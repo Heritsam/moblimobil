@@ -1,0 +1,40 @@
+{
+    "@@locale": "id",
+
+    "seeAll": "Lihat Semua",
+
+    "welcomeText": "SELAMAT DATANG",
+    "skipText": "Lewati",
+    "phoneField": "Masukkan nomor telepon",
+    "passwordField": "Masukkan password",
+    "forgotPassword": "Lupa password?",
+    "rememberMe": "Ingat Saya",
+    "login": "Masuk",
+    "register": "Daftar",
+    "loginWithGoogle": "Masuk dengan Google",
+    "logout": "Keluar",
+    "logoutMessage": "Apakah anda yakin ingin keluar?",
+    "yes": "Ya",
+    "no": "Tidak",
+    "cancel": "Batalkan",
+
+    "fullNameField": "Masukkan nama lengkap",
+    "save": "Simpan",
+
+    "newCars": "Mobil Baru",
+    "usedCars": "Mobil Bekas",
+    "usedText": "Bekas",
+    "compare": "Komparasi",
+    "newsAndReview": "Berita & Ulasan",
+    "hotDeals": "Penawaran Terbaru",
+    "popularCars": "Mobil Populer",
+    "price": "Harga",
+    "searchByLocation": "Cari mobil berdasarkan lokasi",
+
+    "home": "Beranda",
+    "discountAndPromo": "Diskon & Promo",
+    "insurance": "Asuransi",
+    "credit": "Kredit",
+    "account": "Akun",
+    "language": "Bahasa"
+}

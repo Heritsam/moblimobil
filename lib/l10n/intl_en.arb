@@ -1,0 +1,40 @@
+{
+    "@@locale": "en",
+
+    "seeAll": "See All",
+
+    "welcomeText": "WELCOME",
+    "skipText": "Skip",
+    "phoneField": "Enter phone number",
+    "passwordField": "Enter password",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+    "login": "Login",
+    "register": "Register",
+    "loginWithGoogle": "Login with Google",
+    "logout": "Logout",
+    "logoutMessage": "Are you sure you want to logout?",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+
+    "fullNameField": "Enter full name",
+    "save": "Save",
+
+    "newCars": "New Cars",
+    "usedCars": "Used Cars",
+    "usedText": "Used",
+    "compare": "Compare",
+    "newsAndReview": "News & Review",
+    "hotDeals": "Hot Deals",
+    "popularCars": "Popular Cars",
+    "price": "Price",
+    "searchByLocation": "Search for Cars by Location",
+
+    "home": "Home",
+    "discountAndPromo": "Discount & Promo",
+    "insurance": "Insurance",
+    "credit": "Credit",
+    "account": "Account",
+    "language": "Language"
+}
