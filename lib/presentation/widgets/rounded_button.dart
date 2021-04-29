@@ -7,14 +7,14 @@ class RoundedButton extends StatefulWidget {
   final String label;
   final Color backgroundColor;
   final Color textColor;
-  final Function()? onTap;
+  final Function()? onPressed;
 
   const RoundedButton({
     Key? key,
     required this.label,
     this.backgroundColor = blueColor,
     this.textColor = Colors.white,
-    this.onTap,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -40,7 +40,7 @@ class _RoundedButtonState extends State<RoundedButton> {
         .borderRadius(all: 150, animate: true)
         .gestures(
           onTapChange: (tapStatus) => setState(() => _isPressed = tapStatus),
-          onTap: widget.onTap,
+          onTap: widget.onPressed,
         )
         .scale(all: _isPressed ? 0.95 : 1.0, animate: true)
         .animate(Duration(milliseconds: 175), Curves.fastLinearToSlowEaseIn);

@@ -48,7 +48,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ),
           SizedBox(height: 64),
           RoundedButton(
-            onTap: () {},
+            onPressed: () {},
             label: S.of(context).save,
           ),
           SizedBox(height: 72 + mediaQuery.padding.top),

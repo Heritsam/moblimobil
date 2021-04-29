@@ -83,6 +83,9 @@ class _LoginPageState extends State<LoginPage> {
               ].toRow().padding(right: 16, left: 8),
               SizedBox(height: 32),
               RoundedButton(
+                onPressed: () {
+                  context.read(loginNotifier).navigateToHomePage(context);
+                },
                 label: S.of(context).login,
               ).constrained(width: 210),
               SizedBox(height: 16),
