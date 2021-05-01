@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moblimobil/core/theme.dart';
 import 'package:styled_widget/styled_widget.dart';
+
+import '../../../../core/theme.dart';
 
 class MenuItem extends StatefulWidget {
   final Widget icon;
@@ -28,9 +29,14 @@ class _MenuItemState extends State<MenuItem> {
           .padding(horizontal: 4, vertical: 12)
           .borderRadius(all: defaultBorderRadius)
           .ripple()
-          .backgroundColor(lightGreyColor, animate: true)
+          .backgroundColor(Colors.white, animate: true)
           .clipRRect(all: defaultBorderRadius)
           .borderRadius(all: defaultBorderRadius, animate: true)
+          .elevation(
+            _isPressed ? 2 : 10,
+            borderRadius: BorderRadius.circular(defaultBorderRadius),
+            shadowColor: Colors.black38,
+          )
           .constrained(height: 73, width: 73)
           .gestures(
             onTapChange: (tapStatus) => setState(() => _isPressed = tapStatus),
@@ -43,7 +49,11 @@ class _MenuItemState extends State<MenuItem> {
         onTap: widget.onTap,
         child: Text(
           widget.label,
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 12,
+            color: darkGreyColor,
+          ),
           textAlign: TextAlign.center,
         ),
       ),

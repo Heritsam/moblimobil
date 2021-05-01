@@ -10,7 +10,7 @@ import 'intl/messages_all.dart';
 
 // ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
-// ignore_for_file: avoid_redundant_argument_values
+// ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
 
 class S {
   S();
@@ -18,28 +18,31 @@ class S {
   static S? _current;
 
   static S get current {
-    assert(_current != null, 'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+    assert(_current != null,
+        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
     return _current!;
   }
 
-  static const AppLocalizationDelegate delegate =
-    AppLocalizationDelegate();
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name); 
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       final instance = S();
       S._current = instance;
- 
+
       return instance;
     });
-  } 
+  }
 
   static S of(BuildContext context) {
     final instance = S.maybeOf(context);
-    assert(instance != null, 'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    assert(instance != null,
+        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
     return instance!;
   }
 
@@ -137,6 +140,16 @@ class S {
     );
   }
 
+  /// `or`
+  String get or {
+    return Intl.message(
+      'or',
+      name: 'or',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login with Google`
   String get loginWithGoogle {
     return Intl.message(
@@ -197,21 +210,41 @@ class S {
     );
   }
 
-  /// `Enter full name`
+  /// `Enter name`
   String get fullNameField {
     return Intl.message(
-      'Enter full name',
+      'Enter name',
       name: 'fullNameField',
       desc: '',
       args: [],
     );
   }
 
-  /// `Save`
-  String get save {
+  /// `We will help you reset your password\nby sending us your name and your phone number`
+  String get forgotPasswordMessage {
     return Intl.message(
-      'Save',
-      name: 'save',
+      'We will help you reset your password\nby sending us your name and your phone number',
+      name: 'forgotPasswordMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message(
+      'Send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter email address`
+  String get emailField {
+    return Intl.message(
+      'Enter email address',
+      name: 'emailField',
       desc: '',
       args: [],
     );
@@ -307,6 +340,26 @@ class S {
     );
   }
 
+  /// `Search for Cars by Brand`
+  String get searchByBrand {
+    return Intl.message(
+      'Search for Cars by Brand',
+      name: 'searchByBrand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Videos`
+  String get videos {
+    return Intl.message(
+      'Videos',
+      name: 'videos',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Home`
   String get home {
     return Intl.message(
@@ -362,6 +415,26 @@ class S {
     return Intl.message(
       'Language',
       name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification`
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Detail`
+  String get detail {
+    return Intl.message(
+      'Detail',
+      name: 'detail',
       desc: '',
       args: [],
     );

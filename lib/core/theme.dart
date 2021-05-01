@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-const Color blueColor = const Color(0xff2E7AFC);
-const Color blackColor = const Color(0xff14141C);
+const Color lightBlueColor = const Color(0xffbbe5f8);
+const Color blueColor = const Color(0xff2DB5F3);
 const Color greenColor = const Color(0xff04BC64);
-const Color redColor = const Color(0xffE14636);
+const Color redColor = const Color(0xffE6151D);
 const Color yellowColor = const Color(0xffFCC404);
 const Color lightGreyColor = const Color(0xffE7E7E7);
 const Color mediumGreyColor = const Color(0xffA4A4A4);
+const Color darkGreyColor = const Color(0xff4A4A4A);
 
-const double defaultBorderRadius = 10;
+const double defaultBorderRadius = 16;

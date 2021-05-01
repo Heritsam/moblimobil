@@ -11,6 +11,7 @@
     "rememberMe": "Remember Me",
     "login": "Login",
     "register": "Register",
+    "or": "or",
     "loginWithGoogle": "Login with Google",
     "logout": "Logout",
     "logoutMessage": "Are you sure you want to logout?",
@@ -18,8 +19,11 @@
     "no": "No",
     "cancel": "Cancel",
 
-    "fullNameField": "Enter full name",
-    "save": "Save",
+    "fullNameField": "Enter name",
+    "forgotPasswordMessage": "We will help you reset your password\nby sending us your name and your phone number",
+    "send": "Send",
+
+    "emailField": "Enter email address",
 
     "newCars": "New Cars",
     "usedCars": "Used Cars",
@@ -30,11 +34,16 @@
     "popularCars": "Popular Cars",
     "price": "Price",
     "searchByLocation": "Search for Cars by Location",
+    "searchByBrand": "Search for Cars by Brand",  
+    "videos": "Videos",  
 
     "home": "Home",
     "discountAndPromo": "Discount & Promo",
     "insurance": "Insurance",
     "credit": "Credit",
     "account": "Account",
-    "language": "Language"
+    "language": "Language",
+
+    "notification": "Notification",
+    "detail": "Detail"
 }

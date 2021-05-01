@@ -1,51 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../core/theme.dart';
+import '../../../../core/theme.dart';
 
-class RoundedButton extends StatefulWidget {
+class LocationChip extends StatefulWidget {
   final String label;
-  final Color backgroundColor;
-  final Color textColor;
-  final Function()? onPressed;
+  final Function()? onTap;
 
-  const RoundedButton({
+  const LocationChip({
     Key? key,
     required this.label,
-    this.backgroundColor = blueColor,
-    this.textColor = Colors.white,
-    this.onPressed,
+    this.onTap,
   }) : super(key: key);
 
   @override
-  _RoundedButtonState createState() => _RoundedButtonState();
+  _LocationChipState createState() => _LocationChipState();
 }
 
-class _RoundedButtonState extends State<RoundedButton> {
+class _LocationChipState extends State<LocationChip> {
   bool _isPressed = false;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      widget.label,
-      textAlign: TextAlign.center,
-      style:
-          Theme.of(context).textTheme.button?.copyWith(color: widget.textColor),
-    )
-        .padding(vertical: 16, horizontal: 59)
+    return Styled.text(widget.label, style: TextStyle(color: Colors.white))
+        .fittedBox()
+        .padding(horizontal: 4, vertical: 12)
         .borderRadius(all: defaultBorderRadius)
         .ripple()
-        .backgroundColor(widget.backgroundColor, animate: true)
+        .backgroundColor(greenColor, animate: true)
         .clipRRect(all: defaultBorderRadius)
         .borderRadius(all: defaultBorderRadius, animate: true)
         .elevation(
           _isPressed ? 2 : 10,
           borderRadius: BorderRadius.circular(defaultBorderRadius),
-          shadowColor: widget.backgroundColor.withOpacity(.38),
+          shadowColor: greenColor.withOpacity(.38),
         )
         .gestures(
           onTapChange: (tapStatus) => setState(() => _isPressed = tapStatus),
-          onTap: widget.onPressed,
+          onTap: widget.onTap,
         )
         .scale(all: _isPressed ? 0.95 : 1.0, animate: true)
         .animate(Duration(milliseconds: 175), Curves.fastLinearToSlowEaseIn);

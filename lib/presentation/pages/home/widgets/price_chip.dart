@@ -1,51 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../core/theme.dart';
+import '../../../../core/theme.dart';
 
-class RoundedButton extends StatefulWidget {
+class PriceChip extends StatefulWidget {
   final String label;
-  final Color backgroundColor;
-  final Color textColor;
-  final Function()? onPressed;
+  final bool selected;
+  final Function()? onTap;
 
-  const RoundedButton({
+  const PriceChip({
     Key? key,
     required this.label,
-    this.backgroundColor = blueColor,
-    this.textColor = Colors.white,
-    this.onPressed,
+    this.selected = false,
+    this.onTap,
   }) : super(key: key);
 
   @override
-  _RoundedButtonState createState() => _RoundedButtonState();
+  _PriceChipState createState() => _PriceChipState();
 }
 
-class _RoundedButtonState extends State<RoundedButton> {
+class _PriceChipState extends State<PriceChip> {
   bool _isPressed = false;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return Styled.text(
       widget.label,
-      textAlign: TextAlign.center,
-      style:
-          Theme.of(context).textTheme.button?.copyWith(color: widget.textColor),
+      style: TextStyle(
+        fontWeight: FontWeight.w600,
+        color: widget.selected ? Colors.white : darkGreyColor,
+      ),
     )
-        .padding(vertical: 16, horizontal: 59)
+        .padding(horizontal: 24, vertical: 16)
         .borderRadius(all: defaultBorderRadius)
         .ripple()
-        .backgroundColor(widget.backgroundColor, animate: true)
+        .backgroundColor(
+          widget.selected ? blueColor : lightGreyColor,
+          animate: true,
+        )
         .clipRRect(all: defaultBorderRadius)
         .borderRadius(all: defaultBorderRadius, animate: true)
         .elevation(
           _isPressed ? 2 : 10,
           borderRadius: BorderRadius.circular(defaultBorderRadius),
-          shadowColor: widget.backgroundColor.withOpacity(.38),
+          shadowColor:
+              widget.selected ? blueColor.withOpacity(.38) : Colors.black38,
         )
         .gestures(
           onTapChange: (tapStatus) => setState(() => _isPressed = tapStatus),
-          onTap: widget.onPressed,
+          onTap: widget.onTap,
         )
         .scale(all: _isPressed ? 0.95 : 1.0, animate: true)
         .animate(Duration(milliseconds: 175), Curves.fastLinearToSlowEaseIn);

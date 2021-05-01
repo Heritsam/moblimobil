@@ -11,6 +11,7 @@
     "rememberMe": "Ingat Saya",
     "login": "Masuk",
     "register": "Daftar",
+    "or": "atau",
     "loginWithGoogle": "Masuk dengan Google",
     "logout": "Keluar",
     "logoutMessage": "Apakah anda yakin ingin keluar?",
@@ -19,22 +20,30 @@
     "cancel": "Batalkan",
 
     "fullNameField": "Masukkan nama lengkap",
-    "save": "Simpan",
+    "forgotPasswordMessage": "Jika kamu lupa password kamu\nkami akan perbaiki dengan mengirimkan\nnamamu dan nomor handphonemu",
+    "send": "Kirim",
+
+    "emailField": "Masukkan alamat email",
 
     "newCars": "Mobil Baru",
     "usedCars": "Mobil Bekas",
     "usedText": "Bekas",
-    "compare": "Komparasi",
+    "compare": "Bandingkan",
     "newsAndReview": "Berita & Ulasan",
     "hotDeals": "Penawaran Terbaru",
     "popularCars": "Mobil Populer",
     "price": "Harga",
-    "searchByLocation": "Cari mobil berdasarkan lokasi",
+    "searchByLocation": "Cari Mobil Berdasarkan Lokasi",
+    "searchByBrand": "Cari Mobil Berdasarkan Merek",
+    "videos": "Video",
 
     "home": "Beranda",
     "discountAndPromo": "Diskon & Promo",
     "insurance": "Asuransi",
     "credit": "Kredit",
     "account": "Akun",
-    "language": "Bahasa"
+    "language": "Bahasa",
+
+    "notification": "Notifikasi",
+    "detail": "Detail"
 }
