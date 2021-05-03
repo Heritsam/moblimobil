@@ -1,4 +1,4 @@
-package com.moblimobil.app.moblimobil
+package com.moblimobil.app
 
 import io.flutter.embedding.android.FlutterActivity
 
