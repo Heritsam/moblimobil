@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:moblimobil/presentation/notifiers/app_settings/app_settings_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../../core/theme.dart';
-import '../../../../generated/l10n.dart';
+import '../../../core/theme.dart';
+import '../../../generated/l10n.dart';
+import '../../../infrastructures/models/car.dart';
+import '../../notifiers/app_settings/app_settings_notifier.dart';
+import '../../notifiers/wishlist/wishlist_notifier.dart';
 
 class CarCard extends StatefulWidget {
+  final int carId;
   final String title;
   final int? originalPrice;
   final int price;
   final String imageUrl;
+  final double imageHeight;
   final bool hasUsed;
   final Function()? onTap;
 
   const CarCard({
     Key? key,
+    required this.carId,
     required this.title,
     required this.price,
     required this.imageUrl,
+    this.imageHeight = 120,
     this.originalPrice,
     this.hasUsed = false,
     this.onTap,
@@ -39,12 +45,13 @@ class _CarCardState extends State<CarCard> {
     return Consumer(
       builder: (context, watch, child) {
         final settings = watch(appSettingsNotifier);
+        final wishlist = watch(wishlistNotifier);
 
         return Styled.widget(
           child: <Widget>[
             <Widget>[
               Container(
-                height: 120,
+                height: widget.imageHeight,
                 width: width,
                 decoration: BoxDecoration(
                   color: lightGreyColor,
@@ -111,10 +118,23 @@ class _CarCardState extends State<CarCard> {
                   .toColumn(crossAxisAlignment: CrossAxisAlignment.start)
                   .expanded(),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  final car = carList
+                      .firstWhere((element) => element.id == widget.carId);
+                  final wishlisted = wishlist.isWishlisted(car);
+
+                  if (wishlisted) {
+                    wishlist.removeFromWishlist(car);
+                  } else {
+                    wishlist.addToWishlist(car);
+                  }
+                },
                 icon: Icon(Icons.favorite),
                 iconSize: 32,
-                color: Colors.black12,
+                color: wishlist.isWishlisted(carList
+                        .firstWhere((element) => element.id == widget.carId))
+                    ? redColor
+                    : Colors.black12,
                 padding: EdgeInsets.only(right: 8),
               ),
             ]

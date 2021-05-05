@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,14 +10,15 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
+import '../../../infrastructures/models/car.dart';
+import '../../widgets/cars/brand_item.dart';
+import '../../widgets/cars/car_card.dart';
+import '../../widgets/cars/location_chip.dart';
+import '../../widgets/cars/menu_item.dart';
+import '../../widgets/cars/price_chip.dart';
+import '../../widgets/cars/video_card.dart';
 import '../../widgets/drawer/mobli_drawer.dart';
 import 'notifiers/home_banner_notifier.dart';
-import 'widgets/brand_item.dart';
-import 'widgets/car_card.dart';
-import 'widgets/location_chip.dart';
-import 'widgets/menu_item.dart';
-import 'widgets/price_chip.dart';
-import 'widgets/video_card.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -47,11 +49,17 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               Navigator.pushNamed(context, '/notification');
             },
-            icon: Icon(Icons.notifications_none_rounded),
+            icon: Badge(
+              badgeContent: Text('3').textColor(Colors.white),
+              badgeColor: redColor,
+              child: Icon(Icons.notifications_none_rounded),
+            ),
             color: greenColor,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/search');
+            },
             icon: Icon(Icons.search_rounded),
             color: greenColor,
           ),
@@ -148,6 +156,9 @@ class _HomePageState extends State<HomePage> {
             <Widget>[
               Expanded(
                 child: MenuItem(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/new-cars');
+                  },
                   icon: SvgPicture.asset('assets/ic_new_cars.svg'),
                   label: S.of(context).newCars,
                 ),
@@ -155,6 +166,9 @@ class _HomePageState extends State<HomePage> {
               SizedBox(width: 16),
               Expanded(
                 child: MenuItem(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/used-cars');
+                  },
                   icon: SvgPicture.asset('assets/ic_used_cars.svg'),
                   label: S.of(context).usedCars,
                 ),
@@ -162,6 +176,9 @@ class _HomePageState extends State<HomePage> {
               SizedBox(width: 16),
               Expanded(
                 child: MenuItem(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/compare');
+                  },
                   icon: SvgPicture.asset('assets/ic_compare.svg'),
                   label: S.of(context).compare,
                 ),
@@ -169,6 +186,9 @@ class _HomePageState extends State<HomePage> {
               SizedBox(width: 16),
               Expanded(
                 child: MenuItem(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/news-and-review');
+                  },
                   icon: SvgPicture.asset('assets/ic_news.svg'),
                   label: S.of(context).newsAndReview,
                 ),
@@ -194,15 +214,20 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: 6,
+              itemCount: carList.length,
               itemBuilder: (context, index) {
+                final item = carList[index];
+
                 return CarCard(
-                  title: 'Toyota Supra',
-                  originalPrice: 750000000,
-                  price: 650000000,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/cars-detail');
+                  },
+                  carId: item.id,
+                  title: item.title,
+                  originalPrice: item.originalPrice,
+                  price: item.price,
                   hasUsed: index.isEven,
-                  imageUrl:
-                      'https://images.unsplash.com/photo-1613946990583-5ffd41268b72?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
+                  imageUrl: item.imageUrl,
                 ).padding(right: 16, bottom: 32);
               },
             ).constrained(height: 240),
@@ -223,14 +248,20 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: 6,
+              itemCount: carList.length,
               itemBuilder: (context, index) {
+                final item = carList[index];
+
                 return CarCard(
-                  title: 'Rolls Royce',
-                  price: 1650000000,
-                  hasUsed: index.isOdd,
-                  imageUrl:
-                      'https://images.unsplash.com/photo-1612538790197-61ccec68d648?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
+                  onTap: () {
+                    Navigator.pushNamed(context, '/cars-detail');
+                  },
+                  carId: item.id,
+                  title: item.title,
+                  originalPrice: item.originalPrice,
+                  price: item.price,
+                  hasUsed: index.isEven,
+                  imageUrl: item.imageUrl,
                 ).padding(right: 16, bottom: 32);
               },
             ).constrained(height: 240),
@@ -263,14 +294,20 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: 6,
+              itemCount: carList.length,
               itemBuilder: (context, index) {
+                final item = carList[index];
+
                 return CarCard(
-                  title: 'Chevrolet Camaro',
-                  price: 1250000000,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/cars-detail');
+                  },
+                  carId: item.id,
+                  title: item.title,
+                  originalPrice: item.originalPrice,
+                  price: item.price,
                   hasUsed: index.isEven,
-                  imageUrl:
-                      'https://images.unsplash.com/photo-1597075945661-b6348139021a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
+                  imageUrl: item.imageUrl,
                 ).padding(right: 16, bottom: 32);
               },
             ).constrained(height: 240),

@@ -5,6 +5,7 @@ const Color blueColor = const Color(0xff2DB5F3);
 const Color greenColor = const Color(0xff04BC64);
 const Color redColor = const Color(0xffE6151D);
 const Color yellowColor = const Color(0xffFCC404);
+const Color lighterGreyColor = const Color(0xffF5F5F5);
 const Color lightGreyColor = const Color(0xffE7E7E7);
 const Color mediumGreyColor = const Color(0xffA4A4A4);
 const Color darkGreyColor = const Color(0xff4A4A4A);

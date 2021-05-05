@@ -25,8 +25,12 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  badges: ^2.0.0-nullsafety.1
   carousel_slider: ^4.0.0-nullsafety.0
   cupertino_icons: ^1.0.2
+  dropdown_search: ^0.6.1
+  expandable: ^5.0.1
+  fading_edge_scrollview: ^2.0.0
   flutter_riverpod: ^0.14.0+2
   flutter_svg: ^0.22.0
   freezed_annotation: ^0.14.1

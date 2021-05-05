@@ -10,7 +10,6 @@ class NotificationPage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white70,
         centerTitle: false,
@@ -33,7 +32,7 @@ class NotificationPage extends StatelessWidget {
               ),
               Text(
                 '12/12/2021',
-                style: textTheme.caption?.copyWith(color: blueColor),
+                style: textTheme.caption?.copyWith(color: greenColor),
               ),
             ]
                 .toRow(
@@ -49,7 +48,6 @@ class NotificationPage extends StatelessWidget {
               .ripple()
               .backgroundColor(lightGreyColor.withOpacity(.54))
               .gestures(onTap: () {
-            Navigator.popUntil(context, ModalRoute.withName('/home'));
             Navigator.pushNamed(context, '/notification-detail');
           }).padding(bottom: 4);
         },

@@ -1,30 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../../core/theme.dart';
+import '../../../core/theme.dart';
 
-class BrandItem extends StatefulWidget {
-  final ImageProvider image;
+class FeatureItem extends StatefulWidget {
+  final Widget image;
+  final String label;
   final Function()? onTap;
 
-  const BrandItem({
+  const FeatureItem({
     Key? key,
     required this.image,
+    required this.label,
     this.onTap,
   }) : super(key: key);
 
   @override
-  _BrandItemState createState() => _BrandItemState();
+  _FeatureItemState createState() => _FeatureItemState();
 }
 
-class _BrandItemState extends State<BrandItem> {
+class _FeatureItemState extends State<FeatureItem> {
   bool _isPressed = false;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Styled.widget(child: Image(image: widget.image))
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(height: 4),
+        widget.image,
+        SizedBox(height: 8),
+        Text(
+          widget.label,
+          style: TextStyle(
+            color: mediumGreyColor,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: 4),
+      ],
+    )
         .padding(all: 4)
         .borderRadius(all: defaultBorderRadius)
         .ripple()

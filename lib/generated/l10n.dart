@@ -439,6 +439,496 @@ class S {
       args: [],
     );
   }
+
+  /// `Search for cars`
+  String get searchForCars {
+    return Intl.message(
+      'Search for cars',
+      name: 'searchForCars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Result`
+  String get searchResult {
+    return Intl.message(
+      'Search Result',
+      name: 'searchResult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Popular`
+  String get popular {
+    return Intl.message(
+      'Popular',
+      name: 'popular',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort & Filter`
+  String get sortAndFilter {
+    return Intl.message(
+      'Sort & Filter',
+      name: 'sortAndFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorting`
+  String get sorting {
+    return Intl.message(
+      'Sorting',
+      name: 'sorting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Installment`
+  String get installment {
+    return Intl.message(
+      'Installment',
+      name: 'installment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Body Type`
+  String get bodyType {
+    return Intl.message(
+      'Body Type',
+      name: 'bodyType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Brand`
+  String get brand {
+    return Intl.message(
+      'Brand',
+      name: 'brand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fuel Type`
+  String get fuelType {
+    return Intl.message(
+      'Fuel Type',
+      name: 'fuelType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transmission`
+  String get transmission {
+    return Intl.message(
+      'Transmission',
+      name: 'transmission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Year`
+  String get year {
+    return Intl.message(
+      'Year',
+      name: 'year',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kilometers`
+  String get kilometers {
+    return Intl.message(
+      'Kilometers',
+      name: 'kilometers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Color`
+  String get color {
+    return Intl.message(
+      'Color',
+      name: 'color',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select`
+  String get select {
+    return Intl.message(
+      'Select',
+      name: 'select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Month`
+  String get month {
+    return Intl.message(
+      'Month',
+      name: 'month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car Detail`
+  String get carDetail {
+    return Intl.message(
+      'Car Detail',
+      name: 'carDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Credit Simulation`
+  String get creditSimulation {
+    return Intl.message(
+      'Credit Simulation',
+      name: 'creditSimulation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recommended`
+  String get recommended {
+    return Intl.message(
+      'Recommended',
+      name: 'recommended',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Schedule to test drive`
+  String get scheduleToTestDrive {
+    return Intl.message(
+      'Schedule to test drive',
+      name: 'scheduleToTestDrive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Method`
+  String get paymentMethod {
+    return Intl.message(
+      'Payment Method',
+      name: 'paymentMethod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get time {
+    return Intl.message(
+      'Time',
+      name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `News Updates`
+  String get newsUpdates {
+    return Intl.message(
+      'News Updates',
+      name: 'newsUpdates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review Updates`
+  String get reviewUpdates {
+    return Intl.message(
+      'Review Updates',
+      name: 'reviewUpdates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `News`
+  String get news {
+    return Intl.message(
+      'News',
+      name: 'news',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviews`
+  String get reviews {
+    return Intl.message(
+      'Reviews',
+      name: 'reviews',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email hasn't been verified yet`
+  String get emailVerificationMessage {
+    return Intl.message(
+      'Email hasn\'t been verified yet',
+      name: 'emailVerificationMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wishlist`
+  String get wishlist {
+    return Intl.message(
+      'Wishlist',
+      name: 'wishlist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Profile`
+  String get editProfile {
+    return Intl.message(
+      'Edit Profile',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help`
+  String get help {
+    return Intl.message(
+      'Help',
+      name: 'help',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Phone Number & Password`
+  String get changePhoneAndPassword {
+    return Intl.message(
+      'Change Phone Number & Password',
+      name: 'changePhoneAndPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter text`
+  String get textField {
+    return Intl.message(
+      'Enter text',
+      name: 'textField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or, contact us directly to:`
+  String get otherHelpMessage {
+    return Intl.message(
+      'Or, contact us directly to:',
+      name: 'otherHelpMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your old phone number & password`
+  String get enterOldPasswordPhone {
+    return Intl.message(
+      'Enter your old phone number & password',
+      name: 'enterOldPasswordPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your new phone number & password`
+  String get enterNewPasswordPhone {
+    return Intl.message(
+      'Enter your new phone number & password',
+      name: 'enterNewPasswordPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Gender`
+  String get selectGender {
+    return Intl.message(
+      'Select Gender',
+      name: 'selectGender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message(
+      'Male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message(
+      'Female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick birthdate`
+  String get birthField {
+    return Intl.message(
+      'Pick birthdate',
+      name: 'birthField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select province`
+  String get selectProvince {
+    return Intl.message(
+      'Select province',
+      name: 'selectProvince',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select city / district`
+  String get selectCity {
+    return Intl.message(
+      'Select city / district',
+      name: 'selectCity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select sub-district`
+  String get selectSubDistrict {
+    return Intl.message(
+      'Select sub-district',
+      name: 'selectSubDistrict',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter address`
+  String get addressField {
+    return Intl.message(
+      'Enter address',
+      name: 'addressField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter zip code`
+  String get zipCodeField {
+    return Intl.message(
+      'Enter zip code',
+      name: 'zipCodeField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final loginNotifier =
-    ChangeNotifierProvider((ref) => LoginNotifier(ref.read));
+final loginViewModel =
+    ChangeNotifierProvider((ref) => LoginViewModel(ref.read));
 
-class LoginNotifier extends ChangeNotifier {
+class LoginViewModel extends ChangeNotifier {
   late final Reader _reader;
 
-  LoginNotifier(this._reader);
+  LoginViewModel(this._reader);
 
   bool isObscured = true;
   bool rememberMe = false;
@@ -26,7 +26,7 @@ class LoginNotifier extends ChangeNotifier {
     Navigator.pushNamed(context, '/forgot-password');
   }
 
-  void navigateToHomePage(BuildContext context) {
+  void login(BuildContext context) {
     Navigator.pushReplacementNamed(context, '/home');
   }
 }

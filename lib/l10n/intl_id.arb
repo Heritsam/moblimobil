@@ -45,5 +45,62 @@
     "language": "Bahasa",
 
     "notification": "Notifikasi",
-    "detail": "Detail"
+    "detail": "Detail",
+
+    "searchForCars": "Cari mobil",
+    "searchResult": "Hasil pencarian",
+    "popular": "Populer",
+    "sortAndFilter": "Urutkan dan Filter",
+    "sorting": "Urutkan",
+    "installment": "Cicilan",
+    "city": "Kota",
+    "bodyType": "Tipe Mobil",
+
+    "brand": "Merek",
+    "fuelType": "Bahan Bakar",
+    "transmission": "Transmisi",
+    "year": "Tahun",
+    "kilometers": "Kilometer",
+    "color": "Warna",
+
+    "select": "Pilih",
+    "month": "Bulan",
+    "carDetail": "Detail Mobil",
+    "description": "Deskripsi",
+    "creditSimulation": "Simulasi Kredit",
+    "recommended": "Rekomendasi",
+    "scheduleToTestDrive": "Jadwalkan test drive",
+    "paymentMethod": "Metode Pembayaran",
+    "date": "Tanggal",
+    "time": "Waktu",
+
+    "newsUpdates": "Berita Terkini",
+    "reviewUpdates": "Ulasan Terbaru",
+    "news": "Berita",
+    "reviews": "Ulasan",
+
+    "emailVerificationMessage": "Anda belum melakukan verifikasi email",
+    "wishlist": "Wishlist",
+    "editProfile": "Ubah Profil",
+    "help": "Bantuan",
+    "about": "Tentang",
+    "changePhoneAndPassword": "Ganti Nomor Handphone dan Password",
+
+    "textField": "Masukkan text",
+    "otherHelpMessage": "Jika kamu ingin melakukan kontak langsung dengan kami hubungi kami ke:",
+
+    "enterOldPasswordPhone": "Masukan nomor dan password lama",
+    "enterNewPasswordPhone": "Masukan nomor dan password baru",
+    "next": "Lanjut",
+
+    "selectGender": "Pilih jenis kelamin",
+    "male": "Laki-laki",
+    "female": "Perempuan",
+    "birthField": "Tanggal lahir",
+    "selectProvince": "Pilih provinsi",
+    "selectCity": "Pilih kota / kabupaten",
+    "selectSubDistrict": "Pilih kecamatan",
+    "addressField": "Masukkan alamat",
+    "zipCodeField": "Masukkan kode pos",
+    "save": "Simpan"
 }

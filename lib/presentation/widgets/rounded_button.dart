@@ -7,6 +7,9 @@ class RoundedButton extends StatefulWidget {
   final String label;
   final Color backgroundColor;
   final Color textColor;
+  final double verticalPadding;
+  final double horizontalPadding;
+  final bool enabled;
   final Function()? onPressed;
 
   const RoundedButton({
@@ -14,6 +17,9 @@ class RoundedButton extends StatefulWidget {
     required this.label,
     this.backgroundColor = blueColor,
     this.textColor = Colors.white,
+    this.verticalPadding = 16,
+    this.horizontalPadding = 59,
+    this.enabled = true,
     this.onPressed,
   }) : super(key: key);
 
@@ -26,13 +32,34 @@ class _RoundedButtonState extends State<RoundedButton> {
 
   @override
   Widget build(BuildContext context) {
+    if (!widget.enabled) {
+      return Text(
+        widget.label,
+        textAlign: TextAlign.center,
+        style: Theme.of(context)
+            .textTheme
+            .button
+            ?.copyWith(color: mediumGreyColor),
+      )
+          .padding(
+            vertical: widget.verticalPadding,
+            horizontal: widget.horizontalPadding,
+          )
+          .borderRadius(all: defaultBorderRadius)
+          .backgroundColor(lightGreyColor)
+          .clipRRect(all: defaultBorderRadius);
+    }
+
     return Text(
       widget.label,
       textAlign: TextAlign.center,
       style:
           Theme.of(context).textTheme.button?.copyWith(color: widget.textColor),
     )
-        .padding(vertical: 16, horizontal: 59)
+        .padding(
+          vertical: widget.verticalPadding,
+          horizontal: widget.horizontalPadding,
+        )
         .borderRadius(all: defaultBorderRadius)
         .ripple()
         .backgroundColor(widget.backgroundColor, animate: true)

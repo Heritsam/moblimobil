@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../../core/theme.dart';
+import '../../../core/theme.dart';
 
 class PriceChip extends StatefulWidget {
   final String label;
@@ -26,6 +26,7 @@ class _PriceChipState extends State<PriceChip> {
   Widget build(BuildContext context) {
     return Styled.text(
       widget.label,
+      textAlign: TextAlign.center,
       style: TextStyle(
         fontWeight: FontWeight.w600,
         color: widget.selected ? Colors.white : darkGreyColor,

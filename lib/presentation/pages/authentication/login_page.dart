@@ -7,7 +7,7 @@ import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/circle_button.dart';
 import '../../widgets/rounded_button.dart';
-import 'notifiers/login_notifier.dart';
+import 'viewmodels/login_viewmodels.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return Consumer(
       builder: (context, watch, child) {
-        final vm = watch(loginNotifier);
+        final vm = watch(loginViewModel);
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: vm.isObscured,
                   ).expanded(flex: 2),
                   IconButton(
-                    onPressed: context.read(loginNotifier).toggleObscure,
+                    onPressed: context.read(loginViewModel).toggleObscure,
                     icon: Icon(
                       vm.isObscured ? Icons.visibility : Icons.visibility_off,
                     ),
@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                   <Widget>[
                     Checkbox(
                       onChanged: (_) {
-                        context.read(loginNotifier).toggleRememberMe();
+                        context.read(loginViewModel).toggleRememberMe();
                       },
                       value: vm.rememberMe,
                       visualDensity: VisualDensity.compact,
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(width: 4),
                     InkResponse(
-                      onTap: context.read(loginNotifier).toggleRememberMe,
+                      onTap: context.read(loginViewModel).toggleRememberMe,
                       child: Text(
                         S.of(context).rememberMe,
                         style: TextStyle(fontSize: 14, color: mediumGreyColor),
@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                   InkResponse(
                     onTap: () {
                       context
-                          .read(loginNotifier)
+                          .read(loginViewModel)
                           .navigateToForgotPassword(context);
                     },
                     child: Text(
@@ -154,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(height: 32),
                 RoundedButton(
                   onPressed: () {
-                    context.read(loginNotifier).navigateToHomePage(context);
+                    context.read(loginViewModel).login(context);
                   },
                   label: S.of(context).login,
                 ).constrained(width: 193),

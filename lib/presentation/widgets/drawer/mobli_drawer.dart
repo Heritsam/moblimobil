@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/widgets/circle_button.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
+import '../circle_button.dart';
 import '../toggle.dart';
 import 'user_card.dart';
 
@@ -49,6 +49,10 @@ class MobliDrawer extends ConsumerWidget {
           children: [
             SizedBox(height: 4),
             UserCard(
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/account');
+              },
               avatar: NetworkImage(
                 'https://uifaces.co/our-content/donated/gPZwCbdS.jpg',
               ),
@@ -58,28 +62,39 @@ class MobliDrawer extends ConsumerWidget {
             SizedBox(height: 16),
             _drawerItem(
               context: context,
-              onTap: () {},
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+              },
               title: S.of(context).home.toUpperCase(),
               icon: Icons.home_outlined,
             ),
             _divider(context),
             _drawerItem(
               context: context,
-              onTap: () {},
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/new-cars');
+              },
               title: S.of(context).newCars.toUpperCase(),
               icon: Icons.directions_car_outlined,
             ),
             _divider(context),
             _drawerItem(
               context: context,
-              onTap: () {},
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/used-cars');
+              },
               title: S.of(context).usedCars.toUpperCase(),
               icon: Icons.directions_car_outlined,
             ),
             _divider(context),
             _drawerItem(
               context: context,
-              onTap: () {},
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/discount');
+              },
               title: S.of(context).discountAndPromo.toUpperCase(),
               icon: Icons.account_balance_wallet_outlined,
             ),
@@ -100,14 +115,20 @@ class MobliDrawer extends ConsumerWidget {
             _divider(context),
             _drawerItem(
               context: context,
-              onTap: () {},
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/news-and-review');
+              },
               title: S.of(context).newsAndReview.toUpperCase(),
               icon: Icons.article_outlined,
             ),
             _divider(context),
             _drawerItem(
               context: context,
-              onTap: () {},
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/faq');
+              },
               title: 'FAQ',
               icon: Icons.chat_outlined,
             ),
@@ -161,6 +182,7 @@ class MobliDrawer extends ConsumerWidget {
               S.of(context).logout,
               style: TextStyle(color: mediumGreyColor),
             ).center(),
+            SizedBox(height: 16),
           ],
         ),
       ),

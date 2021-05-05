@@ -6,7 +6,7 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/rounded_button.dart';
-import 'notifiers/register_notifier.dart';
+import 'viewmodels/register_viewmodels.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Consumer(
       builder: (context, watch, child) {
-        final vm = watch(registerNotifier);
+        final vm = watch(registerViewModel);
 
         return Scaffold(
           backgroundColor: Colors.white,
@@ -144,7 +144,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     obscureText: vm.isObscured,
                   ).expanded(flex: 2),
                   IconButton(
-                    onPressed: context.read(registerNotifier).toggleObscure,
+                    onPressed: context.read(registerViewModel).toggleObscure,
                     icon: Icon(
                       vm.isObscured ? Icons.visibility : Icons.visibility_off,
                     ),

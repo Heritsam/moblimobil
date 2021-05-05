@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final registerNotifier = ChangeNotifierProvider((ref) => RegisterNotifier());
+final registerViewModel = ChangeNotifierProvider((ref) => RegisterViewModel());
 
-class RegisterNotifier extends ChangeNotifier {
+class RegisterViewModel extends ChangeNotifier {
   bool isObscured = true;
 
   void toggleObscure() {

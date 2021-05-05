@@ -34,8 +34,8 @@
     "popularCars": "Popular Cars",
     "price": "Price",
     "searchByLocation": "Search for Cars by Location",
-    "searchByBrand": "Search for Cars by Brand",  
-    "videos": "Videos",  
+    "searchByBrand": "Search for Cars by Brand",
+    "videos": "Videos",
 
     "home": "Home",
     "discountAndPromo": "Discount & Promo",
@@ -45,5 +45,62 @@
     "language": "Language",
 
     "notification": "Notification",
-    "detail": "Detail"
+    "detail": "Detail",
+
+    "searchForCars": "Search for cars",
+    "searchResult": "Search Result",
+    "popular": "Popular",
+    "sortAndFilter": "Sort & Filter",
+    "sorting": "Sorting",
+    "installment": "Installment",
+    "city": "City",
+    "bodyType": "Body Type",
+    
+    "brand": "Brand",
+    "fuelType": "Fuel Type",
+    "transmission": "Transmission",
+    "year": "Year",
+    "kilometers": "Kilometers",
+    "color": "Color",
+
+    "select": "Select",
+    "month": "Month",
+    "carDetail": "Car Detail",
+    "description": "Description",
+    "creditSimulation": "Credit Simulation",
+    "recommended": "Recommended",
+    "scheduleToTestDrive": "Schedule to test drive",
+    "paymentMethod": "Payment Method",
+    "date": "Date",
+    "time": "Time",
+
+    "newsUpdates": "News Updates",
+    "reviewUpdates": "Review Updates",
+    "news": "News",
+    "reviews": "Reviews",
+
+    "emailVerificationMessage": "Email hasn't been verified yet",
+    "wishlist": "Wishlist",
+    "editProfile": "Edit Profile",
+    "help": "Help",
+    "about": "About",
+    "changePhoneAndPassword": "Change Phone Number & Password",
+
+    "textField": "Enter text",
+    "otherHelpMessage": "Or, contact us directly to:",
+
+    "enterOldPasswordPhone": "Enter your old phone number & password",
+    "enterNewPasswordPhone": "Enter your new phone number & password",
+    "next": "Next",
+
+    "selectGender": "Select Gender",
+    "male": "Male",
+    "female": "Female",
+    "birthField": "Pick birthdate",
+    "selectProvince": "Select province",
+    "selectCity": "Select city / district",
+    "selectSubDistrict": "Select sub-district",
+    "addressField": "Enter address",
+    "zipCodeField": "Enter zip code",
+    "save": "Save"
 }
