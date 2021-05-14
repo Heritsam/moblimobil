@@ -1,6 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:moblimobil/presentation/widgets/rounded_button.dart';
+import 'package:moblimobil/presentation/widgets/buttons/rounded_button.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
@@ -19,6 +19,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         backgroundColor: Colors.white70,
@@ -66,7 +67,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 hintStyle: TextStyle(color: mediumGreyColor),
               ),
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
@@ -79,7 +80,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               keyboardType: TextInputType.emailAddress,
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
@@ -100,7 +101,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 color: mediumGreyColor,
               ),
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
@@ -116,7 +117,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 suffixIcon: Icon(Icons.calendar_today_rounded),
               ),
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 32),
@@ -138,7 +139,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 color: mediumGreyColor,
               ),
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
@@ -163,7 +164,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 color: mediumGreyColor,
               ),
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
@@ -188,7 +189,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 color: mediumGreyColor,
               ),
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
@@ -203,7 +204,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 hintStyle: TextStyle(color: mediumGreyColor),
               ),
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
@@ -219,7 +220,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               keyboardType: TextInputType.number,
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 32),

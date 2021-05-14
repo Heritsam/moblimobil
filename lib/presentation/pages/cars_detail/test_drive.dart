@@ -9,7 +9,7 @@ import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
-import '../../widgets/rounded_button.dart';
+import '../../widgets/buttons/rounded_button.dart';
 import '../../widgets/seller_card.dart';
 
 class TestDrive extends StatefulWidget {
@@ -113,12 +113,10 @@ class _TestDriveState extends State<TestDrive> {
                     ),
                   )
                       .decorated(
-                        color: blueColor.withOpacity(.12),
+                        color: inputFieldColor,
                         borderRadius:
                             BorderRadius.circular(defaultBorderRadius),
-                        border: Border.all(color: Colors.white),
                       )
-                      .clipRRect(all: defaultBorderRadius)
                       .padding(horizontal: 16),
                   SizedBox(height: 16),
                   TextField(
@@ -131,12 +129,10 @@ class _TestDriveState extends State<TestDrive> {
                     keyboardType: TextInputType.emailAddress,
                   )
                       .decorated(
-                        color: blueColor.withOpacity(.12),
+                        color: inputFieldColor,
                         borderRadius:
                             BorderRadius.circular(defaultBorderRadius),
-                        border: Border.all(color: Colors.white),
                       )
-                      .clipRRect(all: defaultBorderRadius)
                       .padding(horizontal: 16),
                   SizedBox(height: 16),
                   TextField(
@@ -149,12 +145,11 @@ class _TestDriveState extends State<TestDrive> {
                     keyboardType: TextInputType.phone,
                   )
                       .decorated(
-                        color: blueColor.withOpacity(.12),
+                        color: inputFieldColor,
                         borderRadius:
                             BorderRadius.circular(defaultBorderRadius),
                         border: Border.all(color: Colors.white),
                       )
-                      .clipRRect(all: defaultBorderRadius)
                       .padding(horizontal: 16),
                   SizedBox(height: 16),
                   DropdownSearch(
@@ -173,12 +168,10 @@ class _TestDriveState extends State<TestDrive> {
                     ),
                   )
                       .decorated(
-                        color: blueColor.withOpacity(.12),
+                        color: inputFieldColor,
                         borderRadius:
                             BorderRadius.circular(defaultBorderRadius),
-                        border: Border.all(color: Colors.white),
                       )
-                      .clipRRect(all: defaultBorderRadius)
                       .padding(horizontal: 16),
                   SizedBox(height: 24),
                   Row(
@@ -205,9 +198,7 @@ class _TestDriveState extends State<TestDrive> {
                                 color: lightGreyColor.withOpacity(.54),
                                 borderRadius:
                                     BorderRadius.circular(defaultBorderRadius),
-                                border: Border.all(color: Colors.white),
                               )
-                              .clipRRect(all: defaultBorderRadius),
                         ],
                       ).expanded(),
                       SizedBox(width: 16),
@@ -233,9 +224,7 @@ class _TestDriveState extends State<TestDrive> {
                                 color: lightGreyColor.withOpacity(.54),
                                 borderRadius:
                                     BorderRadius.circular(defaultBorderRadius),
-                                border: Border.all(color: Colors.white),
                               )
-                              .clipRRect(all: defaultBorderRadius),
                         ],
                       ).expanded(),
                     ],

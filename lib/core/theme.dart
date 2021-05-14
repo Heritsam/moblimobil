@@ -10,4 +10,6 @@ const Color lightGreyColor = const Color(0xffE7E7E7);
 const Color mediumGreyColor = const Color(0xffA4A4A4);
 const Color darkGreyColor = const Color(0xff4A4A4A);
 
+const Color inputFieldColor = const Color(0xffEEF9FE);
+
 const double defaultBorderRadius = 16;

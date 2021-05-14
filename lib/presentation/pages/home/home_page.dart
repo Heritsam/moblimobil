@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, '/notification');
             },
             icon: Badge(
-              badgeContent: Text('3').textColor(Colors.white),
+              badgeContent: Text('1').textColor(Colors.white),
               badgeColor: redColor,
               child: Icon(Icons.notifications_none_rounded),
             ),

@@ -10,6 +10,7 @@ class NotificationDetailPage extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white70,
         centerTitle: false,

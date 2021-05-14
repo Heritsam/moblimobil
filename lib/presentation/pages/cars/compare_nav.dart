@@ -5,7 +5,7 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
-import '../../widgets/rounded_button.dart';
+import '../../widgets/buttons/rounded_button.dart';
 import 'viewmodels/car_compare_viewmodel.dart';
 
 class CompareNav extends ConsumerWidget {

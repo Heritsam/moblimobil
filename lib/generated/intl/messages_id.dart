@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "city": MessageLookupByLibrary.simpleMessage("Kota"),
         "color": MessageLookupByLibrary.simpleMessage("Warna"),
         "compare": MessageLookupByLibrary.simpleMessage("Bandingkan"),
+        "contactSeller":
+            MessageLookupByLibrary.simpleMessage("Hubungi Penjual"),
         "credit": MessageLookupByLibrary.simpleMessage("Kredit"),
         "creditSimulation":
             MessageLookupByLibrary.simpleMessage("Simulasi Kredit"),

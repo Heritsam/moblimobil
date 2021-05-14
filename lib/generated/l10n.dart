@@ -610,6 +610,16 @@ class S {
     );
   }
 
+  /// `Contact Seller`
+  String get contactSeller {
+    return Intl.message(
+      'Contact Seller',
+      name: 'contactSeller',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Description`
   String get description {
     return Intl.message(

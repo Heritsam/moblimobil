@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/widgets/dialog/custom_dialog.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
-import '../circle_button.dart';
+import '../buttons/circle_button.dart';
 import '../toggle.dart';
 import 'user_card.dart';
 
@@ -149,26 +150,25 @@ class MobliDrawer extends ConsumerWidget {
             ),
             CircleButton(
               onPressed: () {
-                showDialog(
+                showCupertinoDialog(
                   context: context,
-                  builder: (context) => CupertinoAlertDialog(
-                    title: Text(S.of(context).logout),
-                    content: Text(S.of(context).logoutMessage),
+                  builder: (context) => CustomDialog(
+                    title: S.of(context).logout,
+                    description: S.of(context).logoutMessage,
                     actions: [
-                      CupertinoDialogAction(
+                      CustomDialogAction(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text(S.of(context).no),
+                        label: S.of(context).no,
                         isDefaultAction: true,
                       ),
-                      CupertinoDialogAction(
+                      CustomDialogAction(
                         onPressed: () {
-                          Navigator.pop(context);
-                          Navigator.pop(context);
+                          Navigator.popUntil(context, ModalRoute.withName('/home'));
                           Navigator.pushReplacementNamed(context, '/login');
                         },
-                        child: Text(S.of(context).yes),
+                        label: S.of(context).yes,
                         isDestructiveAction: true,
                       ),
                     ],

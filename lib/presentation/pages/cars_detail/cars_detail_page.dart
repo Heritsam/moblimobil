@@ -16,8 +16,8 @@ import '../../notifiers/app_settings/app_settings_notifier.dart';
 import '../../widgets/cars/brand_item.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/cars/feature_item.dart';
-import '../../widgets/rounded_button.dart';
-import '../../widgets/whatsapp_button.dart';
+import '../../widgets/buttons/rounded_button.dart';
+import '../../widgets/buttons/whatsapp_button.dart';
 import 'test_drive.dart';
 
 class CarsDetailPage extends StatefulWidget {
@@ -78,7 +78,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                             height: 180,
                             width: size.width,
                             decoration: BoxDecoration(
-                              color: blueColor,
+                              color: lightGreyColor,
                               image: DecorationImage(
                                 image: NetworkImage(i.imageUrl),
                                 fit: BoxFit.cover,
@@ -191,7 +191,8 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                     ],
                   ).expanded(flex: 3),
                   SizedBox(width: 16),
-                  WhatsAppButton(label: 'Hubungi Penjual').expanded(flex: 4),
+                  WhatsAppButton(label: S.of(context).contactSeller)
+                      .expanded(flex: 4),
                 ],
               ).padding(horizontal: 16),
               SizedBox(height: 16),

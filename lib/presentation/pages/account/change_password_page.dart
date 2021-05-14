@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../widgets/rounded_button.dart';
+import '../../widgets/buttons/rounded_button.dart';
 import 'viewmodels/change_password/change_password_viewmodel.dart';
 
 class ChangePasswordPage extends StatefulWidget {
@@ -35,10 +36,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
-    final size = mediaQuery.size;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         backgroundColor: Colors.white70,
@@ -107,18 +108,17 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           ),
                           keyboardType: TextInputType.phone,
                           textInputAction: TextInputAction.next,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                           onSubmitted: (_) {
                             _passwordNode.requestFocus();
                           },
-                        )
-                            .decorated(
-                              color: blueColor.withOpacity(.12),
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                              border: Border.all(color: Colors.white),
-                            )
-                            .backgroundBlur(20)
-                            .clipRRect(all: defaultBorderRadius),
+                        ).decorated(
+                          color: inputFieldColor,
+                          borderRadius:
+                              BorderRadius.circular(defaultBorderRadius),
+                        ),
                         SizedBox(height: 16),
                         <Widget>[
                           TextField(
@@ -141,16 +141,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             icon: Icon(Icons.visibility),
                             color: darkGreyColor,
                           ),
-                        ]
-                            .toRow()
-                            .decorated(
-                              color: blueColor.withOpacity(.12),
+                        ].toRow().decorated(
+                              color: inputFieldColor,
                               borderRadius:
                                   BorderRadius.circular(defaultBorderRadius),
-                              border: Border.all(color: Colors.white),
-                            )
-                            .backgroundBlur(20)
-                            .clipRRect(all: defaultBorderRadius),
+                            ),
                         SizedBox(height: 32),
                         RoundedButton(
                           onPressed: () {
@@ -182,50 +177,48 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           ),
                           keyboardType: TextInputType.phone,
                           textInputAction: TextInputAction.next,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                           onSubmitted: (_) {
                             _passwordNode.requestFocus();
                           },
                         )
                             .decorated(
-                              color: blueColor.withOpacity(.12),
+                              color: inputFieldColor,
                               borderRadius:
                                   BorderRadius.circular(defaultBorderRadius),
                               border: Border.all(color: Colors.white),
-                            )
-                            .backgroundBlur(20)
-                            .clipRRect(all: defaultBorderRadius),
-                        SizedBox(height: 16),
-                        <Widget>[
-                          TextField(
-                            focusNode: _passwordNode,
-                            decoration: InputDecoration(
-                              hintText: S.of(context).passwordField,
-                              border: InputBorder.none,
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 18),
-                              hintStyle: TextStyle(color: mediumGreyColor),
                             ),
-                            obscureText: true,
-                          ).expanded(flex: 2),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _isObscured = !_isObscured;
-                              });
-                            },
-                            icon: Icon(Icons.visibility),
-                            color: darkGreyColor,
-                          ),
-                        ]
-                            .toRow()
-                            .decorated(
-                              color: blueColor.withOpacity(.12),
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                              border: Border.all(color: Colors.white),
-                            )
-                            .backgroundBlur(20)
-                            .clipRRect(all: defaultBorderRadius),
+                        SizedBox(height: 16),
+                        Row(
+                          children: [
+                            TextField(
+                              focusNode: _passwordNode,
+                              decoration: InputDecoration(
+                                hintText: S.of(context).passwordField,
+                                border: InputBorder.none,
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 18),
+                                hintStyle: TextStyle(color: mediumGreyColor),
+                              ),
+                              obscureText: true,
+                            ).expanded(flex: 2),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isObscured = !_isObscured;
+                                });
+                              },
+                              icon: Icon(Icons.visibility),
+                              color: darkGreyColor,
+                            ),
+                          ],
+                        ).decorated(
+                          color: inputFieldColor,
+                          borderRadius:
+                              BorderRadius.circular(defaultBorderRadius),
+                        ),
                         SizedBox(height: 32),
                         RoundedButton(
                           onPressed: () {

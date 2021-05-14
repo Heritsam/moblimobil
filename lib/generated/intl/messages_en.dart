@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "compare": MessageLookupByLibrary.simpleMessage("Compare"),
+        "contactSeller": MessageLookupByLibrary.simpleMessage("Contact Seller"),
         "credit": MessageLookupByLibrary.simpleMessage("Credit"),
         "creditSimulation":
             MessageLookupByLibrary.simpleMessage("Credit Simulation"),

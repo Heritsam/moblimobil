@@ -4,7 +4,7 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../widgets/rounded_button.dart';
+import '../../widgets/buttons/rounded_button.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
@@ -24,11 +24,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
-    final size = mediaQuery.size;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.white70,
         elevation: 0,
@@ -37,90 +36,74 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
         leading: BackButton(color: darkGreyColor),
       ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.all(16),
         child: <Widget>[
-          Container(
-            alignment: Alignment.bottomCenter,
-            height: size.height / 2.5,
-            width: size.width * 3,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/bg_wave.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
+          SizedBox(height: 56 + mediaQuery.padding.top),
+          SvgPicture.asset(
+            'assets/logo.svg',
+            width: 140,
+            height: 140,
           ),
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.all(16),
-            child: <Widget>[
-              SizedBox(height: 56 + mediaQuery.padding.top),
-              SvgPicture.asset(
-                'assets/logo.svg',
-                width: 140,
-                height: 140,
-              ),
-              SizedBox(height: 32),
-              Text(
-                S.of(context).forgotPassword,
-                style: textTheme.headline6,
-              ),
-              SizedBox(height: 32),
-              Text(
-                S.of(context).forgotPasswordMessage,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: darkGreyColor),
-              ),
-              SizedBox(height: 32),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: S.of(context).fullNameField,
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                  hintStyle: TextStyle(color: mediumGreyColor),
-                ),
-                textInputAction: TextInputAction.next,
-                onSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_phoneNode);
-                },
-              )
-                  .decorated(
-                    color: blueColor.withOpacity(.12),
-                    borderRadius: BorderRadius.circular(defaultBorderRadius),
-                    border: Border.all(color: Colors.white),
-                  )
-                  .backgroundBlur(20)
-                  .clipRRect(all: defaultBorderRadius),
-              SizedBox(height: 16),
-              TextField(
-                focusNode: _phoneNode,
-                decoration: InputDecoration(
-                  hintText: S.of(context).phoneField,
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                  hintStyle: TextStyle(color: mediumGreyColor),
-                ),
-                keyboardType: TextInputType.phone,
-              )
-                  .decorated(
-                    color: blueColor.withOpacity(.12),
-                    borderRadius: BorderRadius.circular(defaultBorderRadius),
-                    border: Border.all(color: Colors.white),
-                  )
-                  .backgroundBlur(20)
-                  .clipRRect(all: defaultBorderRadius),
-              SizedBox(height: 64),
-              RoundedButton(
-                onPressed: () {},
-                label: S.of(context).send,
-              ),
-              SizedBox(height: 72 + mediaQuery.padding.top),
-            ].toColumn(mainAxisAlignment: MainAxisAlignment.center),
-          ).center(),
-        ].toStack(alignment: Alignment.bottomCenter),
+          SizedBox(height: 32),
+          Text(
+            S.of(context).forgotPassword,
+            style: textTheme.headline6,
+          ),
+          SizedBox(height: 32),
+          Text(
+            S.of(context).forgotPasswordMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: darkGreyColor),
+          ),
+          SizedBox(height: 32),
+          TextField(
+            decoration: InputDecoration(
+              hintText: S.of(context).fullNameField,
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 18),
+              hintStyle: TextStyle(color: mediumGreyColor),
+            ),
+            textInputAction: TextInputAction.next,
+            onSubmitted: (_) {
+              FocusScope.of(context).requestFocus(_phoneNode);
+            },
+          ).decorated(
+            color: inputFieldColor,
+            borderRadius: BorderRadius.circular(defaultBorderRadius),
+          ),
+          SizedBox(height: 16),
+          TextField(
+            focusNode: _phoneNode,
+            decoration: InputDecoration(
+              hintText: S.of(context).phoneField,
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 18),
+              hintStyle: TextStyle(color: mediumGreyColor),
+            ),
+            keyboardType: TextInputType.phone,
+          ).decorated(
+            color: inputFieldColor,
+            borderRadius: BorderRadius.circular(defaultBorderRadius),
+          ),
+          SizedBox(height: 64),
+          RoundedButton(
+            onPressed: () {},
+            label: S.of(context).send,
+          ),
+          SizedBox(height: 72 + mediaQuery.padding.top),
+        ].toColumn(mainAxisAlignment: MainAxisAlignment.center),
+      ).center(),
+    ).gestures(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+    ).decorated(
+      color: Colors.white,
+      image: DecorationImage(
+        image: AssetImage('assets/bg_wave.png'),
+        alignment: Alignment.bottomCenter,
       ),
     );
   }

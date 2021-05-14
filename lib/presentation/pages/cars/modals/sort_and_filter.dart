@@ -6,7 +6,7 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../../core/theme.dart';
 import '../../../../generated/l10n.dart';
-import '../../../widgets/rounded_button.dart';
+import '../../../widgets/buttons/rounded_button.dart';
 
 class SortAndFilter extends ConsumerWidget {
   final _controller = ScrollController();

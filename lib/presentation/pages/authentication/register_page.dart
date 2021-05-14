@@ -5,7 +5,7 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../widgets/rounded_button.dart';
+import '../../widgets/buttons/rounded_button.dart';
 import 'viewmodels/register_viewmodels.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -29,110 +29,89 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final size = MediaQuery.of(context).size;
 
     return Consumer(
       builder: (context, watch, child) {
         final vm = watch(registerViewModel);
 
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           extendBody: true,
-          body: <Widget>[
-            Container(
-              alignment: Alignment.bottomCenter,
-              height: size.height / 2.5,
-              width: size.width * 3,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/bg_wave.png'),
-                  fit: BoxFit.cover,
-                ),
+          body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(vertical: 24),
+            child: <Widget>[
+              SvgPicture.asset(
+                'assets/logo.svg',
+                width: 140,
+                height: 140,
               ),
-            ),
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(vertical: 24),
-              child: <Widget>[
-                SvgPicture.asset(
-                  'assets/logo.svg',
-                  width: 140,
-                  height: 140,
+              SizedBox(height: 32),
+              Text(
+                S.of(context).register,
+                style: textTheme.headline6,
+              ),
+              SizedBox(height: 32),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: S.of(context).fullNameField,
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
+                  hintStyle: TextStyle(color: mediumGreyColor),
                 ),
-                SizedBox(height: 32),
-                Text(
-                  S.of(context).register,
-                  style: textTheme.headline6,
+                textInputAction: TextInputAction.next,
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_emailNode);
+                },
+              )
+                  .decorated(
+                    color: inputFieldColor,
+                    borderRadius: BorderRadius.circular(defaultBorderRadius),
+                  )
+                  .padding(horizontal: 24),
+              SizedBox(height: 16),
+              TextField(
+                focusNode: _emailNode,
+                decoration: InputDecoration(
+                  hintText: S.of(context).emailField,
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
+                  hintStyle: TextStyle(color: mediumGreyColor),
                 ),
-                SizedBox(height: 32),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: S.of(context).fullNameField,
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                    hintStyle: TextStyle(color: mediumGreyColor),
-                  ),
-                  textInputAction: TextInputAction.next,
-                  onSubmitted: (_) {
-                    _emailNode.requestFocus();
-                  },
-                )
-                    .decorated(
-                      color: blueColor.withOpacity(.12),
-                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                      border: Border.all(color: Colors.white),
-                    )
-                    .backgroundBlur(20)
-                    .clipRRect(all: defaultBorderRadius)
-                    .padding(horizontal: 24),
-                SizedBox(height: 16),
-                TextField(
-                  focusNode: _emailNode,
-                  decoration: InputDecoration(
-                    hintText: S.of(context).emailField,
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                    hintStyle: TextStyle(color: mediumGreyColor),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  onSubmitted: (_) {
-                    _phoneNode.requestFocus();
-                  },
-                )
-                    .decorated(
-                      color: blueColor.withOpacity(.12),
-                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                      border: Border.all(color: Colors.white),
-                    )
-                    .backgroundBlur(20)
-                    .clipRRect(all: defaultBorderRadius)
-                    .padding(horizontal: 24),
-                SizedBox(height: 16),
-                TextField(
-                  focusNode: _phoneNode,
-                  decoration: InputDecoration(
-                    hintText: S.of(context).phoneField,
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                    hintStyle: TextStyle(color: mediumGreyColor),
-                  ),
-                  keyboardType: TextInputType.phone,
-                  textInputAction: TextInputAction.next,
-                  onSubmitted: (_) {
-                    _passwordNode.requestFocus();
-                  },
-                )
-                    .decorated(
-                      color: blueColor.withOpacity(.12),
-                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                      border: Border.all(color: Colors.white),
-                    )
-                    .backgroundBlur(20)
-                    .clipRRect(all: defaultBorderRadius)
-                    .padding(horizontal: 24),
-                SizedBox(height: 16),
-                <Widget>[
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_phoneNode);
+                },
+              )
+                  .decorated(
+                    color: inputFieldColor,
+                    borderRadius: BorderRadius.circular(defaultBorderRadius),
+                  )
+                  .padding(horizontal: 24),
+              SizedBox(height: 16),
+              TextField(
+                focusNode: _phoneNode,
+                decoration: InputDecoration(
+                  hintText: S.of(context).phoneField,
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
+                  hintStyle: TextStyle(color: mediumGreyColor),
+                ),
+                keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_passwordNode);
+                },
+              )
+                  .decorated(
+                    color: inputFieldColor,
+                    borderRadius: BorderRadius.circular(defaultBorderRadius),
+                  )
+                  .padding(horizontal: 24),
+              SizedBox(height: 16),
+              Row(
+                children: [
                   TextField(
                     focusNode: _passwordNode,
                     decoration: InputDecoration(
@@ -150,35 +129,41 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     color: darkGreyColor,
                   ),
-                ]
-                    .toRow()
-                    .decorated(
-                      color: blueColor.withOpacity(.12),
-                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                      border: Border.all(color: Colors.white),
-                    )
-                    .backgroundBlur(20)
-                    .clipRRect(all: defaultBorderRadius)
-                    .padding(horizontal: 24),
-                SizedBox(height: 32),
-                RoundedButton(
-                  onPressed: () {},
-                  label: S.of(context).register,
-                ).constrained(width: 193),
-                SizedBox(height: 16),
-                RoundedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  label: S.of(context).login,
-                  backgroundColor: darkGreyColor,
-                ).constrained(width: 193),
-              ].toColumn(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-              ),
-            ).center(),
-          ].toStack(alignment: Alignment.bottomCenter),
+                ],
+              )
+                  .decorated(
+                    color: inputFieldColor,
+                    borderRadius: BorderRadius.circular(defaultBorderRadius),
+                  )
+                  .padding(horizontal: 24),
+              SizedBox(height: 32),
+              RoundedButton(
+                onPressed: () {},
+                label: S.of(context).register,
+              ).constrained(width: 193),
+              SizedBox(height: 16),
+              RoundedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                label: S.of(context).login,
+                backgroundColor: darkGreyColor,
+              ).constrained(width: 193),
+            ].toColumn(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+            ),
+          ).center(),
+        ).gestures(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+        ).decorated(
+          color: Colors.white,
+          image: DecorationImage(
+            image: AssetImage('assets/bg_wave.png'),
+            alignment: Alignment.bottomCenter,
+          ),
         );
       },
     );

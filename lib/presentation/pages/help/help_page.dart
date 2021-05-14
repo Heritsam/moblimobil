@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moblimobil/presentation/widgets/rounded_button.dart';
+import 'package:moblimobil/presentation/widgets/buttons/rounded_button.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
@@ -27,6 +27,7 @@ class _HelpPageState extends State<HelpPage> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         backgroundColor: Colors.white70,
@@ -62,7 +63,7 @@ class _HelpPageState extends State<HelpPage> {
                 FocusScope.of(context).requestFocus(_textNode);
               },
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
@@ -79,7 +80,7 @@ class _HelpPageState extends State<HelpPage> {
               ),
               maxLines: 5,
             ).decorated(
-              color: blueColor.withOpacity(.12),
+              color: inputFieldColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 32),
@@ -152,7 +153,7 @@ class _HelpPageState extends State<HelpPage> {
             )
                 .padding(all: 16)
                 .decorated(
-                  color: blueColor.withOpacity(.12),
+                  color: inputFieldColor,
                   borderRadius: BorderRadius.circular(defaultBorderRadius),
                 )
                 .constrained(width: size.width),
