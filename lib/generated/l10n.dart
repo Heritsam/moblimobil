@@ -60,10 +60,10 @@ class S {
     );
   }
 
-  /// `WELCOME`
+  /// `Welcome`
   String get welcomeText {
     return Intl.message(
-      'WELCOME',
+      'Welcome',
       name: 'welcomeText',
       desc: '',
       args: [],
@@ -125,6 +125,16 @@ class S {
     return Intl.message(
       'Login',
       name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Later`
+  String get later {
+    return Intl.message(
+      'Later',
+      name: 'later',
       desc: '',
       args: [],
     );
@@ -220,10 +230,10 @@ class S {
     );
   }
 
-  /// `We will help you reset your password\nby sending us your name and your phone number`
+  /// `We will help you reset your password\nby sending us your email address.`
   String get forgotPasswordMessage {
     return Intl.message(
-      'We will help you reset your password\nby sending us your name and your phone number',
+      'We will help you reset your password\nby sending us your email address.',
       name: 'forgotPasswordMessage',
       desc: '',
       args: [],
@@ -235,6 +245,36 @@ class S {
     return Intl.message(
       'Send',
       name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not receiving code?`
+  String get notReceiveCode {
+    return Intl.message(
+      'Not receiving code?',
+      name: 'notReceiveCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend Code`
+  String get resendCode {
+    return Intl.message(
+      'Resend Code',
+      name: 'resendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
       desc: '',
       args: [],
     );
@@ -370,6 +410,26 @@ class S {
     );
   }
 
+  /// `Explore`
+  String get explore {
+    return Intl.message(
+      'Explore',
+      name: 'explore',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Discount & Promo`
   String get discountAndPromo {
     return Intl.message(
@@ -435,6 +495,16 @@ class S {
     return Intl.message(
       'Detail',
       name: 'detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
       desc: '',
       args: [],
     );

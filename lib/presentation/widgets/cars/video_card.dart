@@ -25,52 +25,51 @@ class _VideoCardState extends State<VideoCard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final width = 320.0;
 
-    return Styled.widget(
-      child: <Widget>[
-        Container(
-          height: size.height,
-          width: size.width - 32,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: widget.thumbnail,
-              fit: BoxFit.cover,
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Container(
+              height: size.height,
+              width: width,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: widget.thumbnail,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
-        ),
-        <Widget>[
-          SizedBox().expanded(flex: 3),
-          Styled.widget(
-            child: Icon(
+            Icon(
               Icons.play_arrow_rounded,
               color: Colors.white,
-              size: 40,
-            ).center(),
-          )
-              .decorated(
-                shape: BoxShape.circle,
-                color: Colors.black38,
-              )
-              .backgroundBlur(20)
-              .clipRRect(all: 150)
-              .constrained(height: 46, width: 46),
-          SizedBox().expanded(),
-          Styled.text(
-            widget.title,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-          )
-              .padding(vertical: 8, left: 16, right: 10)
-              .decorated(
-                borderRadius: BorderRadius.circular(150),
-                color: Colors.white54,
-              )
-              .backgroundBlur(20)
-              .clipRRect(all: 150)
-              .padding(horizontal: 8, vertical: 12)
-              .constrained(width: size.width - 32),
-        ].toColumn(),
-      ].toStack(alignment: Alignment.center),
+              size: 48,
+            )
+                .center()
+                .decorated(
+                  shape: BoxShape.circle,
+                  color: Colors.black26,
+                )
+                .backgroundBlur(20)
+                .clipRRect(all: 150)
+                .constrained(height: 52, width: 52)
+                .alignment(Alignment.center),
+          ],
+        ).expanded(),
+        Text(
+          widget.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: darkGreyColor,
+          ),
+        ).padding(all: 12).constrained(width: width),
+      ],
     )
         .borderRadius(all: defaultBorderRadius)
         .ripple()

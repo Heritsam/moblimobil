@@ -54,9 +54,7 @@ class WishlistPage extends ConsumerWidget {
             carId: item.id,
             title: item.title,
             price: item.price,
-            originalPrice: item.originalPrice,
             imageUrl: item.imageUrl,
-            imageHeight: 110,
           );
         },
       ),

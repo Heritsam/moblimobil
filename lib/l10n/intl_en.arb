@@ -3,13 +3,14 @@
 
     "seeAll": "See All",
 
-    "welcomeText": "WELCOME",
+    "welcomeText": "Welcome",
     "skipText": "Skip",
     "phoneField": "Enter phone number",
     "passwordField": "Enter password",
     "forgotPassword": "Forgot Password?",
     "rememberMe": "Remember Me",
     "login": "Login",
+    "later": "Later",
     "register": "Register",
     "or": "or",
     "loginWithGoogle": "Login with Google",
@@ -20,8 +21,11 @@
     "cancel": "Cancel",
 
     "fullNameField": "Enter name",
-    "forgotPasswordMessage": "We will help you reset your password\nby sending us your name and your phone number",
+    "forgotPasswordMessage": "We will help you reset your password\nby sending us your email address.",
     "send": "Send",
+    "notReceiveCode": "Not receiving code?",
+    "resendCode": "Resend Code",
+    "confirm": "Confirm",
 
     "emailField": "Enter email address",
 
@@ -38,6 +42,8 @@
     "videos": "Videos",
 
     "home": "Home",
+    "explore": "Explore",
+    "profile": "Profile",
     "discountAndPromo": "Discount & Promo",
     "insurance": "Insurance",
     "credit": "Credit",
@@ -47,6 +53,7 @@
     "notification": "Notification",
     "detail": "Detail",
 
+    "search": "Search",
     "searchForCars": "Search for cars",
     "searchResult": "Search Result",
     "popular": "Popular",

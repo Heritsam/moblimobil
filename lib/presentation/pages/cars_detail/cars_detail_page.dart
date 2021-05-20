@@ -334,7 +334,6 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                     },
                     carId: item.id,
                     title: item.title,
-                    originalPrice: item.originalPrice,
                     price: item.price,
                     hasUsed: index.isEven,
                     imageUrl: item.imageUrl,

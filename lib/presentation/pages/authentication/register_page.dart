@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/theme.dart';
@@ -28,142 +27,116 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final mediaQuery = MediaQuery.of(context);
+    final size = mediaQuery.size;
 
     return Consumer(
       builder: (context, watch, child) {
         final vm = watch(registerViewModel);
 
         return Scaffold(
-          backgroundColor: Colors.transparent,
-          extendBody: true,
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.white70,
+            elevation: 0,
+            flexibleSpace: ClipRRect(
+              child: Container(color: Colors.white60).backgroundBlur(7),
+            ),
+            leading: BackButton(color: darkGreyColor),
+          ),
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(vertical: 24),
             child: <Widget>[
-              SvgPicture.asset(
-                'assets/logo.svg',
+              SizedBox(height: 56),
+              Image.asset(
+                'assets/illustration_user.png',
                 width: 140,
                 height: 140,
               ),
-              SizedBox(height: 32),
+              SizedBox(height: 16),
               Text(
                 S.of(context).register,
-                style: textTheme.headline6,
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: darkGreyColor,
+                  fontSize: 24,
+                ),
               ),
               SizedBox(height: 32),
               TextField(
                 decoration: InputDecoration(
-                  hintText: S.of(context).fullNameField,
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                  hintStyle: TextStyle(color: mediumGreyColor),
+                  labelText: S.of(context).fullNameField,
                 ),
                 textInputAction: TextInputAction.next,
                 onSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_emailNode);
                 },
-              )
-                  .decorated(
-                    color: inputFieldColor,
-                    borderRadius: BorderRadius.circular(defaultBorderRadius),
-                  )
-                  .padding(horizontal: 24),
-              SizedBox(height: 16),
+              ).padding(horizontal: 24),
+              SizedBox(height: 8),
               TextField(
                 focusNode: _emailNode,
                 decoration: InputDecoration(
-                  hintText: S.of(context).emailField,
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                  hintStyle: TextStyle(color: mediumGreyColor),
+                  labelText: S.of(context).emailField,
                 ),
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
                 onSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_phoneNode);
                 },
-              )
-                  .decorated(
-                    color: inputFieldColor,
-                    borderRadius: BorderRadius.circular(defaultBorderRadius),
-                  )
-                  .padding(horizontal: 24),
-              SizedBox(height: 16),
+              ).padding(horizontal: 24),
+              SizedBox(height: 8),
               TextField(
                 focusNode: _phoneNode,
                 decoration: InputDecoration(
-                  hintText: S.of(context).phoneField,
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                  hintStyle: TextStyle(color: mediumGreyColor),
+                  labelText: S.of(context).phoneField,
                 ),
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.next,
                 onSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_passwordNode);
                 },
-              )
-                  .decorated(
-                    color: inputFieldColor,
-                    borderRadius: BorderRadius.circular(defaultBorderRadius),
-                  )
-                  .padding(horizontal: 24),
-              SizedBox(height: 16),
-              Row(
-                children: [
-                  TextField(
-                    focusNode: _passwordNode,
-                    decoration: InputDecoration(
-                      hintText: S.of(context).passwordField,
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                      hintStyle: TextStyle(color: mediumGreyColor),
-                    ),
-                    obscureText: vm.isObscured,
-                  ).expanded(flex: 2),
-                  IconButton(
-                    onPressed: context.read(registerViewModel).toggleObscure,
-                    icon: Icon(
-                      vm.isObscured ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    color: darkGreyColor,
-                  ),
-                ],
-              )
-                  .decorated(
-                    color: inputFieldColor,
-                    borderRadius: BorderRadius.circular(defaultBorderRadius),
-                  )
-                  .padding(horizontal: 24),
+              ).padding(horizontal: 24),
+              SizedBox(height: 8),
+              TextField(
+                focusNode: _passwordNode,
+                decoration: InputDecoration(
+                  labelText: S.of(context).passwordField,
+                ),
+                obscureText: vm.isObscured,
+              ).padding(horizontal: 24),
               SizedBox(height: 32),
               RoundedButton(
-                onPressed: () {},
-                label: S.of(context).register,
-              ).constrained(width: 193),
-              SizedBox(height: 16),
-              RoundedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/otp');
                 },
-                label: S.of(context).login,
-                backgroundColor: darkGreyColor,
-              ).constrained(width: 193),
+                label: S.of(context).register.toUpperCase(),
+                elevated: false,
+              ).constrained(width: size.width).padding(horizontal: 24),
+              SizedBox(height: 16),
+              OutlinedButton(
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/google_logo.png',
+                      height: 24,
+                      width: 24,
+                    ),
+                    SizedBox(width: 8),
+                    Text(S.of(context).loginWithGoogle.toUpperCase()).textColor(Colors.black),
+                  ],
+                ),
+                style: OutlinedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 14),
+                ),
+              ).constrained(width: size.width).padding(horizontal: 24),
             ].toColumn(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
             ),
           ).center(),
-        ).gestures(
-          onTap: () {
-            FocusScope.of(context).requestFocus(FocusNode());
-          },
-        ).decorated(
-          color: Colors.white,
-          image: DecorationImage(
-            image: AssetImage('assets/bg_wave.png'),
-            alignment: Alignment.bottomCenter,
-          ),
         );
       },
     );

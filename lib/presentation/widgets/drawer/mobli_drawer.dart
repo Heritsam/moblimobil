@@ -48,19 +48,6 @@ class MobliDrawer extends ConsumerWidget {
         body: ListView(
           physics: BouncingScrollPhysics(),
           children: [
-            SizedBox(height: 4),
-            UserCard(
-              onTap: () {
-                Navigator.popUntil(context, ModalRoute.withName('/home'));
-                Navigator.pushNamed(context, '/account');
-              },
-              avatar: NetworkImage(
-                'https://uifaces.co/our-content/donated/gPZwCbdS.jpg',
-              ),
-              name: 'Rohayat G. Ade',
-              phone: '0812 3456 7890',
-            ).padding(horizontal: 16),
-            SizedBox(height: 16),
             _drawerItem(
               context: context,
               onTap: () {
@@ -69,7 +56,6 @@ class MobliDrawer extends ConsumerWidget {
               title: S.of(context).home.toUpperCase(),
               icon: Icons.home_outlined,
             ),
-            _divider(context),
             _drawerItem(
               context: context,
               onTap: () {
@@ -79,7 +65,6 @@ class MobliDrawer extends ConsumerWidget {
               title: S.of(context).newCars.toUpperCase(),
               icon: Icons.directions_car_outlined,
             ),
-            _divider(context),
             _drawerItem(
               context: context,
               onTap: () {
@@ -89,7 +74,6 @@ class MobliDrawer extends ConsumerWidget {
               title: S.of(context).usedCars.toUpperCase(),
               icon: Icons.directions_car_outlined,
             ),
-            _divider(context),
             _drawerItem(
               context: context,
               onTap: () {
@@ -99,21 +83,18 @@ class MobliDrawer extends ConsumerWidget {
               title: S.of(context).discountAndPromo.toUpperCase(),
               icon: Icons.account_balance_wallet_outlined,
             ),
-            _divider(context),
             _drawerItem(
               context: context,
               title: S.of(context).insurance.toUpperCase(),
               icon: Icons.verified_user_outlined,
               trailing: Icon(Icons.lock, color: mediumGreyColor),
             ),
-            _divider(context),
             _drawerItem(
               context: context,
               title: S.of(context).credit.toUpperCase(),
               icon: Icons.attach_money_outlined,
               trailing: Icon(Icons.lock, color: mediumGreyColor),
             ),
-            _divider(context),
             _drawerItem(
               context: context,
               onTap: () {
@@ -123,7 +104,6 @@ class MobliDrawer extends ConsumerWidget {
               title: S.of(context).newsAndReview.toUpperCase(),
               icon: Icons.article_outlined,
             ),
-            _divider(context),
             _drawerItem(
               context: context,
               onTap: () {
@@ -133,7 +113,6 @@ class MobliDrawer extends ConsumerWidget {
               title: 'FAQ',
               icon: Icons.chat_outlined,
             ),
-            _divider(context),
             _drawerItem(
               context: context,
               title: S.of(context).language.toUpperCase(),

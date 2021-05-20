@@ -15,15 +15,13 @@ class _SearchBarState extends State<SearchBar> {
     return <Widget>[
       TextField(
         decoration: InputDecoration(
-          hintText: S.of(context).searchForCars,
+          hintText: S.of(context).search,
           hintStyle: TextStyle(color: mediumGreyColor),
           border: InputBorder.none,
           contentPadding: EdgeInsets.all(16),
         ),
       ).expanded(),
-      Styled.widget(
-        child: Icon(Icons.search_rounded, size: 32, color: Colors.white),
-      )
+      Icon(Icons.search_rounded, size: 32, color: Colors.white)
           .padding(all: 12)
           .ripple()
           .decorated(
@@ -36,16 +34,9 @@ class _SearchBarState extends State<SearchBar> {
             topRight: defaultBorderRadius,
             bottomRight: defaultBorderRadius,
           ),
-    ]
-        .toRow()
-        .decorated(
-          color: Colors.white,
+    ].toRow().decorated(
+          color: lightGreyColor,
           borderRadius: BorderRadius.circular(defaultBorderRadius),
-        )
-        .elevation(
-          12,
-          borderRadius: BorderRadius.circular(defaultBorderRadius),
-          shadowColor: Colors.black38,
         );
   }
 }

@@ -26,17 +26,6 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     return <Widget>[
       Styled.widget(child: widget.icon)
-          .padding(horizontal: 4, vertical: 12)
-          .borderRadius(all: defaultBorderRadius)
-          .ripple()
-          .backgroundColor(Colors.white, animate: true)
-          .clipRRect(all: defaultBorderRadius)
-          .borderRadius(all: defaultBorderRadius, animate: true)
-          .elevation(
-            _isPressed ? 2 : 10,
-            borderRadius: BorderRadius.circular(defaultBorderRadius),
-            shadowColor: Colors.black38,
-          )
           .constrained(height: 73, width: 73)
           .gestures(
             onTapChange: (tapStatus) => setState(() => _isPressed = tapStatus),

@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
         "compare": MessageLookupByLibrary.simpleMessage("Compare"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "contactSeller": MessageLookupByLibrary.simpleMessage("Contact Seller"),
         "credit": MessageLookupByLibrary.simpleMessage("Credit"),
         "creditSimulation":
@@ -52,11 +53,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter your new phone number & password"),
         "enterOldPasswordPhone": MessageLookupByLibrary.simpleMessage(
             "Enter your old phone number & password"),
+        "explore": MessageLookupByLibrary.simpleMessage("Explore"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
-            "We will help you reset your password\nby sending us your name and your phone number"),
+            "We will help you reset your password\nby sending us your email address."),
         "fuelType": MessageLookupByLibrary.simpleMessage("Fuel Type"),
         "fullNameField": MessageLookupByLibrary.simpleMessage("Enter name"),
         "help": MessageLookupByLibrary.simpleMessage("Help"),
@@ -66,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "insurance": MessageLookupByLibrary.simpleMessage("Insurance"),
         "kilometers": MessageLookupByLibrary.simpleMessage("Kilometers"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "later": MessageLookupByLibrary.simpleMessage("Later"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginWithGoogle":
             MessageLookupByLibrary.simpleMessage("Login with Google"),
@@ -80,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "newsUpdates": MessageLookupByLibrary.simpleMessage("News Updates"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "notReceiveCode":
+            MessageLookupByLibrary.simpleMessage("Not receiving code?"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "otherHelpMessage":
@@ -91,14 +96,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "popular": MessageLookupByLibrary.simpleMessage("Popular"),
         "popularCars": MessageLookupByLibrary.simpleMessage("Popular Cars"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "recommended": MessageLookupByLibrary.simpleMessage("Recommended"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember Me"),
+        "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
         "reviewUpdates": MessageLookupByLibrary.simpleMessage("Review Updates"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "scheduleToTestDrive":
             MessageLookupByLibrary.simpleMessage("Schedule to test drive"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "searchByBrand":
             MessageLookupByLibrary.simpleMessage("Search for Cars by Brand"),
         "searchByLocation":
@@ -125,7 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "usedCars": MessageLookupByLibrary.simpleMessage("Used Cars"),
         "usedText": MessageLookupByLibrary.simpleMessage("Used"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),
-        "welcomeText": MessageLookupByLibrary.simpleMessage("WELCOME"),
+        "welcomeText": MessageLookupByLibrary.simpleMessage("Welcome"),
         "wishlist": MessageLookupByLibrary.simpleMessage("Wishlist"),
         "year": MessageLookupByLibrary.simpleMessage("Year"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),

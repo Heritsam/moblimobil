@@ -12,22 +12,13 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  final _phoneNode = FocusNode();
-
-  @override
-  void dispose() {
-    _phoneNode.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
+    final size = mediaQuery.size;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
       appBar: AppBar(
         backgroundColor: Colors.white70,
         elevation: 0,
@@ -38,73 +29,44 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(24),
         child: <Widget>[
           SizedBox(height: 56 + mediaQuery.padding.top),
-          SvgPicture.asset(
-            'assets/logo.svg',
+          Image.asset(
+            'assets/illustration_user.png',
             width: 140,
             height: 140,
           ),
-          SizedBox(height: 32),
+          SizedBox(height: 16),
           Text(
             S.of(context).forgotPassword,
-            style: textTheme.headline6,
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              color: darkGreyColor,
+              fontSize: 24,
+            ),
           ),
           SizedBox(height: 32),
           Text(
             S.of(context).forgotPasswordMessage,
             textAlign: TextAlign.center,
-            style: TextStyle(color: darkGreyColor),
+            style: TextStyle(fontSize: 16),
           ),
           SizedBox(height: 32),
           TextField(
             decoration: InputDecoration(
-              hintText: S.of(context).fullNameField,
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(horizontal: 18),
-              hintStyle: TextStyle(color: mediumGreyColor),
+              labelText: S.of(context).emailField,
             ),
-            textInputAction: TextInputAction.next,
-            onSubmitted: (_) {
-              FocusScope.of(context).requestFocus(_phoneNode);
-            },
-          ).decorated(
-            color: inputFieldColor,
-            borderRadius: BorderRadius.circular(defaultBorderRadius),
-          ),
-          SizedBox(height: 16),
-          TextField(
-            focusNode: _phoneNode,
-            decoration: InputDecoration(
-              hintText: S.of(context).phoneField,
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(horizontal: 18),
-              hintStyle: TextStyle(color: mediumGreyColor),
-            ),
-            keyboardType: TextInputType.phone,
-          ).decorated(
-            color: inputFieldColor,
-            borderRadius: BorderRadius.circular(defaultBorderRadius),
           ),
           SizedBox(height: 64),
           RoundedButton(
             onPressed: () {},
-            label: S.of(context).send,
-          ),
+            label: S.of(context).send.toUpperCase(),
+            elevated: false,
+          ).constrained(width: size.width),
           SizedBox(height: 72 + mediaQuery.padding.top),
         ].toColumn(mainAxisAlignment: MainAxisAlignment.center),
       ).center(),
-    ).gestures(
-      onTap: () {
-        FocusScope.of(context).requestFocus(FocusNode());
-      },
-    ).decorated(
-      color: Colors.white,
-      image: DecorationImage(
-        image: AssetImage('assets/bg_wave.png'),
-        alignment: Alignment.bottomCenter,
-      ),
     );
   }
 }

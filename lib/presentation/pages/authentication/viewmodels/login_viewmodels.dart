@@ -21,12 +21,4 @@ class LoginViewModel extends ChangeNotifier {
     rememberMe = !rememberMe;
     notifyListeners();
   }
-
-  void navigateToForgotPassword(BuildContext context) {
-    Navigator.pushNamed(context, '/forgot-password');
-  }
-
-  void login(BuildContext context) {
-    Navigator.pushReplacementNamed(context, '/home');
-  }
 }

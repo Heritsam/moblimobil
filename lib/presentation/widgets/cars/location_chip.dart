@@ -24,10 +24,10 @@ class _LocationChipState extends State<LocationChip> {
   Widget build(BuildContext context) {
     return Styled.text(widget.label, style: TextStyle(color: Colors.white))
         .fittedBox()
-        .padding(horizontal: 4, vertical: 12)
+        .padding(horizontal: 4, vertical: 14)
         .borderRadius(all: defaultBorderRadius)
         .ripple()
-        .backgroundColor(greenColor, animate: true)
+        .backgroundColor(blueColor, animate: true)
         .clipRRect(all: defaultBorderRadius)
         .borderRadius(all: defaultBorderRadius, animate: true)
         .elevation(

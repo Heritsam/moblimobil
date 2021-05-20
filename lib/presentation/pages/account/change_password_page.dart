@@ -155,6 +155,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                           },
                           label: S.of(context).next,
                           backgroundColor: darkGreyColor,
+                          horizontalPadding: 64,
                         ),
                       ].toColumn();
                     },
@@ -227,6 +228,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                 .sendNewForm();
                           },
                           label: S.of(context).send,
+                          horizontalPadding: 64,
                         ),
                       ].toColumn();
                     },

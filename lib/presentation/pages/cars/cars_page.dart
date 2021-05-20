@@ -130,9 +130,7 @@ class _CarsPageState extends State<CarsPage> {
                 hasUsed: widget.type == CarsPageType.usedCars,
                 title: item.title,
                 price: item.price,
-                originalPrice: item.originalPrice,
                 imageUrl: item.imageUrl,
-                imageHeight: 110,
               );
             },
           ).parent(({required child}) => Scrollbar(child: child)),

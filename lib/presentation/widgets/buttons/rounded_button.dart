@@ -10,6 +10,7 @@ class RoundedButton extends StatefulWidget {
   final double verticalPadding;
   final double horizontalPadding;
   final bool enabled;
+  final bool elevated;
   final Function()? onPressed;
 
   const RoundedButton({
@@ -17,9 +18,10 @@ class RoundedButton extends StatefulWidget {
     required this.label,
     this.backgroundColor = blueColor,
     this.textColor = Colors.white,
-    this.verticalPadding = 16,
-    this.horizontalPadding = 59,
+    this.verticalPadding = 14,
+    this.horizontalPadding = 32,
     this.enabled = true,
+    this.elevated = true,
     this.onPressed,
   }) : super(key: key);
 
@@ -66,7 +68,11 @@ class _RoundedButtonState extends State<RoundedButton> {
         .clipRRect(all: defaultBorderRadius)
         .borderRadius(all: defaultBorderRadius, animate: true)
         .elevation(
-          _isPressed ? 2 : 10,
+          widget.elevated
+              ? _isPressed
+                  ? 2
+                  : 10
+              : 0,
           borderRadius: BorderRadius.circular(defaultBorderRadius),
           shadowColor: widget.backgroundColor.withOpacity(.38),
         )

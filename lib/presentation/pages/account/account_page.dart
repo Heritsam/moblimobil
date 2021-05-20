@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -7,24 +9,35 @@ import '../../../generated/l10n.dart';
 class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
     final size = mediaQuery.size;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white70,
         elevation: 0,
         centerTitle: false,
         title: Text(
           S.of(context).account,
-          style: textTheme.headline6?.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Scaffold.of(context).openEndDrawer();
+            },
+            icon: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(math.pi),
+              child: Icon(Icons.short_text_rounded),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -143,7 +156,7 @@ class AccountPage extends StatelessWidget {
             icon: Icons.vpn_key_outlined,
             title: S.of(context).changePhoneAndPassword,
           ),
-          SizedBox(height: 24),
+          SizedBox(height: 32 + mediaQuery.padding.top),
         ].toColumn(mainAxisAlignment: MainAxisAlignment.center),
       ),
     );

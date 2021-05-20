@@ -33,7 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ganti Nomor Handphone dan Password"),
         "city": MessageLookupByLibrary.simpleMessage("Kota"),
         "color": MessageLookupByLibrary.simpleMessage("Warna"),
-        "compare": MessageLookupByLibrary.simpleMessage("Bandingkan"),
+        "compare": MessageLookupByLibrary.simpleMessage("Perbandingan"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Konfirmasi"),
         "contactSeller":
             MessageLookupByLibrary.simpleMessage("Hubungi Penjual"),
         "credit": MessageLookupByLibrary.simpleMessage("Kredit"),
@@ -53,11 +54,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Masukan nomor dan password baru"),
         "enterOldPasswordPhone": MessageLookupByLibrary.simpleMessage(
             "Masukan nomor dan password lama"),
+        "explore": MessageLookupByLibrary.simpleMessage("Jelajahi"),
         "female": MessageLookupByLibrary.simpleMessage("Perempuan"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Lupa password?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
-            "Jika kamu lupa password kamu\nkami akan perbaiki dengan mengirimkan\nnamamu dan nomor handphonemu"),
+            "Jika kamu lupa password kamu\nkami akan perbaiki dengan mengirimkan\nemail."),
         "fuelType": MessageLookupByLibrary.simpleMessage("Bahan Bakar"),
         "fullNameField":
             MessageLookupByLibrary.simpleMessage("Masukkan nama lengkap"),
@@ -68,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "insurance": MessageLookupByLibrary.simpleMessage("Asuransi"),
         "kilometers": MessageLookupByLibrary.simpleMessage("Kilometer"),
         "language": MessageLookupByLibrary.simpleMessage("Bahasa"),
+        "later": MessageLookupByLibrary.simpleMessage("Nanti Saja"),
         "login": MessageLookupByLibrary.simpleMessage("Masuk"),
         "loginWithGoogle":
             MessageLookupByLibrary.simpleMessage("Masuk dengan Google"),
@@ -83,6 +86,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "newsUpdates": MessageLookupByLibrary.simpleMessage("Berita Terkini"),
         "next": MessageLookupByLibrary.simpleMessage("Lanjut"),
         "no": MessageLookupByLibrary.simpleMessage("Tidak"),
+        "notReceiveCode":
+            MessageLookupByLibrary.simpleMessage("Belum mendapatkan kode?"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifikasi"),
         "or": MessageLookupByLibrary.simpleMessage("atau"),
         "otherHelpMessage": MessageLookupByLibrary.simpleMessage(
@@ -96,14 +101,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "popular": MessageLookupByLibrary.simpleMessage("Populer"),
         "popularCars": MessageLookupByLibrary.simpleMessage("Mobil Populer"),
         "price": MessageLookupByLibrary.simpleMessage("Harga"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profil"),
         "recommended": MessageLookupByLibrary.simpleMessage("Rekomendasi"),
         "register": MessageLookupByLibrary.simpleMessage("Daftar"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Ingat Saya"),
+        "resendCode": MessageLookupByLibrary.simpleMessage("Kirim Ulang Kode"),
         "reviewUpdates": MessageLookupByLibrary.simpleMessage("Ulasan Terbaru"),
         "reviews": MessageLookupByLibrary.simpleMessage("Ulasan"),
         "save": MessageLookupByLibrary.simpleMessage("Simpan"),
         "scheduleToTestDrive":
             MessageLookupByLibrary.simpleMessage("Jadwalkan test drive"),
+        "search": MessageLookupByLibrary.simpleMessage("Cari"),
         "searchByBrand": MessageLookupByLibrary.simpleMessage(
             "Cari Mobil Berdasarkan Merek"),
         "searchByLocation": MessageLookupByLibrary.simpleMessage(

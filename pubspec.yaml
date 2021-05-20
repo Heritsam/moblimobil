@@ -36,6 +36,7 @@ dependencies:
   freezed_annotation: ^0.14.1
   google_fonts: ^2.0.0
   intl: ^0.17.0
+  pin_code_fields: ^7.1.0
   shared_preferences: ^2.0.5
   smooth_page_indicator: ^0.3.0-nullsafety.0
   styled_widget: ^0.3.0
@@ -59,6 +60,17 @@ flutter:
   assets:
     - assets/
     - assets/brands/
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-ExtraBold.ttf
+          weight: 800
+        - asset: fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: fonts/Montserrat-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

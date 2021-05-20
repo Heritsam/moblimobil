@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'presentation/notifiers/authentication/authentication_notifier.dart';
+import 'presentation/notifiers/splash_screen/splash_screen_notifier.dart';
 import 'presentation/pages/splash_screen.dart';
 
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      context.read(authenticationNotifier.notifier).initialize();
+      context.read(splashScreenNotifier.notifier).initialize();
     });
-    
+
     return Scaffold(
       body: ProviderListener(
-        provider: authenticationNotifier,
-        onChange: (context, AuthenticationState state) {
+        provider: splashScreenNotifier,
+        onChange: (context, SplashScreenState state) {
           state.maybeWhen(
-            unauthenticated: () {
-              Navigator.pushReplacementNamed(context, '/login');
-            },
-            authenticated: () {
-              Navigator.pushReplacementNamed(context, '/home');
+            initialized: () {
+              Navigator.pushReplacementNamed(context, '/onboarding');
             },
             orElse: () {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
