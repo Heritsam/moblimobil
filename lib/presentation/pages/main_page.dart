@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moblimobil/core/themes/mobli_icons_icons.dart';
 
 import '../../generated/l10n.dart';
 import '../widgets/drawer/mobli_drawer.dart';
@@ -38,7 +39,7 @@ class _MainPageState extends State<MainPage> {
           AccountPage(),
         ],
       ),
-      endDrawer: MobliDrawer(),
+      endDrawer: _pageIndex == 4 ? MobliDrawer() : null,
       bottomNavigationBar: CupertinoTabBar(
         onTap: (index) {
           _controller.jumpToPage(index);
@@ -51,23 +52,23 @@ class _MainPageState extends State<MainPage> {
         border: Border(),
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(MobliIcons.home),
             label: S.of(context).home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: Icon(MobliIcons.explore),
             label: S.of(context).explore,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.directions_car_outlined),
+            icon: Icon(MobliIcons.car),
             label: S.of(context).newsAndReview,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.compare_outlined),
+            icon: Icon(MobliIcons.compare),
             label: S.of(context).compare,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_rounded),
+            icon: Icon(MobliIcons.profile),
             label: S.of(context).profile,
           ),
         ],

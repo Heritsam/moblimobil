@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 
 class AboutPage extends StatelessWidget {
@@ -19,7 +19,7 @@ class AboutPage extends StatelessWidget {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          S.of(context).about,
+          S.of(context).aboutUs,
           style: textTheme.headline6?.copyWith(color: darkGreyColor),
         ),
         flexibleSpace: ClipRRect(

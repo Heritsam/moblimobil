@@ -1,10 +1,10 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:moblimobil/presentation/widgets/buttons/rounded_button.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
+import '../../widgets/buttons/rounded_button.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override

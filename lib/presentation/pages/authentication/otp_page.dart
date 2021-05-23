@@ -4,7 +4,7 @@ import 'package:moblimobil/presentation/widgets/buttons/rounded_button.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 
 class OtpPage extends StatefulWidget {
   @override

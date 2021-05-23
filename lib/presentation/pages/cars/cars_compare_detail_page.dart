@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
 import 'viewmodels/car_compare_viewmodel.dart';

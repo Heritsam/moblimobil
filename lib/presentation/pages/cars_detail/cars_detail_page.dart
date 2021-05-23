@@ -1,23 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:moblimobil/presentation/pages/cars_detail/credit_simulation.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
+import '../../widgets/buttons/rounded_button.dart';
+import '../../widgets/buttons/whatsapp_button.dart';
 import '../../widgets/cars/brand_item.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/cars/feature_item.dart';
-import '../../widgets/buttons/rounded_button.dart';
-import '../../widgets/buttons/whatsapp_button.dart';
+import 'credit_simulation.dart';
 import 'test_drive.dart';
 
 class CarsDetailPage extends StatefulWidget {

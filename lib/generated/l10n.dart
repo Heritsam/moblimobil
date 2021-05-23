@@ -510,6 +510,56 @@ class S {
     );
   }
 
+  /// `For You`
+  String get forYou {
+    return Intl.message(
+      'For You',
+      name: 'forYou',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Just Released`
+  String get justReleased {
+    return Intl.message(
+      'Just Released',
+      name: 'justReleased',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coming Soon`
+  String get comingSoon {
+    return Intl.message(
+      'Coming Soon',
+      name: 'comingSoon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recently Seen`
+  String get recentlySeen {
+    return Intl.message(
+      'Recently Seen',
+      name: 'recentlySeen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get category {
+    return Intl.message(
+      'Category',
+      name: 'category',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Search for cars`
   String get searchForCars {
     return Intl.message(
@@ -840,20 +890,50 @@ class S {
     );
   }
 
-  /// `About`
-  String get about {
+  /// `Contributor`
+  String get contributor {
     return Intl.message(
-      'About',
-      name: 'about',
+      'Contributor',
+      name: 'contributor',
       desc: '',
       args: [],
     );
   }
 
-  /// `Change Phone Number & Password`
+  /// `Sell Cars`
+  String get sellCar {
+    return Intl.message(
+      'Sell Cars',
+      name: 'sellCar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Advertisement`
+  String get advertisement {
+    return Intl.message(
+      'Advertisement',
+      name: 'advertisement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About Us`
+  String get aboutUs {
+    return Intl.message(
+      'About Us',
+      name: 'aboutUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Email & Password`
   String get changePhoneAndPassword {
     return Intl.message(
-      'Change Phone Number & Password',
+      'Change Email & Password',
       name: 'changePhoneAndPassword',
       desc: '',
       args: [],
@@ -1005,6 +1085,46 @@ class S {
     return Intl.message(
       'Save',
       name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Newest`
+  String get newest {
+    return Intl.message(
+      'Newest',
+      name: 'newest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved News & Review`
+  String get savedNewsAndReview {
+    return Intl.message(
+      'Saved News & Review',
+      name: 'savedNewsAndReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cars`
+  String get cars {
+    return Intl.message(
+      'Cars',
+      name: 'cars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly Fee`
+  String get iuran {
+    return Intl.message(
+      'Monthly Fee',
+      name: 'iuran',
       desc: '',
       args: [],
     );

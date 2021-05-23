@@ -2,12 +2,11 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 
 class FaqPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
@@ -19,7 +18,7 @@ class FaqPage extends StatelessWidget {
         centerTitle: false,
         title: Text(
           'FAQ',
-          style: textTheme.headline6?.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),
@@ -91,10 +90,7 @@ class FaqPage extends StatelessWidget {
               ],
             ).padding(all: 16),
           ),
-          Text(
-            description,
-            style: TextStyle(color: darkGreyColor.withOpacity(.70)),
-          ).padding(horizontal: 16, bottom: 16),
+          Text(description).padding(horizontal: 16, bottom: 16),
         ],
       ),
     )

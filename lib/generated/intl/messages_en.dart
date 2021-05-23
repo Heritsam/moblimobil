@@ -21,21 +21,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "about": MessageLookupByLibrary.simpleMessage("About"),
+        "aboutUs": MessageLookupByLibrary.simpleMessage("About Us"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "addressField": MessageLookupByLibrary.simpleMessage("Enter address"),
+        "advertisement": MessageLookupByLibrary.simpleMessage("Advertisement"),
         "birthField": MessageLookupByLibrary.simpleMessage("Pick birthdate"),
         "bodyType": MessageLookupByLibrary.simpleMessage("Body Type"),
         "brand": MessageLookupByLibrary.simpleMessage("Brand"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carDetail": MessageLookupByLibrary.simpleMessage("Car Detail"),
-        "changePhoneAndPassword": MessageLookupByLibrary.simpleMessage(
-            "Change Phone Number & Password"),
+        "cars": MessageLookupByLibrary.simpleMessage("Cars"),
+        "category": MessageLookupByLibrary.simpleMessage("Category"),
+        "changePhoneAndPassword":
+            MessageLookupByLibrary.simpleMessage("Change Email & Password"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "color": MessageLookupByLibrary.simpleMessage("Color"),
+        "comingSoon": MessageLookupByLibrary.simpleMessage("Coming Soon"),
         "compare": MessageLookupByLibrary.simpleMessage("Compare"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "contactSeller": MessageLookupByLibrary.simpleMessage("Contact Seller"),
+        "contributor": MessageLookupByLibrary.simpleMessage("Contributor"),
         "credit": MessageLookupByLibrary.simpleMessage("Credit"),
         "creditSimulation":
             MessageLookupByLibrary.simpleMessage("Credit Simulation"),
@@ -55,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter your old phone number & password"),
         "explore": MessageLookupByLibrary.simpleMessage("Explore"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "forYou": MessageLookupByLibrary.simpleMessage("For You"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
@@ -66,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hotDeals": MessageLookupByLibrary.simpleMessage("Hot Deals"),
         "installment": MessageLookupByLibrary.simpleMessage("Installment"),
         "insurance": MessageLookupByLibrary.simpleMessage("Insurance"),
+        "iuran": MessageLookupByLibrary.simpleMessage("Monthly Fee"),
+        "justReleased": MessageLookupByLibrary.simpleMessage("Just Released"),
         "kilometers": MessageLookupByLibrary.simpleMessage("Kilometers"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "later": MessageLookupByLibrary.simpleMessage("Later"),
@@ -78,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "month": MessageLookupByLibrary.simpleMessage("Month"),
         "newCars": MessageLookupByLibrary.simpleMessage("New Cars"),
+        "newest": MessageLookupByLibrary.simpleMessage("Newest"),
         "news": MessageLookupByLibrary.simpleMessage("News"),
         "newsAndReview": MessageLookupByLibrary.simpleMessage("News & Review"),
         "newsUpdates": MessageLookupByLibrary.simpleMessage("News Updates"),
@@ -97,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "popularCars": MessageLookupByLibrary.simpleMessage("Popular Cars"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "recentlySeen": MessageLookupByLibrary.simpleMessage("Recently Seen"),
         "recommended": MessageLookupByLibrary.simpleMessage("Recommended"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember Me"),
@@ -104,6 +114,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviewUpdates": MessageLookupByLibrary.simpleMessage("Review Updates"),
         "reviews": MessageLookupByLibrary.simpleMessage("Reviews"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "savedNewsAndReview":
+            MessageLookupByLibrary.simpleMessage("Saved News & Review"),
         "scheduleToTestDrive":
             MessageLookupByLibrary.simpleMessage("Schedule to test drive"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
@@ -123,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select province"),
         "selectSubDistrict":
             MessageLookupByLibrary.simpleMessage("Select sub-district"),
+        "sellCar": MessageLookupByLibrary.simpleMessage("Sell Cars"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "skipText": MessageLookupByLibrary.simpleMessage("Skip"),
         "sortAndFilter": MessageLookupByLibrary.simpleMessage("Sort & Filter"),

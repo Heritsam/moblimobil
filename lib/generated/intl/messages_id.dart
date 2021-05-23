@@ -21,22 +21,27 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "about": MessageLookupByLibrary.simpleMessage("Tentang"),
+        "aboutUs": MessageLookupByLibrary.simpleMessage("Tentang Kami"),
         "account": MessageLookupByLibrary.simpleMessage("Akun"),
         "addressField": MessageLookupByLibrary.simpleMessage("Masukkan alamat"),
+        "advertisement": MessageLookupByLibrary.simpleMessage("Iklan"),
         "birthField": MessageLookupByLibrary.simpleMessage("Tanggal lahir"),
         "bodyType": MessageLookupByLibrary.simpleMessage("Tipe Mobil"),
         "brand": MessageLookupByLibrary.simpleMessage("Merek"),
         "cancel": MessageLookupByLibrary.simpleMessage("Batalkan"),
         "carDetail": MessageLookupByLibrary.simpleMessage("Detail Mobil"),
-        "changePhoneAndPassword": MessageLookupByLibrary.simpleMessage(
-            "Ganti Nomor Handphone dan Password"),
+        "cars": MessageLookupByLibrary.simpleMessage("Mobil"),
+        "category": MessageLookupByLibrary.simpleMessage("Kategori"),
+        "changePhoneAndPassword":
+            MessageLookupByLibrary.simpleMessage("Ubah Email dan Password"),
         "city": MessageLookupByLibrary.simpleMessage("Kota"),
         "color": MessageLookupByLibrary.simpleMessage("Warna"),
+        "comingSoon": MessageLookupByLibrary.simpleMessage("Akan Datang"),
         "compare": MessageLookupByLibrary.simpleMessage("Perbandingan"),
         "confirm": MessageLookupByLibrary.simpleMessage("Konfirmasi"),
         "contactSeller":
             MessageLookupByLibrary.simpleMessage("Hubungi Penjual"),
+        "contributor": MessageLookupByLibrary.simpleMessage("Kontributor"),
         "credit": MessageLookupByLibrary.simpleMessage("Kredit"),
         "creditSimulation":
             MessageLookupByLibrary.simpleMessage("Simulasi Kredit"),
@@ -56,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Masukan nomor dan password lama"),
         "explore": MessageLookupByLibrary.simpleMessage("Jelajahi"),
         "female": MessageLookupByLibrary.simpleMessage("Perempuan"),
+        "forYou": MessageLookupByLibrary.simpleMessage("Pilihan"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Lupa password?"),
         "forgotPasswordMessage": MessageLookupByLibrary.simpleMessage(
@@ -68,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hotDeals": MessageLookupByLibrary.simpleMessage("Penawaran Terbaru"),
         "installment": MessageLookupByLibrary.simpleMessage("Cicilan"),
         "insurance": MessageLookupByLibrary.simpleMessage("Asuransi"),
+        "iuran": MessageLookupByLibrary.simpleMessage("Iuran Bulanan"),
+        "justReleased": MessageLookupByLibrary.simpleMessage("Baru Rilis"),
         "kilometers": MessageLookupByLibrary.simpleMessage("Kilometer"),
         "language": MessageLookupByLibrary.simpleMessage("Bahasa"),
         "later": MessageLookupByLibrary.simpleMessage("Nanti Saja"),
@@ -80,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "male": MessageLookupByLibrary.simpleMessage("Laki-laki"),
         "month": MessageLookupByLibrary.simpleMessage("Bulan"),
         "newCars": MessageLookupByLibrary.simpleMessage("Mobil Baru"),
+        "newest": MessageLookupByLibrary.simpleMessage("Terbaru"),
         "news": MessageLookupByLibrary.simpleMessage("Berita"),
         "newsAndReview":
             MessageLookupByLibrary.simpleMessage("Berita & Ulasan"),
@@ -102,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "popularCars": MessageLookupByLibrary.simpleMessage("Mobil Populer"),
         "price": MessageLookupByLibrary.simpleMessage("Harga"),
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
+        "recentlySeen": MessageLookupByLibrary.simpleMessage("Baru Dilihat"),
         "recommended": MessageLookupByLibrary.simpleMessage("Rekomendasi"),
         "register": MessageLookupByLibrary.simpleMessage("Daftar"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Ingat Saya"),
@@ -109,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reviewUpdates": MessageLookupByLibrary.simpleMessage("Ulasan Terbaru"),
         "reviews": MessageLookupByLibrary.simpleMessage("Ulasan"),
         "save": MessageLookupByLibrary.simpleMessage("Simpan"),
+        "savedNewsAndReview":
+            MessageLookupByLibrary.simpleMessage("Berita & Ulasan Disimpan"),
         "scheduleToTestDrive":
             MessageLookupByLibrary.simpleMessage("Jadwalkan test drive"),
         "search": MessageLookupByLibrary.simpleMessage("Cari"),
@@ -128,6 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pilih provinsi"),
         "selectSubDistrict":
             MessageLookupByLibrary.simpleMessage("Pilih kecamatan"),
+        "sellCar": MessageLookupByLibrary.simpleMessage("Jual Mobil"),
         "send": MessageLookupByLibrary.simpleMessage("Kirim"),
         "skipText": MessageLookupByLibrary.simpleMessage("Lewati"),
         "sortAndFilter":
@@ -140,7 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "usedText": MessageLookupByLibrary.simpleMessage("Bekas"),
         "videos": MessageLookupByLibrary.simpleMessage("Video"),
         "welcomeText": MessageLookupByLibrary.simpleMessage("SELAMAT DATANG"),
-        "wishlist": MessageLookupByLibrary.simpleMessage("Wishlist"),
+        "wishlist": MessageLookupByLibrary.simpleMessage("Daftar Keinginan"),
         "year": MessageLookupByLibrary.simpleMessage("Tahun"),
         "yes": MessageLookupByLibrary.simpleMessage("Ya"),
         "zipCodeField":

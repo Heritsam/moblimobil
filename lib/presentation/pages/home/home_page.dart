@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/brand_item.dart';
@@ -14,7 +14,7 @@ import '../../widgets/cars/location_chip.dart';
 import '../../widgets/cars/menu_item.dart';
 import '../../widgets/cars/price_chip.dart';
 import '../../widgets/cars/video_card.dart';
-import 'notifiers/home_banner_notifier.dart';
+import 'viewmodels/home_banner_notifier.dart';
 
 class HomePage extends StatefulWidget {
   @override

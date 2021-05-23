@@ -3,12 +3,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'core/theme.dart';
+import 'core/themes/theme.dart';
 import 'generated/l10n.dart';
 import 'presentation/notifiers/app_settings/app_settings_notifier.dart';
 import 'presentation/pages/about/about_page.dart';
 import 'presentation/pages/account/account_page.dart';
-import 'presentation/pages/account/change_password_page.dart';
 import 'presentation/pages/account/edit_profile_page.dart';
 import 'presentation/pages/authentication/forgot_password_page.dart';
 import 'presentation/pages/authentication/login_page.dart';
@@ -17,6 +16,7 @@ import 'presentation/pages/authentication/register_page.dart';
 import 'presentation/pages/cars/cars_compare_detail_page.dart';
 import 'presentation/pages/cars/cars_page.dart';
 import 'presentation/pages/cars_detail/cars_detail_page.dart';
+import 'presentation/pages/change_password/change_password_page.dart';
 import 'presentation/pages/faq/faq_page.dart';
 import 'presentation/pages/help/help_page.dart';
 import 'presentation/pages/main_page.dart';
@@ -27,6 +27,7 @@ import 'presentation/pages/notification/notification_detail_page.dart';
 import 'presentation/pages/notification/notification_page.dart';
 import 'presentation/pages/onboarding_page.dart';
 import 'presentation/pages/search/search_page.dart';
+import 'presentation/pages/search/search_recent_page.dart';
 import 'presentation/pages/wishlist/wishlist_page.dart';
 import 'providers.dart';
 import 'wrapper.dart';
@@ -93,6 +94,7 @@ class MyApp extends ConsumerWidget {
         '/notification': (context) => NotificationPage(),
         '/notification-detail': (context) => NotificationDetailPage(),
         '/search': (context) => SearchPage(),
+        '/search-recent': (context) => SearchRecentPage(),
         '/new-cars': (context) => CarsPage(type: CarsPageType.newCars),
         '/used-cars': (context) => CarsPage(type: CarsPageType.usedCars),
         '/discount': (context) => CarsPage(type: CarsPageType.discount),

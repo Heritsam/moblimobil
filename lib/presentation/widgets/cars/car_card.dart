@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 
 class CarCard extends StatefulWidget {
@@ -12,6 +12,7 @@ class CarCard extends StatefulWidget {
   final int price;
   final String imageUrl;
   final bool hasUsed;
+  final double size;
   final Function()? onTap;
 
   const CarCard({
@@ -21,6 +22,7 @@ class CarCard extends StatefulWidget {
     required this.price,
     required this.imageUrl,
     this.hasUsed = false,
+    this.size = 160.0,
     this.onTap,
   }) : super(key: key);
 
@@ -33,7 +35,7 @@ class _CarCardState extends State<CarCard> {
 
   @override
   Widget build(BuildContext context) {
-    final width = 160.0;
+    final width = widget.size;
 
     return Consumer(
       builder: (context, watch, child) {
@@ -62,7 +64,7 @@ class _CarCardState extends State<CarCard> {
                     ),
                   )
                       .padding(horizontal: 8, vertical: 6)
-                      .backgroundColor(redAccentColor)
+                      .backgroundColor(redColor)
                       .clipRRect(
                         topRight: 150,
                         bottomRight: 150,

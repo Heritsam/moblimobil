@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moblimobil/core/theme.dart';
+import 'package:moblimobil/core/themes/theme.dart';
 import 'package:moblimobil/generated/l10n.dart';
 import 'package:moblimobil/presentation/widgets/buttons/rounded_button.dart';
 import 'package:styled_widget/styled_widget.dart';

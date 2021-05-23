@@ -1,23 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/widgets/dialog/custom_dialog.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/mobli_icons_icons.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
-import '../buttons/circle_button.dart';
+import '../dialog/custom_dialog.dart';
 import '../toggle.dart';
-import 'user_card.dart';
 
 class MobliDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final settings = watch(appSettingsNotifier);
-    final textTheme = Theme.of(context).textTheme;
-    final mediaQuery = MediaQuery.of(context);
-    final size = mediaQuery.size;
 
     return Drawer(
       child: Scaffold(
@@ -33,7 +29,7 @@ class MobliDrawer extends ConsumerWidget {
           ),
           title: Text(
             'Menu',
-            style: textTheme.headline6?.copyWith(color: darkGreyColor),
+            style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w600),
           ),
           actions: [
             IconButton(
@@ -52,57 +48,10 @@ class MobliDrawer extends ConsumerWidget {
               context: context,
               onTap: () {
                 Navigator.popUntil(context, ModalRoute.withName('/home'));
-              },
-              title: S.of(context).home.toUpperCase(),
-              icon: Icons.home_outlined,
-            ),
-            _drawerItem(
-              context: context,
-              onTap: () {
-                Navigator.popUntil(context, ModalRoute.withName('/home'));
-                Navigator.pushNamed(context, '/new-cars');
-              },
-              title: S.of(context).newCars.toUpperCase(),
-              icon: Icons.directions_car_outlined,
-            ),
-            _drawerItem(
-              context: context,
-              onTap: () {
-                Navigator.popUntil(context, ModalRoute.withName('/home'));
-                Navigator.pushNamed(context, '/used-cars');
-              },
-              title: S.of(context).usedCars.toUpperCase(),
-              icon: Icons.directions_car_outlined,
-            ),
-            _drawerItem(
-              context: context,
-              onTap: () {
-                Navigator.popUntil(context, ModalRoute.withName('/home'));
                 Navigator.pushNamed(context, '/discount');
               },
               title: S.of(context).discountAndPromo.toUpperCase(),
-              icon: Icons.account_balance_wallet_outlined,
-            ),
-            _drawerItem(
-              context: context,
-              title: S.of(context).insurance.toUpperCase(),
-              icon: Icons.verified_user_outlined,
-              trailing: Icon(Icons.lock, color: mediumGreyColor),
-            ),
-            _drawerItem(
-              context: context,
-              title: S.of(context).credit.toUpperCase(),
-              icon: Icons.attach_money_outlined,
-              trailing: Icon(Icons.lock, color: mediumGreyColor),
-            ),
-            _drawerItem(
-              context: context,
-              onTap: () {
-                Navigator.popUntil(context, ModalRoute.withName('/home'));
-                Navigator.pushNamed(context, '/news-and-review');
-              },
-              title: S.of(context).newsAndReview.toUpperCase(),
-              icon: Icons.article_outlined,
+              icon: MobliIcons.discount,
             ),
             _drawerItem(
               context: context,
@@ -111,7 +60,64 @@ class MobliDrawer extends ConsumerWidget {
                 Navigator.pushNamed(context, '/faq');
               },
               title: 'FAQ',
-              icon: Icons.chat_outlined,
+              icon: MobliIcons.faq,
+            ),
+            _drawerItem(
+              context: context,
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/help');
+              },
+              title: S.of(context).help.toUpperCase(),
+              icon: Icons.help_outline_rounded,
+            ),
+            _drawerItem(
+              context: context,
+              title: S.of(context).contributor.toUpperCase(),
+              icon: MobliIcons.edit,
+              trailing: Icon(Icons.lock, color: mediumGreyColor),
+            ),
+            _drawerItem(
+              context: context,
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/new-cars');
+              },
+              title: S.of(context).sellCar.toUpperCase(),
+              icon: Icons.directions_car_outlined,
+            ),
+            _drawerItem(
+              context: context,
+              title: S.of(context).advertisement.toUpperCase(),
+              icon: MobliIcons.advertisement,
+              trailing: Icon(Icons.lock, color: mediumGreyColor),
+            ),
+            _drawerItem(
+              context: context,
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/about');
+              },
+              title: S.of(context).aboutUs.toUpperCase(),
+              icon: Icons.info_outline,
+            ),
+            _drawerItem(
+              context: context,
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/change-password');
+              },
+              title: S.of(context).changePhoneAndPassword.toUpperCase(),
+              icon: MobliIcons.key,
+            ),
+            _drawerItem(
+              context: context,
+              onTap: () {
+                Navigator.popUntil(context, ModalRoute.withName('/home'));
+                Navigator.pushNamed(context, '/edit-profile');
+              },
+              title: S.of(context).editProfile.toUpperCase(),
+              icon: MobliIcons.edit,
             ),
             _drawerItem(
               context: context,
@@ -125,10 +131,12 @@ class MobliDrawer extends ConsumerWidget {
                 },
                 items: ['EN', 'ID'],
                 value: settings.language.toUpperCase(),
+                radius: 150,
               ).expanded(flex: 2),
             ),
-            CircleButton(
-              onPressed: () {
+            _drawerItem(
+              context: context,
+              onTap: () {
                 showCupertinoDialog(
                   context: context,
                   builder: (context) => CustomDialog(
@@ -144,7 +152,8 @@ class MobliDrawer extends ConsumerWidget {
                       ),
                       CustomDialogAction(
                         onPressed: () {
-                          Navigator.popUntil(context, ModalRoute.withName('/home'));
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/home'));
                           Navigator.pushReplacementNamed(context, '/login');
                         },
                         label: S.of(context).yes,
@@ -154,14 +163,9 @@ class MobliDrawer extends ConsumerWidget {
                   ),
                 );
               },
-              child: Icon(Icons.exit_to_app, color: redColor, size: 32),
-            ).center(),
-            SizedBox(height: 12),
-            Text(
-              S.of(context).logout,
-              style: TextStyle(color: mediumGreyColor),
-            ).center(),
-            SizedBox(height: 16),
+              title: S.of(context).logout.toUpperCase(),
+              icon: MobliIcons.logout,
+            ),
           ],
         ),
       ),
@@ -171,6 +175,7 @@ class MobliDrawer extends ConsumerWidget {
   Widget _drawerItem({
     required BuildContext context,
     required IconData icon,
+    double iconSize = 20,
     required String title,
     Widget? trailing,
     Function()? onTap,
@@ -179,24 +184,18 @@ class MobliDrawer extends ConsumerWidget {
       onTap: onTap,
       child: <Widget>[
         <Widget>[
-          Icon(icon, color: darkGreyColor),
-          SizedBox(width: 16),
+          Icon(icon, color: darkGreyColor, size: iconSize),
+          SizedBox(width: 24),
           Text(
             title,
-            style: TextStyle(fontSize: 16, color: darkGreyColor),
-          ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          ).expanded(),
         ].toRow().expanded(flex: 3),
         SizedBox(width: 16),
         trailing ?? SizedBox(),
       ].toRow().padding(all: 16),
     );
-  }
-
-  Widget _divider(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Styled.widget()
-        .decorated(color: mediumGreyColor)
-        .constrained(width: size.width, height: 1)
-        .padding(horizontal: 16);
   }
 }

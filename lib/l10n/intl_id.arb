@@ -54,6 +54,11 @@
     "detail": "Detail",
 
     "search": "Cari",
+    "forYou": "Pilihan",
+    "justReleased": "Baru Rilis",
+    "comingSoon": "Akan Datang",
+    "recentlySeen": "Baru Dilihat",
+    "category": "Kategori",
     "searchForCars": "Cari mobil",
     "searchResult": "Hasil pencarian",
     "popular": "Populer",
@@ -88,11 +93,14 @@
     "reviews": "Ulasan",
 
     "emailVerificationMessage": "Anda belum melakukan verifikasi email",
-    "wishlist": "Wishlist",
+    "wishlist": "Daftar Keinginan",
     "editProfile": "Ubah Profil",
     "help": "Bantuan",
-    "about": "Tentang",
-    "changePhoneAndPassword": "Ganti Nomor Handphone dan Password",
+    "contributor": "Kontributor",
+    "sellCar": "Jual Mobil",
+    "advertisement": "Iklan",
+    "aboutUs": "Tentang Kami",
+    "changePhoneAndPassword": "Ubah Email dan Password",
 
     "textField": "Masukkan text",
     "otherHelpMessage": "Jika kamu ingin melakukan kontak langsung dengan kami hubungi kami ke:",
@@ -110,5 +118,10 @@
     "selectSubDistrict": "Pilih kecamatan",
     "addressField": "Masukkan alamat",
     "zipCodeField": "Masukkan kode pos",
-    "save": "Simpan"
+    "save": "Simpan",
+
+    "newest": "Terbaru",
+    "savedNewsAndReview": "Berita & Ulasan Disimpan",
+    "cars": "Mobil",
+    "iuran": "Iuran Bulanan"
 }

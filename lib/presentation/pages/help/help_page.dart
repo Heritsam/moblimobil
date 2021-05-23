@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moblimobil/presentation/widgets/buttons/rounded_button.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 
 class HelpPage extends StatefulWidget {
@@ -21,7 +21,6 @@ class _HelpPageState extends State<HelpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
     final size = mediaQuery.size;
 
@@ -35,7 +34,7 @@ class _HelpPageState extends State<HelpPage> {
         centerTitle: false,
         title: Text(
           S.of(context).help,
-          style: textTheme.headline6?.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),
@@ -53,39 +52,28 @@ class _HelpPageState extends State<HelpPage> {
           children: [
             TextField(
               decoration: InputDecoration(
-                hintText: S.of(context).fullNameField,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).fullNameField,
               ),
               textInputAction: TextInputAction.next,
               onSubmitted: (value) {
                 FocusScope.of(context).requestFocus(_textNode);
               },
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 24),
             TextField(
               focusNode: _textNode,
               decoration: InputDecoration(
                 hintText: S.of(context).textField,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 16,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(mediumBorderRadius),
                 ),
-                hintStyle: TextStyle(color: mediumGreyColor),
               ),
               maxLines: 5,
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 32),
             RoundedButton(
               label: S.of(context).send,
+              horizontalPadding: 52,
             ),
             SizedBox(height: 32),
             Text(
@@ -106,7 +94,7 @@ class _HelpPageState extends State<HelpPage> {
                     Text(
                       '0822 1353 0065',
                       style: TextStyle(
-                        color: greenColor,
+                        color: blueColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -124,7 +112,7 @@ class _HelpPageState extends State<HelpPage> {
                     Text(
                       'moblimobil@gmail.com',
                       style: TextStyle(
-                        color: greenColor,
+                        color: blueColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -142,7 +130,7 @@ class _HelpPageState extends State<HelpPage> {
                     Text(
                       'Jl. Anyelir IV Blok 5W No.4',
                       style: TextStyle(
-                        color: greenColor,
+                        color: blueColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -153,8 +141,8 @@ class _HelpPageState extends State<HelpPage> {
             )
                 .padding(all: 16)
                 .decorated(
-                  color: inputFieldColor,
                   borderRadius: BorderRadius.circular(defaultBorderRadius),
+                  border: Border.all(color: mediumGreyColor),
                 )
                 .constrained(width: size.width),
           ],

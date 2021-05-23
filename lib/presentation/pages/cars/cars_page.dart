@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/widgets/mobli_chip.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/car_card.dart';
@@ -73,17 +74,28 @@ class _CarsPageState extends State<CarsPage> {
           Text(S.of(context).price, style: textTheme.headline6)
               .padding(horizontal: 16),
           SizedBox(height: 12),
-          ListView.builder(
+          ListView(
             scrollDirection: Axis.horizontal,
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.symmetric(horizontal: 16),
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return PriceChip(
-                label: index == 0 ? S.of(context).popular : '100 jt - 300 jt',
-                selected: index == 0,
-              ).constrained(width: 155).padding(right: 16, bottom: 16);
-            },
+            children: [
+              MobliChip(
+                label: S.of(context).popular,
+                selected: true,
+              ).padding(right: 12, bottom: 24),
+              MobliChip(
+                onTap: () {},
+                label: S.of(context).justReleased,
+                selected: false,
+                elevated: false,
+              ).padding(right: 12, bottom: 24),
+              MobliChip(
+                onTap: () {},
+                label: S.of(context).comingSoon,
+                selected: false,
+                elevated: false,
+              ).padding(right: 12, bottom: 24),
+            ],
           ).constrained(height: 64),
           SizedBox(height: 4),
           InkResponse(
@@ -108,7 +120,7 @@ class _CarsPageState extends State<CarsPage> {
               crossAxisCount: 2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              childAspectRatio: 5.2 / 6.2,
+              childAspectRatio: 3.3 / 4.3,
             ),
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
@@ -131,9 +143,10 @@ class _CarsPageState extends State<CarsPage> {
                 title: item.title,
                 price: item.price,
                 imageUrl: item.imageUrl,
+                size: mediaQuery.size.width / 2 - 24,
               );
             },
-          ).parent(({required child}) => Scrollbar(child: child)),
+          ),
         ].toColumn(crossAxisAlignment: CrossAxisAlignment.start),
       ),
     );

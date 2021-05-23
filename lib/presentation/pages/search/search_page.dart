@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moblimobil/presentation/widgets/mobli_chip.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../generated/l10n.dart';
@@ -44,10 +45,38 @@ class _SearchPageState extends State<SearchPage> {
         child: <Widget>[
           SearchBar().padding(horizontal: 16),
           SizedBox(height: 32),
-          Text(S.of(context).searchResult, style: textTheme.headline6)
+          Text(S.of(context).category, style: textTheme.headline6)
               .padding(horizontal: 16),
+          SizedBox(height: 16),
+          ListView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            children: [
+              MobliChip(
+                label: S.of(context).forYou,
+                selected: true,
+              ).padding(right: 12, bottom: 24),
+              MobliChip(
+                onTap: () {
+                  Navigator.pushNamed(context, '/search-recent');
+                },
+                label: S.of(context).recentlySeen,
+                selected: false,
+                elevated: false,
+              ).padding(right: 12, bottom: 24),
+              MobliChip(
+                onTap: () {
+                  Navigator.pushNamed(context, '/new-cars');
+                },
+                label: S.of(context).newCars,
+                selected: false,
+                elevated: false,
+              ).padding(right: 12, bottom: 24),
+            ],
+          ).constrained(height: 64),
           GridView.builder(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16,
@@ -61,15 +90,18 @@ class _SearchPageState extends State<SearchPage> {
               final item = carList[index];
 
               return CarCard(
+                onTap: () {
+                  Navigator.pushNamed(context, '/cars-detail');
+                },
                 carId: item.id,
                 hasUsed: index.isOdd,
                 title: item.title,
                 price: item.price,
-                imageUrl:
-                    'https://images.unsplash.com/photo-1574438085144-72418a474aa9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
+                imageUrl: item.imageUrl,
+                size: mediaQuery.size.width / 2 - 24,
               );
             },
-          ).parent(({required child}) => Scrollbar(child: child)),
+          ),
           SizedBox(height: 32 + mediaQuery.padding.top),
         ].toColumn(crossAxisAlignment: CrossAxisAlignment.start),
       ),

@@ -54,6 +54,11 @@
     "detail": "Detail",
 
     "search": "Search",
+    "forYou": "For You",
+    "justReleased": "Just Released",
+    "comingSoon": "Coming Soon",
+    "recentlySeen": "Recently Seen",
+    "category": "Category",
     "searchForCars": "Search for cars",
     "searchResult": "Search Result",
     "popular": "Popular",
@@ -91,8 +96,11 @@
     "wishlist": "Wishlist",
     "editProfile": "Edit Profile",
     "help": "Help",
-    "about": "About",
-    "changePhoneAndPassword": "Change Phone Number & Password",
+    "contributor": "Contributor",
+    "sellCar": "Sell Cars",
+    "advertisement": "Advertisement",
+    "aboutUs": "About Us",
+    "changePhoneAndPassword": "Change Email & Password",
 
     "textField": "Enter text",
     "otherHelpMessage": "Or, contact us directly to:",
@@ -110,5 +118,10 @@
     "selectSubDistrict": "Select sub-district",
     "addressField": "Enter address",
     "zipCodeField": "Enter zip code",
-    "save": "Save"
+    "save": "Save",
+
+    "newest": "Newest",
+    "savedNewsAndReview": "Saved News & Review",
+    "cars": "Cars",
+    "iuran": "Monthly Fee"
 }

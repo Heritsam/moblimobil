@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/theme.dart';
+import '../../../core/themes/theme.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../notifiers/wishlist/wishlist_notifier.dart';
 import '../../widgets/cars/car_card.dart';

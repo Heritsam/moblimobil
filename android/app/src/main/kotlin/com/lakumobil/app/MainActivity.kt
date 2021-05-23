@@ -1,4 +1,4 @@
-package com.moblimobil.app
+package com.lakumobil.app
 
 import io.flutter.embedding.android.FlutterActivity
 
