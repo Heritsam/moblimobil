@@ -13,7 +13,7 @@ import '../../widgets/cars/car_card.dart';
 import '../../widgets/cars/location_chip.dart';
 import '../../widgets/cars/menu_item.dart';
 import '../../widgets/cars/price_chip.dart';
-import '../../widgets/cars/video_card.dart';
+import '../../widgets/video/video_card.dart';
 import 'viewmodels/home_banner_notifier.dart';
 
 class HomePage extends StatefulWidget {
@@ -307,18 +307,21 @@ class _HomePageState extends State<HomePage> {
             }).toList(),
           ).padding(horizontal: 16),
           SizedBox(height: 32),
-          <Widget>[
-            Text(S.of(context).videos, style: textTheme.headline6),
-            InkResponse(
-              onTap: () {},
-              child: Text(
-                S.of(context).seeAll,
-                style: TextStyle(color: blueColor),
+          Row(
+            children: [
+              Text(S.of(context).videos, style: textTheme.headline6),
+              InkResponse(
+                onTap: () {
+                  Navigator.pushNamed(context, '/videos');
+                },
+                child: Text(
+                  S.of(context).seeAll,
+                  style: TextStyle(color: blueColor),
+                ),
               ),
-            ),
-          ]
-              .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
-              .padding(horizontal: 16),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ).padding(horizontal: 16),
           SizedBox(height: 16),
           ListView.builder(
             scrollDirection: Axis.horizontal,

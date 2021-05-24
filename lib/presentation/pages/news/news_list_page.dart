@@ -15,7 +15,6 @@ class NewsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
@@ -27,7 +26,7 @@ class NewsListPage extends StatelessWidget {
         centerTitle: false,
         title: Text(
           _title(context),
-          style: textTheme.headline6?.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),
@@ -49,8 +48,7 @@ class NewsListPage extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, '/news-detail');
             },
-            title: 'Ipsum Lorem',
-            description:
+            title:
                 'Lorem Ipsum is simply dummy text of the printing Lorem Ipsum is simply dummy text.',
             imageUrl: item.imageUrl,
           ).padding(bottom: 16);

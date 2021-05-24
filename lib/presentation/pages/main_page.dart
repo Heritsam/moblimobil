@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:moblimobil/core/themes/mobli_icons_icons.dart';
 
+import '../../core/themes/mobli_icons_icons.dart';
 import '../../generated/l10n.dart';
 import '../widgets/drawer/mobli_drawer.dart';
 import 'account/account_page.dart';
+import 'cars/cars_page.dart';
 import 'home/home_page.dart';
+import 'news/news_and_review_page.dart';
 import 'search/search_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -34,8 +36,8 @@ class _MainPageState extends State<MainPage> {
         children: [
           HomePage(),
           SearchPage(),
-          HomePage(),
-          HomePage(),
+          NewsAndReviewPage(),
+          CarsPage(type: CarsPageType.compare),
           AccountPage(),
         ],
       ),

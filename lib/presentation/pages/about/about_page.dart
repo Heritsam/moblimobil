@@ -7,7 +7,6 @@ import '../../../generated/l10n.dart';
 class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
     final size = mediaQuery.size;
 
@@ -20,7 +19,7 @@ class AboutPage extends StatelessWidget {
         centerTitle: false,
         title: Text(
           S.of(context).aboutUs,
-          style: textTheme.headline6?.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),
@@ -29,9 +28,7 @@ class AboutPage extends StatelessWidget {
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.only(
-          top: mediaQuery.padding.top + 56 + 16,
-          left: 16,
-          right: 16,
+          top: mediaQuery.padding.top + 56,
           bottom: 32,
         ),
         child: Column(
@@ -40,7 +37,6 @@ class AboutPage extends StatelessWidget {
             Styled.widget()
                 .decorated(
                   color: lightGreyColor,
-                  borderRadius: BorderRadius.circular(defaultBorderRadius),
                   image: DecorationImage(
                     image: NetworkImage(
                       'https://images.unsplash.com/photo-1592096304832-62463bfdc822?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
@@ -49,7 +45,7 @@ class AboutPage extends StatelessWidget {
                   ),
                 )
                 .constrained(width: size.width, height: 210),
-            SizedBox(height: 32),
+            SizedBox(height: 24),
             Text(
               'Lorem Ipsum',
               style: TextStyle(
@@ -57,14 +53,11 @@ class AboutPage extends StatelessWidget {
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
               ),
-            ),
+            ).padding(horizontal: 16),
             SizedBox(height: 16),
             Text(
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-              style: TextStyle(
-                color: darkGreyColor.withOpacity(.70),
-              ),
-            ),
+            ).padding(horizontal: 16),
           ],
         ),
       ),

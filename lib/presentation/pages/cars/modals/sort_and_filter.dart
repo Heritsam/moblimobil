@@ -21,15 +21,18 @@ class SortAndFilter extends ConsumerWidget {
       ),
       child: Column(
         children: [
-          <Widget>[
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.close),
-              color: mediumGreyColor,
-            ),
-          ].toRow(mainAxisAlignment: MainAxisAlignment.end),
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.close),
+                color: mediumGreyColor,
+              ),
+            ],
+            mainAxisAlignment: MainAxisAlignment.end,
+          ),
           FadingEdgeScrollView.fromSingleChildScrollView(
             shouldDisposeScrollController: true,
             child: SingleChildScrollView(

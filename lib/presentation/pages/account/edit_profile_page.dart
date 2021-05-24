@@ -14,7 +14,6 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
@@ -27,7 +26,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         centerTitle: false,
         title: Text(
           S.of(context).editProfile,
-          style: textTheme.headline6?.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),
@@ -61,27 +60,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
             SizedBox(height: 32),
             TextField(
               decoration: InputDecoration(
-                hintText: S.of(context).fullNameField,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).fullNameField,
               ),
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
             TextField(
               decoration: InputDecoration(
-                hintText: S.of(context).emailField,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(horizontal: 18),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).emailField,
               ),
               keyboardType: TextInputType.emailAddress,
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
             DropdownSearch(
@@ -91,34 +78,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 S.of(context).female,
               ],
               dropdownSearchDecoration: InputDecoration(
-                hintText: S.of(context).selectGender,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 18),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).selectGender,
+                contentPadding: EdgeInsets.zero,
               ),
               dropDownButton: Icon(
                 Icons.arrow_drop_down_rounded,
                 color: mediumGreyColor,
               ),
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
             TextField(
               decoration: InputDecoration(
-                hintText: S.of(context).birthField,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 14,
-                ),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).birthField,
                 suffixIcon: Icon(Icons.calendar_today_rounded),
               ),
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 32),
             DropdownSearch(
@@ -129,18 +102,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 'Jawa Timur',
               ],
               dropdownSearchDecoration: InputDecoration(
-                hintText: S.of(context).selectProvince,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 18),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).selectProvince,
+                contentPadding: EdgeInsets.zero,
               ),
               dropDownButton: Icon(
                 Icons.arrow_drop_down_rounded,
                 color: mediumGreyColor,
               ),
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
             DropdownSearch(
@@ -154,18 +122,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 'Detroit',
               ],
               dropdownSearchDecoration: InputDecoration(
-                hintText: S.of(context).selectCity,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 18),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).selectCity,
+                contentPadding: EdgeInsets.zero,
               ),
               dropDownButton: Icon(
                 Icons.arrow_drop_down_rounded,
                 color: mediumGreyColor,
               ),
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
             DropdownSearch(
@@ -179,61 +142,37 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 'Detroit',
               ],
               dropdownSearchDecoration: InputDecoration(
-                hintText: S.of(context).selectSubDistrict,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(left: 18),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).selectSubDistrict,
+                contentPadding: EdgeInsets.zero,
               ),
               dropDownButton: Icon(
                 Icons.arrow_drop_down_rounded,
                 color: mediumGreyColor,
               ),
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
             TextField(
               decoration: InputDecoration(
-                hintText: S.of(context).addressField,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 14,
-                ),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).addressField,
               ),
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 16),
             TextField(
               decoration: InputDecoration(
-                hintText: S.of(context).zipCodeField,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 14,
-                ),
-                hintStyle: TextStyle(color: mediumGreyColor),
+                labelText: S.of(context).zipCodeField,
               ),
               keyboardType: TextInputType.number,
-            ).decorated(
-              color: inputFieldColor,
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
             ),
             SizedBox(height: 32),
             RoundedButton(
               onPressed: () {},
               label: S.of(context).save,
+              horizontalPadding: 64,
             ),
             SizedBox(height: 64),
           ],
         ),
-      ).gestures(onTap: () {
-        FocusScope.of(context).requestFocus(FocusNode());
-      }),
+      ),
     );
   }
 }

@@ -84,7 +84,7 @@ class MobliDrawer extends ConsumerWidget {
                 Navigator.pushNamed(context, '/new-cars');
               },
               title: S.of(context).sellCar.toUpperCase(),
-              icon: Icons.directions_car_outlined,
+              icon: MobliIcons.car,
             ),
             _drawerItem(
               context: context,

@@ -24,7 +24,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
@@ -37,7 +36,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         centerTitle: false,
         title: Text(
           S.of(context).changePhoneAndPassword,
-          style: textTheme.headline6?.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),

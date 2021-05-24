@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/widgets/mobli_chip.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/car_card.dart';
-import '../../widgets/cars/price_chip.dart';
+import '../../widgets/mobli_chip.dart';
 import '../../widgets/search_bar.dart';
 import 'compare_nav.dart';
 import 'modals/sort_and_filter.dart';
@@ -43,7 +42,6 @@ class _CarsPageState extends State<CarsPage> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
-    final size = mediaQuery.size;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -57,7 +55,7 @@ class _CarsPageState extends State<CarsPage> {
         ),
         title: Text(
           _buildTitle(),
-          style: textTheme.headline6?.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
       ),
       bottomNavigationBar:

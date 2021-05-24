@@ -34,7 +34,8 @@ class _OldPasswordState extends State<OldPassword> {
             Text(
               S.of(context).enterOldPasswordPhone,
               textAlign: TextAlign.left,
-            ).fontSize(16).expanded(),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            ).expanded(),
           ],
         ),
         SizedBox(height: 16),

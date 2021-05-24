@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:moblimobil/presentation/widgets/mobli_chip.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/car_card.dart';
+import '../../widgets/mobli_chip.dart';
 import '../../widgets/search_bar.dart';
 
 class SearchPage extends StatefulWidget {
@@ -33,7 +34,7 @@ class _SearchPageState extends State<SearchPage> {
         ),
         title: Text(
           S.of(context).explore,
-          style: TextStyle(fontWeight: FontWeight.w700),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
       ),
       body: SingleChildScrollView(
@@ -70,6 +71,14 @@ class _SearchPageState extends State<SearchPage> {
                   Navigator.pushNamed(context, '/new-cars');
                 },
                 label: S.of(context).newCars,
+                selected: false,
+                elevated: false,
+              ).padding(right: 12, bottom: 24),
+              MobliChip(
+                onTap: () {
+                  Navigator.pushNamed(context, '/used-cars');
+                },
+                label: S.of(context).usedCars,
                 selected: false,
                 elevated: false,
               ).padding(right: 12, bottom: 24),

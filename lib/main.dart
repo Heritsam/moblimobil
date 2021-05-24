@@ -28,6 +28,7 @@ import 'presentation/pages/notification/notification_page.dart';
 import 'presentation/pages/onboarding_page.dart';
 import 'presentation/pages/search/search_page.dart';
 import 'presentation/pages/search/search_recent_page.dart';
+import 'presentation/pages/video/video_page.dart';
 import 'presentation/pages/wishlist/wishlist_page.dart';
 import 'providers.dart';
 import 'wrapper.dart';
@@ -113,6 +114,7 @@ class MyApp extends ConsumerWidget {
         '/change-password': (context) => ChangePasswordPage(),
         '/edit-profile': (context) => EditProfilePage(),
         '/wishlist': (context) => WishlistPage(),
+        '/videos': (context) => VideoPage(),
       },
     );
   }

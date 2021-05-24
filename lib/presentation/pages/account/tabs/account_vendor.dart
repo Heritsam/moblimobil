@@ -69,6 +69,7 @@ class AccountVendor extends StatelessWidget {
               ),
               SizedBox(height: 32),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   MobliCard(
@@ -137,50 +138,40 @@ class AccountVendor extends StatelessWidget {
                   ).expanded(),
                 ],
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 8),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  DashboardItem(
-                    icon: Icon(
-                      MobliIcons.car_alt,
-                      size: 48,
-                      color: greenColor,
+                  MobliCard(
+                    onTap: () {},
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Text(
+                          S.of(context).cars,
+                          style: TextStyle(color: mediumGreyColor),
+                        ),
+                        SizedBox(height: 2),
+                        Icon(MobliIcons.car_alt, color: greenColor, size: 64),
+                      ],
                     ),
-                    label: S.of(context).cars,
-                    size: mediaQuery.size.width / 4 - 16,
                   ).expanded(),
-                  SizedBox(width: 12),
-                  DashboardItem(
-                    icon: Icon(
-                      MobliIcons.iuran,
-                      size: 48,
-                      color: greenColor,
+                  SizedBox(width: 16),
+                  MobliCard(
+                    onTap: () {},
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Text(
+                          S.of(context).iuran,
+                          style: TextStyle(color: mediumGreyColor),
+                        ),
+                        SizedBox(height: 2),
+                        Icon(MobliIcons.iuran, color: greenColor, size: 64),
+                      ],
                     ),
-                    label: S.of(context).iuran,
-                    size: mediaQuery.size.width / 4 - 16,
-                  ).expanded(),
-                  SizedBox(width: 12),
-                  DashboardItem(
-                    icon: Icon(
-                      MobliIcons.profile,
-                      size: 48,
-                      color: greenColor,
-                    ),
-                    label: S.of(context).editProfile,
-                    size: mediaQuery.size.width / 4 - 16,
-                  ).expanded(),
-                  SizedBox(width: 12),
-                  DashboardItem(
-                    icon: Icon(
-                      MobliIcons.key,
-                      size: 48,
-                      color: greenColor,
-                    ),
-                    label: S.of(context).changePhoneAndPassword,
-                    size: mediaQuery.size.width / 4 - 16,
-                  ).expanded(),
+                  ).constrained(width: mediaQuery.size.width).expanded(),
                 ],
               ),
             ],

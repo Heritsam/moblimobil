@@ -72,6 +72,7 @@ class _OtpPageState extends State<OtpPage> {
               borderWidth: 1,
               fieldOuterPadding: EdgeInsets.symmetric(horizontal: 8),
             ),
+            textCapitalization: TextCapitalization.words,
           ).padding(),
           SizedBox(height: 16),
           Row(
