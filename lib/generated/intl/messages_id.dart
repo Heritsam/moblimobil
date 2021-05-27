@@ -143,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sellCar": MessageLookupByLibrary.simpleMessage("Jual Mobil"),
         "send": MessageLookupByLibrary.simpleMessage("Kirim"),
         "skipText": MessageLookupByLibrary.simpleMessage("Lewati"),
+        "sold": MessageLookupByLibrary.simpleMessage("Terjual"),
         "sortAndFilter":
             MessageLookupByLibrary.simpleMessage("Urutkan dan Filter"),
         "sorting": MessageLookupByLibrary.simpleMessage("Urutkan"),

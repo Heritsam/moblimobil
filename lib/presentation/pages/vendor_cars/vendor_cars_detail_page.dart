@@ -11,20 +11,15 @@ import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
-import '../../widgets/buttons/rounded_button.dart';
 import '../../widgets/buttons/rounded_icon_button.dart';
-import '../../widgets/cars/car_card.dart';
-import '../../widgets/circle_image.dart';
-import 'credit_simulation.dart';
 import 'specification.dart';
-import 'test_drive.dart';
 
-class CarsDetailPage extends StatefulWidget {
+class VendorCarsDetailPage extends StatefulWidget {
   @override
-  _CarsDetailPageState createState() => _CarsDetailPageState();
+  _VendorCarsDetailPageState createState() => _VendorCarsDetailPageState();
 }
 
-class _CarsDetailPageState extends State<CarsDetailPage> {
+class _VendorCarsDetailPageState extends State<VendorCarsDetailPage> {
   int _sliderIndex = 0;
 
   @override
@@ -49,19 +44,67 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
         ),
       ),
       bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RoundedIconButton(
-            icon: Icon(MobliIcons.chat, color: Colors.white),
-            label: 'Chat Penjual',
-            horizontalPadding: 0,
-          ).expanded(),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RoundedIconButton(
+                icon: Icon(Icons.edit_outlined, color: Colors.white, size: 32),
+                horizontalPadding: 24,
+                verticalPadding: 20,
+                backgroundColor: mediumGreyColor,
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Edit',
+                style: TextStyle(
+                  color: mediumGreyColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
           SizedBox(width: 16),
-          RoundedIconButton(
-            icon: Icon(Icons.phone_outlined, color: Colors.white),
-            label: 'Telepon',
-            horizontalPadding: 0,
-            backgroundColor: darkGreyColor,
-          ).expanded(),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RoundedIconButton(
+                icon: Icon(Icons.close, color: Colors.white, size: 32),
+                horizontalPadding: 24,
+                verticalPadding: 20,
+                backgroundColor: redColor,
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Delete',
+                style: TextStyle(
+                  color: mediumGreyColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 16),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RoundedIconButton(
+                icon: Icon(Icons.check, color: Colors.white, size: 32),
+                horizontalPadding: 24,
+                verticalPadding: 20,
+                backgroundColor: greenColor,
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Sold',
+                style: TextStyle(
+                  color: mediumGreyColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ],
       )
           .parent(({required child}) => SafeArea(child: child))
@@ -132,51 +175,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                   ).padding(bottom: 20).alignment(Alignment.bottomCenter),
                 ],
               ).constrained(height: 240),
-              Row(
-                children: [
-                  CircleImage(
-                    image: NetworkImage(
-                      'https://uifaces.co/our-content/donated/6MWH9Xi_.jpg',
-                    ),
-                    size: 42,
-                  ),
-                  SizedBox(width: 16),
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        'Verdiansyah',
-                        style: TextStyle(
-                          color: darkGreyColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ).flexible(),
-                      SizedBox(width: 8),
-                      Icon(Icons.verified, color: yellowColor),
-                    ],
-                  ).constrained(width: size.width / 2),
-                  Row(
-                    children: <Widget>[
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.share),
-                        iconSize: 32,
-                        color: darkGreyColor,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.favorite),
-                        iconSize: 32,
-                        color: Colors.black12,
-                      ),
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.end,
-                  ).expanded(),
-                ],
-              ).padding(horizontal: 16),
-              SizedBox(height: 32),
+              SizedBox(height: 4),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -252,53 +251,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                 ),
               ).padding(horizontal: 16),
               SizedBox(height: 32),
-              CreditSimulation().padding(horizontal: 16),
-              SizedBox(height: 32),
-              RoundedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => TestDrive(),
-                  );
-                },
-                label: S.of(context).scheduleToTestDrive,
-                verticalPadding: 12,
-              ).padding(horizontal: 16).constrained(width: size.width),
-              SizedBox(height: 32),
-              <Widget>[
-                Text(S.of(context).recommended, style: textTheme.headline6),
-                InkResponse(
-                  onTap: () {},
-                  child: Text(
-                    S.of(context).seeAll,
-                    style: TextStyle(color: blueColor),
-                  ),
-                ),
-              ]
-                  .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
-                  .padding(horizontal: 16),
-              SizedBox(height: 16),
-              ListView.builder(
-                scrollDirection: Axis.horizontal,
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                itemCount: carList.length,
-                itemBuilder: (context, index) {
-                  final item = carList[index];
-
-                  return CarCard(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/cars-detail');
-                    },
-                    carId: item.id,
-                    title: item.title,
-                    price: item.price,
-                    hasUsed: index.isEven,
-                    imageUrl: item.imageUrl,
-                  ).padding(right: 16, bottom: 32);
-                },
-              ).constrained(height: 240),
-              SizedBox(height: mediaQuery.padding.bottom + 64),
+              SizedBox(height: mediaQuery.padding.bottom + 128),
             ].toColumn(crossAxisAlignment: CrossAxisAlignment.start),
           );
         },

@@ -5,7 +5,7 @@ import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/car_card.dart';
 
-class SearchRecentPage extends StatelessWidget {
+class VendorSoldPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -21,7 +21,7 @@ class SearchRecentPage extends StatelessWidget {
           child: Container(color: Colors.white60).backgroundBlur(7),
         ),
         title: Text(
-          S.of(context).recentlySeen,
+          S.of(context).sold,
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
       ),

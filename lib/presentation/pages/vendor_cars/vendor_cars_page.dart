@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
+import '../../widgets/buttons/circle_button.dart';
 import '../../widgets/cars/car_card.dart';
 
-class SearchRecentPage extends StatelessWidget {
+class VendorCarsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -21,9 +23,13 @@ class SearchRecentPage extends StatelessWidget {
           child: Container(color: Colors.white60).backgroundBlur(7),
         ),
         title: Text(
-          S.of(context).recentlySeen,
+          S.of(context).cars,
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
+      ),
+      floatingActionButton: CircleButton(
+        child: Icon(Icons.add, size: 32, color: Colors.white),
+        backgroundColor: greenColor,
       ),
       body: GridView.builder(
         physics: BouncingScrollPhysics(),
@@ -44,6 +50,9 @@ class SearchRecentPage extends StatelessWidget {
           final item = carList[index];
 
           return CarCard(
+            onTap: () {
+              Navigator.pushNamed(context, '/vendor-cars-detail');
+            },
             carId: item.id,
             hasUsed: index.isOdd,
             title: item.title,

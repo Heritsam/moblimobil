@@ -4,7 +4,7 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/themes/theme.dart';
 
 class RoundedIconButton extends StatefulWidget {
-  final String label;
+  final String? label;
   final Icon icon;
   final Color backgroundColor;
   final Color textColor;
@@ -16,7 +16,7 @@ class RoundedIconButton extends StatefulWidget {
 
   const RoundedIconButton({
     Key? key,
-    required this.label,
+    this.label,
     required this.icon,
     this.backgroundColor = blueColor,
     this.textColor = Colors.white,
@@ -41,15 +41,16 @@ class _RoundedIconButtonState extends State<RoundedIconButton> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           widget.icon,
-          SizedBox(width: 8),
-          Text(
-            widget.label,
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .button
-                ?.copyWith(color: mediumGreyColor),
-          ).flexible(),
+          if (widget.label != null) SizedBox(width: 8),
+          if (widget.label != null)
+            Text(
+              widget.label ?? '',
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .button
+                  ?.copyWith(color: mediumGreyColor),
+            ).flexible(),
         ],
       )
           .padding(
@@ -65,15 +66,16 @@ class _RoundedIconButtonState extends State<RoundedIconButton> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         widget.icon,
-        SizedBox(width: 8),
-        Text(
-          widget.label,
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .button
-              ?.copyWith(color: widget.textColor),
-        ).flexible(),
+        if (widget.label != null) SizedBox(width: 8),
+        if (widget.label != null)
+          Text(
+            widget.label ?? '',
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .button
+                ?.copyWith(color: widget.textColor),
+          ).flexible(),
       ],
     )
         .padding(

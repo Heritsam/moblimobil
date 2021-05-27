@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../../core/themes/mobli_icons_icons.dart';
 import '../../../../core/themes/theme.dart';
 import '../../../../generated/l10n.dart';
-import '../../../widgets/account/dashboard_item.dart';
+import '../../../notifiers/app_settings/app_settings_notifier.dart';
 import '../../../widgets/circle_image.dart';
 import '../../../widgets/mobli_card.dart';
 
-class AccountVendor extends StatelessWidget {
+class AccountVendor extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final settings = watch(appSettingsNotifier);
     final mediaQuery = MediaQuery.of(context);
 
     return SingleChildScrollView(
@@ -68,111 +71,94 @@ class AccountVendor extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 32),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MobliCard(
-                    onTap: () {},
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Sold',
-                          style: TextStyle(color: mediumGreyColor),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          '9',
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: greenColor,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+              MobliCard(
+                onTap: () {
+                  Navigator.pushNamed(context, '/vendor-cars');
+                },
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Icon(MobliIcons.car_alt, color: greenColor, size: 64),
+                    SizedBox(width: 16),
+                    Text(
+                      S.of(context).cars,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: darkGreyColor,
+                      ),
                     ),
-                  ).expanded(),
-                  SizedBox(width: 16),
-                  Stack(
-                    alignment: Alignment.topRight,
-                    children: [
-                      MobliCard(
-                        onTap: () {},
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Test Drive',
-                              style: TextStyle(color: mediumGreyColor),
-                            ),
-                            SizedBox(height: 2),
-                            Text(
-                              '12',
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: greenColor,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ).constrained(width: mediaQuery.size.width),
-                      Container(
-                        child: Text('3').fontSize(12).textColor(Colors.white),
-                        padding: EdgeInsets.all(6),
-                        margin: EdgeInsets.only(right: 8, top: 8),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: redColor,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 6,
-                              offset: Offset(0, 3),
-                              color: redColor.withOpacity(.38),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ).expanded(),
-                ],
+                    Spacer(),
+                    Text(
+                      '12',
+                      style: TextStyle(
+                        color: greenColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                  ],
+                ),
               ),
-              SizedBox(height: 8),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MobliCard(
-                    onTap: () {},
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Text(
-                          S.of(context).cars,
-                          style: TextStyle(color: mediumGreyColor),
-                        ),
-                        SizedBox(height: 2),
-                        Icon(MobliIcons.car_alt, color: greenColor, size: 64),
-                      ],
+              SizedBox(height: 16),
+              MobliCard(
+                onTap: () {
+                  Navigator.pushNamed(context, '/vendor-sold');
+                },
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Icon(MobliIcons.sold, color: greenColor, size: 64),
+                    SizedBox(width: 16),
+                    Text(
+                      S.of(context).sold,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: darkGreyColor,
+                      ),
                     ),
-                  ).expanded(),
-                  SizedBox(width: 16),
-                  MobliCard(
-                    onTap: () {},
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Text(
-                          S.of(context).iuran,
-                          style: TextStyle(color: mediumGreyColor),
-                        ),
-                        SizedBox(height: 2),
-                        Icon(MobliIcons.iuran, color: greenColor, size: 64),
-                      ],
+                    Spacer(),
+                    Text(
+                      '9',
+                      style: TextStyle(
+                        color: greenColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ).constrained(width: mediaQuery.size.width).expanded(),
-                ],
+                    SizedBox(width: 8),
+                  ],
+                ),
+              ),
+              SizedBox(height: 16),
+              MobliCard(
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Icon(MobliIcons.iuran, color: greenColor, size: 64),
+                    SizedBox(width: 16),
+                    Text(
+                      S.of(context).iuran,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: darkGreyColor,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      NumberFormat.compactCurrency(
+                        locale: 'en',
+                        decimalDigits: 0,
+                        symbol: 'Rp ',
+                      ).format(123000) + '/' + S.of(context).month,
+                      style: TextStyle(
+                        color: mediumGreyColor,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                  ],
+                ),
               ),
             ],
           ),

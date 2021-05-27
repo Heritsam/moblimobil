@@ -32,7 +32,7 @@ class _CircleButtonState extends State<CircleButton> {
         .elevation(
           _isPressed ? 2 : 10,
           borderRadius: BorderRadius.circular(150),
-          shadowColor:Colors.black38,
+          shadowColor: widget.backgroundColor.withOpacity(.42),
         )
         .gestures(
           onTapChange: (tapStatus) => setState(() => _isPressed = tapStatus),

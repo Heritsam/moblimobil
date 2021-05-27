@@ -166,6 +166,7 @@ class MobliDrawer extends ConsumerWidget {
               title: S.of(context).logout.toUpperCase(),
               icon: MobliIcons.logout,
             ),
+            SizedBox(height: 16),
           ],
         ),
       ),

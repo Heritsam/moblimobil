@@ -1120,6 +1120,16 @@ class S {
     );
   }
 
+  /// `Sold`
+  String get sold {
+    return Intl.message(
+      'Sold',
+      name: 'sold',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Monthly Fee`
   String get iuran {
     return Intl.message(

@@ -28,6 +28,9 @@ import 'presentation/pages/notification/notification_page.dart';
 import 'presentation/pages/onboarding_page.dart';
 import 'presentation/pages/search/search_page.dart';
 import 'presentation/pages/search/search_recent_page.dart';
+import 'presentation/pages/vendor/vendor_sold_page.dart';
+import 'presentation/pages/vendor_cars/vendor_cars_detail_page.dart';
+import 'presentation/pages/vendor_cars/vendor_cars_page.dart';
 import 'presentation/pages/video/video_page.dart';
 import 'presentation/pages/wishlist/wishlist_page.dart';
 import 'providers.dart';
@@ -115,6 +118,9 @@ class MyApp extends ConsumerWidget {
         '/edit-profile': (context) => EditProfilePage(),
         '/wishlist': (context) => WishlistPage(),
         '/videos': (context) => VideoPage(),
+        '/vendor-sold': (context) => VendorSoldPage(),
+        '/vendor-cars': (context) => VendorCarsPage(),
+        '/vendor-cars-detail': (context) => VendorCarsDetailPage(),
       },
     );
   }

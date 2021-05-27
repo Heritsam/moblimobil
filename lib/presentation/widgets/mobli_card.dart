@@ -27,14 +27,14 @@ class _MobliCardState extends State<MobliCard> {
   @override
   Widget build(BuildContext context) {
     return Container(child: widget.child, padding: widget.padding)
-        .borderRadius(all: mediumBorderRadius)
+        .borderRadius(all: defaultBorderRadius)
         .ripple()
         .backgroundColor(widget.backgroundColor)
-        .clipRRect(all: mediumBorderRadius)
-        .borderRadius(all: mediumBorderRadius, animate: true)
+        .clipRRect(all: defaultBorderRadius)
+        .borderRadius(all: defaultBorderRadius, animate: true)
         .elevation(
           _isPressed ? 2 : 10,
-          borderRadius: BorderRadius.circular(mediumBorderRadius),
+          borderRadius: BorderRadius.circular(defaultBorderRadius),
           shadowColor: Colors.black26,
         )
         .gestures(

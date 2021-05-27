@@ -43,4 +43,5 @@ class MobliIcons {
   static const IconData sort_and_filter = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData car_alt = IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData iuran = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData sold = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
