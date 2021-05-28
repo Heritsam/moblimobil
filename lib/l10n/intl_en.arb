@@ -68,12 +68,15 @@
     "city": "City",
     "bodyType": "Body Type",
     
+    "carName": "Car name",
     "brand": "Brand",
     "fuelType": "Fuel Type",
     "transmission": "Transmission",
     "year": "Year",
     "kilometers": "Kilometers",
     "color": "Color",
+    "variant": "Variant",
+    "model": "Model",
 
     "select": "Select",
     "month": "Month",
@@ -101,12 +104,13 @@
     "advertisement": "Advertisement",
     "aboutUs": "About Us",
     "changePhoneAndPassword": "Change Email & Password",
+    "changePassword": "Change Password",
 
     "textField": "Enter text",
     "otherHelpMessage": "Or, contact us directly to:",
 
-    "enterOldPasswordPhone": "Enter your old phone number & password",
-    "enterNewPasswordPhone": "Enter your new phone number & password",
+    "enterOldPasswordPhone": "Enter your old password",
+    "enterNewPasswordPhone": "Enter your new password",
     "next": "Next",
 
     "selectGender": "Select Gender",

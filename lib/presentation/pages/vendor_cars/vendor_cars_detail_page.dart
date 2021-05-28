@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/themes/mobli_icons_icons.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
@@ -50,6 +49,9 @@ class _VendorCarsDetailPageState extends State<VendorCarsDetailPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               RoundedIconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/vendor-cars-add');
+                },
                 icon: Icon(Icons.edit_outlined, color: Colors.white, size: 32),
                 horizontalPadding: 24,
                 verticalPadding: 20,

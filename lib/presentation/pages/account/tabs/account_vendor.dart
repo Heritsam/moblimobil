@@ -132,6 +132,9 @@ class AccountVendor extends ConsumerWidget {
               ),
               SizedBox(height: 16),
               MobliCard(
+                onTap: () {
+                  Navigator.pushNamed(context, '/iuran');
+                },
                 padding: EdgeInsets.all(16),
                 child: Row(
                   children: [

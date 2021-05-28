@@ -107,7 +107,7 @@ class MobliDrawer extends ConsumerWidget {
                 Navigator.popUntil(context, ModalRoute.withName('/home'));
                 Navigator.pushNamed(context, '/change-password');
               },
-              title: S.of(context).changePhoneAndPassword.toUpperCase(),
+              title: S.of(context).changePassword.toUpperCase(),
               icon: MobliIcons.key,
             ),
             _drawerItem(

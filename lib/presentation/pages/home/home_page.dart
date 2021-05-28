@@ -14,6 +14,7 @@ import '../../widgets/cars/location_chip.dart';
 import '../../widgets/cars/menu_item.dart';
 import '../../widgets/cars/price_chip.dart';
 import '../../widgets/video/video_card.dart';
+import 'feature_detail_page.dart';
 import 'viewmodels/home_banner_notifier.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,10 +53,7 @@ class _HomePageState extends State<HomePage> {
               child: Icon(Icons.notifications_none_rounded),
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.chat_bubble_outline_rounded),
-          ),
+          SizedBox(width: 8),
         ],
       ),
       body: SingleChildScrollView(
@@ -117,6 +115,16 @@ class _HomePageState extends State<HomePage> {
           <Widget>[
             Expanded(
               child: MenuItem(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/feature-detail',
+                    arguments: FeatureDetailArgs(
+                      title: 'Garansi 1 Tahun',
+                      image: AssetImage('assets/feature_1.png'),
+                    ),
+                  );
+                },
                 icon: Image.asset('assets/feature_1.png'),
                 label: 'Garansi 1 Tahun',
               ),
@@ -124,6 +132,16 @@ class _HomePageState extends State<HomePage> {
             SizedBox(width: 16),
             Expanded(
               child: MenuItem(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/feature-detail',
+                    arguments: FeatureDetailArgs(
+                      title: 'Tersertifikasi',
+                      image: AssetImage('assets/feature_2.png'),
+                    ),
+                  );
+                },
                 icon: Image.asset('assets/feature_2.png'),
                 label: 'Tersertifikasi',
               ),
@@ -131,6 +149,16 @@ class _HomePageState extends State<HomePage> {
             SizedBox(width: 16),
             Expanded(
               child: MenuItem(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/feature-detail',
+                    arguments: FeatureDetailArgs(
+                      title: 'Garansi Uang Kembali',
+                      image: AssetImage('assets/feature_3.png'),
+                    ),
+                  );
+                },
                 icon: Image.asset('assets/feature_3.png'),
                 label: 'Garansi Uang Kembali',
               ),
@@ -309,7 +337,7 @@ class _HomePageState extends State<HomePage> {
           SizedBox(height: 32),
           Row(
             children: [
-              Text(S.of(context).videos, style: textTheme.headline6),
+              Text(S.of(context).newsAndReview, style: textTheme.headline6),
               InkResponse(
                 onTap: () {
                   Navigator.pushNamed(context, '/videos');

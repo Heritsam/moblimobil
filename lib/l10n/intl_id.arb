@@ -68,12 +68,15 @@
     "city": "Kota",
     "bodyType": "Tipe Mobil",
 
+    "carName": "Nama mobil",
     "brand": "Merek",
     "fuelType": "Bahan Bakar",
     "transmission": "Transmisi",
     "year": "Tahun",
     "kilometers": "Kilometer",
     "color": "Warna",
+    "variant": "Varian",
+    "model": "Model",
 
     "select": "Pilih",
     "month": "Bulan",
@@ -101,12 +104,13 @@
     "advertisement": "Iklan",
     "aboutUs": "Tentang Kami",
     "changePhoneAndPassword": "Ubah Email dan Password",
+    "changePassword": "Ubah Email",
 
     "textField": "Masukkan text",
     "otherHelpMessage": "Jika kamu ingin melakukan kontak langsung dengan kami hubungi kami ke:",
 
-    "enterOldPasswordPhone": "Masukan nomor dan password lama",
-    "enterNewPasswordPhone": "Masukan nomor dan password baru",
+    "enterOldPasswordPhone": "Masukkan password lama",
+    "enterNewPasswordPhone": "Masukkan password baru",
     "next": "Lanjut",
 
     "selectGender": "Pilih jenis kelamin",

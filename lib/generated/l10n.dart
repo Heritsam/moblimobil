@@ -640,6 +640,16 @@ class S {
     );
   }
 
+  /// `Car name`
+  String get carName {
+    return Intl.message(
+      'Car name',
+      name: 'carName',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Brand`
   String get brand {
     return Intl.message(
@@ -695,6 +705,26 @@ class S {
     return Intl.message(
       'Color',
       name: 'color',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Variant`
+  String get variant {
+    return Intl.message(
+      'Variant',
+      name: 'variant',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Model`
+  String get model {
+    return Intl.message(
+      'Model',
+      name: 'model',
       desc: '',
       args: [],
     );
@@ -940,6 +970,16 @@ class S {
     );
   }
 
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Enter text`
   String get textField {
     return Intl.message(
@@ -960,20 +1000,20 @@ class S {
     );
   }
 
-  /// `Enter your old phone number & password`
+  /// `Enter your old password`
   String get enterOldPasswordPhone {
     return Intl.message(
-      'Enter your old phone number & password',
+      'Enter your old password',
       name: 'enterOldPasswordPhone',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enter your new phone number & password`
+  /// `Enter your new password`
   String get enterNewPasswordPhone {
     return Intl.message(
-      'Enter your new phone number & password',
+      'Enter your new password',
       name: 'enterNewPasswordPhone',
       desc: '',
       args: [],

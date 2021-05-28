@@ -35,7 +35,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          S.of(context).changePhoneAndPassword,
+          S.of(context).changePassword,
           style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(

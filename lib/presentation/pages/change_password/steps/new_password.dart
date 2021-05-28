@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -14,15 +13,7 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
-  final _passwordNode = FocusNode();
-
   bool _isObscured = true;
-
-  @override
-  void dispose() {
-    _passwordNode.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +31,6 @@ class _NewPasswordState extends State<NewPassword> {
         ),
         SizedBox(height: 16),
         TextField(
-          decoration: InputDecoration(
-            labelText: S.of(context).phoneField,
-          ),
-          keyboardType: TextInputType.phone,
-          textInputAction: TextInputAction.next,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly
-          ],
-          onSubmitted: (_) {
-            _passwordNode.requestFocus();
-          },
-        ),
-        SizedBox(height: 16),
-        TextField(
-          focusNode: _passwordNode,
           decoration: InputDecoration(
             labelText: S.of(context).passwordField,
             suffixIcon: IconButton(

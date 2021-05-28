@@ -30,8 +30,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "brand": MessageLookupByLibrary.simpleMessage("Merek"),
         "cancel": MessageLookupByLibrary.simpleMessage("Batalkan"),
         "carDetail": MessageLookupByLibrary.simpleMessage("Detail Mobil"),
+        "carName": MessageLookupByLibrary.simpleMessage("Nama mobil"),
         "cars": MessageLookupByLibrary.simpleMessage("Mobil"),
         "category": MessageLookupByLibrary.simpleMessage("Kategori"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("Ubah Email"),
         "changePhoneAndPassword":
             MessageLookupByLibrary.simpleMessage("Ubah Email dan Password"),
         "city": MessageLookupByLibrary.simpleMessage("Kota"),
@@ -55,10 +57,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Masukkan alamat email"),
         "emailVerificationMessage": MessageLookupByLibrary.simpleMessage(
             "Anda belum melakukan verifikasi email"),
-        "enterNewPasswordPhone": MessageLookupByLibrary.simpleMessage(
-            "Masukan nomor dan password baru"),
-        "enterOldPasswordPhone": MessageLookupByLibrary.simpleMessage(
-            "Masukan nomor dan password lama"),
+        "enterNewPasswordPhone":
+            MessageLookupByLibrary.simpleMessage("Masukkan password baru"),
+        "enterOldPasswordPhone":
+            MessageLookupByLibrary.simpleMessage("Masukkan password lama"),
         "explore": MessageLookupByLibrary.simpleMessage("Jelajahi"),
         "female": MessageLookupByLibrary.simpleMessage("Perempuan"),
         "forYou": MessageLookupByLibrary.simpleMessage("Pilihan"),
@@ -86,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logoutMessage": MessageLookupByLibrary.simpleMessage(
             "Apakah anda yakin ingin keluar?"),
         "male": MessageLookupByLibrary.simpleMessage("Laki-laki"),
+        "model": MessageLookupByLibrary.simpleMessage("Model"),
         "month": MessageLookupByLibrary.simpleMessage("Bulan"),
         "newCars": MessageLookupByLibrary.simpleMessage("Mobil Baru"),
         "newest": MessageLookupByLibrary.simpleMessage("Terbaru"),
@@ -152,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transmission": MessageLookupByLibrary.simpleMessage("Transmisi"),
         "usedCars": MessageLookupByLibrary.simpleMessage("Mobil Bekas"),
         "usedText": MessageLookupByLibrary.simpleMessage("Bekas"),
+        "variant": MessageLookupByLibrary.simpleMessage("Varian"),
         "videos": MessageLookupByLibrary.simpleMessage("Video"),
         "welcomeText": MessageLookupByLibrary.simpleMessage("SELAMAT DATANG"),
         "wishlist": MessageLookupByLibrary.simpleMessage("Daftar Keinginan"),

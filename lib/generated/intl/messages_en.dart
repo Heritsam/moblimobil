@@ -30,8 +30,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "brand": MessageLookupByLibrary.simpleMessage("Brand"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "carDetail": MessageLookupByLibrary.simpleMessage("Car Detail"),
+        "carName": MessageLookupByLibrary.simpleMessage("Car name"),
         "cars": MessageLookupByLibrary.simpleMessage("Cars"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
         "changePhoneAndPassword":
             MessageLookupByLibrary.simpleMessage("Change Email & Password"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
@@ -54,10 +57,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter email address"),
         "emailVerificationMessage": MessageLookupByLibrary.simpleMessage(
             "Email hasn\'t been verified yet"),
-        "enterNewPasswordPhone": MessageLookupByLibrary.simpleMessage(
-            "Enter your new phone number & password"),
-        "enterOldPasswordPhone": MessageLookupByLibrary.simpleMessage(
-            "Enter your old phone number & password"),
+        "enterNewPasswordPhone":
+            MessageLookupByLibrary.simpleMessage("Enter your new password"),
+        "enterOldPasswordPhone":
+            MessageLookupByLibrary.simpleMessage("Enter your old password"),
         "explore": MessageLookupByLibrary.simpleMessage("Explore"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "forYou": MessageLookupByLibrary.simpleMessage("For You"),
@@ -84,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logoutMessage": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to logout?"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
+        "model": MessageLookupByLibrary.simpleMessage("Model"),
         "month": MessageLookupByLibrary.simpleMessage("Month"),
         "newCars": MessageLookupByLibrary.simpleMessage("New Cars"),
         "newest": MessageLookupByLibrary.simpleMessage("Newest"),
@@ -146,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transmission": MessageLookupByLibrary.simpleMessage("Transmission"),
         "usedCars": MessageLookupByLibrary.simpleMessage("Used Cars"),
         "usedText": MessageLookupByLibrary.simpleMessage("Used"),
+        "variant": MessageLookupByLibrary.simpleMessage("Variant"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),
         "welcomeText": MessageLookupByLibrary.simpleMessage("Welcome"),
         "wishlist": MessageLookupByLibrary.simpleMessage("Wishlist"),

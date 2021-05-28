@@ -19,6 +19,7 @@ import 'presentation/pages/cars_detail/cars_detail_page.dart';
 import 'presentation/pages/change_password/change_password_page.dart';
 import 'presentation/pages/faq/faq_page.dart';
 import 'presentation/pages/help/help_page.dart';
+import 'presentation/pages/home/feature_detail_page.dart';
 import 'presentation/pages/main_page.dart';
 import 'presentation/pages/news/news_and_review_page.dart';
 import 'presentation/pages/news/news_detail_page.dart';
@@ -31,6 +32,10 @@ import 'presentation/pages/search/search_recent_page.dart';
 import 'presentation/pages/vendor/vendor_sold_page.dart';
 import 'presentation/pages/vendor_cars/vendor_cars_detail_page.dart';
 import 'presentation/pages/vendor_cars/vendor_cars_page.dart';
+import 'presentation/pages/vendor_cars_add/vendor_cars_add_page.dart';
+import 'presentation/pages/vendor_iuran/iuran_history_page.dart';
+import 'presentation/pages/vendor_iuran/iuran_page.dart';
+import 'presentation/pages/vendor_iuran/pay_iuran_page.dart';
 import 'presentation/pages/video/video_page.dart';
 import 'presentation/pages/wishlist/wishlist_page.dart';
 import 'providers.dart';
@@ -95,6 +100,7 @@ class MyApp extends ConsumerWidget {
         '/register': (context) => RegisterPage(),
         '/forgot-password': (context) => ForgotPasswordPage(),
         '/home': (context) => MainPage(),
+        '/feature-detail': (context) => FeatureDetailPage(),
         '/notification': (context) => NotificationPage(),
         '/notification-detail': (context) => NotificationDetailPage(),
         '/search': (context) => SearchPage(),
@@ -121,6 +127,10 @@ class MyApp extends ConsumerWidget {
         '/vendor-sold': (context) => VendorSoldPage(),
         '/vendor-cars': (context) => VendorCarsPage(),
         '/vendor-cars-detail': (context) => VendorCarsDetailPage(),
+        '/vendor-cars-add': (context) => VendorCarsAddPage(),
+        '/iuran': (context) => IuranPage(),
+        '/pay-iuran': (context) => PayIuranPage(),
+        '/iuran-history': (context) => IuranHistoryPage(),
       },
     );
   }

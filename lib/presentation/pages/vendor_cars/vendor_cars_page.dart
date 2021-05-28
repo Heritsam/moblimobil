@@ -28,6 +28,9 @@ class VendorCarsPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: CircleButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/vendor-cars-add');
+        },
         child: Icon(Icons.add, size: 32, color: Colors.white),
         backgroundColor: greenColor,
       ),
@@ -37,7 +40,7 @@ class VendorCarsPage extends StatelessWidget {
           right: 16,
           left: 16,
           top: mediaQuery.padding.top + 72,
-          bottom: mediaQuery.padding.bottom + 16,
+          bottom: mediaQuery.padding.bottom + 64,
         ),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

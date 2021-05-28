@@ -18,6 +18,7 @@ class CompareNav extends ConsumerWidget {
     return Column(
       children: [
         Stack(
+          alignment: Alignment.center,
           children: [
             ListView.builder(
               scrollDirection: Axis.horizontal,

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../core/themes/mobli_icons_icons.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/mobli_chip.dart';
 import '../../widgets/search_bar.dart';
+import '../cars/modals/sort_and_filter.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -37,6 +39,18 @@ class _SearchPageState extends State<SearchPage> {
           style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => SortAndFilter(),
+          );
+        },
+        label: Text('Sort & Filter', style: TextStyle(color: darkGreyColor)),
+        icon: Icon(MobliIcons.sort_and_filter, color: darkGreyColor),
+        backgroundColor: Colors.white,
+      ).padding(bottom: 52),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SingleChildScrollView(
         padding: EdgeInsets.only(
           top: mediaQuery.padding.top + 56 + 16,

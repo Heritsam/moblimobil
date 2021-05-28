@@ -252,19 +252,6 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                 ),
               ).padding(horizontal: 16),
               SizedBox(height: 32),
-              CreditSimulation().padding(horizontal: 16),
-              SizedBox(height: 32),
-              RoundedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => TestDrive(),
-                  );
-                },
-                label: S.of(context).scheduleToTestDrive,
-                verticalPadding: 12,
-              ).padding(horizontal: 16).constrained(width: size.width),
-              SizedBox(height: 32),
               <Widget>[
                 Text(S.of(context).recommended, style: textTheme.headline6),
                 InkResponse(

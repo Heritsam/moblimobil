@@ -6,12 +6,14 @@ import '../../../core/themes/theme.dart';
 class PriceChip extends StatefulWidget {
   final String label;
   final bool selected;
+  final Color activeColor;
   final Function()? onTap;
 
   const PriceChip({
     Key? key,
     required this.label,
     this.selected = false,
+    this.activeColor = blueColor,
     this.onTap,
   }) : super(key: key);
 
@@ -36,7 +38,7 @@ class _PriceChipState extends State<PriceChip> {
         .borderRadius(all: defaultBorderRadius)
         .ripple()
         .backgroundColor(
-          widget.selected ? blueColor : lightGreyColor,
+          widget.selected ? widget.activeColor : lightGreyColor,
           animate: true,
         )
         .clipRRect(all: defaultBorderRadius)
@@ -45,7 +47,7 @@ class _PriceChipState extends State<PriceChip> {
           _isPressed ? 2 : 10,
           borderRadius: BorderRadius.circular(defaultBorderRadius),
           shadowColor:
-              widget.selected ? blueColor.withOpacity(.38) : Colors.black38,
+              widget.selected ? widget.activeColor.withOpacity(.38) : Colors.black38,
         )
         .gestures(
           onTapChange: (tapStatus) => setState(() => _isPressed = tapStatus),
