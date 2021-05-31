@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
-import '../circle_image.dart';
 
 class VideoTrendingCard extends StatefulWidget {
   final String title;

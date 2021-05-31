@@ -87,6 +87,5 @@ class _VideoCardState extends State<VideoCard> {
         )
         .scale(all: _isPressed ? 0.95 : 1.0, animate: true)
         .animate(Duration(milliseconds: 175), Curves.fastLinearToSlowEaseIn);
-    ;
   }
 }

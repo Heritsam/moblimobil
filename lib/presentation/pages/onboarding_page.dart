@@ -55,7 +55,7 @@ class OnboardingPage extends StatelessWidget {
           SizedBox(height: 16),
           RoundedButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/home');
+              Navigator.popUntil(context, ModalRoute.withName('/home'));
             },
             label: S.of(context).later.toUpperCase(),
             elevated: false,

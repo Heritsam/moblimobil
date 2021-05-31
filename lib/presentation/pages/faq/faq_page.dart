@@ -1,10 +1,27 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
+import '../../widgets/error/empty_state.dart';
+import 'viewmodels/faq_viewmodel.dart';
 
-class FaqPage extends StatelessWidget {
+class FaqPage extends StatefulWidget {
+  @override
+  _FaqPageState createState() => _FaqPageState();
+}
+
+class _FaqPageState extends State<FaqPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      context.read(faqViewModel.notifier).fetchFaq();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -24,22 +41,77 @@ class FaqPage extends StatelessWidget {
           child: Container(color: Colors.white60).backgroundBlur(7),
         ),
       ),
-      body: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.only(
-          top: mediaQuery.padding.top + 56 + 16,
-          left: 16,
-          right: 16,
-          bottom: 16,
-        ),
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return _buildItem(
-            'Lorem Ipsum',
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-          ).padding(bottom: 16);
-        },
-      ),
+      body: Consumer(builder: (context, watch, child) {
+        final state = watch(faqViewModel);
+        
+        return state.when(
+          initial: () {
+            return ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.only(
+                top: mediaQuery.padding.top + 56 + 16,
+                left: 16,
+                right: 16,
+                bottom: 16,
+              ),
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return Shimmer.fromColors(
+                  baseColor: lightGreyColor,
+                  highlightColor: Colors.white24,
+                  child: Container(
+                    height: 16,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                      color: lightGreyColor,
+                    ),
+                  ),
+                )
+                    .padding(all: 24)
+                    .decorated(color: Colors.white)
+                    .clipRRect(all: defaultBorderRadius)
+                    .elevation(
+                      10,
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                      shadowColor: Colors.black38,
+                    )
+                    .padding(bottom: 16);
+              },
+            );
+          },
+          data: (items) {
+            return RefreshIndicator(
+              onRefresh: () async {
+                return context.read(faqViewModel.notifier).fetchFaq();
+              },
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.only(
+                  top: mediaQuery.padding.top + 56 + 16,
+                  left: 16,
+                  right: 16,
+                  bottom: 16,
+                ),
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+
+                  return _buildItem(item.pertanyaan, item.jawaban)
+                      .padding(bottom: 16);
+                },
+              ),
+            );
+          },
+          error: (message) {
+            return EmptyState(
+              onPressed: () {
+                return context.read(faqViewModel.notifier).fetchFaq();
+              },
+              message: message,
+            );
+          },
+        );
+      }),
     );
   }
 
@@ -56,7 +128,7 @@ class FaqPage extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
-            ),
+            ).expanded(),
             Icon(
               Icons.arrow_drop_down_rounded,
               size: 32,
@@ -66,6 +138,7 @@ class FaqPage extends StatelessWidget {
         ).padding(all: 16),
       ),
       expanded: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ExpandableButton(
             theme: ExpandableThemeData(
@@ -81,7 +154,7 @@ class FaqPage extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
-                ),
+                ).expanded(),
                 Icon(
                   Icons.arrow_drop_up_rounded,
                   size: 32,

@@ -17,7 +17,7 @@ class Wrapper extends StatelessWidget {
         onChange: (context, SplashScreenState state) {
           state.maybeWhen(
             initialized: () {
-              Navigator.pushReplacementNamed(context, '/onboarding');
+              Navigator.pushReplacementNamed(context, '/home');
             },
             orElse: () {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -6,14 +6,12 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../../core/themes/mobli_icons_icons.dart';
 import '../../../../core/themes/theme.dart';
 import '../../../../generated/l10n.dart';
-import '../../../notifiers/app_settings/app_settings_notifier.dart';
 import '../../../widgets/circle_image.dart';
 import '../../../widgets/mobli_card.dart';
 
 class AccountVendor extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final settings = watch(appSettingsNotifier);
     final mediaQuery = MediaQuery.of(context);
 
     return SingleChildScrollView(

@@ -60,6 +60,16 @@ class S {
     );
   }
 
+  /// `Login to continue`
+  String get loginToContinue {
+    return Intl.message(
+      'Login to continue',
+      name: 'loginToContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Welcome`
   String get welcomeText {
     return Intl.message(

@@ -49,7 +49,7 @@ class _SearchPageState extends State<SearchPage> {
         label: Text('Sort & Filter', style: TextStyle(color: darkGreyColor)),
         icon: Icon(MobliIcons.sort_and_filter, color: darkGreyColor),
         backgroundColor: Colors.white,
-      ).padding(bottom: 52),
+      ).padding(bottom: mediaQuery.padding.bottom),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SingleChildScrollView(
         padding: EdgeInsets.only(

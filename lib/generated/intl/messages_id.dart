@@ -82,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Bahasa"),
         "later": MessageLookupByLibrary.simpleMessage("Nanti Saja"),
         "login": MessageLookupByLibrary.simpleMessage("Masuk"),
+        "loginToContinue":
+            MessageLookupByLibrary.simpleMessage("Login untuk melanjutkan"),
         "loginWithGoogle":
             MessageLookupByLibrary.simpleMessage("Masuk dengan Google"),
         "logout": MessageLookupByLibrary.simpleMessage("Keluar"),

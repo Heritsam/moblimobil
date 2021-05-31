@@ -11,13 +11,10 @@ import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
-import '../../widgets/buttons/rounded_button.dart';
 import '../../widgets/buttons/rounded_icon_button.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/circle_image.dart';
-import 'credit_simulation.dart';
 import 'specification.dart';
-import 'test_drive.dart';
 
 class CarsDetailPage extends StatefulWidget {
   @override

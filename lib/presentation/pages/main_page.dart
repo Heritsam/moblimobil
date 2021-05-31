@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/themes/mobli_icons_icons.dart';
 import '../../generated/l10n.dart';
+import '../notifiers/authentication/authentication_notifier.dart';
 import '../widgets/drawer/mobli_drawer.dart';
 import 'account/account_page.dart';
 import 'cars/cars_page.dart';
@@ -21,27 +23,58 @@ class _MainPageState extends State<MainPage> {
   int _pageIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      context.read(authenticationNotifier.notifier).checkStatus();
+    });
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: PageView(
-        controller: _controller,
-        physics: NeverScrollableScrollPhysics(),
-        children: [
-          HomePage(),
-          SearchPage(),
-          NewsAndReviewPage(),
-          CarsPage(type: CarsPageType.compare),
-          AccountPage(),
-        ],
+      body: ProviderListener(
+        provider: authenticationNotifier,
+        onChange: (context, AuthenticationState state) {
+          state.maybeWhen(
+            unauthenticated: () {
+              Navigator.pushNamed(context, '/onboarding');
+            },
+            orElse: () {},
+          );
+        },
+        child: PageView(
+          controller: _controller,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            HomePage(),
+            SearchPage(),
+            NewsAndReviewPage(),
+            CarsPage(type: CarsPageType.compare),
+            AccountPage(),
+          ],
+        ),
       ),
-      endDrawer: _pageIndex == 4 ? MobliDrawer() : null,
+      endDrawerEnableOpenDragGesture: false,
+      endDrawer: _pageIndex == 4
+          ? Consumer(
+              builder: (context, watch, child) {
+                final authState = watch(authenticationNotifier);
+
+                return authState.when(
+                  unauthenticated: () => Container(),
+                  authenticated: () => MobliDrawer(),
+                );
+              },
+            )
+          : null,
       bottomNavigationBar: CupertinoTabBar(
         onTap: (index) {
           _controller.jumpToPage(index);

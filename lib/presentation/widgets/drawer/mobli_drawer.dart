@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/notifiers/authentication/authentication_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/mobli_icons_icons.dart';
@@ -152,9 +153,11 @@ class MobliDrawer extends ConsumerWidget {
                       ),
                       CustomDialogAction(
                         onPressed: () {
+                          context
+                              .read(authenticationNotifier.notifier)
+                              .logout();
                           Navigator.popUntil(
                               context, ModalRoute.withName('/home'));
-                          Navigator.pushReplacementNamed(context, '/login');
                         },
                         label: S.of(context).yes,
                         isDestructiveAction: true,
