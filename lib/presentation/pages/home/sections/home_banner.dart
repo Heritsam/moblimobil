@@ -5,8 +5,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/themes/theme.dart';
-import 'viewmodels/home_banner_notifier.dart';
+import '../../../../core/themes/theme.dart';
+import '../viewmodels/home_banner_notifier.dart';
 
 class HomeBanner extends ConsumerWidget {
   @override

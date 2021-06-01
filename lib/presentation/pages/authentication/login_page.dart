@@ -6,7 +6,7 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/buttons/rounded_button.dart';
-import 'viewmodels/login_viewmodels.dart';
+import 'viewmodels/login_viewmodel.dart';
 
 class LoginPage extends StatefulWidget {
   @override

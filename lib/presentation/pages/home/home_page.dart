@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/pages/home/viewmodels/choose_us_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
@@ -9,11 +10,10 @@ import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/brand_item.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/cars/location_chip.dart';
-import '../../widgets/cars/menu_item.dart';
 import '../../widgets/cars/price_chip.dart';
 import '../../widgets/video/video_card.dart';
-import 'feature_detail_page.dart';
-import 'home_banner.dart';
+import 'sections/home_banner.dart';
+import 'sections/home_choose_us.dart';
 import 'viewmodels/home_banner_notifier.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,7 +58,8 @@ class _HomePageState extends State<HomePage> {
       body: RefreshIndicator(
         onRefresh: () async {
           Future.wait([
-            context.read(homeBannerNotifier).fetchSlider(),
+            context.read(homeBannerNotifier).fetch(),
+            context.read(chooseUsNotifier).fetch(),
           ]);
         },
         displacement: 32 + mediaQuery.padding.top,
@@ -68,60 +69,7 @@ class _HomePageState extends State<HomePage> {
           physics: BouncingScrollPhysics(),
           child: <Widget>[
             HomeBanner(),
-            <Widget>[
-              Expanded(
-                child: MenuItem(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/feature-detail',
-                      arguments: FeatureDetailArgs(
-                        title: 'Garansi 1 Tahun',
-                        image: AssetImage('assets/feature_1.png'),
-                      ),
-                    );
-                  },
-                  icon: Image.asset('assets/feature_1.png'),
-                  label: 'Garansi 1 Tahun',
-                ),
-              ),
-              SizedBox(width: 16),
-              Expanded(
-                child: MenuItem(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/feature-detail',
-                      arguments: FeatureDetailArgs(
-                        title: 'Tersertifikasi',
-                        image: AssetImage('assets/feature_2.png'),
-                      ),
-                    );
-                  },
-                  icon: Image.asset('assets/feature_2.png'),
-                  label: 'Tersertifikasi',
-                ),
-              ),
-              SizedBox(width: 16),
-              Expanded(
-                child: MenuItem(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/feature-detail',
-                      arguments: FeatureDetailArgs(
-                        title: 'Garansi Uang Kembali',
-                        image: AssetImage('assets/feature_3.png'),
-                      ),
-                    );
-                  },
-                  icon: Image.asset('assets/feature_3.png'),
-                  label: 'Garansi Uang Kembali',
-                ),
-              ),
-            ]
-                .toRow(crossAxisAlignment: CrossAxisAlignment.start)
-                .padding(horizontal: 16, top: 8),
+            HomeChooseUs().padding(horizontal: 16, top: 8),
             SizedBox(height: 32),
             <Widget>[
               Text(S.of(context).hotDeals, style: textTheme.headline6),

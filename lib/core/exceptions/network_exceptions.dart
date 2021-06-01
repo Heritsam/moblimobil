@@ -72,22 +72,24 @@ class NetworkExceptions with _$NetworkExceptions {
                   networkExceptions = NetworkExceptions.serviceUnavailable();
                   break;
                 default:
-                  if ((error.response?.data as String) == 'Unauthorized.') {
+                  if ((error.response?.data) == 'Unauthorized.') {
                     networkExceptions = NetworkExceptions.defaultError(
                       'Unauthorized',
                     );
                   } else {
                     networkExceptions = NetworkExceptions.defaultError(
-                      error.response?.data['message'] ??
-                          'Unexpected error occured',
+                      error.response?.data['message'].toString() ??
+                          'Server error',
                     );
                   }
+                  break;
               }
               break;
             case DioErrorType.sendTimeout:
               networkExceptions = NetworkExceptions.sendTimeout();
               break;
             default:
+              networkExceptions = NetworkExceptions.unexpectedError();
               break;
           }
         } else if (error is SocketException) {
@@ -156,7 +158,7 @@ class NetworkExceptions with _$NetworkExceptions {
         errorMessage = error;
       },
       formatException: () {
-        errorMessage = 'Unexpected error occurred';
+        errorMessage = 'Unexpected error occurred (format exception)';
       },
       notAcceptable: () {
         errorMessage = 'Not acceptable';

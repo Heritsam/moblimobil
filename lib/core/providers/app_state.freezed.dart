@@ -30,9 +30,9 @@ class _$AppStateTearOff {
     );
   }
 
-  Error<T> error<T>({required NetworkExceptions error}) {
+  Error<T> error<T>({required String message}) {
     return Error<T>(
-      error: error,
+      message: message,
     );
   }
 }
@@ -47,7 +47,7 @@ mixin _$AppState<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) data,
-    required TResult Function(NetworkExceptions error) error,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,7 +55,7 @@ mixin _$AppState<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? data,
-    TResult Function(NetworkExceptions error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,7 +134,7 @@ class _$Initial<T> implements Initial<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) data,
-    required TResult Function(NetworkExceptions error) error,
+    required TResult Function(String message) error,
   }) {
     return initial();
   }
@@ -145,7 +145,7 @@ class _$Initial<T> implements Initial<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? data,
-    TResult Function(NetworkExceptions error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -225,7 +225,7 @@ class _$Loading<T> implements Loading<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) data,
-    required TResult Function(NetworkExceptions error) error,
+    required TResult Function(String message) error,
   }) {
     return loading();
   }
@@ -236,7 +236,7 @@ class _$Loading<T> implements Loading<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? data,
-    TResult Function(NetworkExceptions error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -341,7 +341,7 @@ class _$Data<T> implements Data<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) data,
-    required TResult Function(NetworkExceptions error) error,
+    required TResult Function(String message) error,
   }) {
     return data(this.data);
   }
@@ -352,7 +352,7 @@ class _$Data<T> implements Data<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? data,
-    TResult Function(NetworkExceptions error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -400,9 +400,7 @@ abstract class Data<T> implements AppState<T> {
 abstract class $ErrorCopyWith<T, $Res> {
   factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) then) =
       _$ErrorCopyWithImpl<T, $Res>;
-  $Res call({NetworkExceptions error});
-
-  $NetworkExceptionsCopyWith<$Res> get error;
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -416,48 +414,41 @@ class _$ErrorCopyWithImpl<T, $Res> extends _$AppStateCopyWithImpl<T, $Res>
 
   @override
   $Res call({
-    Object? error = freezed,
+    Object? message = freezed,
   }) {
     return _then(Error<T>(
-      error: error == freezed
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as NetworkExceptions,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
-  }
-
-  @override
-  $NetworkExceptionsCopyWith<$Res> get error {
-    return $NetworkExceptionsCopyWith<$Res>(_value.error, (value) {
-      return _then(_value.copyWith(error: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$Error<T> implements Error<T> {
-  const _$Error({required this.error});
+  const _$Error({required this.message});
 
   @override
-  final NetworkExceptions error;
+  final String message;
 
   @override
   String toString() {
-    return 'AppState<$T>.error(error: $error)';
+    return 'AppState<$T>.error(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Error<T> &&
-            (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)));
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
 
   @JsonKey(ignore: true)
   @override
@@ -470,9 +461,9 @@ class _$Error<T> implements Error<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) data,
-    required TResult Function(NetworkExceptions error) error,
+    required TResult Function(String message) error,
   }) {
-    return error(this.error);
+    return error(message);
   }
 
   @override
@@ -481,11 +472,11 @@ class _$Error<T> implements Error<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? data,
-    TResult Function(NetworkExceptions error)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(message);
     }
     return orElse();
   }
@@ -518,9 +509,9 @@ class _$Error<T> implements Error<T> {
 }
 
 abstract class Error<T> implements AppState<T> {
-  const factory Error({required NetworkExceptions error}) = _$Error<T>;
+  const factory Error({required String message}) = _$Error<T>;
 
-  NetworkExceptions get error => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ErrorCopyWith<T, Error<T>> get copyWith =>
       throw _privateConstructorUsedError;

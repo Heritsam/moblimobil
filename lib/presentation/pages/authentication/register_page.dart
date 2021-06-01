@@ -6,7 +6,7 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/buttons/rounded_button.dart';
-import 'viewmodels/register_viewmodels.dart';
+import 'viewmodels/register_viewmodel.dart';
 
 class RegisterPage extends StatefulWidget {
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../infrastructures/models/slider/slider.dart';
-import '../../../../infrastructures/repositories/slider_repository.dart';
+import '../../../../infrastructures/models/other/slider.dart';
+import '../../../../infrastructures/repositories/other_repository.dart';
 
 final homeBannerNotifier = ChangeNotifierProvider<HomeBannerNotifier>((ref) {
   return HomeBannerNotifier(ref.read);
@@ -12,7 +12,7 @@ class HomeBannerNotifier extends ChangeNotifier {
   final Reader _read;
 
   HomeBannerNotifier(this._read) {
-    fetchSlider();
+    fetch();
   }
 
   List<SliderBanner> items = [];
@@ -25,16 +25,16 @@ class HomeBannerNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchSlider() async {
+  Future<void> fetch() async {
     isLoading = true;
     notifyListeners();
 
     try {
-      items = await _read(sliderRepository).getSlider();
+      items = await _read(otherRepository).getSlider();
       isLoading = false;
       notifyListeners();
     } catch (e) {
-      fetchSlider();
+      fetch();
     }
   }
 }

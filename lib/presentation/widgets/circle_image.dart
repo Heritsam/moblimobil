@@ -9,7 +9,7 @@ class CircleImage extends StatelessWidget {
   const CircleImage({
     Key? key,
     required this.size,
-    required this.image,
+    this.image = const AssetImage('assets/profile_picture.png'),
   }) : super(key: key);
 
   @override

@@ -74,6 +74,11 @@ class MyApp extends ConsumerWidget {
         primarySwatch: Colors.cyan,
         primaryColor: blueColor,
         accentColor: darkGreyColor,
+        colorScheme: ColorScheme.light().copyWith(
+          primary: blueColor,
+          onPrimary: Colors.white,
+          brightness: Brightness.light,
+        ),
         fontFamily: 'Montserrat',
         textTheme: TextTheme(
           button: TextStyle(

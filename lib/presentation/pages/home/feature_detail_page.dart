@@ -16,11 +16,9 @@ class FeatureDetailArgs {
 class FeatureDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     final args =
         ModalRoute.of(context)!.settings.arguments as FeatureDetailArgs;
-
-    final textTheme = Theme.of(context).textTheme;
-    final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -30,7 +28,7 @@ class FeatureDetailPage extends StatelessWidget {
         elevation: 0,
         title: Text(
           args.title,
-          style: textTheme.headline6!.copyWith(color: darkGreyColor),
+          style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),
@@ -46,6 +44,7 @@ class FeatureDetailPage extends StatelessWidget {
         child: Column(
           children: [
             Image(image: args.image, height: 140, width: 140),
+            SizedBox(height: 12),
             Text(
               args.title.toUpperCase(),
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),

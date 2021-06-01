@@ -7,25 +7,15 @@ import '../../../generated/l10n.dart';
 import '../../widgets/buttons/rounded_button.dart';
 import 'viewmodels/help_viewmodel.dart';
 
-class HelpPage extends StatefulWidget {
-  @override
-  _HelpPageState createState() => _HelpPageState();
-}
-
-class _HelpPageState extends State<HelpPage> {
+class HelpPage extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
-  final _textNode = FocusNode();
 
   @override
-  void dispose() {
-    _textNode.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     final mediaQuery = MediaQuery.of(context);
     final size = mediaQuery.size;
+
+    final vm = watch(helpViewModel);
 
     return Form(
       key: _formKey,
@@ -45,148 +35,136 @@ class _HelpPageState extends State<HelpPage> {
             child: Container(color: Colors.white60).backgroundBlur(7),
           ),
         ),
-        body: Consumer(
-          builder: (context, watch, child) {
-            final vm = watch(helpViewModel);
-
-            return SingleChildScrollView(
-              padding: EdgeInsets.only(
-                top: mediaQuery.padding.top + 56 + 16,
-                left: 16,
-                right: 16,
-                bottom: 32,
+        body: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            top: mediaQuery.padding.top + 56 + 16,
+            left: 16,
+            right: 16,
+            bottom: 32,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: S.of(context).fullNameField,
+                ),
+                onSaved: (value) {
+                  vm.fullname = value!;
+                },
+                validator: (value) {
+                  if (value!.isEmpty) return 'Required';
+                },
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              SizedBox(height: 24),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: S.of(context).textField,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(mediumBorderRadius),
+                  ),
+                ),
+                maxLines: 5,
+                onSaved: (value) {
+                  vm.description = value!;
+                },
+                validator: (value) {
+                  if (value!.isEmpty) return 'Required';
+                },
+              ),
+              SizedBox(height: 32),
+              if (vm.isLoading)
+                RoundedButton(
+                  enabled: false,
+                  label: 'LOADING...',
+                  horizontalPadding: 52,
+                )
+              else
+                RoundedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      vm.sendHelp(context);
+                    }
+                  },
+                  label: S.of(context).send,
+                  horizontalPadding: 52,
+                ),
+              SizedBox(height: 32),
+              Text(
+                S.of(context).otherHelpMessage,
+                textAlign: TextAlign.center,
+              ).textColor(darkGreyColor.withOpacity(.70)),
+              SizedBox(height: 32),
+              Column(
                 children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: S.of(context).fullNameField,
-                    ),
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (_) {
-                      FocusScope.of(context).requestFocus(_textNode);
-                    },
-                    onSaved: (value) {
-                      vm.fullname = value!;
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) return 'Required';
-                    },
-                  ),
-                  SizedBox(height: 24),
-                  TextFormField(
-                    focusNode: _textNode,
-                    decoration: InputDecoration(
-                      hintText: S.of(context).textField,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(mediumBorderRadius),
-                      ),
-                    ),
-                    maxLines: 5,
-                    onSaved: (value) {
-                      vm.description = value!;
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) return 'Required';
-                    },
-                  ),
-                  SizedBox(height: 32),
-                  if (vm.isLoading)
-                    RoundedButton(
-                      enabled: false,
-                      label: 'LOADING...',
-                      horizontalPadding: 52,
-                    )
-                  else
-                    RoundedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          vm.sendHelp(context);
-                        }
-                      },
-                      label: S.of(context).send,
-                      horizontalPadding: 52,
-                    ),
-                  SizedBox(height: 32),
-                  Text(
-                    S.of(context).otherHelpMessage,
-                    textAlign: TextAlign.center,
-                  ).textColor(darkGreyColor.withOpacity(.70)),
-                  SizedBox(height: 32),
-                  Column(
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.phone_outlined,
-                            color: mediumGreyColor,
-                            size: 28,
-                          ),
-                          SizedBox(width: 16),
-                          Text(
-                            '0822 1353 0065',
-                            style: TextStyle(
-                              color: blueColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ).expanded()
-                        ],
-                      ).padding(vertical: 16),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.mail_outline_rounded,
-                            color: mediumGreyColor,
-                            size: 28,
-                          ),
-                          SizedBox(width: 16),
-                          Text(
-                            'moblimobil@gmail.com',
-                            style: TextStyle(
-                              color: blueColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ).expanded()
-                        ],
-                      ).padding(vertical: 16),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.map_rounded,
-                            color: mediumGreyColor,
-                            size: 28,
-                          ),
-                          SizedBox(width: 16),
-                          Text(
-                            'Jl. Anyelir IV Blok 5W No.4',
-                            style: TextStyle(
-                              color: blueColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ).expanded()
-                        ],
-                      ).padding(vertical: 16),
+                      Icon(
+                        Icons.phone_outlined,
+                        color: mediumGreyColor,
+                        size: 28,
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                        '0822 1353 0065',
+                        style: TextStyle(
+                          color: blueColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ).expanded()
                     ],
-                  )
-                      .padding(all: 16)
-                      .decorated(
-                        borderRadius:
-                            BorderRadius.circular(defaultBorderRadius),
-                        border: Border.all(color: mediumGreyColor),
-                      )
-                      .constrained(width: size.width),
+                  ).padding(vertical: 16),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.mail_outline_rounded,
+                        color: mediumGreyColor,
+                        size: 28,
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                        'moblimobil@gmail.com',
+                        style: TextStyle(
+                          color: blueColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ).expanded()
+                    ],
+                  ).padding(vertical: 16),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.map_rounded,
+                        color: mediumGreyColor,
+                        size: 28,
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                        'Jl. Anyelir IV Blok 5W No.4',
+                        style: TextStyle(
+                          color: blueColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ).expanded()
+                    ],
+                  ).padding(vertical: 16),
                 ],
-              ),
-            ).gestures(onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
-            });
-          },
-        ),
+              )
+                  .padding(all: 16)
+                  .decorated(
+                    borderRadius: BorderRadius.circular(defaultBorderRadius),
+                    border: Border.all(color: mediumGreyColor),
+                  )
+                  .constrained(width: size.width),
+            ],
+          ),
+        ).gestures(onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        }),
       ),
     );
   }
