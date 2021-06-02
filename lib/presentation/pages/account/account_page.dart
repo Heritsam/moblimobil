@@ -27,7 +27,6 @@ class AccountPage extends StatelessWidget {
       child: Consumer(
         builder: (context, watch, child) {
           final authState = watch(authenticationNotifier);
-          final userState = watch(accountUserNotifier);
 
           return authState.when(
             unauthenticated: () {

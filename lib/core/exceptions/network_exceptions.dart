@@ -91,6 +91,12 @@ class NetworkExceptions with _$NetworkExceptions {
             case DioErrorType.sendTimeout:
               networkExceptions = NetworkExceptions.sendTimeout();
               break;
+            case DioErrorType.other:
+              networkExceptions = NetworkExceptions.defaultError(
+                error.message,
+                null,
+              );
+              break;
             default:
               networkExceptions = NetworkExceptions.unexpectedError();
               break;

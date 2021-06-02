@@ -14,9 +14,13 @@ import '../../widgets/video/video_card.dart';
 import 'sections/home_banner.dart';
 import 'sections/home_choose_us.dart';
 import 'sections/home_hot_deals.dart';
+import 'sections/home_popular_cars.dart';
+import 'sections/home_sort_by_price.dart';
 import 'viewmodels/choose_us_notifier.dart';
 import 'viewmodels/home_banner_notifier.dart';
 import 'viewmodels/hot_deals_notifier.dart';
+import 'viewmodels/popular_cars_notifier.dart';
+import 'viewmodels/sort_by_price_notifier.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -63,6 +67,8 @@ class _HomePageState extends State<HomePage> {
             context.read(homeBannerNotifier).fetch(),
             context.read(chooseUsNotifier).fetch(),
             context.read(hotDealsNotifier).fetch(),
+            context.read(popularCarsNotifier).fetch(),
+            context.read(sortByPriceNotifier).fetch(),
           ]);
         },
         displacement: 32 + mediaQuery.padding.top,
@@ -101,26 +107,7 @@ class _HomePageState extends State<HomePage> {
                 .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
                 .padding(horizontal: 16),
             SizedBox(height: 16),
-            ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: carList.length,
-              itemBuilder: (context, index) {
-                final item = carList[index];
-
-                return CarCard(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/cars-detail');
-                  },
-                  carId: item.id,
-                  title: item.title,
-                  price: item.price,
-                  hasUsed: index.isEven,
-                  imageUrl: item.imageUrl,
-                ).padding(right: 16, bottom: 32);
-              },
-            ).constrained(height: 240),
+            HomePopularCars(),
             <Widget>[
               Text(S.of(context).price, style: textTheme.headline6),
               InkResponse(
@@ -134,43 +121,16 @@ class _HomePageState extends State<HomePage> {
                 .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
                 .padding(horizontal: 16),
             SizedBox(height: 12),
-            ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return PriceChip(
-                  label: '100 jt - 300 jt',
-                  selected: index == 0,
-                ).padding(right: 16, bottom: 16);
-              },
-            ).constrained(height: 64),
-            ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: carList.length,
-              itemBuilder: (context, index) {
-                final item = carList[index];
-
-                return CarCard(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/cars-detail');
-                  },
-                  carId: item.id,
-                  title: item.title,
-                  price: item.price,
-                  hasUsed: index.isEven,
-                  imageUrl: item.imageUrl,
-                ).padding(right: 16, bottom: 32);
-              },
-            ).constrained(height: 240),
-            <Widget>[
-              Text(S.of(context).searchByLocation, style: textTheme.headline6),
-            ]
-                .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
-                .padding(horizontal: 16),
+            HomeSortByPrice(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  S.of(context).searchByLocation,
+                  style: textTheme.headline6,
+                ),
+              ],
+            ).padding(horizontal: 16),
             SizedBox(height: 16),
             Wrap(
               spacing: 10,

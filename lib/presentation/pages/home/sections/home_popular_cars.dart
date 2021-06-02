@@ -6,7 +6,7 @@ import '../../../widgets/cars/car_card.dart';
 import '../../../widgets/shimmer/shimmer_car_card.dart';
 import '../viewmodels/hot_deals_notifier.dart';
 
-class HomeHotDeals extends ConsumerWidget {
+class HomePopularCars extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final state = watch(hotDealsNotifier);

@@ -9,12 +9,17 @@ import '../models/product/product_index.dart';
 final productRepository = Provider<ProductRepository>((ref) {
   final dio = ref.watch(dioClient);
   final preferences = ref.watch(sharedPreferences);
-  
+
   return ProductRepositoryImpl(dio, preferences);
 });
 
 abstract class ProductRepository {
-  Future<List<Product>> index();
+  Future<List<Product>> index({
+    int page = 1,
+    String? sort,
+    String? search,
+    String? rangePrice,
+  });
 }
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -24,9 +29,24 @@ class ProductRepositoryImpl implements ProductRepository {
   const ProductRepositoryImpl(this._client, this._preferences);
 
   @override
-  Future<List<Product>> index() async {
+  Future<List<Product>> index({
+    int page = 1,
+    String? sort,
+    String? search,
+    String? rangePrice,
+  }) async {
     try {
-      final response = await _client.post('/api/product');
+      final response = await _client.post(
+        '/api/product',
+        queryParameters: {
+          'page': page,
+          if (sort != null) 'sort': sort,
+        },
+        data: {
+          if (search != null) 'search': search,
+          if (rangePrice != null) 'range_price': rangePrice,
+        },
+      );
 
       return ProductIndexResponse.fromJson(response.data).data;
     } catch (e) {

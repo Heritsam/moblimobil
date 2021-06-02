@@ -50,7 +50,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
       return;
     }
 
-    final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await _picker.getImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    );
 
     if (pickedFile != null) {
       vm.newAvatar = File(pickedFile.path);

@@ -5,7 +5,6 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../../core/themes/theme.dart';
 import '../../../../generated/l10n.dart';
 import '../../../widgets/buttons/rounded_button.dart';
-import '../viewmodels/change_password_viewmodel.dart';
 import '../viewmodels/old_password_notifier.dart';
 
 class OldPassword extends StatefulWidget {

@@ -7,7 +7,6 @@ import '../../core/utils/dio_client.dart';
 import '../../core/utils/preferences_key.dart';
 import '../../providers.dart';
 import '../models/auth/login_response.dart';
-import '../models/auth/register_response.dart';
 
 final authenticationRepository = Provider<AuthenticationRepository>((ref) {
   final dio = ref.watch(dioClient);
