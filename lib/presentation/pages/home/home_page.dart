@@ -1,7 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/pages/home/viewmodels/choose_us_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
@@ -14,7 +13,10 @@ import '../../widgets/cars/price_chip.dart';
 import '../../widgets/video/video_card.dart';
 import 'sections/home_banner.dart';
 import 'sections/home_choose_us.dart';
+import 'sections/home_hot_deals.dart';
+import 'viewmodels/choose_us_notifier.dart';
 import 'viewmodels/home_banner_notifier.dart';
+import 'viewmodels/hot_deals_notifier.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -60,6 +62,7 @@ class _HomePageState extends State<HomePage> {
           Future.wait([
             context.read(homeBannerNotifier).fetch(),
             context.read(chooseUsNotifier).fetch(),
+            context.read(hotDealsNotifier).fetch(),
           ]);
         },
         displacement: 32 + mediaQuery.padding.top,
@@ -84,26 +87,7 @@ class _HomePageState extends State<HomePage> {
                 .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
                 .padding(horizontal: 16),
             SizedBox(height: 16),
-            ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: carList.length,
-              itemBuilder: (context, index) {
-                final item = carList[index];
-
-                return CarCard(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/cars-detail');
-                  },
-                  carId: item.id,
-                  title: item.title,
-                  price: item.price,
-                  hasUsed: index.isEven,
-                  imageUrl: item.imageUrl,
-                ).padding(right: 16, bottom: 32);
-              },
-            ).constrained(height: 240),
+            HomeHotDeals(),
             <Widget>[
               Text(S.of(context).popularCars, style: textTheme.headline6),
               InkResponse(

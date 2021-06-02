@@ -29,6 +29,17 @@ class EditProfileViewModel extends ChangeNotifier {
     cityState = AppState.initial();
     subdistrictState = AppState.initial();
 
+    avatar = null;
+    newAvatar = null;
+    fullname = '';
+    phone = '';
+    email = '';
+    provinceId = 0;
+    cityId = 0;
+    subdistrictId = 0;
+    postcode = '';
+    address = '';
+
     fetchUser();
     fetchProvinces();
   }
@@ -40,17 +51,17 @@ class EditProfileViewModel extends ChangeNotifier {
 
   bool isUpdating = false;
 
-  String? avatar;
-  File? newAvatar;
+  late String? avatar;
+  late File? newAvatar;
 
-  String fullname = '';
-  String phone = '';
-  String email = '';
-  int provinceId = 0;
-  int cityId = 0;
-  int subdistrictId = 0;
-  String postcode = '';
-  String address = '';
+  late String fullname;
+  late String phone;
+  late String email;
+  late int provinceId;
+  late int cityId;
+  late int subdistrictId;
+  late String postcode;
+  late String address;
 
   TextEditingController birthController = TextEditingController();
 
@@ -67,6 +78,7 @@ class EditProfileViewModel extends ChangeNotifier {
     try {
       final me = await _read(profileRepository).me();
 
+      newAvatar = null;
       userState = AppState.data(data: me);
       avatar = me.file;
       fullname = me.fullname;
@@ -156,6 +168,7 @@ class EditProfileViewModel extends ChangeNotifier {
     try {
       await _read(profileRepository).update(
         UpdateProfileParams(
+          avatar: newAvatar,
           fullname: fullname,
           phone: phone,
           email: email,

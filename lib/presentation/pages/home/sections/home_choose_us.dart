@@ -69,52 +69,6 @@ class HomeChooseUs extends ConsumerWidget {
           label: item.title,
         ).expanded();
       }).toList(),
-      // children: [
-      //   MenuItem(
-      //     onTap: () {
-      //       Navigator.pushNamed(
-      //         context,
-      //         '/feature-detail',
-      //         arguments: FeatureDetailArgs(
-      //           title: 'Garansi 1 Tahun',
-      //           image: AssetImage('assets/feature_1.png'),
-      //         ),
-      //       );
-      //     },
-      //     icon: Image.asset('assets/feature_1.png'),
-      //     label: 'Garansi 1 Tahun',
-      //   ).expanded(),
-      //   SizedBox(width: 16),
-      //   MenuItem(
-      //     onTap: () {
-      //       Navigator.pushNamed(
-      //         context,
-      //         '/feature-detail',
-      //         arguments: FeatureDetailArgs(
-      //           title: 'Tersertifikasi',
-      //           image: AssetImage('assets/feature_2.png'),
-      //         ),
-      //       );
-      //     },
-      //     icon: Image.asset('assets/feature_2.png'),
-      //     label: 'Tersertifikasi',
-      //   ).expanded(),
-      //   SizedBox(width: 16),
-      //   MenuItem(
-      //     onTap: () {
-      //       Navigator.pushNamed(
-      //         context,
-      //         '/feature-detail',
-      //         arguments: FeatureDetailArgs(
-      //           title: 'Garansi Uang Kembali',
-      //           image: AssetImage('assets/feature_3.png'),
-      //         ),
-      //       );
-      //     },
-      //     icon: Image.asset('assets/feature_3.png'),
-      //     label: 'Garansi Uang Kembali',
-      //   ).expanded(),
-      // ],
     );
   }
 }

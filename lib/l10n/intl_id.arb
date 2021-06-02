@@ -129,5 +129,7 @@
     "savedNewsAndReview": "Berita & Ulasan Disimpan",
     "cars": "Mobil",
     "sold": "Terjual",
-    "iuran": "Iuran Bulanan"
+    "iuran": "Iuran Bulanan",
+
+    "vendorInactive": "Anda belum memiliki akun vendor"
 }

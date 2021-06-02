@@ -129,5 +129,7 @@
     "savedNewsAndReview": "Saved News & Review",
     "cars": "Cars",
     "sold": "Sold",
-    "iuran": "Monthly Fee"
+    "iuran": "Monthly Fee",
+
+    "vendorInactive": "Your account isn't registered as vendor"
 }

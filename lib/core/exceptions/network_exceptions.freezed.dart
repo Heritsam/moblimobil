@@ -68,9 +68,10 @@ class _$NetworkExceptionsTearOff {
     return const UnableToProcess();
   }
 
-  DefaultError defaultError(String error) {
+  DefaultError defaultError(String error, Response<dynamic>? response) {
     return DefaultError(
       error,
+      response,
     );
   }
 
@@ -99,7 +100,8 @@ mixin _$NetworkExceptions {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) =>
       throw _privateConstructorUsedError;
@@ -118,7 +120,7 @@ mixin _$NetworkExceptions {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) =>
@@ -234,7 +236,8 @@ class _$RequestCancelled extends RequestCancelled {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return requestCancelled();
@@ -256,7 +259,7 @@ class _$RequestCancelled extends RequestCancelled {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -372,7 +375,8 @@ class _$BadRequest extends BadRequest {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return badRequest();
@@ -394,7 +398,7 @@ class _$BadRequest extends BadRequest {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -511,7 +515,8 @@ class _$MethodNotAllowed extends MethodNotAllowed {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return methodNotAllowed();
@@ -533,7 +538,7 @@ class _$MethodNotAllowed extends MethodNotAllowed {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -650,7 +655,8 @@ class _$NotAcceptable extends NotAcceptable {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return notAcceptable();
@@ -672,7 +678,7 @@ class _$NotAcceptable extends NotAcceptable {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -789,7 +795,8 @@ class _$RequestTimeout extends RequestTimeout {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return requestTimeout();
@@ -811,7 +818,7 @@ class _$RequestTimeout extends RequestTimeout {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -928,7 +935,8 @@ class _$SendTimeout extends SendTimeout {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return sendTimeout();
@@ -950,7 +958,7 @@ class _$SendTimeout extends SendTimeout {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -1064,7 +1072,8 @@ class _$Conflict extends Conflict {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return conflict();
@@ -1086,7 +1095,7 @@ class _$Conflict extends Conflict {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -1203,7 +1212,8 @@ class _$InternalServerError extends InternalServerError {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return internalServerError();
@@ -1225,7 +1235,7 @@ class _$InternalServerError extends InternalServerError {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -1342,7 +1352,8 @@ class _$NotImplemented extends NotImplemented {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return notImplemented();
@@ -1364,7 +1375,7 @@ class _$NotImplemented extends NotImplemented {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -1481,7 +1492,8 @@ class _$ServiceUnavailable extends ServiceUnavailable {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return serviceUnavailable();
@@ -1503,7 +1515,7 @@ class _$ServiceUnavailable extends ServiceUnavailable {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -1620,7 +1632,8 @@ class _$NoInternetConnection extends NoInternetConnection {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return noInternetConnection();
@@ -1642,7 +1655,7 @@ class _$NoInternetConnection extends NoInternetConnection {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -1759,7 +1772,8 @@ class _$FormatException extends FormatException {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return formatException();
@@ -1781,7 +1795,7 @@ class _$FormatException extends FormatException {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -1898,7 +1912,8 @@ class _$UnableToProcess extends UnableToProcess {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return unableToProcess();
@@ -1920,7 +1935,7 @@ class _$UnableToProcess extends UnableToProcess {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
@@ -1989,7 +2004,7 @@ abstract class $DefaultErrorCopyWith<$Res> {
   factory $DefaultErrorCopyWith(
           DefaultError value, $Res Function(DefaultError) then) =
       _$DefaultErrorCopyWithImpl<$Res>;
-  $Res call({String error});
+  $Res call({String error, Response<dynamic>? response});
 }
 
 /// @nodoc
@@ -2006,12 +2021,17 @@ class _$DefaultErrorCopyWithImpl<$Res>
   @override
   $Res call({
     Object? error = freezed,
+    Object? response = freezed,
   }) {
     return _then(DefaultError(
       error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      response == freezed
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as Response<dynamic>?,
     ));
   }
 }
@@ -2019,14 +2039,16 @@ class _$DefaultErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DefaultError extends DefaultError {
-  const _$DefaultError(this.error) : super._();
+  const _$DefaultError(this.error, this.response) : super._();
 
   @override
   final String error;
+  @override
+  final Response<dynamic>? response;
 
   @override
   String toString() {
-    return 'NetworkExceptions.defaultError(error: $error)';
+    return 'NetworkExceptions.defaultError(error: $error, response: $response)';
   }
 
   @override
@@ -2034,12 +2056,17 @@ class _$DefaultError extends DefaultError {
     return identical(this, other) ||
         (other is DefaultError &&
             (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)));
+                const DeepCollectionEquality().equals(other.error, error)) &&
+            (identical(other.response, response) ||
+                const DeepCollectionEquality()
+                    .equals(other.response, response)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(error) ^
+      const DeepCollectionEquality().hash(response);
 
   @JsonKey(ignore: true)
   @override
@@ -2062,10 +2089,11 @@ class _$DefaultError extends DefaultError {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
-    return defaultError(error);
+    return defaultError(error, response);
   }
 
   @override
@@ -2084,12 +2112,12 @@ class _$DefaultError extends DefaultError {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {
     if (defaultError != null) {
-      return defaultError(error);
+      return defaultError(error, response);
     }
     return orElse();
   }
@@ -2144,10 +2172,12 @@ class _$DefaultError extends DefaultError {
 }
 
 abstract class DefaultError extends NetworkExceptions {
-  const factory DefaultError(String error) = _$DefaultError;
+  const factory DefaultError(String error, Response<dynamic>? response) =
+      _$DefaultError;
   const DefaultError._() : super._();
 
   String get error => throw _privateConstructorUsedError;
+  Response<dynamic>? get response => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $DefaultErrorCopyWith<DefaultError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2206,7 +2236,8 @@ class _$UnexpectedError extends UnexpectedError {
     required TResult Function() noInternetConnection,
     required TResult Function() formatException,
     required TResult Function() unableToProcess,
-    required TResult Function(String error) defaultError,
+    required TResult Function(String error, Response<dynamic>? response)
+        defaultError,
     required TResult Function() unexpectedError,
   }) {
     return unexpectedError();
@@ -2228,7 +2259,7 @@ class _$UnexpectedError extends UnexpectedError {
     TResult Function()? noInternetConnection,
     TResult Function()? formatException,
     TResult Function()? unableToProcess,
-    TResult Function(String error)? defaultError,
+    TResult Function(String error, Response<dynamic>? response)? defaultError,
     TResult Function()? unexpectedError,
     required TResult orElse(),
   }) {

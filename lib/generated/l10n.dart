@@ -1189,6 +1189,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Your account isn't registered as vendor`
+  String get vendorInactive {
+    return Intl.message(
+      'Your account isn\'t registered as vendor',
+      name: 'vendorInactive',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -158,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "usedCars": MessageLookupByLibrary.simpleMessage("Mobil Bekas"),
         "usedText": MessageLookupByLibrary.simpleMessage("Bekas"),
         "variant": MessageLookupByLibrary.simpleMessage("Varian"),
+        "vendorInactive": MessageLookupByLibrary.simpleMessage(
+            "Anda belum memiliki akun vendor"),
         "videos": MessageLookupByLibrary.simpleMessage("Video"),
         "welcomeText": MessageLookupByLibrary.simpleMessage("SELAMAT DATANG"),
         "wishlist": MessageLookupByLibrary.simpleMessage("Daftar Keinginan"),

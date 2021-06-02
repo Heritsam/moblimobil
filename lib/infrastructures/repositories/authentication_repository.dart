@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/infrastructures/models/auth/email_not_verified.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/exceptions/network_exceptions.dart';
@@ -16,13 +17,17 @@ final authenticationRepository = Provider<AuthenticationRepository>((ref) {
 });
 
 abstract class AuthenticationRepository {
-  Future<bool> checkToken(String token);
+  Future<LoginResponse> checkToken({
+    required String token,
+    required int userId,
+    required String password,
+  });
   Future<LoginResponse> login({
     required String email,
     required String password,
   });
   Future<void> logout();
-  Future<RegisterResponse> register({
+  Future<EmailNotVerified> register({
     required String fullname,
     required String phone,
     required String email,
@@ -37,17 +42,26 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   const AuthenticationRepositoryImpl(this._client, this._preferences);
 
   @override
-  Future<bool> checkToken(String token) async {
+  Future<LoginResponse> checkToken({
+    required String token,
+    required int userId,
+    required String password,
+  }) async {
     try {
-      await _client.post(
+      final response = await _client.post(
         '/api/check-token',
         data: {
-          'user_id': _preferences.getInt(PreferencesKey.userKey),
+          'user_id': userId,
           'token': token,
+          'password': password,
         },
       );
+      final loginData = LoginResponse.fromJson(response.data);
 
-      return true;
+      _preferences.setString(PreferencesKey.tokenKey, loginData.token);
+      _preferences.setInt(PreferencesKey.userKey, loginData.data.id);
+
+      return LoginResponse.fromJson(response.data);
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }
@@ -69,7 +83,8 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       final loginData = LoginResponse.fromJson(response.data);
 
       _preferences.setString(PreferencesKey.tokenKey, loginData.token);
-      
+      _preferences.setInt(PreferencesKey.userKey, loginData.data.id);
+
       return loginData;
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
@@ -81,13 +96,14 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
     try {
       await _client.get('/api/logout');
       _preferences.remove(PreferencesKey.tokenKey);
+      _preferences.remove(PreferencesKey.userKey);
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }
   }
 
   @override
-  Future<RegisterResponse> register({
+  Future<EmailNotVerified> register({
     required String fullname,
     required String phone,
     required String email,
@@ -104,7 +120,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         },
       );
 
-      return RegisterResponse.fromJson(response.data);
+      return EmailNotVerified.fromJson(response.data);
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }

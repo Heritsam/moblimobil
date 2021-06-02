@@ -29,7 +29,11 @@ class UpdateProfileParams {
 
   Map<String, dynamic> toJson() {
     return {
-      if (avatar != null) 'file_profile': MultipartFile.fromFile(avatar!.path),
+      if (avatar != null)
+        'file_profile': MultipartFile.fromBytes(
+          avatar!.readAsBytesSync(),
+          filename: avatar!.path.split('/').last,
+        ),
       'fullname': fullname,
       'phone': phone,
       'email': email,

@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -23,6 +26,7 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
+  final _picker = ImagePicker();
 
   @override
   void initState() {
@@ -31,6 +35,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
       context.read(editProfileViewModel).fetchUser();
       context.read(editProfileViewModel).fetchProvinces();
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    context.read(editProfileViewModel).dispose();
+  }
+
+  Future<void> _pickImage(EditProfileViewModel vm) async {
+    if (vm.newAvatar != null) {
+      vm.newAvatar = null;
+      setState(() {});
+      return;
+    }
+
+    final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      vm.newAvatar = File(pickedFile.path);
+      setState(() {});
+    }
   }
 
   @override
@@ -100,11 +125,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               image: FileImage(vm.newAvatar!),
                             ),
                           Icon(
-                            Icons.camera_alt_outlined,
+                            vm.newAvatar != null
+                                ? Icons.close
+                                : Icons.camera_alt_outlined,
                             color: Colors.black45,
                             size: 28,
                           )
-                              .padding(all: 12)
+                              .padding(all: 8)
                               .decorated(
                                 color: Colors.white24,
                                 shape: BoxShape.circle,
@@ -114,9 +141,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ],
                       )
                           .constrained(height: 120, width: 120)
-                          .gestures(
-                            onTap: () {},
-                          )
+                          .gestures(onTap: () => _pickImage(vm))
                           .center(),
                       SizedBox(height: 16),
                       TextFormField(

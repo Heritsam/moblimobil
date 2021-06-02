@@ -35,7 +35,8 @@ class NetworkExceptions with _$NetworkExceptions {
 
   const factory NetworkExceptions.unableToProcess() = UnableToProcess;
 
-  const factory NetworkExceptions.defaultError(String error) = DefaultError;
+  const factory NetworkExceptions.defaultError(
+      String error, Response<dynamic>? response) = DefaultError;
 
   const factory NetworkExceptions.unexpectedError() = UnexpectedError;
 
@@ -75,11 +76,13 @@ class NetworkExceptions with _$NetworkExceptions {
                   if ((error.response?.data) == 'Unauthorized.') {
                     networkExceptions = NetworkExceptions.defaultError(
                       'Unauthorized',
+                      error.response,
                     );
                   } else {
                     networkExceptions = NetworkExceptions.defaultError(
                       error.response?.data['message'].toString() ??
                           'Server error',
+                      error.response,
                     );
                   }
                   break;
@@ -154,7 +157,7 @@ class NetworkExceptions with _$NetworkExceptions {
       unableToProcess: () {
         errorMessage = 'Unable to process the data';
       },
-      defaultError: (String error) {
+      defaultError: (String error, Response? response) {
         errorMessage = error;
       },
       formatException: () {

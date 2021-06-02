@@ -21,6 +21,8 @@ final profileRepository = Provider<ProfileRepository>((ref) {
 abstract class ProfileRepository {
   Future<User> me();
   Future<void> update(UpdateProfileParams params);
+  Future<void> checkPassword(String oldPassword);
+  Future<void> updatePassword(String newPassword);
 }
 
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -58,6 +60,41 @@ class ProfileRepositoryImpl implements ProfileRepository {
           headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
         ),
         data: FormData.fromMap(params.toJson()),
+      );
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<void> checkPassword(String oldPassword) async {
+    final token = _preferences.getString(PreferencesKey.tokenKey);
+
+    try {
+      await _client.post(
+        '/api/check-password',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+        data: {'old_password': oldPassword},
+      );
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<void> updatePassword(String newPassword) async {
+    final token = _preferences.getString(PreferencesKey.tokenKey);
+    final userId = _preferences.getInt(PreferencesKey.userKey);
+
+    try {
+      await _client.post(
+        '/api/update-password',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+        data: {'new_password': newPassword, 'user_id': userId},
       );
     } catch (e) {
       throw NetworkExceptions.getDioException(e);

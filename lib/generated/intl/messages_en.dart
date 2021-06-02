@@ -153,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "usedCars": MessageLookupByLibrary.simpleMessage("Used Cars"),
         "usedText": MessageLookupByLibrary.simpleMessage("Used"),
         "variant": MessageLookupByLibrary.simpleMessage("Variant"),
+        "vendorInactive": MessageLookupByLibrary.simpleMessage(
+            "Your account isn\'t registered as vendor"),
         "videos": MessageLookupByLibrary.simpleMessage("Videos"),
         "welcomeText": MessageLookupByLibrary.simpleMessage("Welcome"),
         "wishlist": MessageLookupByLibrary.simpleMessage("Wishlist"),

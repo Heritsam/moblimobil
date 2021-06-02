@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/infrastructures/models/auth/email_not_verified.dart';
+import 'package:moblimobil/presentation/pages/authentication/otp_page.dart';
 
 import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../infrastructures/repositories/authentication_repository.dart';
+import '../../../../infrastructures/repositories/onesignal_repository.dart';
 import '../../../notifiers/authentication/authentication_notifier.dart';
 
 final loginViewModel =
@@ -35,16 +38,28 @@ class LoginViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await _read(authenticationRepository).login(
+      final user = await _read(authenticationRepository).login(
         email: email,
         password: password,
       );
 
       _read(authenticationNotifier.notifier).checkStatus();
+      _read(onesignalRepository).setExternalUserId(user.data.id);
+
       Navigator.popUntil(context, ModalRoute.withName('/home'));
     } on NetworkExceptions catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message)));
+      e.maybeWhen(
+        defaultError: (message, response) {
+          if (e.message == 'email_not_verified') {
+            final args = EmailNotVerified.fromJson(response!.data);
+            Navigator.pushNamed(context, '/otp', arguments: OtpArgs(args));
+          }
+        },
+        orElse: () {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.message)));
+        },
+      );
     }
 
     isLoading = false;
