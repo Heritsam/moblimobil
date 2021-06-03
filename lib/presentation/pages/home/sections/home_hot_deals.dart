@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/pages/cars_detail/cars_detail_page.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../widgets/cars/car_card.dart';
@@ -33,13 +34,19 @@ class HomeHotDeals extends ConsumerWidget {
 
         return CarCard(
           onTap: () {
-            Navigator.pushNamed(context, '/cars-detail');
+            Navigator.pushNamed(
+              context,
+              '/cars-detail',
+              arguments: CarsDetailArgs(item.id),
+            );
           },
           carId: item.id,
-          title: item.title,
+          title: '${item.brandName} ${item.title}',
           price: int.tryParse(item.price) ?? 0,
           hasUsed: item.type == 'used',
-          imageUrl: item.file.first.file,
+          imageUrl: item.file.isNotEmpty
+              ? item.file.first.file
+              : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png',
         ).padding(right: 16, bottom: 32);
       },
     ).constrained(height: 240);

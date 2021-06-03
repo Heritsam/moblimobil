@@ -114,7 +114,6 @@ class _SearchPageState extends State<SearchPage> {
 
               return CarCard(
                 onTap: () {
-                  Navigator.pushNamed(context, '/cars-detail');
                 },
                 carId: item.id,
                 hasUsed: index.isOdd,

@@ -19,9 +19,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read(authenticationNotifier.notifier).checkStatus();
     });
@@ -34,6 +37,7 @@ class _MainPageState extends State<MainPage> {
         final state = watch(bottomNavNotifier);
 
         return Scaffold(
+          key: _scaffoldKey,
           extendBody: true,
           body: ProviderListener(
             provider: authenticationNotifier,
@@ -45,7 +49,6 @@ class _MainPageState extends State<MainPage> {
                 orElse: () {},
               );
             },
-            // child: _buildPage(state.index),
             child: PageView(
               controller: state.controller,
               physics: NeverScrollableScrollPhysics(),
@@ -104,20 +107,5 @@ class _MainPageState extends State<MainPage> {
         );
       },
     );
-  }
-
-  Widget _buildPage(int index) {
-    switch (index) {
-      case 0:
-        return HomePage();
-      case 1:
-        return SearchPage();
-      case 2:
-        return NewsAndReviewPage();
-      case 3:
-        return CarsPage(type: CarsPageType.compare);
-      default:
-        return AccountPage();
-    }
   }
 }

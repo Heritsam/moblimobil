@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/exceptions/network_exceptions.dart';
 import '../../core/utils/dio_client.dart';
 import '../../providers.dart';
+import '../models/product/product.dart';
 import '../models/product/product_index.dart';
 
 final productRepository = Provider<ProductRepository>((ref) {
@@ -20,6 +21,7 @@ abstract class ProductRepository {
     String? search,
     String? rangePrice,
   });
+  Future<Product> detail(int id);
 }
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -49,6 +51,17 @@ class ProductRepositoryImpl implements ProductRepository {
       );
 
       return ProductIndexResponse.fromJson(response.data);
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<Product> detail(int id) async {
+    try {
+      final response = await _client.get('/api/product/$id');
+
+      return Product.fromJson(response.data['data'][0]);
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }

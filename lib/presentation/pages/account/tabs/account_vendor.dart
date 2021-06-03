@@ -91,7 +91,7 @@ class AccountVendor extends ConsumerWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      user.phone,
+                      user.formattedPhone,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: greenColor,

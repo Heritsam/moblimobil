@@ -7,6 +7,7 @@ class MobliTile extends StatefulWidget {
   final String title;
   final Widget subtitle;
   final String imageUrl;
+  final bool isVideo;
   final Function()? onTap;
 
   const MobliTile({
@@ -14,6 +15,7 @@ class MobliTile extends StatefulWidget {
     required this.title,
     required this.subtitle,
     required this.imageUrl,
+    this.isVideo = false,
     this.onTap,
   }) : super(key: key);
 
@@ -31,17 +33,37 @@ class _MobliTile extends State<MobliTile> {
 
     return Row(
       children: [
-        Container(
-          height: 90,
-          width: width,
-          decoration: BoxDecoration(
-            color: lightGreyColor,
-            image: DecorationImage(
-              image: NetworkImage(widget.imageUrl),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ).clipRRect(all: mediumBorderRadius),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 90,
+              width: width,
+              decoration: BoxDecoration(
+                color: lightGreyColor,
+                image: DecorationImage(
+                  image: NetworkImage(widget.imageUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ).clipRRect(all: mediumBorderRadius),
+            if (widget.isVideo)
+              Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 32,
+              )
+                  .center()
+                  .decorated(
+                    shape: BoxShape.circle,
+                    color: Colors.black26,
+                  )
+                  .backgroundBlur(20)
+                  .clipRRect(all: 150)
+                  .constrained(height: 36, width: 36)
+                  .alignment(Alignment.center),
+          ],
+        ),
         SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

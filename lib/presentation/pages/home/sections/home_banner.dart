@@ -20,7 +20,7 @@ class HomeBanner extends ConsumerWidget {
         highlightColor: Colors.white24,
         child: Container(
           margin: EdgeInsets.all(16),
-          height: 160,
+          height: size.width / 2.3,
           width: size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(defaultBorderRadius),
@@ -36,7 +36,7 @@ class HomeBanner extends ConsumerWidget {
         CarouselSlider(
           options: CarouselOptions(
             initialPage: state.index,
-            height: 160,
+            height: size.width / 2.3,
             viewportFraction: 1,
             onPageChanged: (index, reason) {
               context.read(homeBannerNotifier).indexChanged(index);

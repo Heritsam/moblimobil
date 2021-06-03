@@ -134,7 +134,6 @@ class _CarsPageState extends State<CarsPage> {
                         .addCar(context: context, car: item);
                   }
 
-                  Navigator.pushNamed(context, '/cars-detail');
                 },
                 carId: item.id,
                 hasUsed: widget.type == CarsPageType.usedCars,

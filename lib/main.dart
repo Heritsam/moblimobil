@@ -24,7 +24,6 @@ import 'presentation/pages/home/feature_detail_page.dart';
 import 'presentation/pages/main_page.dart';
 import 'presentation/pages/news/news_and_review_page.dart';
 import 'presentation/pages/news/news_detail_page.dart';
-import 'presentation/pages/news/news_list_page.dart';
 import 'presentation/pages/notification/notification_detail_page.dart';
 import 'presentation/pages/notification/notification_page.dart';
 import 'presentation/pages/onboarding_page.dart';
@@ -38,7 +37,6 @@ import 'presentation/pages/vendor_iuran/iuran_history_page.dart';
 import 'presentation/pages/vendor_iuran/iuran_page.dart';
 import 'presentation/pages/vendor_iuran/pay_iuran_page.dart';
 import 'presentation/pages/video/video_page.dart';
-import 'presentation/pages/wishlist/wishlist_page.dart';
 import 'providers.dart';
 import 'wrapper.dart';
 
@@ -125,9 +123,6 @@ class MyApp extends ConsumerWidget {
         '/compare': (context) => CarsPage(type: CarsPageType.compare),
         '/compare-detail': (context) => CarsCompareDetailPage(),
         '/news-and-review': (context) => NewsAndReviewPage(),
-        '/news-list': (context) => NewsListPage(type: NewsListPageType.news),
-        '/reviews-list': (context) =>
-            NewsListPage(type: NewsListPageType.reviews),
         '/news-detail': (context) => NewsDetailPage(),
         '/faq': (context) => FaqPage(),
         '/account': (context) => AccountPage(),
@@ -135,7 +130,6 @@ class MyApp extends ConsumerWidget {
         '/about': (context) => AboutPage(),
         '/change-password': (context) => ChangePasswordPage(),
         '/edit-profile': (context) => EditProfilePage(),
-        '/wishlist': (context) => WishlistPage(),
         '/videos': (context) => VideoPage(),
         '/vendor-sold': (context) => VendorSoldPage(),
         '/vendor-cars': (context) => VendorCarsPage(),

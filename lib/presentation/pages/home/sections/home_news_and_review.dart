@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/pages/news/news_detail_page.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -46,6 +47,13 @@ class HomeNewsAndReview extends ConsumerWidget {
         final item = state.items[index];
 
         return VideoCard(
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              '/news-detail',
+              arguments: NewsDetailArgs(item.id),
+            );
+          },
           thumbnail: NetworkImage(item.file),
           title: item.title,
           isVideo: item.typeFile == 'video',

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
-import '../circle_image.dart';
 
 class NewsCard extends StatefulWidget {
   final String title;
   final String imageUrl;
+  final String timestamp;
+  final bool isVideo;
   final Function()? onTap;
   final double width;
   final double imageHeight;
@@ -15,6 +16,8 @@ class NewsCard extends StatefulWidget {
     Key? key,
     required this.title,
     required this.imageUrl,
+    required this.timestamp,
+    required this.isVideo,
     this.onTap,
     this.width = 260,
     this.imageHeight = 160,
@@ -34,17 +37,37 @@ class _NewsCardState extends State<NewsCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: widget.imageHeight,
-          width: width,
-          decoration: BoxDecoration(
-            color: lightGreyColor,
-            image: DecorationImage(
-              image: NetworkImage(widget.imageUrl),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ).clipRRect(all: mediumBorderRadius),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: widget.imageHeight,
+              width: width,
+              decoration: BoxDecoration(
+                color: lightGreyColor,
+                image: DecorationImage(
+                  image: NetworkImage(widget.imageUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ).clipRRect(all: mediumBorderRadius),
+            if (widget.isVideo)
+              Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 48,
+              )
+                  .center()
+                  .decorated(
+                    shape: BoxShape.circle,
+                    color: Colors.black26,
+                  )
+                  .backgroundBlur(20)
+                  .clipRRect(all: 150)
+                  .constrained(height: 52, width: 52)
+                  .alignment(Alignment.center),
+          ],
+        ),
         SizedBox(height: 12),
         Text(
           widget.title,
@@ -59,15 +82,8 @@ class _NewsCardState extends State<NewsCard> {
         SizedBox(height: 12),
         Row(
           children: [
-            CircleImage(
-              size: 30,
-              image: NetworkImage(
-                'https://uifaces.co/our-content/donated/gPZwCbdS.jpg',
-              ),
-            ),
-            SizedBox(width: 8),
             Text(
-              'Iustiar | 2 Jam Lalu',
+              widget.timestamp,
               style: TextStyle(
                 color: mediumGreyColor,
                 fontWeight: FontWeight.w500,

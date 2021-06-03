@@ -10,7 +10,7 @@ import '../../widgets/cars/location_chip.dart';
 import 'sections/home_banner.dart';
 import 'sections/home_choose_us.dart';
 import 'sections/home_hot_deals.dart';
-import 'sections/home_news_and_review_notifier.dart';
+import 'sections/home_news_and_review.dart';
 import 'sections/home_popular_cars.dart';
 import 'sections/home_sort_by_brand.dart';
 import 'sections/home_sort_by_price.dart';

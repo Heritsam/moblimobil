@@ -14,6 +14,7 @@ final newsRepository = Provider<NewsRepository>((ref) {
 abstract class NewsRepository {
   Future<NewsIndexResponse> index({
     int page = 1,
+    bool trending = false,
   });
   Future<News> detail(int id);
 }
@@ -26,12 +27,14 @@ class NewsRepositoryImpl implements NewsRepository {
   @override
   Future<NewsIndexResponse> index({
     int page = 1,
+    bool trending = false,
   }) async {
     try {
       final response = await _client.get(
         '/api/news',
         queryParameters: {
           'page': page,
+          if (trending) 'tranding': trending,
         },
       );
 
