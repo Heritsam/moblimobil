@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/themes/mobli_icons_icons.dart';
 import '../../generated/l10n.dart';
 import '../notifiers/authentication/authentication_notifier.dart';
+import '../notifiers/bottom_nav/bottom_nav_notifier.dart';
 import '../widgets/drawer/mobli_drawer.dart';
 import 'account/account_page.dart';
 import 'cars/cars_page.dart';
@@ -18,10 +19,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final _controller = PageController();
-
-  int _pageIndex = 0;
-
   @override
   void initState() {
     super.initState();
@@ -31,83 +28,96 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (context, watch, child) {
+        final state = watch(bottomNavNotifier);
+
+        return Scaffold(
+          extendBody: true,
+          body: ProviderListener(
+            provider: authenticationNotifier,
+            onChange: (context, AuthenticationState state) {
+              state.maybeWhen(
+                unauthenticated: () {
+                  Navigator.pushNamed(context, '/onboarding');
+                },
+                orElse: () {},
+              );
+            },
+            // child: _buildPage(state.index),
+            child: PageView(
+              controller: state.controller,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                HomePage(),
+                SearchPage(),
+                NewsAndReviewPage(),
+                CarsPage(type: CarsPageType.compare),
+                AccountPage(),
+              ],
+            ),
+          ),
+          endDrawerEnableOpenDragGesture: false,
+          endDrawer: state.index == 4
+              ? Consumer(
+                  builder: (context, watch, child) {
+                    final authState = watch(authenticationNotifier);
+
+                    return authState.when(
+                      unauthenticated: () => Container(),
+                      authenticated: () => MobliDrawer(),
+                    );
+                  },
+                )
+              : null,
+          bottomNavigationBar: CupertinoTabBar(
+            onTap: (index) {
+              state.changeIndex(index);
+            },
+            currentIndex: state.index,
+            backgroundColor: Colors.white.withOpacity(.85),
+            border: Border(),
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(MobliIcons.home),
+                label: S.of(context).home,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(MobliIcons.explore),
+                label: S.of(context).explore,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(MobliIcons.car),
+                label: S.of(context).newsAndReview,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(MobliIcons.compare),
+                label: S.of(context).compare,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(MobliIcons.profile),
+                label: S.of(context).profile,
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      body: ProviderListener(
-        provider: authenticationNotifier,
-        onChange: (context, AuthenticationState state) {
-          state.maybeWhen(
-            unauthenticated: () {
-              Navigator.pushNamed(context, '/onboarding');
-            },
-            orElse: () {},
-          );
-        },
-        child: PageView(
-          controller: _controller,
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            HomePage(),
-            SearchPage(),
-            NewsAndReviewPage(),
-            CarsPage(type: CarsPageType.compare),
-            AccountPage(),
-          ],
-        ),
-      ),
-      endDrawerEnableOpenDragGesture: false,
-      endDrawer: _pageIndex == 4
-          ? Consumer(
-              builder: (context, watch, child) {
-                final authState = watch(authenticationNotifier);
-
-                return authState.when(
-                  unauthenticated: () => Container(),
-                  authenticated: () => MobliDrawer(),
-                );
-              },
-            )
-          : null,
-      bottomNavigationBar: CupertinoTabBar(
-        onTap: (index) {
-          _controller.jumpToPage(index);
-          setState(() {
-            _pageIndex = index;
-          });
-        },
-        currentIndex: _pageIndex,
-        backgroundColor: Colors.white.withOpacity(.85),
-        border: Border(),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(MobliIcons.home),
-            label: S.of(context).home,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MobliIcons.explore),
-            label: S.of(context).explore,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MobliIcons.car),
-            label: S.of(context).newsAndReview,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MobliIcons.compare),
-            label: S.of(context).compare,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(MobliIcons.profile),
-            label: S.of(context).profile,
-          ),
-        ],
-      ),
-    );
+  Widget _buildPage(int index) {
+    switch (index) {
+      case 0:
+        return HomePage();
+      case 1:
+        return SearchPage();
+      case 2:
+        return NewsAndReviewPage();
+      case 3:
+        return CarsPage(type: CarsPageType.compare);
+      default:
+        return AccountPage();
+    }
   }
 }

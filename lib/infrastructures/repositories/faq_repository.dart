@@ -8,7 +8,7 @@ final faqRepository =
     Provider<FaqRepository>((ref) => FaqRepositoryImpl(ref.watch(dioClient)));
 
 abstract class FaqRepository {
-  Future<List<FAQ>> getFaq();
+  Future<List<FAQ>> faqs();
 }
 
 class FaqRepositoryImpl implements FaqRepository {
@@ -17,7 +17,7 @@ class FaqRepositoryImpl implements FaqRepository {
   const FaqRepositoryImpl(this._client);
 
   @override
-  Future<List<FAQ>> getFaq() async {
+  Future<List<FAQ>> faqs() async {
     try {
       final response = await _client.get('/api/faq');
 

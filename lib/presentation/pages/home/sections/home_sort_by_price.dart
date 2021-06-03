@@ -61,7 +61,7 @@ class HomeSortByPrice extends ConsumerWidget {
                 carId: item.id,
                 title: item.title,
                 price: int.tryParse(item.price) ?? 0,
-                hasUsed: index.isEven,
+                hasUsed: item.type == 'used',
                 imageUrl: item.file.first.file,
               ).padding(right: 16, bottom: 32);
             },

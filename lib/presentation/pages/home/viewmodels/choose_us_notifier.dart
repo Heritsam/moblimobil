@@ -23,7 +23,7 @@ class ChooseUsNotifier extends ChangeNotifier {
     notifyListeners();
 
     try {
-      items = await _read(otherRepository).getChooseUs();
+      items = await _read(otherRepository).chooseUs();
       isLoading = false;
       notifyListeners();
     } catch (e) {

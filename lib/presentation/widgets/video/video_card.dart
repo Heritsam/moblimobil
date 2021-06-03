@@ -6,12 +6,14 @@ import '../../../core/themes/theme.dart';
 class VideoCard extends StatefulWidget {
   final ImageProvider thumbnail;
   final String title;
+  final bool isVideo;
   final Function()? onTap;
 
   const VideoCard({
     Key? key,
     required this.thumbnail,
     required this.title,
+    required this.isVideo,
     this.onTap,
   }) : super(key: key);
 
@@ -42,20 +44,21 @@ class _VideoCardState extends State<VideoCard> {
                 ),
               ),
             ),
-            Icon(
-              Icons.play_arrow_rounded,
-              color: Colors.white,
-              size: 48,
-            )
-                .center()
-                .decorated(
-                  shape: BoxShape.circle,
-                  color: Colors.black26,
-                )
-                .backgroundBlur(20)
-                .clipRRect(all: 150)
-                .constrained(height: 52, width: 52)
-                .alignment(Alignment.center),
+            if (widget.isVideo)
+              Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 48,
+              )
+                  .center()
+                  .decorated(
+                    shape: BoxShape.circle,
+                    color: Colors.black26,
+                  )
+                  .backgroundBlur(20)
+                  .clipRRect(all: 150)
+                  .constrained(height: 52, width: 52)
+                  .alignment(Alignment.center),
           ],
         ).expanded(),
         Text(

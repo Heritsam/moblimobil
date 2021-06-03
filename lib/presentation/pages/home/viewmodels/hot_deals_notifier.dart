@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../infrastructures/models/product/product_index.dart';
+import '../../../../infrastructures/models/product/product.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 
 final hotDealsNotifier = ChangeNotifierProvider<HotDealsNotifier>((ref) {
@@ -23,7 +23,9 @@ class HotDealsNotifier extends ChangeNotifier {
     notifyListeners();
 
     try {
-      items = await _read(productRepository).index(sort: 'latest');
+      final cars =  await _read(productRepository).index(sort: 'latest');
+      items = cars.data;
+      
       isLoading = false;
       notifyListeners();
     } catch (e) {

@@ -5,21 +5,21 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../../infrastructures/models/car.dart';
-import '../../widgets/cars/brand_item.dart';
-import '../../widgets/cars/car_card.dart';
+import '../../notifiers/bottom_nav/bottom_nav_notifier.dart';
 import '../../widgets/cars/location_chip.dart';
-import '../../widgets/cars/price_chip.dart';
-import '../../widgets/video/video_card.dart';
 import 'sections/home_banner.dart';
 import 'sections/home_choose_us.dart';
 import 'sections/home_hot_deals.dart';
+import 'sections/home_news_and_review_notifier.dart';
 import 'sections/home_popular_cars.dart';
+import 'sections/home_sort_by_brand.dart';
 import 'sections/home_sort_by_price.dart';
 import 'viewmodels/choose_us_notifier.dart';
 import 'viewmodels/home_banner_notifier.dart';
+import 'viewmodels/home_news_and_review_notifier.dart';
 import 'viewmodels/hot_deals_notifier.dart';
 import 'viewmodels/popular_cars_notifier.dart';
+import 'viewmodels/sort_by_brand_notifier.dart';
 import 'viewmodels/sort_by_price_notifier.dart';
 
 class HomePage extends StatefulWidget {
@@ -69,6 +69,8 @@ class _HomePageState extends State<HomePage> {
             context.read(hotDealsNotifier).fetch(),
             context.read(popularCarsNotifier).fetch(),
             context.read(sortByPriceNotifier).fetch(),
+            context.read(sortByBrandNotifier).fetch(),
+            context.read(homeNewsAndReviewNotifier).fetch(),
           ]);
         },
         displacement: 32 + mediaQuery.padding.top,
@@ -163,32 +165,14 @@ class _HomePageState extends State<HomePage> {
                 .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
                 .padding(horizontal: 16),
             SizedBox(height: 16),
-            Wrap(
-              spacing: 10,
-              runSpacing: 12,
-              children: [
-                'assets/brands/toyota.png',
-                'assets/brands/bmw.png',
-                'assets/brands/suzuki.png',
-                'assets/brands/honda.png',
-                'assets/brands/nissan.png',
-                'assets/brands/daihatsu.png',
-                'assets/brands/mitsubishi.png',
-                'assets/brands/datsun.png',
-              ].map((e) {
-                return BrandItem(
-                  onTap: () {},
-                  image: AssetImage(e),
-                );
-              }).toList(),
-            ).padding(horizontal: 16),
+            HomeSortByBrand(),
             SizedBox(height: 32),
             Row(
               children: [
                 Text(S.of(context).newsAndReview, style: textTheme.headline6),
                 InkResponse(
                   onTap: () {
-                    Navigator.pushNamed(context, '/videos');
+                    context.read(bottomNavNotifier).changeIndex(2);
                   },
                   child: Text(
                     S.of(context).seeAll,
@@ -199,18 +183,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ).padding(horizontal: 16),
             SizedBox(height: 16),
-            ListView.builder(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                return VideoCard(
-                  thumbnail: AssetImage('assets/thumbnail.jpg'),
-                  title: 'BTS 100 JUTA CHALLENGE: CHALLENGE OFF-ROAD',
-                ).padding(right: 16, bottom: 24);
-              },
-            ).constrained(height: 210),
+            HomeNewsAndReview(),
             SizedBox(height: 32 + mediaQuery.padding.bottom),
           ].toColumn(crossAxisAlignment: CrossAxisAlignment.start),
         ),

@@ -1,7 +1,7 @@
-import 'product.dart';
+import 'news.dart';
 
-class ProductIndexResponse {
-  ProductIndexResponse({
+class NewsIndexResponse {
+  NewsIndexResponse({
     required this.code,
     required this.success,
     required this.message,
@@ -15,16 +15,16 @@ class ProductIndexResponse {
   final String message;
   final int currentPage;
   final int total;
-  final List<Product> data;
+  final List<News> data;
 
-  factory ProductIndexResponse.fromJson(Map<String, dynamic> json) =>
-      ProductIndexResponse(
+  factory NewsIndexResponse.fromJson(Map<String, dynamic> json) =>
+      NewsIndexResponse(
         code: json['code'],
         success: json['success'],
         message: json['message'],
         currentPage: json['current_page'],
         total: json['total'],
-        data: List<Product>.from(json['data'].map((x) => Product.fromJson(x))),
+        data: List<News>.from(json['data'].map((x) => News.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

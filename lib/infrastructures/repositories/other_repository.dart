@@ -9,8 +9,8 @@ final otherRepository = Provider<OtherRepository>(
     (ref) => OtherRepositoryImpl(ref.watch(dioClient)));
 
 abstract class OtherRepository {
-  Future<List<SliderBanner>> getSlider();
-  Future<List<ChooseUs>> getChooseUs();
+  Future<List<SliderBanner>> sliders();
+  Future<List<ChooseUs>> chooseUs();
 }
 
 class OtherRepositoryImpl implements OtherRepository {
@@ -19,7 +19,7 @@ class OtherRepositoryImpl implements OtherRepository {
   const OtherRepositoryImpl(this._client);
 
   @override
-  Future<List<SliderBanner>> getSlider() async {
+  Future<List<SliderBanner>> sliders() async {
     try {
       final response = await _client.get('/api/slider');
 
@@ -30,7 +30,7 @@ class OtherRepositoryImpl implements OtherRepository {
   }
 
   @override
-  Future<List<ChooseUs>> getChooseUs() async {
+  Future<List<ChooseUs>> chooseUs() async {
     try {
       final response = await _client.get('/api/choose-us');
 

@@ -14,7 +14,7 @@ final productRepository = Provider<ProductRepository>((ref) {
 });
 
 abstract class ProductRepository {
-  Future<List<Product>> index({
+  Future<ProductIndexResponse> index({
     int page = 1,
     String? sort,
     String? search,
@@ -29,7 +29,7 @@ class ProductRepositoryImpl implements ProductRepository {
   const ProductRepositoryImpl(this._client, this._preferences);
 
   @override
-  Future<List<Product>> index({
+  Future<ProductIndexResponse> index({
     int page = 1,
     String? sort,
     String? search,
@@ -48,7 +48,7 @@ class ProductRepositoryImpl implements ProductRepository {
         },
       );
 
-      return ProductIndexResponse.fromJson(response.data).data;
+      return ProductIndexResponse.fromJson(response.data);
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }

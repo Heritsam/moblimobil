@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../infrastructures/models/product/product_index.dart';
+import '../../../../infrastructures/models/product/product.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 
 final popularCarsNotifier = ChangeNotifierProvider<PopularCarsNotifier>((ref) {
@@ -23,7 +23,8 @@ class PopularCarsNotifier extends ChangeNotifier {
     notifyListeners();
 
     try {
-      items = await _read(productRepository).index(sort: 'popular');
+      final cars = await _read(productRepository).index(sort: 'popular');
+      items = cars.data;
       isLoading = false;
       notifyListeners();
     } catch (e) {

@@ -11,9 +11,9 @@ final locationRepository = Provider<LocationRepository>((ref) {
 });
 
 abstract class LocationRepository {
-  Future<List<Province>> getProvinces();
-  Future<List<City>> getCities(int provinceId);
-  Future<List<Subdistrict>> getSubdistrict(int cityId);
+  Future<List<Province>> provinces();
+  Future<List<City>> cities(int provinceId);
+  Future<List<Subdistrict>> subDistricts(int cityId);
 }
 
 class LocationRepositoryImpl implements LocationRepository {
@@ -22,7 +22,7 @@ class LocationRepositoryImpl implements LocationRepository {
   const LocationRepositoryImpl(this._client);
 
   @override
-  Future<List<Province>> getProvinces() async {
+  Future<List<Province>> provinces() async {
     try {
       final response = await _client.get('/api/provinces');
 
@@ -33,7 +33,7 @@ class LocationRepositoryImpl implements LocationRepository {
   }
 
   @override
-  Future<List<City>> getCities(int provinceId) async {
+  Future<List<City>> cities(int provinceId) async {
     try {
       final response = await _client.get('/api/city/$provinceId');
 
@@ -44,7 +44,7 @@ class LocationRepositoryImpl implements LocationRepository {
   }
 
   @override
-  Future<List<Subdistrict>> getSubdistrict(int cityId) async {
+  Future<List<Subdistrict>> subDistricts(int cityId) async {
     try {
       final response = await _client.get('/api/subdistrict/$cityId');
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/exceptions/network_exceptions.dart';
-import '../../../../infrastructures/models/product/product_index.dart';
+import '../../../../infrastructures/models/product/product.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 
 final sortByPriceNotifier = ChangeNotifierProvider<SortByPrice>((ref) {
@@ -38,7 +38,8 @@ class SortByPrice extends ChangeNotifier {
     notifyListeners();
 
     try {
-      items = await _read(productRepository).index(rangePrice: filter);
+      final cars = await _read(productRepository).index(rangePrice: filter);
+      items = cars.data;
       isLoading = false;
       notifyListeners();
     } on NetworkExceptions catch (e) {

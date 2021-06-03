@@ -23,7 +23,7 @@ class FaqViewModel extends StateNotifier<FaqState> {
     state = FaqState.initial();
 
     try {
-      final faqs = await _read(faqRepository).getFaq();
+      final faqs = await _read(faqRepository).faqs();
 
       state = FaqState.data(faqs);
     } on NetworkExceptions catch (e) {

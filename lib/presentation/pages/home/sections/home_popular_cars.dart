@@ -4,12 +4,12 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../widgets/cars/car_card.dart';
 import '../../../widgets/shimmer/shimmer_car_card.dart';
-import '../viewmodels/hot_deals_notifier.dart';
+import '../viewmodels/popular_cars_notifier.dart';
 
 class HomePopularCars extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final state = watch(hotDealsNotifier);
+    final state = watch(popularCarsNotifier);
 
     if (state.isLoading) {
       return ListView.builder(

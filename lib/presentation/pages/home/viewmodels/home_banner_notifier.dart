@@ -30,7 +30,7 @@ class HomeBannerNotifier extends ChangeNotifier {
     notifyListeners();
 
     try {
-      items = await _read(otherRepository).getSlider();
+      items = await _read(otherRepository).sliders();
       isLoading = false;
       notifyListeners();
     } catch (e) {

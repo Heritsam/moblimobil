@@ -116,7 +116,7 @@ class EditProfileViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final provinces = await _read(locationRepository).getProvinces();
+      final provinces = await _read(locationRepository).provinces();
 
       provinceState = AppState.data(data: provinces);
       notifyListeners();
@@ -133,7 +133,7 @@ class EditProfileViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final cities = await _read(locationRepository).getCities(provinceId);
+      final cities = await _read(locationRepository).cities(provinceId);
 
       cityState = AppState.data(data: cities);
       notifyListeners();
@@ -150,7 +150,7 @@ class EditProfileViewModel extends ChangeNotifier {
 
     try {
       final subDistricts =
-          await _read(locationRepository).getSubdistrict(cityId);
+          await _read(locationRepository).subDistricts(cityId);
 
       subdistrictState = AppState.data(data: subDistricts);
       notifyListeners();
