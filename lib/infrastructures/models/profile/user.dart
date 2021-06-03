@@ -25,6 +25,16 @@ class User {
     this.monthlyContrBill,
   });
 
+  String get formattedPhone {
+    String format = 'xxxx xxxx xxxx';
+
+    this.phone.split('').forEach((char) {
+      format = format.replaceFirst('x', char);
+    });
+    
+    return format.replaceAll('x', '');
+  }
+
   final int id;
   final String fullname;
   final String phone;
