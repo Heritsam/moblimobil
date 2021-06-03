@@ -119,27 +119,6 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ],
                 ).padding(horizontal: 24),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Checkbox(
-                      onChanged: (_) {
-                        context.read(loginViewModel).toggleRememberMe();
-                      },
-                      value: vm.rememberMe,
-                      visualDensity: VisualDensity.compact,
-                      activeColor: greenColor,
-                    ),
-                    SizedBox(width: 4),
-                    InkResponse(
-                      onTap: context.read(loginViewModel).toggleRememberMe,
-                      child: Text(
-                        S.of(context).rememberMe,
-                        style: TextStyle(fontSize: 14, color: mediumGreyColor),
-                      ),
-                    ),
-                  ],
-                ).padding(horizontal: 16),
                 SizedBox(height: 32),
                 if (vm.isLoading)
                   RoundedButton(
