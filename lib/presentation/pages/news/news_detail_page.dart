@@ -39,7 +39,6 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
     final size = mediaQuery.size;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         backgroundColor: Colors.white70,
@@ -51,9 +50,6 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
             color: darkGreyColor,
             fontWeight: FontWeight.w700,
           ),
-        ),
-        flexibleSpace: ClipRRect(
-          child: Container(color: Colors.white60).backgroundBlur(7),
         ),
       ),
       body: Consumer(
@@ -80,7 +76,6 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                 },
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
-                  padding: EdgeInsets.only(top: mediaQuery.padding.top + 56),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -88,10 +83,26 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                         YoutubePlayer(
                           controller: vm.controller!,
                           showVideoProgressIndicator: true,
-                          progressColors: ProgressBarColors(
-                            playedColor: blueColor,
-                            handleColor: lightBlueColor,
-                          ),
+                          bottomActions: [
+                            const SizedBox(width: 14.0),
+                            CurrentPosition(),
+                            const SizedBox(width: 8.0),
+                            ProgressBar(
+                              isExpanded: true,
+                              colors: ProgressBarColors(
+                                playedColor: blueColor,
+                                handleColor: lightBlueColor,
+                              ),
+                            ),
+                            RemainingDuration(),
+                            const SizedBox(width: 8.0),
+                            IconButton(
+                              onPressed: () {
+                                vm.launchYoutube(context);
+                              },
+                              icon: Image.asset('assets/ic_youtube.png'),
+                            ),
+                          ],
                         )
                       else
                         Container(
@@ -116,10 +127,21 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                               fontWeight: FontWeight.w500,
                             ),
                           ).expanded(),
-                          InkResponse(
-                            onTap: () {},
-                            child: Icon(Icons.bookmark_border_rounded),
-                          ),
+                          if (vm.isWishlisted)
+                            IconButton(
+                              onPressed: () {
+                                vm.removeFromWishlist(context, news.id);
+                              },
+                              icon: Icon(Icons.bookmark_rounded),
+                              color: greenColor,
+                            )
+                          else
+                            IconButton(
+                              onPressed: () {
+                                vm.addToWishlist(context, news.id);
+                              },
+                              icon: Icon(Icons.bookmark_border_rounded),
+                            ),
                         ],
                       ).padding(horizontal: 16),
                       SizedBox(height: 32),

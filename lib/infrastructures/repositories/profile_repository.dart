@@ -33,9 +33,9 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<User> me() async {
-    final token = _preferences.getString(PreferencesKey.tokenKey);
-
     try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
       final response = await _client.get(
         '/api/me',
         options: Options(
@@ -51,9 +51,9 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<void> update(UpdateProfileParams params) async {
-    final token = _preferences.getString(PreferencesKey.tokenKey);
-
     try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
       await _client.post(
         '/api/profile-update',
         options: Options(
@@ -68,9 +68,9 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<void> checkPassword(String oldPassword) async {
-    final token = _preferences.getString(PreferencesKey.tokenKey);
-
     try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
       await _client.post(
         '/api/check-password',
         options: Options(
@@ -85,10 +85,10 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<void> updatePassword(String newPassword) async {
-    final token = _preferences.getString(PreferencesKey.tokenKey);
-    final userId = _preferences.getInt(PreferencesKey.userKey);
-
     try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+      final userId = _preferences.getInt(PreferencesKey.userKey);
+      
       await _client.post(
         '/api/update-password',
         options: Options(

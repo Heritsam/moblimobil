@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../infrastructures/repositories/wishlist_repository.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
@@ -25,13 +27,18 @@ class NewsDetailViewModel extends ChangeNotifier {
   }
 
   AppState<News> newsState = AppState.initial();
+  bool isWishlisted = false;
+  int? wishlistId;
 
   Future<void> fetch(int id) async {
     newsState = AppState.loading();
+    isWishlisted = false;
     notifyListeners();
 
     try {
       final news = await _read(newsRepository).detail(id);
+      
+      await checkWishlisted(news.id, 'news');
 
       newsState = AppState.data(data: news);
 
@@ -48,6 +55,64 @@ class NewsDetailViewModel extends ChangeNotifier {
       notifyListeners();
     } on NetworkExceptions catch (e) {
       newsState = AppState.error(message: e.message);
+      notifyListeners();
+    }
+  }
+
+  void launchYoutube(BuildContext context) {
+    newsState.maybeWhen(
+      data: (news) async {
+        final url = news.linkYoutube!;
+        if (await canLaunch(url)) {
+          launch(url);
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Could not launch $url')));
+        }
+      },
+      orElse: () {},
+    );
+  }
+
+  Future<void> checkWishlisted(int id, String type) async {
+    try {
+      final wishlisted = await _read(wishlistRepository).check(id, type);
+
+      isWishlisted = wishlisted.wishlisted;
+      wishlistId = wishlisted.id;
+    } catch (e) {
+      return checkWishlisted(id, type);
+    }
+  }
+
+  Future<void> addToWishlist(BuildContext context, int carId) async {
+    try {
+      isWishlisted = true;
+      notifyListeners();
+
+      await _read(wishlistRepository).add(carId, 'news');
+      await checkWishlisted(carId, 'news');
+    } on NetworkExceptions catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+
+      isWishlisted = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> removeFromWishlist(BuildContext context, int carId) async {
+    try {
+      isWishlisted = false;
+      notifyListeners();
+
+      await _read(wishlistRepository).remove(wishlistId!);
+      await checkWishlisted(carId, 'news');
+    } on NetworkExceptions catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+
+      isWishlisted = true;
       notifyListeners();
     }
   }

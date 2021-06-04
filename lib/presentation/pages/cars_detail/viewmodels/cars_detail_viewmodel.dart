@@ -5,6 +5,7 @@ import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
 import '../../../../infrastructures/models/product/product.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
+import '../../../../infrastructures/repositories/wishlist_repository.dart';
 
 final carsDetailViewModel = ChangeNotifierProvider<CarsDetailViewModel>((ref) {
   return CarsDetailViewModel(ref.read);
@@ -16,18 +17,67 @@ class CarsDetailViewModel extends ChangeNotifier {
   CarsDetailViewModel(this._read);
 
   AppState<Product> productState = AppState.initial();
+  bool isWishlisted = false;
+  int? wishlistId;
 
   Future<void> fetch(int id) async {
     productState = AppState.loading();
+    isWishlisted = false;
     notifyListeners();
 
     try {
       final cars = await _read(productRepository).detail(id);
 
+      await checkWishlisted(cars.id, 'product');
+
       productState = AppState.data(data: cars);
+
       notifyListeners();
     } on NetworkExceptions catch (e) {
       productState = AppState.error(message: e.message);
+      notifyListeners();
+    }
+  }
+
+  Future<void> checkWishlisted(int id, String type) async {
+    try {
+      final wishlisted = await _read(wishlistRepository).check(id, type);
+
+      isWishlisted = wishlisted.wishlisted;
+      wishlistId = wishlisted.id;
+    } catch (e) {
+      return checkWishlisted(id, type);
+    }
+  }
+
+  Future<void> addToWishlist(BuildContext context, int carId) async {
+    try {
+      isWishlisted = true;
+      notifyListeners();
+
+      await _read(wishlistRepository).add(carId, 'product');
+      await checkWishlisted(carId, 'product');
+    } on NetworkExceptions catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+
+      isWishlisted = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> removeFromWishlist(BuildContext context, int carId) async {
+    try {
+      isWishlisted = false;
+      notifyListeners();
+
+      await _read(wishlistRepository).remove(wishlistId!);
+      await checkWishlisted(carId, 'product');
+    } on NetworkExceptions catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+
+      isWishlisted = true;
       notifyListeners();
     }
   }

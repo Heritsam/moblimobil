@@ -34,9 +34,9 @@ class HelpRepositoryImpl implements HelpRepository {
     required String fullname,
     required String description,
   }) async {
-    final token = _preferences.getString(PreferencesKey.tokenKey);
-
     try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+      
       await _client.post(
         '/api/bantuan',
         options: Options(

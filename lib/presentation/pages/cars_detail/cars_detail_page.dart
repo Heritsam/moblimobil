@@ -10,6 +10,7 @@ import '../../../core/themes/mobli_icons_icons.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
+import '../../notifiers/wishlist/wishlist_notifier.dart';
 import '../../widgets/buttons/rounded_icon_button.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/circle_image.dart';
@@ -133,7 +134,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                               autoPlay: true,
                               height: size.width - 40,
                               viewportFraction: 1,
-                              onPageChanged: (index, reason) {
+                              onPageChanged: (index, _) {
                                 setState(() {
                                   _sliderIndex = index;
                                 });
@@ -221,12 +222,25 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                               iconSize: 32,
                               color: darkGreyColor,
                             ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.favorite),
-                              iconSize: 32,
-                              color: Colors.black12,
-                            ),
+                            // mark: Wishlist
+                            if (vm.isWishlisted)
+                              IconButton(
+                                onPressed: () {
+                                  vm.removeFromWishlist(context, car.id);
+                                },
+                                icon: Icon(Icons.favorite),
+                                iconSize: 32,
+                                color: redColor,
+                              )
+                            else
+                              IconButton(
+                                onPressed: () {
+                                  vm.addToWishlist(context, car.id);
+                                },
+                                icon: Icon(Icons.favorite),
+                                iconSize: 32,
+                                color: Colors.black12,
+                              ),
                           ],
                           mainAxisAlignment: MainAxisAlignment.end,
                         ).expanded(),

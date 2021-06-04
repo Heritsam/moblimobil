@@ -95,4 +95,26 @@ class DioClient {
       throw e;
     }
   }
+
+  Future<Response> delete(
+    String uri, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      return await _dio.delete(
+        uri,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+      );
+    } on FormatException catch (_) {
+      throw FormatException('Unable to process the data');
+    } catch (e) {
+      throw e;
+    }
+  }
 }

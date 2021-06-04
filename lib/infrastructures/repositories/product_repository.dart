@@ -1,17 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/exceptions/network_exceptions.dart';
 import '../../core/utils/dio_client.dart';
-import '../../providers.dart';
 import '../models/product/product.dart';
 import '../models/product/product_index.dart';
 
 final productRepository = Provider<ProductRepository>((ref) {
   final dio = ref.watch(dioClient);
-  final preferences = ref.watch(sharedPreferences);
+  // final preferences = ref.watch(sharedPreferences);
 
-  return ProductRepositoryImpl(dio, preferences);
+  return ProductRepositoryImpl(dio);
 });
 
 abstract class ProductRepository {
@@ -26,9 +24,8 @@ abstract class ProductRepository {
 
 class ProductRepositoryImpl implements ProductRepository {
   final DioClient _client;
-  final SharedPreferences _preferences;
 
-  const ProductRepositoryImpl(this._client, this._preferences);
+  const ProductRepositoryImpl(this._client);
 
   @override
   Future<ProductIndexResponse> index({
