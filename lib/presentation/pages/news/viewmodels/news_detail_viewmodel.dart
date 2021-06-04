@@ -37,7 +37,7 @@ class NewsDetailViewModel extends ChangeNotifier {
 
     try {
       final news = await _read(newsRepository).detail(id);
-      
+
       await checkWishlisted(news.id);
 
       newsState = AppState.data(data: news);
@@ -80,8 +80,15 @@ class NewsDetailViewModel extends ChangeNotifier {
 
       isWishlisted = wishlisted.wishlisted;
       wishlistId = wishlisted.id;
-    } catch (e) {
-      return checkWishlisted(id);
+    } on NetworkExceptions catch (e) {
+      e.maybeWhen(
+        defaultError: (message, response) {
+          if (response?.statusCode == 401) return;
+        },
+        orElse: () {
+          checkWishlisted(id);
+        },
+      );
     }
   }
 

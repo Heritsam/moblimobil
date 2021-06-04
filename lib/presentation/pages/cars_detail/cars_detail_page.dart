@@ -5,11 +5,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:styled_widget/styled_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/themes/mobli_icons_icons.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
+import '../../notifiers/authentication/authentication_notifier.dart';
 import '../../widgets/buttons/rounded_icon_button.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/circle_image.dart';
@@ -50,6 +52,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
 
     return Consumer(
       builder: (context, watch, child) {
+        final authState = watch(authenticationNotifier);
         final vm = watch(carsDetailViewModel);
 
         return vm.productState.when(
@@ -94,12 +97,34 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
               bottomNavigationBar: Row(
                 children: [
                   RoundedIconButton(
+                    onPressed: () {
+                      authState.when(
+                        unauthenticated: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        authenticated: () async {
+                          final url = 'https://wa.me/6283819899528';
+
+                          if (await canLaunch(url)) {
+                            launch(url);
+                          }
+                        },
+                      );
+                    },
                     icon: Icon(MobliIcons.chat, color: Colors.white),
                     label: 'Chat Penjual',
                     horizontalPadding: 0,
                   ).expanded(),
                   SizedBox(width: 16),
                   RoundedIconButton(
+                    onPressed: () {
+                      authState.when(
+                        unauthenticated: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        authenticated: () {},
+                      );
+                    },
                     icon: Icon(Icons.phone_outlined, color: Colors.white),
                     label: 'Telepon',
                     horizontalPadding: 0,

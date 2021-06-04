@@ -47,8 +47,15 @@ class _NewsCardState extends State<NewsCard> {
         isWishlisted = wishlisted.wishlisted;
         wishlistId = wishlisted.id;
       });
-    } catch (e) {
-      return checkWishlisted(id);
+    } on NetworkExceptions catch (e) {
+      e.maybeWhen(
+        defaultError: (message, response) {
+          if (response?.statusCode == 401) return;
+        },
+        orElse: () {
+          checkWishlisted(id);
+        },
+      );
     }
   }
 
