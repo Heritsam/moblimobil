@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../core/exceptions/network_exceptions.dart';
 import '../../../core/themes/theme.dart';
+import '../../../infrastructures/repositories/wishlist_repository.dart';
 
 class NewsCard extends StatefulWidget {
+  final int newsId;
   final String title;
   final String imageUrl;
   final String timestamp;
@@ -14,6 +18,7 @@ class NewsCard extends StatefulWidget {
 
   const NewsCard({
     Key? key,
+    required this.newsId,
     required this.title,
     required this.imageUrl,
     required this.timestamp,
@@ -29,6 +34,65 @@ class NewsCard extends StatefulWidget {
 
 class _NewsCardState extends State<NewsCard> {
   bool _isPressed = false;
+
+  bool isWishlisted = false;
+  int? wishlistId;
+
+  Future<void> checkWishlisted(int id) async {
+    try {
+      final wishlisted =
+          await context.read(wishlistRepository).check(id, 'news');
+
+      setState(() {
+        isWishlisted = wishlisted.wishlisted;
+        wishlistId = wishlisted.id;
+      });
+    } catch (e) {
+      return checkWishlisted(id);
+    }
+  }
+
+  Future<void> addToWishlist(BuildContext context, int newsId) async {
+    try {
+      setState(() {
+        isWishlisted = true;
+      });
+
+      await context.read(wishlistRepository).add(newsId, 'news');
+      await checkWishlisted(newsId);
+    } on NetworkExceptions catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+
+      setState(() {
+        isWishlisted = false;
+      });
+    }
+  }
+
+  Future<void> removeFromWishlist(BuildContext context, int newsId) async {
+    try {
+      setState(() {
+        isWishlisted = false;
+      });
+
+      await context.read(wishlistRepository).remove(wishlistId!);
+      await checkWishlisted(newsId);
+    } on NetworkExceptions catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+
+      setState(() {
+        isWishlisted = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkWishlisted(widget.newsId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +154,20 @@ class _NewsCardState extends State<NewsCard> {
               ),
               overflow: TextOverflow.ellipsis,
             ).expanded(),
-            InkResponse(
-              onTap: () {},
-              child: Icon(Icons.bookmark_border_rounded),
-            ),
+            if (isWishlisted)
+              InkResponse(
+                onTap: () {
+                  removeFromWishlist(context, widget.newsId);
+                },
+                child: Icon(Icons.bookmark_rounded, color: greenColor),
+              )
+            else
+              InkResponse(
+                onTap: () {
+                  addToWishlist(context, widget.newsId);
+                },
+                child: Icon(Icons.bookmark_border_rounded),
+              ),
           ],
         ).constrained(width: width),
       ],

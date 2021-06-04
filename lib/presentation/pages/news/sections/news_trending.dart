@@ -80,6 +80,7 @@ class NewsTrending extends ConsumerWidget {
               arguments: NewsDetailArgs(item.id),
             );
           },
+          newsId: item.id,
           title: item.title,
           imageUrl: item.file,
           timestamp: timeago.format(
