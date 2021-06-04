@@ -10,7 +10,6 @@ import '../../../core/themes/mobli_icons_icons.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
-import '../../notifiers/wishlist/wishlist_notifier.dart';
 import '../../widgets/buttons/rounded_icon_button.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/circle_image.dart';

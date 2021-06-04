@@ -28,7 +28,7 @@ class CarsDetailViewModel extends ChangeNotifier {
     try {
       final cars = await _read(productRepository).detail(id);
 
-      await checkWishlisted(cars.id, 'product');
+      await checkWishlisted(cars.id);
 
       productState = AppState.data(data: cars);
 
@@ -39,14 +39,14 @@ class CarsDetailViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> checkWishlisted(int id, String type) async {
+  Future<void> checkWishlisted(int id) async {
     try {
-      final wishlisted = await _read(wishlistRepository).check(id, type);
+      final wishlisted = await _read(wishlistRepository).check(id, 'product');
 
       isWishlisted = wishlisted.wishlisted;
       wishlistId = wishlisted.id;
     } catch (e) {
-      return checkWishlisted(id, type);
+      return checkWishlisted(id);
     }
   }
 
@@ -56,7 +56,7 @@ class CarsDetailViewModel extends ChangeNotifier {
       notifyListeners();
 
       await _read(wishlistRepository).add(carId, 'product');
-      await checkWishlisted(carId, 'product');
+      await checkWishlisted(carId);
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
@@ -72,7 +72,7 @@ class CarsDetailViewModel extends ChangeNotifier {
       notifyListeners();
 
       await _read(wishlistRepository).remove(wishlistId!);
-      await checkWishlisted(carId, 'product');
+      await checkWishlisted(carId);
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
