@@ -4,7 +4,7 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../../infrastructures/models/car.dart';
+import '../../../infrastructures/models/product/product.dart';
 import '../../widgets/buttons/rounded_button.dart';
 import 'viewmodels/car_compare_viewmodel.dart';
 
@@ -89,7 +89,7 @@ class CompareNav extends ConsumerWidget {
     );
   }
 
-  Widget _selectedBox(Car car, double width) {
+  Widget _selectedBox(Product car, double width) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -98,7 +98,7 @@ class CompareNav extends ConsumerWidget {
               color: lightGreyColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
               image: DecorationImage(
-                image: NetworkImage(car.imageUrl),
+                image: NetworkImage(car.file.first.file),
                 fit: BoxFit.cover,
               ),
             )

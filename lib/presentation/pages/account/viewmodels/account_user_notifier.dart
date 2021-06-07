@@ -5,6 +5,8 @@ import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
 import '../../../../infrastructures/models/profile/user.dart';
 import '../../../../infrastructures/repositories/profile_repository.dart';
+import 'account_bookmark_notifier.dart';
+import 'account_wishlist_notifier.dart';
 
 final accountUserNotifier = ChangeNotifierProvider<AccountUserNotifier>((ref) {
   return AccountUserNotifier(ref.read);
@@ -15,22 +17,34 @@ class AccountUserNotifier extends ChangeNotifier {
 
   AccountUserNotifier(this._read) {
     fetchUser();
+    tabIndex = 0;
   }
 
   AppState<User> userState = AppState.loading();
+  int tabIndex = 0;
 
   Future<void> fetchUser() async {
     userState = AppState.loading();
     notifyListeners();
-    
+
     try {
       final user = await _read(profileRepository).me();
 
       userState = AppState.data(data: user);
+
+      // Fetch user wishlist & bookmarks
+      _read(accountWishlistNotifier).getWishlists();
+      _read(accountBookmarkNotifier).getBookmarks();
+
       notifyListeners();
     } on NetworkExceptions catch (e) {
       userState = AppState.error(message: e.message);
       notifyListeners();
     }
+  }
+
+  void changeTabIndex(int index) {
+    tabIndex = index;
+    notifyListeners();
   }
 }

@@ -116,8 +116,6 @@ class MyApp extends ConsumerWidget {
         '/notification-detail': (context) => NotificationDetailPage(),
         '/search': (context) => SearchPage(),
         '/search-recent': (context) => SearchRecentPage(),
-        '/new-cars': (context) => CarsPage(type: CarsPageType.newCars),
-        '/used-cars': (context) => CarsPage(type: CarsPageType.usedCars),
         '/discount': (context) => CarsPage(type: CarsPageType.discount),
         '/cars-detail': (context) => CarsDetailPage(),
         '/compare': (context) => CarsPage(type: CarsPageType.compare),

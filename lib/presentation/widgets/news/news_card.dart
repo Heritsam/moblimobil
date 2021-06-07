@@ -5,6 +5,7 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/exceptions/network_exceptions.dart';
 import '../../../core/themes/theme.dart';
 import '../../../infrastructures/repositories/wishlist_repository.dart';
+import '../../pages/account/viewmodels/account_bookmark_notifier.dart';
 
 class NewsCard extends StatefulWidget {
   final int newsId;
@@ -66,7 +67,10 @@ class _NewsCardState extends State<NewsCard> {
       });
 
       await context.read(wishlistRepository).add(newsId, 'news');
+      // check wishlist status
       await checkWishlisted(newsId);
+      // refresh wishlist on profile page
+      await context.read(accountBookmarkNotifier).getBookmarks();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
@@ -84,7 +88,10 @@ class _NewsCardState extends State<NewsCard> {
       });
 
       await context.read(wishlistRepository).remove(wishlistId!);
+      // check wishlist status
       await checkWishlisted(newsId);
+      // refresh wishlist on profile page
+      await context.read(accountBookmarkNotifier).getBookmarks();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));

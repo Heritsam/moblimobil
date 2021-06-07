@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../widgets/error/empty_state.dart';
 import '../../../widgets/news/news_tile.dart';
 import '../../../widgets/shimmer/shimmer_mobli_tile.dart';
 import '../viewmodels/news_list_notifier.dart';
@@ -25,6 +26,12 @@ class NewsList extends ConsumerWidget {
       );
     }
 
+    if (state.items.isEmpty) {
+      return EmptyState(
+        message: 'Items Empty',
+      );
+    }
+
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.all(16),
@@ -33,7 +40,10 @@ class NewsList extends ConsumerWidget {
       itemBuilder: (context, index) {
         final item = state.items[index];
 
-        return NewsTile(news: item).padding(bottom: 16);
+        return NewsTile(
+          key: Key('${item.id}_${item.title}'),
+          news: item,
+        ).padding(bottom: 16);
       },
     );
   }

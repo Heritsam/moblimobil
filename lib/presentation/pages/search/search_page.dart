@@ -81,17 +81,13 @@ class _SearchPageState extends State<SearchPage> {
                 elevated: false,
               ).padding(right: 12, bottom: 24),
               MobliChip(
-                onTap: () {
-                  Navigator.pushNamed(context, '/new-cars');
-                },
+                onTap: () {},
                 label: S.of(context).newCars,
                 selected: false,
                 elevated: false,
               ).padding(right: 12, bottom: 24),
               MobliChip(
-                onTap: () {
-                  Navigator.pushNamed(context, '/used-cars');
-                },
+                onTap: () {},
                 label: S.of(context).usedCars,
                 selected: false,
                 elevated: false,
@@ -113,8 +109,7 @@ class _SearchPageState extends State<SearchPage> {
               final item = carList[index];
 
               return CarCard(
-                onTap: () {
-                },
+                onTap: () {},
                 carId: item.id,
                 hasUsed: index.isOdd,
                 title: item.title,

@@ -39,33 +39,39 @@ class Wishlist {
     required this.title,
     required this.file,
     this.vendorName,
+    this.vendorFile,
     this.vendorVerified,
+    this.price,
   });
 
   final int id;
   final String type;
   final String userId;
-  final String keyId;
+  final int keyId;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String title;
   final String file;
   final String? vendorName;
+  final String? vendorFile;
   final bool? vendorVerified;
+  final String? price;
 
   factory Wishlist.fromJson(Map<String, dynamic> json) => Wishlist(
         id: json['id'],
         type: json['type'],
         userId: json['user_id'],
-        keyId: json['key_id'],
+        keyId: int.parse(json['key_id']),
         createdAt: DateTime.parse(json['created_at']),
         updatedAt: DateTime.parse(json['updated_at']),
         title: json['title'],
         file: json['file'],
         vendorName: json['vendor_name'] != null ? json['vendor_name'] : null,
+        vendorFile: json['vendor_file'] != null ? json['vendor_file'] : null,
         vendorVerified: json['vendor_verified'] != null
             ? json['vendor_verified'] == 'true'
             : null,
+        price: json['price'] != null ? json['price'] : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,6 +84,8 @@ class Wishlist {
         'title': title,
         'file': file,
         'vendor_name': vendorName,
+        'vendor_file': vendorFile,
         'vendor_verified': vendorVerified,
+        'price': price,
       };
 }

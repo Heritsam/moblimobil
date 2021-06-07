@@ -14,7 +14,7 @@ import '../models/wishlist/wishlist_status.dart';
 final wishlistRepository = Provider<WishlistRepository>((ref) {
   final dio = ref.watch(dioClient);
   final preferences = ref.watch(sharedPreferences);
-  
+
   return WishlistRepositoryImpl(dio, preferences);
 });
 

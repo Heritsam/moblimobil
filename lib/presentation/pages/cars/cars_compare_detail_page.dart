@@ -5,7 +5,7 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../../infrastructures/models/car.dart';
+import '../../../infrastructures/models/product/product.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
 import 'viewmodels/car_compare_viewmodel.dart';
 
@@ -55,7 +55,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
 
   Widget _buildCar(
     BuildContext context, {
-    required Car item,
+    required Product item,
     required double width,
     required AppSettingsNotifier settings,
   }) {
@@ -67,7 +67,11 @@ class CarsCompareDetailPage extends ConsumerWidget {
             .decorated(
               color: lightGreyColor,
               image: DecorationImage(
-                image: NetworkImage(item.imageUrl),
+                image: NetworkImage(
+                  item.file.isNotEmpty
+                      ? item.file.first.file
+                      : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png',
+                ),
                 fit: BoxFit.cover,
               ),
             )
@@ -77,7 +81,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
             )
             .constrained(height: 140, width: width),
         Text(
-          item.title,
+          '${item.brandName} ${item.title}',
           style: TextStyle(
             color: darkGreyColor,
             fontSize: 16,
@@ -105,7 +109,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
                 decimalDigits: 0,
                 locale: settings.language,
                 symbol: 'Rp ',
-              ).format(item.price),
+              ).format(int.tryParse(item.price) ?? 0),
               style: TextStyle(color: blueColor, fontWeight: FontWeight.w600),
             ),
           ],
@@ -122,7 +126,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
             ),
             SizedBox(height: 8),
             Text(
-              item.brand.toUpperCase(),
+              item.brandName.toUpperCase(),
               style: TextStyle(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w600,
@@ -146,7 +150,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
             ),
             SizedBox(height: 8),
             Text(
-              item.fuelType.toUpperCase(),
+              item.fuelTypeName.toUpperCase(),
               style: TextStyle(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w600,
@@ -167,7 +171,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'MATIC',
+              item.transmissionName.toUpperCase(),
               style: TextStyle(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w600,
@@ -191,7 +195,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
             ),
             SizedBox(height: 8),
             Text(
-              '2016',
+              item.yearProduct,
               style: TextStyle(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w600,
@@ -212,7 +216,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
             ),
             SizedBox(height: 8),
             Text(
-              '299000 km',
+              '${item.kilometer} km',
               style: TextStyle(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w600,
@@ -236,7 +240,7 @@ class CarsCompareDetailPage extends ConsumerWidget {
             ),
             SizedBox(height: 8),
             Text(
-              item.color,
+              item.colorName,
               style: TextStyle(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w600,

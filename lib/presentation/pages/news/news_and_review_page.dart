@@ -5,8 +5,10 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/search_bar.dart';
+import 'sections/news_category_tab.dart';
 import 'sections/news_list.dart';
 import 'sections/news_trending.dart';
+import 'viewmodels/news_category_notifier.dart';
 import 'viewmodels/news_list_notifier.dart';
 import 'viewmodels/news_trending_notifier.dart';
 
@@ -34,6 +36,7 @@ class NewsAndReviewPage extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async {
           Future.wait([
+            context.read(newsCategoryNotifier).fetch(),
             context.read(newsTrendingNotifier).fetch(),
             context.read(newsListNotifier).fetch(),
           ]);
@@ -48,30 +51,12 @@ class NewsAndReviewPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              SearchBar().padding(horizontal: 16),
-              DefaultTabController(
-                length: 5,
-                child: TabBar(
-                  isScrollable: true,
-                  physics: BouncingScrollPhysics(),
-                  indicator: BoxDecoration(),
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Montserrat',
-                  ),
-                  unselectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Montserrat',
-                  ),
-                  tabs: [
-                    Tab(child: Text('Beranda')),
-                    Tab(child: Text('Tips')),
-                    Tab(child: Text('Test Drive')),
-                    Tab(child: Text('Ulasan')),
-                    Tab(child: Text('Mobil List')),
-                  ],
-                ),
-              ),
+              SearchBar(
+                onSearch: (value) {
+                  context.read(newsListNotifier).fetch(search: value);
+                },
+              ).padding(horizontal: 16),
+              NewsCategoryTab(),
               SizedBox(height: 24),
               Row(
                 children: [

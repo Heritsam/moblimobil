@@ -8,6 +8,7 @@ import '../../../../core/providers/app_state.dart';
 import '../../../../infrastructures/models/news/news.dart';
 import '../../../../infrastructures/repositories/news_repository.dart';
 import '../../../../infrastructures/repositories/wishlist_repository.dart';
+import '../../account/viewmodels/account_bookmark_notifier.dart';
 
 final newsDetailViewModel =
     ChangeNotifierProvider.autoDispose<NewsDetailViewModel>((ref) {
@@ -98,7 +99,10 @@ class NewsDetailViewModel extends ChangeNotifier {
       notifyListeners();
 
       await _read(wishlistRepository).add(newsId, 'news');
+      // check wishlist status
       await checkWishlisted(newsId);
+      // refresh wishlist on profile page
+      await _read(accountBookmarkNotifier).getBookmarks();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
@@ -114,7 +118,10 @@ class NewsDetailViewModel extends ChangeNotifier {
       notifyListeners();
 
       await _read(wishlistRepository).remove(wishlistId!);
+      // check wishlist status
       await checkWishlisted(newsId);
+      // refresh wishlist on profile page
+      await _read(accountBookmarkNotifier).getBookmarks();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));

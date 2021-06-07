@@ -73,6 +73,7 @@ class NewsTrending extends ConsumerWidget {
         final item = state.items[index];
 
         return NewsCard(
+          key: Key('${item.id}_${item.title}'),
           onTap: () {
             Navigator.pushNamed(
               context,

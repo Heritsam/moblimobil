@@ -9,6 +9,7 @@ class MobliTile extends StatefulWidget {
   final String imageUrl;
   final bool isVideo;
   final Function()? onTap;
+  final Function()? onLongPress;
 
   const MobliTile({
     Key? key,
@@ -17,6 +18,7 @@ class MobliTile extends StatefulWidget {
     required this.imageUrl,
     this.isVideo = false,
     this.onTap,
+    this.onLongPress,
   }) : super(key: key);
 
   @override
@@ -87,6 +89,7 @@ class _MobliTile extends State<MobliTile> {
         .gestures(
           onTapChange: (tapStatus) => setState(() => _isPressed = tapStatus),
           onTap: widget.onTap,
+          onLongPress: widget.onLongPress,
         )
         .scale(all: _isPressed ? 0.95 : 1.0, animate: true)
         .animate(Duration(milliseconds: 175), Curves.fastLinearToSlowEaseIn);

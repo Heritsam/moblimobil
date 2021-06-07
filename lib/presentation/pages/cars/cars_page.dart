@@ -5,10 +5,11 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/car_card.dart';
+import '../../widgets/error/empty_state.dart';
 import '../../widgets/mobli_chip.dart';
 import '../../widgets/search_bar.dart';
+import '../../widgets/shimmer/shimmer_car_card.dart';
 import 'compare_nav.dart';
 import 'modals/sort_and_filter.dart';
 import 'viewmodels/car_compare_viewmodel.dart';
@@ -60,92 +61,142 @@ class _CarsPageState extends State<CarsPage> {
       ),
       bottomNavigationBar:
           widget.type == CarsPageType.compare ? CompareNav() : null,
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          top: mediaQuery.padding.top + 56 + 16,
-          bottom: 32,
-        ),
-        physics: BouncingScrollPhysics(),
-        child: <Widget>[
-          SearchBar().padding(horizontal: 16),
-          SizedBox(height: 32),
-          Text(S.of(context).price, style: textTheme.headline6)
-              .padding(horizontal: 16),
-          SizedBox(height: 12),
-          ListView(
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            children: [
-              MobliChip(
-                label: S.of(context).popular,
-                selected: true,
-              ).padding(right: 12, bottom: 24),
-              MobliChip(
-                onTap: () {},
-                label: S.of(context).justReleased,
-                selected: false,
-                elevated: false,
-              ).padding(right: 12, bottom: 24),
-              MobliChip(
-                onTap: () {},
-                label: S.of(context).comingSoon,
-                selected: false,
-                elevated: false,
-              ).padding(right: 12, bottom: 24),
-            ],
-          ).constrained(height: 64),
-          SizedBox(height: 4),
-          InkResponse(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) => SortAndFilter(),
-              );
-            },
-            child: Text(
-              S.of(context).sortAndFilter,
-              style: TextStyle(
-                color: blueColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-            ).padding(horizontal: 16),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          Future.wait([
+            context.read(carCompareViewModel).fetch(),
+          ]);
+        },
+        displacement: 32 + mediaQuery.padding.top,
+        edgeOffset: 32 + mediaQuery.padding.top,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            top: mediaQuery.padding.top + 56 + 16,
+            bottom: 32,
           ),
-          GridView.builder(
-            padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 24),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              childAspectRatio: 3.3 / 4.3,
+          physics: BouncingScrollPhysics(),
+          child: <Widget>[
+            SearchBar().padding(horizontal: 16),
+            SizedBox(height: 32),
+            Text(S.of(context).category, style: textTheme.headline6)
+                .padding(horizontal: 16),
+            SizedBox(height: 12),
+            ListView(
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              children: [
+                MobliChip(
+                  label: S.of(context).popular,
+                  selected: true,
+                ).padding(right: 12, bottom: 24),
+                MobliChip(
+                  onTap: () {},
+                  label: S.of(context).justReleased,
+                  selected: false,
+                  elevated: false,
+                ).padding(right: 12, bottom: 24),
+                MobliChip(
+                  onTap: () {},
+                  label: S.of(context).comingSoon,
+                  selected: false,
+                  elevated: false,
+                ).padding(right: 12, bottom: 24),
+              ],
+            ).constrained(height: 64),
+            SizedBox(height: 4),
+            InkResponse(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => SortAndFilter(),
+                );
+              },
+              child: Text(
+                S.of(context).sortAndFilter,
+                style: TextStyle(
+                  color: blueColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ).padding(horizontal: 16),
             ),
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: carList.length,
-            itemBuilder: (context, index) {
-              final item = carList[index];
+            Consumer(
+              builder: (context, watch, child) {
+                final vm = watch(carCompareViewModel);
 
-              return CarCard(
-                onTap: () {
-                  if (widget.type == CarsPageType.compare) {
-                    return context
-                        .read(carCompareViewModel)
-                        .addCar(context: context, car: item);
-                  }
+                return vm.carsState.when(
+                  initial: () => _Jerangkong(),
+                  loading: () => _Jerangkong(),
+                  error: (message) {
+                    return EmptyState(
+                      onPressed: vm.fetch,
+                      message: message,
+                    );
+                  },
+                  data: (cars) {
+                    return GridView.builder(
+                      padding: EdgeInsets.only(
+                          top: 16, left: 16, right: 16, bottom: 24),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        childAspectRatio: 3.3 / 4.3,
+                      ),
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: cars.length,
+                      itemBuilder: (context, index) {
+                        final item = cars[index];
 
-                },
-                carId: item.id,
-                hasUsed: widget.type == CarsPageType.usedCars,
-                title: item.title,
-                price: item.price,
-                imageUrl: item.imageUrl,
-                size: mediaQuery.size.width / 2 - 24,
-              );
-            },
-          ),
-        ].toColumn(crossAxisAlignment: CrossAxisAlignment.start),
+                        return CarCard(
+                          onTap: () {
+                            context
+                                .read(carCompareViewModel)
+                                .addCar(context: context, car: item);
+                          },
+                          carId: item.id,
+                          hasUsed: widget.type == CarsPageType.usedCars,
+                          title: '${item.brandName} ${item.title}',
+                          price: int.tryParse(item.price) ?? 0,
+                          imageUrl: item.file.isNotEmpty
+                              ? item.file.first.file
+                              : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png',
+                          size: mediaQuery.size.width / 2 - 24,
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ].toColumn(crossAxisAlignment: CrossAxisAlignment.start),
+        ),
       ),
+    );
+  }
+}
+
+class _Jerangkong extends StatelessWidget {
+  const _Jerangkong({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 24),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 3.3 / 4.3,
+      ),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 3,
+      itemBuilder: (context, index) {
+        return ShimmerCarCard().expanded();
+      },
     );
   }
 }

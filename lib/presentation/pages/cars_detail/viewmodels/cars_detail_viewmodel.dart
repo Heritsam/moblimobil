@@ -6,6 +6,7 @@ import '../../../../core/providers/app_state.dart';
 import '../../../../infrastructures/models/product/product.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 import '../../../../infrastructures/repositories/wishlist_repository.dart';
+import '../../account/viewmodels/account_wishlist_notifier.dart';
 
 final carsDetailViewModel = ChangeNotifierProvider<CarsDetailViewModel>((ref) {
   return CarsDetailViewModel(ref.read);
@@ -63,7 +64,10 @@ class CarsDetailViewModel extends ChangeNotifier {
       notifyListeners();
 
       await _read(wishlistRepository).add(carId, 'product');
+      // check wishlist status
       await checkWishlisted(carId);
+      // refresh wishlist on profile page
+      await _read(accountWishlistNotifier).getWishlists();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
@@ -79,7 +83,10 @@ class CarsDetailViewModel extends ChangeNotifier {
       notifyListeners();
 
       await _read(wishlistRepository).remove(wishlistId!);
+      // check wishlist status
       await checkWishlisted(carId);
+      // refresh wishlist on profile page
+      await _read(accountWishlistNotifier).getWishlists();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));

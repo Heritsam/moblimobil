@@ -15,6 +15,8 @@ abstract class NewsRepository {
   Future<NewsIndexResponse> index({
     int page = 1,
     bool trending = false,
+    String? search,
+    int? categoryId,
   });
   Future<News> detail(int id);
 }
@@ -28,13 +30,19 @@ class NewsRepositoryImpl implements NewsRepository {
   Future<NewsIndexResponse> index({
     int page = 1,
     bool trending = false,
+    String? search,
+    int? categoryId,
   }) async {
     try {
-      final response = await _client.get(
+      final response = await _client.post(
         '/api/news',
         queryParameters: {
           'page': page,
           if (trending) 'tranding': trending,
+          if (categoryId != null) 'category': categoryId,
+        },
+        data: {
+          if (search != null) 'search': search,
         },
       );
 

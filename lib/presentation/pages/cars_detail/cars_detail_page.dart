@@ -353,13 +353,6 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                           S.of(context).recommended,
                           style: textTheme.headline6,
                         ),
-                        InkResponse(
-                          onTap: () {},
-                          child: Text(
-                            S.of(context).seeAll,
-                            style: TextStyle(color: blueColor),
-                          ),
-                        ),
                       ],
                     ).padding(horizontal: 16),
                     SizedBox(height: 16),
@@ -367,17 +360,17 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                       scrollDirection: Axis.horizontal,
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: carList.length,
+                      itemCount: car.productRecommend.length,
                       itemBuilder: (context, index) {
-                        final item = carList[index];
+                        final item = car.productRecommend[index];
 
                         return CarCard(
                           onTap: () {},
                           carId: item.id,
-                          title: item.title,
-                          price: item.price,
-                          hasUsed: index.isEven,
-                          imageUrl: item.imageUrl,
+                          title: '${item.brandName} ${item.title}',
+                          price: int.tryParse(item.price) ?? 0,
+                          hasUsed: item.type == 'used',
+                          imageUrl: item.file,
                         ).padding(right: 16, bottom: 32);
                       },
                     ).constrained(height: 240),

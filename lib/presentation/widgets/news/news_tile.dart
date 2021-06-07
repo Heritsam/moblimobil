@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/pages/account/viewmodels/account_bookmark_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -52,7 +53,10 @@ class _NewsTileState extends State<NewsTile> {
       });
 
       await context.read(wishlistRepository).add(newsId, 'news');
+      // check wishlist status
       await checkWishlisted(newsId);
+      // refresh wishlist on profile page
+      await context.read(accountBookmarkNotifier).getBookmarks();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
@@ -70,7 +74,10 @@ class _NewsTileState extends State<NewsTile> {
       });
 
       await context.read(wishlistRepository).remove(wishlistId!);
+      // check wishlist status
       await checkWishlisted(newsId);
+      // refresh wishlist on profile page
+      await context.read(accountBookmarkNotifier).getBookmarks();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));

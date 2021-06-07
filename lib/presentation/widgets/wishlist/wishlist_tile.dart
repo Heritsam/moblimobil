@@ -11,6 +11,7 @@ class WishlistTile extends StatefulWidget {
   final Widget subtitle;
   final String imageUrl;
   final Function()? onTap;
+  final Function()? onLongPress;
 
   const WishlistTile({
     Key? key,
@@ -19,6 +20,7 @@ class WishlistTile extends StatefulWidget {
     required this.subtitle,
     required this.imageUrl,
     this.onTap,
+    this.onLongPress,
   }) : super(key: key);
 
   @override
@@ -90,10 +92,13 @@ class _WishlistTile extends State<WishlistTile> {
               onTapChange: (tapStatus) =>
                   setState(() => _isPressed = tapStatus),
               onTap: widget.onTap,
+              onLongPress: widget.onLongPress,
             )
             .scale(all: _isPressed ? 0.95 : 1.0, animate: true)
             .animate(
-                Duration(milliseconds: 175), Curves.fastLinearToSlowEaseIn);
+              Duration(milliseconds: 175),
+              Curves.fastLinearToSlowEaseIn,
+            );
       },
     );
   }
