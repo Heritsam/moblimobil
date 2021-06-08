@@ -24,7 +24,7 @@ class Product {
     this.cityId,
     required this.userFullname,
     required this.userFile,
-    required this.userPhone,
+    this.userPhone,
     required this.brandName,
     required this.variantName,
     required this.bodyTypeName,
