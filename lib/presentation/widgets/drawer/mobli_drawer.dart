@@ -49,7 +49,6 @@ class MobliDrawer extends ConsumerWidget {
               context: context,
               onTap: () {
                 Navigator.popUntil(context, ModalRoute.withName('/home'));
-                Navigator.pushNamed(context, '/discount');
               },
               title: S.of(context).discountAndPromo.toUpperCase(),
               icon: MobliIcons.discount,

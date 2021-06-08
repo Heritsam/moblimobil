@@ -5,7 +5,9 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/themes/theme.dart';
 
 class ShimmerCarCard extends StatelessWidget {
-  const ShimmerCarCard({Key? key}) : super(key: key);
+  final double size;
+  
+  const ShimmerCarCard({Key? key, this.size = 160.0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,8 @@ class ShimmerCarCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 160,
-            width: 160,
+            height: size,
+            width: size,
             decoration: BoxDecoration(
               color: lightGreyColor,
               borderRadius: BorderRadius.circular(mediumBorderRadius),
@@ -26,7 +28,7 @@ class ShimmerCarCard extends StatelessWidget {
           SizedBox(height: 8),
           Container(
             height: 16,
-            width: 120,
+            width: size,
             decoration: BoxDecoration(
               color: lightGreyColor,
               borderRadius: BorderRadius.circular(mediumBorderRadius),
@@ -35,7 +37,7 @@ class ShimmerCarCard extends StatelessWidget {
           SizedBox(height: 4),
           Container(
             height: 12,
-            width: 160,
+            width: size,
             decoration: BoxDecoration(
               color: lightGreyColor,
               borderRadius: BorderRadius.circular(mediumBorderRadius),

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
 import '../../../../infrastructures/models/product/product.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 import '../../../../infrastructures/repositories/wishlist_repository.dart';
+import '../../../widgets/dialog/progress_dialog.dart';
 import '../../account/viewmodels/account_wishlist_notifier.dart';
 
 final carsDetailViewModel = ChangeNotifierProvider<CarsDetailViewModel>((ref) {
@@ -93,6 +96,31 @@ class CarsDetailViewModel extends ChangeNotifier {
 
       isWishlisted = true;
       notifyListeners();
+    }
+  }
+
+  Future<void> contactWhatsapp(
+    BuildContext context, {
+    required int id,
+    required String phone,
+  }) async {
+    showDialog(
+      context: context,
+      builder: (context) => ProgressDialog(),
+      barrierDismissible: false,
+    );
+
+    try {
+      final message = await _read(productRepository).submit(id);
+      final link = WhatsAppUnilink(phoneNumber: phone, text: message);
+
+      Navigator.pop(context);
+
+      await launch(link.toString());
+    } on NetworkExceptions catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
     }
   }
 }

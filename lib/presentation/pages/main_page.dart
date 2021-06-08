@@ -56,7 +56,7 @@ class _MainPageState extends State<MainPage> {
                 HomePage(),
                 SearchPage(),
                 NewsAndReviewPage(),
-                CarsPage(type: CarsPageType.compare),
+                CarsPage(),
                 AccountPage(),
               ],
             ),

@@ -5,9 +5,14 @@ import '../../core/themes/theme.dart';
 import '../../generated/l10n.dart';
 
 class SearchBar extends StatefulWidget {
-  final Function(String value)? onSearch;
+  final Function(String)? onSearch;
+  final Function(String)? onChanged;
 
-  const SearchBar({Key? key, this.onSearch}) : super(key: key);
+  const SearchBar({
+    Key? key,
+    this.onSearch,
+    this.onChanged,
+  }) : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -34,6 +39,7 @@ class _SearchBarState extends State<SearchBar> {
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(16),
           ),
+          onChanged: widget.onChanged,
         ).expanded(),
         Icon(Icons.search_rounded, size: 32, color: Colors.white)
             .padding(all: 12)

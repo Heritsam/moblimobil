@@ -46,6 +46,7 @@ dependencies:
   styled_widget: ^0.3.0
   timeago: ^3.0.2
   url_launcher: ^6.0.6
+  whatsapp_unilink: ^2.0.0
   youtube_player_flutter: ^8.0.0
 
 dev_dependencies:

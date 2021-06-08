@@ -10,7 +10,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/themes/mobli_icons_icons.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../../infrastructures/models/car.dart';
 import '../../notifiers/authentication/authentication_notifier.dart';
 import '../../widgets/buttons/rounded_icon_button.dart';
 import '../../widgets/cars/car_card.dart';
@@ -103,11 +102,11 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                           Navigator.pushNamed(context, '/login');
                         },
                         authenticated: () async {
-                          final url = 'https://wa.me/6283819899528';
-
-                          if (await canLaunch(url)) {
-                            launch(url);
-                          }
+                          vm.contactWhatsapp(
+                            context,
+                            id: car.id,
+                            phone: '6283819899528',
+                          );
                         },
                       );
                     },

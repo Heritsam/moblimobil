@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/core/exceptions/network_exceptions.dart';
 
+import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
 import '../../../../infrastructures/models/product/product.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
@@ -20,12 +20,14 @@ class CarCompareViewModel extends ChangeNotifier {
   AppState<List<Product>> carsState = AppState.initial();
   List<Product> selectedCars = [];
 
+  String query = '';
+
   Future<void> fetch() async {
     carsState = AppState.loading();
     notifyListeners();
 
     try {
-      final cars = await _read(productRepository).index();
+      final cars = await _read(productRepository).index(search: query);
       carsState = AppState.data(data: cars.data);
 
       notifyListeners();
@@ -33,6 +35,17 @@ class CarCompareViewModel extends ChangeNotifier {
       carsState = AppState.error(message: e.message);
       notifyListeners();
     }
+  }
+
+  void changeSearchText(String value) {
+    query = value;
+    notifyListeners();
+  }
+
+  Future<void> resetAndFetch() async {
+    query = '';
+    notifyListeners();
+    await fetch();
   }
 
   void addCar({

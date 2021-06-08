@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
@@ -9,20 +10,12 @@ import '../../widgets/cars/car_card.dart';
 import '../../widgets/error/empty_state.dart';
 import '../../widgets/mobli_chip.dart';
 import '../../widgets/search_bar.dart';
-import '../../widgets/shimmer/shimmer_car_card.dart';
 import 'compare_nav.dart';
 import 'modals/sort_and_filter.dart';
 import 'viewmodels/car_compare_viewmodel.dart';
 
-enum CarsPageType { newCars, usedCars, compare, discount }
-
 class CarsPage extends StatefulWidget {
-  final CarsPageType type;
-
-  const CarsPage({
-    Key? key,
-    required this.type,
-  }) : super(key: key);
+  const CarsPage({Key? key}) : super(key: key);
 
   @override
   _CarsPageState createState() => _CarsPageState();
@@ -30,14 +23,6 @@ class CarsPage extends StatefulWidget {
 
 class _CarsPageState extends State<CarsPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  String _buildTitle() {
-    if (widget.type == CarsPageType.newCars) return S.of(context).newCars;
-    if (widget.type == CarsPageType.usedCars) return S.of(context).usedCars;
-    if (widget.type == CarsPageType.discount)
-      return S.of(context).discountAndPromo;
-    return S.of(context).compare;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +40,15 @@ class _CarsPageState extends State<CarsPage> {
           child: Container(color: Colors.white60).backgroundBlur(7),
         ),
         title: Text(
-          _buildTitle(),
+          S.of(context).compare,
           style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
       ),
-      bottomNavigationBar:
-          widget.type == CarsPageType.compare ? CompareNav() : null,
+      bottomNavigationBar: CompareNav(),
       body: RefreshIndicator(
         onRefresh: () async {
           Future.wait([
-            context.read(carCompareViewModel).fetch(),
+            context.read(carCompareViewModel).resetAndFetch(),
           ]);
         },
         displacement: 32 + mediaQuery.padding.top,
@@ -76,7 +60,12 @@ class _CarsPageState extends State<CarsPage> {
           ),
           physics: BouncingScrollPhysics(),
           child: <Widget>[
-            SearchBar().padding(horizontal: 16),
+            SearchBar(
+              onChanged: context.read(carCompareViewModel).changeSearchText,
+              onSearch: (_) {
+                context.read(carCompareViewModel).fetch();
+              },
+            ).padding(horizontal: 16),
             SizedBox(height: 32),
             Text(S.of(context).category, style: textTheme.headline6)
                 .padding(horizontal: 16),
@@ -137,7 +126,11 @@ class _CarsPageState extends State<CarsPage> {
                   data: (cars) {
                     return GridView.builder(
                       padding: EdgeInsets.only(
-                          top: 16, left: 16, right: 16, bottom: 24),
+                        top: 16,
+                        left: 16,
+                        right: 16,
+                        bottom: 24,
+                      ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 16,
@@ -157,7 +150,7 @@ class _CarsPageState extends State<CarsPage> {
                                 .addCar(context: context, car: item);
                           },
                           carId: item.id,
-                          hasUsed: widget.type == CarsPageType.usedCars,
+                          hasUsed: item.type == 'used',
                           title: '${item.brandName} ${item.title}',
                           price: int.tryParse(item.price) ?? 0,
                           imageUrl: item.file.isNotEmpty
@@ -183,6 +176,8 @@ class _Jerangkong extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     return GridView.builder(
       padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 24),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -195,7 +190,41 @@ class _Jerangkong extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       itemCount: 3,
       itemBuilder: (context, index) {
-        return ShimmerCarCard().expanded();
+        return Shimmer.fromColors(
+          baseColor: lightGreyColor,
+          highlightColor: Colors.white24,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: mediaQuery.size.width / 2 - 24,
+                width: mediaQuery.size.width / 2 - 24,
+                decoration: BoxDecoration(
+                  color: lightGreyColor,
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                height: 16,
+                width: mediaQuery.size.width / 3,
+                decoration: BoxDecoration(
+                  color: lightGreyColor,
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                height: 14,
+                width: mediaQuery.size.width / 1.2,
+                decoration: BoxDecoration(
+                  color: lightGreyColor,
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
   }
