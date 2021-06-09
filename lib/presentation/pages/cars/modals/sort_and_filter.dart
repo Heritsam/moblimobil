@@ -6,6 +6,7 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../../core/themes/theme.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../infrastructures/models/sort/sort_template.dart';
 import '../../../widgets/buttons/rounded_button.dart';
 
 class SortAndFilter extends ConsumerWidget {
@@ -41,7 +42,7 @@ class SortAndFilter extends ConsumerWidget {
                 _buildRow(
                   S.of(context).sorting,
                   DropdownSearch(
-                    items: ['Relevance', ''],
+                    items: ['Popular', 'Latest'],
                     hint: S.of(context).select,
                     mode: Mode.BOTTOM_SHEET,
                     dropdownSearchDecoration: InputDecoration(
@@ -57,25 +58,14 @@ class SortAndFilter extends ConsumerWidget {
                 SizedBox(height: 16),
                 _buildRow(
                   S.of(context).price,
-                  DropdownSearch(
-                    items: ['100-200jt', '200-300jt', '300-400jt'],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).installment,
-                  DropdownSearch(
-                    items: ['5jt / month', '10jt / month'],
+                  DropdownSearch<SortTemplate>(
+                    items: [
+                      SortTemplate('≤ 100 jt', '<100'),
+                      SortTemplate('100 jt - 300 jt', '100-300'),
+                      SortTemplate('300 jt - 500 jt', '300-500'),
+                      SortTemplate('≥ 500 jt', '>500'),
+                    ],
+                    itemAsString: (item) => item.label,
                     hint: S.of(context).select,
                     mode: Mode.BOTTOM_SHEET,
                     dropdownSearchDecoration: InputDecoration(

@@ -13,6 +13,7 @@ final locationRepository = Provider<LocationRepository>((ref) {
 abstract class LocationRepository {
   Future<List<Province>> provinces();
   Future<List<City>> cities(int provinceId);
+  Future<List<City>> cityAll();
   Future<List<Subdistrict>> subDistricts(int cityId);
 }
 
@@ -36,6 +37,17 @@ class LocationRepositoryImpl implements LocationRepository {
   Future<List<City>> cities(int provinceId) async {
     try {
       final response = await _client.get('/api/city/$provinceId');
+
+      return CityResponse.fromJson(response.data).data;
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<List<City>> cityAll() async {
+    try {
+      final response = await _client.get('/api/city-all');
 
       return CityResponse.fromJson(response.data).data;
     } catch (e) {

@@ -53,6 +53,9 @@ class LoginViewModel extends ChangeNotifier {
           if (e.message == 'email_not_verified') {
             final args = EmailNotVerified.fromJson(response!.data);
             Navigator.pushNamed(context, '/otp', arguments: OtpArgs(args));
+          } else {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(e.message)));
           }
         },
         orElse: () {

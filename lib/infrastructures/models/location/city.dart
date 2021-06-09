@@ -34,13 +34,13 @@ class City {
     required this.postalCode,
   });
 
-  final String cityId;
+  final int cityId;
   final String provinceId;
   final String cityName;
   final String postalCode;
 
   factory City.fromJson(Map<String, dynamic> json) => City(
-        cityId: json['city_id'],
+        cityId: int.parse(json['city_id']),
         provinceId: json['province_id'],
         cityName: json['city_name'],
         postalCode: json['postal_code'],

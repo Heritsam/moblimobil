@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/pages/cars_detail/cars_detail_page.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../widgets/cars/car_card.dart';
 import '../../../widgets/shimmer/shimmer_car_card.dart';
+import '../../cars_detail/cars_detail_page.dart';
 import '../viewmodels/hot_deals_notifier.dart';
 
 class HomeHotDeals extends ConsumerWidget {

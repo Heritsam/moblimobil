@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../../infrastructures/models/sort/sort_template.dart';
 import '../../../widgets/cars/car_card.dart';
 import '../../../widgets/cars/price_chip.dart';
 import '../../../widgets/shimmer/shimmer_car_card.dart';
@@ -21,16 +22,16 @@ class HomeSortByPrice extends ConsumerWidget {
           scrollDirection: Axis.horizontal,
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: 16),
-          itemCount: state.prices.length,
+          itemCount: SortTemplate.prices.length,
           itemBuilder: (context, index) {
-            final item = state.prices[index];
+            final item = SortTemplate.prices[index];
 
             return PriceChip(
               onTap: () {
-                state.changePrice(item.filter);
+                state.changePrice(item);
               },
               label: item.label,
-              selected: state.filter == item.filter,
+              selected: state.filter == item,
             ).padding(right: 16, bottom: 16);
           },
         ).constrained(height: 64),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
@@ -111,8 +112,9 @@ class CarsDetailViewModel extends ChangeNotifier {
     );
 
     try {
+      final phoneNumber = phone.replaceFirst('0', '62');
       final message = await _read(productRepository).submit(id);
-      final link = WhatsAppUnilink(phoneNumber: phone, text: message);
+      final link = WhatsAppUnilink(phoneNumber: phoneNumber, text: message);
 
       Navigator.pop(context);
 
@@ -122,5 +124,12 @@ class CarsDetailViewModel extends ChangeNotifier {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
     }
+  }
+
+  Future<void> callSeller(
+    BuildContext context, {
+    required String phone,
+  }) async {
+    await FlutterPhoneDirectCaller.callNumber(phone);
   }
 }

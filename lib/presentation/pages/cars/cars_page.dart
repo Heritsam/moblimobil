@@ -65,6 +65,9 @@ class _CarsPageState extends State<CarsPage> {
               onSearch: (_) {
                 context.read(carCompareViewModel).fetch();
               },
+              onTextCleared: () {
+                context.read(carCompareViewModel).changeSearchText('');
+              },
             ).padding(horizontal: 16),
             SizedBox(height: 32),
             Text(S.of(context).category, style: textTheme.headline6)

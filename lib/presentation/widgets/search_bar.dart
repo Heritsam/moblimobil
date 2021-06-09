@@ -7,11 +7,13 @@ import '../../generated/l10n.dart';
 class SearchBar extends StatefulWidget {
   final Function(String)? onSearch;
   final Function(String)? onChanged;
+  final Function() onTextCleared;
 
   const SearchBar({
     Key? key,
     this.onSearch,
     this.onChanged,
+    required this.onTextCleared,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,14 @@ class _SearchBarState extends State<SearchBar> {
           ),
           onChanged: widget.onChanged,
         ).expanded(),
+        if (_controller.text.isNotEmpty)
+          IconButton(
+            onPressed: () {
+              _controller.clear();
+              widget.onTextCleared();
+            },
+            icon: Icon(Icons.close, size: 18, color: Colors.black54),
+          ),
         Icon(Icons.search_rounded, size: 32, color: Colors.white)
             .padding(all: 12)
             .ripple()

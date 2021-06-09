@@ -52,9 +52,11 @@ class NewsAndReviewPage extends StatelessWidget {
           child: Column(
             children: [
               SearchBar(
-                onSearch: (value) {
-                  context.read(newsListNotifier).fetch(search: value);
+                onChanged: context.read(newsListNotifier).changeSearchText,
+                onSearch: (_) {
+                  context.read(newsListNotifier).fetch();
                 },
+                onTextCleared: context.read(newsListNotifier).resetAndSearch,
               ).padding(horizontal: 16),
               NewsCategoryTab(),
               SizedBox(height: 24),

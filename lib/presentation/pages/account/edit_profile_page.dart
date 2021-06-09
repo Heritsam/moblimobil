@@ -265,15 +265,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           return _buildCityField(
                             context,
                             onChanged: (value) {
-                              vm.cityId = int.parse(value!.cityId);
+                              vm.cityId = value!.cityId;
                               vm.fetchSubdistricts();
                             },
                             items: items,
                             enabled: true,
                             value: vm.cityId != 0
                                 ? items.firstWhere(
-                                    (item) =>
-                                        item.cityId == vm.cityId.toString(),
+                                    (item) => item.cityId == vm.cityId,
                                     orElse: () => items[0],
                                   )
                                 : null,
@@ -385,6 +384,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
       validator: (_) {
         return 'Required';
       },
+      emptyBuilder: (context, message) {
+        return Scaffold(
+          body: Text('No Data Found').center(),
+        );
+      },
     );
   }
 
@@ -418,6 +422,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
       validator: (value) {
         if (value == null) return 'Required';
       },
+      emptyBuilder: (context, message) {
+        return Scaffold(
+          body: Text('No Data Found').center(),
+        );
+      },
     );
   }
 
@@ -448,6 +457,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
         Icons.arrow_drop_down_rounded,
         color: mediumGreyColor,
       ),
+      emptyBuilder: (context, message) {
+        return Scaffold(
+          body: Text('No Data Found').center(),
+        );
+      },
     );
   }
 
@@ -478,6 +492,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
         Icons.arrow_drop_down_rounded,
         color: mediumGreyColor,
       ),
+      emptyBuilder: (context, message) {
+        return Scaffold(
+          body: Text('No Data Found').center(),
+        );
+      },
     );
   }
 }

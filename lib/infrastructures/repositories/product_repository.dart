@@ -10,6 +10,7 @@ import '../../core/utils/preferences_key.dart';
 import '../../providers.dart';
 import '../models/product/product.dart';
 import '../models/product/product_index.dart';
+import '../models/sort/sort_template.dart';
 
 final productRepository = Provider<ProductRepository>((ref) {
   final dio = ref.watch(dioClient);
@@ -23,7 +24,18 @@ abstract class ProductRepository {
     int page = 1,
     String? sort,
     String? search,
-    String? rangePrice,
+    SortTemplate? rangePrice,
+    SortTemplate? rangeKm,
+    String? yearBefore,
+    String? yearAfter,
+    SortTemplate? byYear,
+    int? cityId,
+    int? brandId,
+    int? bodyTypeId,
+    int? fuelTypeId,
+    int? transmissionId,
+    int? colorId,
+    bool withAuth = false,
   });
   Future<Product> detail(int id);
   Future<String> submit(int id);
@@ -40,18 +52,50 @@ class ProductRepositoryImpl implements ProductRepository {
     int page = 1,
     String? sort,
     String? search,
-    String? rangePrice,
+    SortTemplate? rangePrice,
+    SortTemplate? rangeKm,
+    String? yearBefore,
+    String? yearAfter,
+    SortTemplate? byYear,
+    int? cityId,
+    int? brandId,
+    int? bodyTypeId,
+    int? fuelTypeId,
+    int? transmissionId,
+    int? colorId,
+    bool withAuth = false,
   }) async {
+    late String? token;
+
     try {
+      if (withAuth) {
+        token = _preferences.getString(PreferencesKey.tokenKey);
+      }
+
       final response = await _client.post(
         '/api/product',
+        options: Options(
+          headers: {
+            if (withAuth) HttpHeaders.authorizationHeader: 'Bearer $token',
+          },
+        ),
         queryParameters: {
           'page': page,
           if (sort != null) 'sort': sort,
+          if (cityId != null) 'city': cityId,
+          if (brandId != null) 'brand': brandId,
+          if (bodyTypeId != null) 'bodytype': bodyTypeId,
+          if (fuelTypeId != null) 'fueltype': fuelTypeId,
+          if (transmissionId != null) 'transmission': transmissionId,
+          if (colorId != null) 'color': colorId,
         },
         data: {
           if (search != null) 'search': search,
-          if (rangePrice != null) 'range_price': rangePrice,
+          if (rangePrice != null) 'range_price': rangePrice.filter,
+          if (rangeKm != null) 'range_km': rangeKm.filter,
+          if (yearBefore != null) 'year_before': yearBefore,
+          if (yearAfter != null) 'year_after': yearAfter,
+          if (byYear != null) 'by_year': byYear.filter,
         },
       );
 

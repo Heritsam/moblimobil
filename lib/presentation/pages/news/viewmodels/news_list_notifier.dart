@@ -17,15 +17,16 @@ class NewsListNotifier extends ChangeNotifier {
 
   List<News> items = [];
   bool isLoading = false;
+  String query = '';
   int? selectedCategoryId;
 
-  Future<void> fetch({String? search}) async {
+  Future<void> fetch() async {
     isLoading = true;
     notifyListeners();
 
     try {
       final news = await _read(newsRepository).index(
-        search: search,
+        search: query,
         categoryId: selectedCategoryId,
       );
 
@@ -40,6 +41,17 @@ class NewsListNotifier extends ChangeNotifier {
 
   void changeCategory(int id) {
     selectedCategoryId = id;
+    notifyListeners();
+  }
+
+  Future<void> resetAndSearch() async {
+    query = '';
+    notifyListeners();
+    await fetch();
+  }
+
+  void changeSearchText(String value) {
+    query = value;
     notifyListeners();
   }
 }

@@ -3,9 +3,9 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:share/share.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:styled_widget/styled_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/themes/mobli_icons_icons.dart';
 import '../../../core/themes/theme.dart';
@@ -121,7 +121,9 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                         unauthenticated: () {
                           Navigator.pushNamed(context, '/login');
                         },
-                        authenticated: () {},
+                        authenticated: () async {
+                          vm.callSeller(context, phone: car.userPhone!);
+                        },
                       );
                     },
                     icon: Icon(Icons.phone_outlined, color: Colors.white),
@@ -240,12 +242,15 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                         Row(
                           children: <Widget>[
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Share.share(
+                                    'https://belimobil.bekas/${car.id} ${car.description}',);
+                              },
                               icon: Icon(Icons.share),
                               iconSize: 32,
                               color: darkGreyColor,
                             ),
-                            // mark: Wishlist
+                            // Wishlist
                             if (vm.isWishlisted)
                               IconButton(
                                 onPressed: () {

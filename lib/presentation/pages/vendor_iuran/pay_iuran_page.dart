@@ -54,6 +54,11 @@ class _PayIuranPageState extends State<PayIuranPage> {
                 labelText: 'Bank',
                 contentPadding: EdgeInsets.zero,
               ),
+              emptyBuilder: (context, message) {
+                return Scaffold(
+                  body: Text('No Data Found').center(),
+                );
+              },
             ).padding(horizontal: 16),
             SizedBox(height: 16),
             TextField(
@@ -98,7 +103,8 @@ class _PayIuranPageState extends State<PayIuranPage> {
                 .decorated(
                   color: lightGreyColor.withOpacity(.70),
                   borderRadius: BorderRadius.circular(defaultBorderRadius),
-                ).constrained(width: mediaQuery.size.width)
+                )
+                .constrained(width: mediaQuery.size.width)
                 .padding(horizontal: 16),
             SizedBox(height: 48),
             RoundedButton(

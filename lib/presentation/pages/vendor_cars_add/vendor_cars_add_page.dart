@@ -128,6 +128,11 @@ class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
                 labelText: S.of(context).brand,
                 contentPadding: EdgeInsets.zero,
               ),
+              emptyBuilder: (context, message) {
+                return Scaffold(
+                  body: Text('No Data Found').center(),
+                );
+              },
             ).padding(horizontal: 16),
             SizedBox(height: 16),
             DropdownSearch(
@@ -146,6 +151,11 @@ class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
                 labelText: S.of(context).color,
                 contentPadding: EdgeInsets.zero,
               ),
+              emptyBuilder: (context, message) {
+                return Scaffold(
+                  body: Text('No Data Found').center(),
+                );
+              },
             ).padding(horizontal: 16),
             SizedBox(height: 16),
             DropdownSearch(
@@ -155,6 +165,11 @@ class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
                 labelText: S.of(context).bodyType,
                 contentPadding: EdgeInsets.zero,
               ),
+              emptyBuilder: (context, message) {
+                return Scaffold(
+                  body: Text('No Data Found').center(),
+                );
+              },
             ).padding(horizontal: 16),
             SizedBox(height: 16),
             DropdownSearch(
@@ -164,6 +179,11 @@ class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
                 labelText: S.of(context).model,
                 contentPadding: EdgeInsets.zero,
               ),
+              emptyBuilder: (context, message) {
+                return Scaffold(
+                  body: Text('No Data Found').center(),
+                );
+              },
             ).padding(horizontal: 16),
             SizedBox(height: 16),
             DropdownSearch(
@@ -173,6 +193,11 @@ class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
                 labelText: S.of(context).fuelType,
                 contentPadding: EdgeInsets.zero,
               ),
+              emptyBuilder: (context, message) {
+                return Scaffold(
+                  body: Text('No Data Found').center(),
+                );
+              },
             ).padding(horizontal: 16),
             SizedBox(height: 16),
             DropdownSearch(
@@ -182,6 +207,11 @@ class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
                 labelText: S.of(context).transmission,
                 contentPadding: EdgeInsets.zero,
               ),
+              emptyBuilder: (context, message) {
+                return Scaffold(
+                  body: Text('No Data Found').center(),
+                );
+              },
             ).padding(horizontal: 16),
             SizedBox(height: 16),
             TextField(

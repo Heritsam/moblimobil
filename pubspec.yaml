@@ -30,8 +30,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^4.0.0
   dropdown_search: ^0.6.1
+  equatable: ^2.0.2
   expandable: ^5.0.1
   fading_edge_scrollview: ^2.0.0
+  flutter_phone_direct_caller: ^2.0.0
   flutter_riverpod: ^0.14.0+2
   flutter_svg: ^0.22.0
   freezed_annotation: ^0.14.1
@@ -40,6 +42,7 @@ dependencies:
   intl: ^0.17.0
   onesignal_flutter: ^3.0.0-beta4
   pin_code_fields: ^7.1.0
+  share: ^2.0.4
   shared_preferences: ^2.0.5
   shimmer: ^2.0.0
   smooth_page_indicator: ^0.3.0-nullsafety.0

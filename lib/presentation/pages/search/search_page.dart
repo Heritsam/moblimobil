@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/pages/cars_detail/cars_detail_page.dart';
+import 'modals/search_sort.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -11,7 +11,7 @@ import '../../widgets/cars/car_card.dart';
 import '../../widgets/error/empty_state.dart';
 import '../../widgets/mobli_chip.dart';
 import '../../widgets/search_bar.dart';
-import '../cars/modals/sort_and_filter.dart';
+import '../cars_detail/cars_detail_page.dart';
 import 'viewmodels/search_viewmodel.dart';
 
 class SearchPage extends StatefulWidget {
@@ -47,7 +47,7 @@ class _SearchPageState extends State<SearchPage> {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) => SortAndFilter(),
+            builder: (context) => SearchSort(),
           );
         },
         label: Text('Sort & Filter', style: TextStyle(color: darkGreyColor)),
@@ -62,7 +62,8 @@ class _SearchPageState extends State<SearchPage> {
           return RefreshIndicator(
             onRefresh: () async {
               Future.wait([
-                vm.resetAndSearch(),
+                vm.initializeSort(),
+                vm.search(),
               ]);
             },
             displacement: 32 + mediaQuery.padding.top,
@@ -79,6 +80,7 @@ class _SearchPageState extends State<SearchPage> {
                   onSearch: (_) {
                     vm.search();
                   },
+                  onTextCleared: vm.resetAndSearch,
                 ).padding(horizontal: 16),
                 SizedBox(height: 32),
                 Text(S.of(context).category, style: textTheme.headline6)
@@ -120,9 +122,11 @@ class _SearchPageState extends State<SearchPage> {
                   loading: () => _Jerangkong(),
                   error: (message) {
                     return EmptyState(
-                      onPressed: () {
-                        vm.search();
-                      },
+                      onPressed: message == 'notfound'
+                          ? null
+                          : () {
+                              vm.search();
+                            },
                       message: message,
                     );
                   },
