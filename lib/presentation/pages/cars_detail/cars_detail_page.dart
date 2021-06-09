@@ -38,13 +38,14 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      args = ModalRoute.of(context)!.settings.arguments as CarsDetailArgs;
-      context.read(carsDetailViewModel).fetch(args.carId);
+      context.read(carsDetailViewModel(args.carId)).fetch();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    args = ModalRoute.of(context)!.settings.arguments as CarsDetailArgs;
+    
     final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
     final size = mediaQuery.size;
@@ -52,7 +53,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
     return Consumer(
       builder: (context, watch, child) {
         final authState = watch(authenticationNotifier);
-        final vm = watch(carsDetailViewModel);
+        final vm = watch(carsDetailViewModel(args.carId));
 
         return vm.productState.when(
           initial: () => CarsDetailShimmer(),
@@ -68,7 +69,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
               ),
               body: EmptyState(
                 onPressed: () {
-                  vm.fetch(args.carId);
+                  vm.fetch();
                 },
                 message: message,
               ),
@@ -141,7 +142,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
               body: RefreshIndicator(
                 onRefresh: () async {
                   Future.wait([
-                    vm.fetch(args.carId),
+                    vm.fetch(),
                   ]);
                 },
                 displacement: 32 + mediaQuery.padding.top,
@@ -304,7 +305,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                       ],
                     ).padding(horizontal: 16),
                     SizedBox(height: 32),
-                    Specification().padding(horizontal: 16),
+                    Specification(car.id).padding(horizontal: 16),
                     SizedBox(height: 32),
                     ExpandablePanel(
                       collapsed: ExpandableButton(

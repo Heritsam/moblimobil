@@ -8,11 +8,15 @@ import '../../../generated/l10n.dart';
 import 'viewmodels/cars_detail_viewmodel.dart';
 
 class Specification extends ConsumerWidget {
+  final int carId;
+
+  const Specification(this.carId);
+  
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final textTheme = Theme.of(context).textTheme;
 
-    final vm = watch(carsDetailViewModel);
+    final vm = watch(carsDetailViewModel(carId));
 
     return vm.productState.maybeWhen(
       data: (car) {

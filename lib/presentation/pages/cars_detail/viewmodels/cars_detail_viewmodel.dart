@@ -12,20 +12,22 @@ import '../../../../infrastructures/repositories/wishlist_repository.dart';
 import '../../../widgets/dialog/progress_dialog.dart';
 import '../../account/viewmodels/account_wishlist_notifier.dart';
 
-final carsDetailViewModel = ChangeNotifierProvider<CarsDetailViewModel>((ref) {
-  return CarsDetailViewModel(ref.read);
+final carsDetailViewModel =
+    ChangeNotifierProvider.family<CarsDetailViewModel, int>((ref, carId) {
+  return CarsDetailViewModel(ref.read, carId);
 });
 
 class CarsDetailViewModel extends ChangeNotifier {
   final Reader _read;
+  final int id;
 
-  CarsDetailViewModel(this._read);
+  CarsDetailViewModel(this._read, this.id);
 
   AppState<Product> productState = AppState.initial();
   bool isWishlisted = false;
   int? wishlistId;
 
-  Future<void> fetch(int id) async {
+  Future<void> fetch() async {
     productState = AppState.loading();
     isWishlisted = false;
     notifyListeners();
