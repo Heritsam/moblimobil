@@ -6,256 +6,371 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../../core/themes/theme.dart';
 import '../../../../generated/l10n.dart';
+import '../../../../infrastructures/models/location/city.dart';
+import '../../../../infrastructures/models/product_master/body_type.dart';
+import '../../../../infrastructures/models/product_master/brand.dart';
+import '../../../../infrastructures/models/product_master/car_color.dart';
+import '../../../../infrastructures/models/product_master/fuel_type.dart';
+import '../../../../infrastructures/models/product_master/transmission.dart';
 import '../../../../infrastructures/models/sort/sort_template.dart';
 import '../../../widgets/buttons/rounded_button.dart';
+import '../viewmodels/car_compare_viewmodel.dart';
 
 class SortAndFilter extends ConsumerWidget {
+  final _key = GlobalKey<FormState>();
   final _controller = ScrollController();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return Dialog(
-      insetPadding: EdgeInsets.all(16),
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.close),
-                color: mediumGreyColor,
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.end,
-          ),
-          FadingEdgeScrollView.fromSingleChildScrollView(
-            shouldDisposeScrollController: true,
-            child: SingleChildScrollView(
-              controller: _controller,
-              child: <Widget>[
-                _buildRow(
-                  S.of(context).sorting,
-                  DropdownSearch(
-                    items: ['Popular', 'Latest'],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
+    final vm = watch(carCompareViewModel);
+
+    return Form(
+      key: _key,
+      child: Dialog(
+        insetPadding: EdgeInsets.all(16),
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.close),
+                  color: mediumGreyColor,
                 ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).price,
-                  DropdownSearch<SortTemplate>(
-                    items: [
-                      SortTemplate('≤ 100 jt', '<100'),
-                      SortTemplate('100 jt - 300 jt', '100-300'),
-                      SortTemplate('300 jt - 500 jt', '300-500'),
-                      SortTemplate('≥ 500 jt', '>500'),
-                    ],
-                    itemAsString: (item) => item.label,
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).city,
-                  DropdownSearch(
-                    items: [
-                      'Jakarta',
-                      'Tangerang',
-                      'Bogor',
-                      'Depok',
-                      'Bandung',
-                      'Detroit',
-                    ],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).brand,
-                  DropdownSearch(
-                    items: [
-                      'Toyota',
-                      'MINI',
-                      'Tesla',
-                      'Mercedes-Benz',
-                      'BMW',
-                      'Honda',
-                    ],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).bodyType,
-                  DropdownSearch(
-                    items: [
-                      'MPV',
-                      'Sedan',
-                      'Hatchback',
-                      'SUV',
-                      'Convertible',
-                      'Pick-up',
-                    ],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).fuelType,
-                  DropdownSearch(
-                    items: ['Gas', 'Electric'],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).transmission,
-                  DropdownSearch(
-                    items: ['Manual', 'Matic'],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).year,
-                  DropdownSearch(
-                    items: ['2000-2005', '2005-2010', '2010-2015', '2015-2020'],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).kilometers,
-                  DropdownSearch(
-                    items: [
-                      '1000-10000',
-                      '10000-15000',
-                      '15000-20000',
-                      '20000-25000',
-                    ],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                _buildRow(
-                  S.of(context).color,
-                  DropdownSearch(
-                    items: ['Black', 'Red', 'White', 'Gold'],
-                    hint: S.of(context).select,
-                    mode: Mode.BOTTOM_SHEET,
-                    dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 16),
-                    ),
-                    dropDownButton: Icon(
-                      Icons.arrow_drop_down_rounded,
-                      color: mediumGreyColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 32),
-              ].toColumn(),
+              ],
+              mainAxisAlignment: MainAxisAlignment.end,
             ),
-          ).expanded(),
-          RoundedButton(
-            label: S.of(context).sortAndFilter,
-          ).padding(all: 16),
-        ],
-      )
-          .backgroundColor(Colors.white)
-          .clipRRect(all: defaultBorderRadius)
-          .elevation(
-            10,
-            borderRadius: BorderRadius.circular(defaultBorderRadius),
-            shadowColor: Colors.black38,
-          ),
+            FadingEdgeScrollView.fromSingleChildScrollView(
+              shouldDisposeScrollController: true,
+              child: SingleChildScrollView(
+                controller: _controller,
+                child: <Widget>[
+                  _buildRow(
+                    S.of(context).sorting,
+                    DropdownSearch<String>(
+                      items: ['Popular', 'Latest'],
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.sort,
+                      onSaved: vm.selectSorting,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).price,
+                    DropdownSearch<SortTemplate>(
+                      items: SortTemplate.prices,
+                      itemAsString: (item) => item.label,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.rangePrice,
+                      onSaved: vm.selectPrice,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).city,
+                    DropdownSearch<City>(
+                      items: vm.cities,
+                      itemAsString: (item) => item.cityName,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.cityId,
+                      onSaved: vm.selectCity,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).brand,
+                    DropdownSearch<Brand>(
+                      items: vm.brands,
+                      itemAsString: (item) => item.title,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.brandId,
+                      onSaved: vm.selectBrand,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).bodyType,
+                    DropdownSearch<BodyType>(
+                      items: vm.bodyTypes,
+                      itemAsString: (item) => item.title,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.bodyTypeId,
+                      onSaved: vm.selectBodyType,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).fuelType,
+                    DropdownSearch<FuelType>(
+                      items: vm.fuelTypes,
+                      itemAsString: (item) => item.title,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.fuelTypeId,
+                      onSaved: vm.selectFuelType,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).transmission,
+                    DropdownSearch<Transmission>(
+                      items: vm.transmissions,
+                      itemAsString: (item) => item.title,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.transmissionId,
+                      onSaved: vm.selectTransmission,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).year,
+                    DropdownSearch<SortTemplate>(
+                      items: SortTemplate.byYears,
+                      itemAsString: (item) => item.label,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.byYear,
+                      onSaved: vm.selectYear,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).kilometers,
+                    DropdownSearch<SortTemplate>(
+                      items: SortTemplate.kilometers,
+                      itemAsString: (item) => item.label,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.rangeKm,
+                      onSaved: vm.selectKilometers,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  _buildRow(
+                    S.of(context).color,
+                    DropdownSearch<CarColor>(
+                      items: vm.colors,
+                      itemAsString: (item) => item.title,
+                      hint: S.of(context).select,
+                      mode: Mode.BOTTOM_SHEET,
+                      selectedItem: vm.colorId,
+                      onSaved: vm.selectColor,
+                      dropdownSearchDecoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 16),
+                      ),
+                      dropDownButton: Icon(
+                        Icons.arrow_drop_down_rounded,
+                        color: mediumGreyColor,
+                      ),
+                      searchBoxDecoration: InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Search...',
+                      ),
+                      showSearchBox: true,
+                      emptyBuilder: (context, message) {
+                        return Scaffold(
+                          body: Text('No Data Found').center(),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 32),
+                ].toColumn(),
+              ),
+            ).expanded(),
+            RoundedButton(
+              onPressed: () {
+                _key.currentState!.save();
+                vm.fetch();
+                Navigator.pop(context);
+              },
+              label: S.of(context).sortAndFilter,
+            ).padding(all: 16),
+          ],
+        )
+            .backgroundColor(Colors.white)
+            .clipRRect(all: defaultBorderRadius)
+            .elevation(
+              10,
+              borderRadius: BorderRadius.circular(defaultBorderRadius),
+              shadowColor: Colors.black38,
+            ),
+      ),
     );
   }
 

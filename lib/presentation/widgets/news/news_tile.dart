@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/pages/account/viewmodels/account_bookmark_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -9,6 +8,7 @@ import '../../../core/themes/theme.dart';
 import '../../../infrastructures/models/news/news.dart';
 import '../../../infrastructures/repositories/wishlist_repository.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
+import '../../pages/account/viewmodels/account_bookmark_notifier.dart';
 import '../../pages/news/news_detail_page.dart';
 import '../mobli_tile.dart';
 

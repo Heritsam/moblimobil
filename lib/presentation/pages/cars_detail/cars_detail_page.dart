@@ -244,7 +244,8 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                             IconButton(
                               onPressed: () {
                                 Share.share(
-                                    'https://belimobil.bekas/${car.id} ${car.description}',);
+                                  'https://belimobil.bekas/${car.id} ${car.description}',
+                                );
                               },
                               icon: Icon(Icons.share),
                               iconSize: 32,
@@ -369,7 +370,13 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                         final item = car.productRecommend[index];
 
                         return CarCard(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/cars-detail',
+                              arguments: CarsDetailArgs(item.id),
+                            );
+                          },
                           carId: item.id,
                           title: '${item.brandName} ${item.title}',
                           price: int.tryParse(item.price) ?? 0,

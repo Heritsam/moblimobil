@@ -48,6 +48,7 @@ class _CarsPageState extends State<CarsPage> {
       body: RefreshIndicator(
         onRefresh: () async {
           Future.wait([
+            context.read(carCompareViewModel).initializeSort(),
             context.read(carCompareViewModel).resetAndFetch(),
           ]);
         },
@@ -65,9 +66,7 @@ class _CarsPageState extends State<CarsPage> {
               onSearch: (_) {
                 context.read(carCompareViewModel).fetch();
               },
-              onTextCleared: () {
-                context.read(carCompareViewModel).changeSearchText('');
-              },
+              onTextCleared: context.read(carCompareViewModel).resetAndFetch,
             ).padding(horizontal: 16),
             SizedBox(height: 32),
             Text(S.of(context).category, style: textTheme.headline6)

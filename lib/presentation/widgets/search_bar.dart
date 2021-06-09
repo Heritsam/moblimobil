@@ -41,7 +41,13 @@ class _SearchBarState extends State<SearchBar> {
             border: InputBorder.none,
             contentPadding: EdgeInsets.all(16),
           ),
-          onChanged: widget.onChanged,
+          onChanged: (value) {
+            if (widget.onChanged != null) {
+              widget.onChanged!(value);
+            }
+
+            setState(() {});
+          },
         ).expanded(),
         if (_controller.text.isNotEmpty)
           IconButton(
