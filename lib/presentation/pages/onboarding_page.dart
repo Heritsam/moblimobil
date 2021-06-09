@@ -35,7 +35,7 @@ class OnboardingPage extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(text: 'Selamat datang di '),
-                TextSpan(text: 'LAKUMOBIL').fontWeight(FontWeight.w600),
+                TextSpan(text: 'BELIMOBIL').fontWeight(FontWeight.w600),
                 TextSpan(
                   text:
                       ', tempat jual beli mobil terpercaya, yang aman, cepat, dan bergaransi Yuk lanjut ke beranda.',

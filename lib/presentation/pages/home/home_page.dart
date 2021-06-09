@@ -40,10 +40,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white70,
         centerTitle: false,
         elevation: 0,
-        title: Text(
-          'LakuMobil',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
-        ),
+        title: Image.asset('assets/belimobil.png', height: 28),
         flexibleSpace: ClipRRect(
           child: Container(color: Colors.white60).backgroundBlur(7),
         ),

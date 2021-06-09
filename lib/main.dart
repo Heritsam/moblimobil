@@ -65,7 +65,7 @@ class MyApp extends ConsumerWidget {
     final settings = watch(appSettingsNotifier);
 
     return MaterialApp(
-      title: 'LakuMobil',
+      title: 'belimobil',
       locale: Locale(settings.language),
       localizationsDelegates: [
         S.delegate,
