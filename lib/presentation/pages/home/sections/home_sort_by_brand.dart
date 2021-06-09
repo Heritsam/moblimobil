@@ -19,17 +19,9 @@ class HomeSortByBrand extends ConsumerWidget {
       return Wrap(
         spacing: 10,
         runSpacing: 12,
-        children: [
-          'assets/brands/toyota.png',
-          'assets/brands/bmw.png',
-          'assets/brands/suzuki.png',
-          'assets/brands/honda.png',
-          'assets/brands/nissan.png',
-          'assets/brands/daihatsu.png',
-          'assets/brands/mitsubishi.png',
-          'assets/brands/datsun.png',
-        ].map((e) {
-          return Shimmer.fromColors(
+        children: List.generate(
+          8,
+          (index) => Shimmer.fromColors(
             baseColor: lightGreyColor,
             highlightColor: Colors.white24,
             child: Container(
@@ -40,8 +32,8 @@ class HomeSortByBrand extends ConsumerWidget {
                 color: lightGreyColor,
               ),
             ),
-          );
-        }).toList(),
+          ),
+        ),
       ).padding(horizontal: 16);
     }
 

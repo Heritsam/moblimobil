@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -7,8 +6,8 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SvgPicture.asset(
-        'assets/logo_text.svg',
+      body: Image.asset(
+        'assets/belimobil.png',
         height: 180,
         width: 180,
       ).center(),
