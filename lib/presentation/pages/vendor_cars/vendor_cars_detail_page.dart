@@ -11,7 +11,7 @@ import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/car.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
 import '../../widgets/buttons/rounded_icon_button.dart';
-import 'specification.dart';
+import 'section/specification.dart';
 
 class VendorCarsDetailPage extends StatefulWidget {
   @override

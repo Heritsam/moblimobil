@@ -64,7 +64,7 @@ class Toggle extends StatelessWidget {
               label,
               style: TextStyle(
                 color: isActive ? Colors.white : darkGreyColor,
-                fontWeight: FontWeight.w600
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/pages/account/viewmodels/account_user_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/mobli_icons_icons.dart';
@@ -15,6 +16,7 @@ class MobliDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final settings = watch(appSettingsNotifier);
+    final userNotifier = watch(accountUserNotifier);
 
     return Drawer(
       child: Scaffold(
@@ -81,6 +83,14 @@ class MobliDrawer extends ConsumerWidget {
               context: context,
               onTap: () {
                 Navigator.popUntil(context, ModalRoute.withName('/home'));
+                userNotifier.userState.maybeWhen(
+                  data: (user) {
+                    if (user.statusVendor == 'active') {
+                      Navigator.pushNamed(context, '/vendor-cars-add');
+                    }
+                  },
+                  orElse: () {},
+                );
               },
               title: S.of(context).sellCar.toUpperCase(),
               icon: MobliIcons.car,

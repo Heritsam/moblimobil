@@ -2,8 +2,8 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../core/themes/theme.dart';
-import '../../../generated/l10n.dart';
+import '../../../../core/themes/theme.dart';
+import '../../../../generated/l10n.dart';
 
 class Specification extends StatelessWidget {
   @override

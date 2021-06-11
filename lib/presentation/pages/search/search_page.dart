@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'modals/search_sort.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -12,6 +11,7 @@ import '../../widgets/error/empty_state.dart';
 import '../../widgets/mobli_chip.dart';
 import '../../widgets/search_bar.dart';
 import '../cars_detail/cars_detail_page.dart';
+import 'modals/search_sort.dart';
 import 'viewmodels/search_viewmodel.dart';
 
 class SearchPage extends StatefulWidget {
@@ -92,8 +92,12 @@ class _SearchPageState extends State<SearchPage> {
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   children: [
                     MobliChip(
+                      onTap: () {
+                        vm.changeCategory('');
+                      },
                       label: S.of(context).forYou,
-                      selected: true,
+                      selected: vm.type == '',
+                      elevated: vm.type == '',
                     ).padding(right: 12, bottom: 24),
                     MobliChip(
                       onTap: () {
@@ -104,16 +108,20 @@ class _SearchPageState extends State<SearchPage> {
                       elevated: false,
                     ).padding(right: 12, bottom: 24),
                     MobliChip(
-                      onTap: () {},
+                      onTap: () {
+                        vm.changeCategory('new');
+                      },
                       label: S.of(context).newCars,
-                      selected: false,
-                      elevated: false,
+                      selected: vm.type == 'new',
+                      elevated: vm.type == 'new',
                     ).padding(right: 12, bottom: 24),
                     MobliChip(
-                      onTap: () {},
+                      onTap: () {
+                        vm.changeCategory('used');
+                      },
                       label: S.of(context).usedCars,
-                      selected: false,
-                      elevated: false,
+                      selected: vm.type == 'used',
+                      elevated: vm.type == 'used',
                     ).padding(right: 12, bottom: 24),
                   ],
                 ).constrained(height: 64),

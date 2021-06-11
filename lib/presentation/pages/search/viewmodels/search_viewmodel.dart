@@ -35,6 +35,8 @@ class SearchViewModel extends ChangeNotifier {
   List<Transmission> transmissions = [];
   List<CarColor> colors = [];
 
+  String type = '';
+
   String query = '';
   String? sort;
   SortTemplate? rangePrice;
@@ -68,6 +70,7 @@ class SearchViewModel extends ChangeNotifier {
 
     try {
       final cars = await _read(productRepository).index(
+        type: type,
         search: query,
         rangePrice: rangePrice,
         rangeKm: rangeKm,
@@ -131,6 +134,12 @@ class SearchViewModel extends ChangeNotifier {
   }
 
   // ==
+  void changeCategory(String value) {
+    type = value;
+    notifyListeners();
+    search();
+  }
+  
   void selectSorting(String? value) {
     sort = value;
     notifyListeners();

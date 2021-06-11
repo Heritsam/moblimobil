@@ -67,7 +67,6 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   onSaved: (value) {
                     vm.email = value!;
-
                   },
                   validator: (value) {
                     final emailFormat = RegExp(

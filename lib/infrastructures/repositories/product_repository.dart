@@ -11,6 +11,7 @@ import '../../providers.dart';
 import '../models/product/product.dart';
 import '../models/product/product_index.dart';
 import '../models/sort/sort_template.dart';
+import '../params/product/add_product_params.dart';
 
 final productRepository = Provider<ProductRepository>((ref) {
   final dio = ref.watch(dioClient);
@@ -36,9 +37,13 @@ abstract class ProductRepository {
     int? transmissionId,
     int? colorId,
     bool withAuth = false,
+    String? type,
   });
   Future<Product> detail(int id);
   Future<String> submit(int id);
+  Future<Map<String, dynamic>> add(AddProductParams params);
+  Future<void> addFile(int carId, File file);
+  Future<void> delete(int id);
 }
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -64,6 +69,7 @@ class ProductRepositoryImpl implements ProductRepository {
     int? transmissionId,
     int? colorId,
     bool withAuth = false,
+    String? type,
   }) async {
     late String? token;
 
@@ -88,6 +94,7 @@ class ProductRepositoryImpl implements ProductRepository {
           if (fuelTypeId != null) 'fueltype': fuelTypeId,
           if (transmissionId != null) 'transmission': transmissionId,
           if (colorId != null) 'color': colorId,
+          if (type != null) 'type': type,
         },
         data: {
           if (search != null) 'search': search,
@@ -132,5 +139,54 @@ class ProductRepositoryImpl implements ProductRepository {
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }
+  }
+
+  @override
+  Future<Map<String, dynamic>> add(AddProductParams params) async {
+    try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
+      final response = await _client.post(
+        '/api/product/insert',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+        data: params.toJson(),
+      );
+
+      return response.data;
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<void> addFile(int carId, File file) async {
+    try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
+      final response = await _client.post(
+        '/api/product-file',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+        data: FormData.fromMap({
+          'product_id': carId,
+          'file_product': await MultipartFile.fromFile(
+            file.path,
+            filename: file.path.split('/').last.toString(),
+          ),
+        }),
+      );
+
+      return response.data;
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<void> delete(int id) async {
+    throw UnimplementedError();
   }
 }
