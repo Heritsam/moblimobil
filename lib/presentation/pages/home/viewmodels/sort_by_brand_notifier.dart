@@ -23,7 +23,7 @@ class SortByBrandNotifier extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final brands = await _read(productMasterRepository).brands();
+      final brands = await _read(productMasterRepository).brands(limit: true);
       items = brands.data;
       isLoading = false;
       notifyListeners();

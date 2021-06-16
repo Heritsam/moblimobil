@@ -1,4 +1,4 @@
-import 'package:moblimobil/infrastructures/models/profile/user.dart';
+import '../profile/user.dart';
 
 class LoginResponse {
   LoginResponse({

@@ -46,6 +46,9 @@ class LoginViewModel extends ChangeNotifier {
       _read(authenticationNotifier.notifier).checkStatus();
       _read(onesignalRepository).setExternalUserId(user.data.id);
 
+      // reset password visibility
+      isObscured = true;
+
       Navigator.popUntil(context, ModalRoute.withName('/home'));
     } on NetworkExceptions catch (e) {
       e.maybeWhen(

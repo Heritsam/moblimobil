@@ -16,9 +16,7 @@ final productMasterRepository = Provider<ProductMasterRepository>((ref) {
 });
 
 abstract class ProductMasterRepository {
-  Future<BrandResponse> brands({
-    int page = 1,
-  });
+  Future<BrandResponse> brands({bool limit = false});
   Future<List<BodyType>> bodyTypes();
   Future<List<FuelType>> fuelTypes();
   Future<List<CarColor>> colors();
@@ -32,15 +30,11 @@ class ProductMasterRepositoryImpl implements ProductMasterRepository {
   ProductMasterRepositoryImpl(this._client);
 
   @override
-  Future<BrandResponse> brands({
-    int page = 1,
-  }) async {
+  Future<BrandResponse> brands({bool limit = false}) async {
     try {
       final response = await _client.get(
         '/api/brands',
-        queryParameters: {
-          'page': page,
-        },
+        queryParameters: {'limit': limit},
       );
 
       return BrandResponse.fromJson(response.data);

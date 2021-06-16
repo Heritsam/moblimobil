@@ -1,22 +1,17 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
-import 'viewmodels/vendor_cars_add_viewmodel.dart';
 
 class UploadImageRow extends StatelessWidget {
-  final ImagePicker _picker = ImagePicker();
-  final File? image;
-  final Function()? onDelete;
+  final ImageProvider? image;
+  final Function()? onTap;
 
   UploadImageRow({
     Key? key,
     this.image,
-    this.onDelete,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -32,7 +27,7 @@ class UploadImageRow extends StatelessWidget {
               color: lightGreyColor,
               borderRadius: BorderRadius.circular(defaultBorderRadius),
               image: DecorationImage(
-                image: FileImage(image!),
+                image: image!,
                 fit: BoxFit.cover,
               ),
             ),
@@ -43,25 +38,13 @@ class UploadImageRow extends StatelessWidget {
               .backgroundBlur(7)
               .clipOval()
               .padding(all: 8)
-              .gestures(onTap: onDelete),
+              .gestures(onTap: onTap),
         ],
       );
     }
 
     return GestureDetector(
-      onTap: () async {
-        final picked = await _picker.getImage(
-          source: ImageSource.gallery,
-          imageQuality: 50,
-        );
-
-        if (picked != null) {
-          context.read(vendorCarsAddViewModel).addFile(File(picked.path));
-          print(context.read(vendorCarsAddViewModel).files);
-        } else {
-          print('watdehel');
-        }
-      },
+      onTap: onTap,
       child: Container(
         height: 100,
         width: 100,

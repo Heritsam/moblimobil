@@ -8,6 +8,7 @@ import '../../../generated/l10n.dart';
 import '../../widgets/buttons/circle_button.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/error/empty_state.dart';
+import 'vendor_cars_detail_page.dart';
 import 'viewmodels/vendor_cars_viewmodel.dart';
 
 class VendorCarsPage extends ConsumerWidget {
@@ -77,7 +78,11 @@ class VendorCarsPage extends ConsumerWidget {
 
                 return CarCard(
                   onTap: () {
-                    Navigator.pushNamed(context, '/vendor-cars-detail');
+                    Navigator.pushNamed(
+                      context,
+                      '/vendor-cars-detail',
+                      arguments: VendorCarsDetailArgs(item.id),
+                    );
                   },
                   carId: item.id,
                   hasUsed: item.type == 'used',

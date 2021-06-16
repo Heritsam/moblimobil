@@ -33,6 +33,7 @@ import 'presentation/pages/vendor/vendor_sold_page.dart';
 import 'presentation/pages/vendor_cars/vendor_cars_detail_page.dart';
 import 'presentation/pages/vendor_cars/vendor_cars_page.dart';
 import 'presentation/pages/vendor_cars_add/vendor_cars_add_page.dart';
+import 'presentation/pages/vendor_cars_edit/vendor_cars_edit_page.dart';
 import 'presentation/pages/vendor_iuran/iuran_history_page.dart';
 import 'presentation/pages/vendor_iuran/iuran_page.dart';
 import 'presentation/pages/vendor_iuran/pay_iuran_page.dart';
@@ -131,6 +132,7 @@ class MyApp extends ConsumerWidget {
         '/vendor-cars': (context) => VendorCarsPage(),
         '/vendor-cars-detail': (context) => VendorCarsDetailPage(),
         '/vendor-cars-add': (context) => VendorCarsAddPage(),
+        '/vendor-cars-edit': (context) => VendorCarsEditPage(),
         '/iuran': (context) => IuranPage(),
         '/pay-iuran': (context) => PayIuranPage(),
         '/iuran-history': (context) => IuranHistoryPage(),

@@ -23,6 +23,7 @@ abstract class ProfileRepository {
   Future<void> update(UpdateProfileParams params);
   Future<void> checkPassword(String oldPassword);
   Future<void> updatePassword(String newPassword);
+  Future<void> forgotPassword(String email);
 }
 
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -88,7 +89,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     try {
       final token = _preferences.getString(PreferencesKey.tokenKey);
       final userId = _preferences.getInt(PreferencesKey.userKey);
-      
+
       await _client.post(
         '/api/update-password',
         options: Options(
@@ -96,6 +97,15 @@ class ProfileRepositoryImpl implements ProfileRepository {
         ),
         data: {'new_password': newPassword, 'user_id': userId},
       );
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<void> forgotPassword(String email) async {
+    try {
+      await _client.post('/api/forgot-password', data: {'email': email});
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }

@@ -7,8 +7,8 @@ import '../../../../core/themes/theme.dart';
 import '../../../../generated/l10n.dart';
 import '../../../widgets/buttons/rounded_icon_button.dart';
 
-class CarsDetailShimmer extends StatelessWidget {
-  const CarsDetailShimmer({Key? key}) : super(key: key);
+class VendorCarsDetailShimmer extends StatelessWidget {
+  const VendorCarsDetailShimmer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,21 +33,76 @@ class CarsDetailShimmer extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RoundedIconButton(
-            icon: Icon(MobliIcons.chat, color: mediumGreyColor),
-            label: 'Chat Penjual',
-            horizontalPadding: 0,
-            enabled: false,
-          ).expanded(),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RoundedIconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/vendor-cars-add');
+                },
+                icon: Icon(Icons.edit_outlined, color: Colors.white, size: 32),
+                horizontalPadding: 24,
+                verticalPadding: 20,
+                backgroundColor: mediumGreyColor,
+                enabled: false,
+                elevated: false,
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Edit',
+                style: TextStyle(
+                  color: mediumGreyColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
           SizedBox(width: 16),
-          RoundedIconButton(
-            icon: Icon(Icons.phone_outlined, color: mediumGreyColor),
-            label: 'Telepon',
-            horizontalPadding: 0,
-            backgroundColor: darkGreyColor,
-            enabled: false,
-          ).expanded(),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RoundedIconButton(
+                icon: Icon(Icons.close, color: Colors.white, size: 32),
+                horizontalPadding: 24,
+                verticalPadding: 20,
+                backgroundColor: redColor,
+                enabled: false,
+                elevated: false,
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Delete',
+                style: TextStyle(
+                  color: mediumGreyColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 16),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RoundedIconButton(
+                icon: Icon(Icons.check, color: Colors.white, size: 32),
+                horizontalPadding: 24,
+                verticalPadding: 20,
+                backgroundColor: greenColor,
+                enabled: false,
+                elevated: false,
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Sold',
+                style: TextStyle(
+                  color: mediumGreyColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ],
       )
           .parent(({required child}) => SafeArea(child: child))
@@ -70,27 +125,15 @@ class CarsDetailShimmer extends StatelessWidget {
                 color: lightGreyColor,
               ),
               SizedBox(height: 16),
-              Row(
-                children: [
-                  Container(
-                    height: 42,
-                    width: 42,
-                    decoration: BoxDecoration(
-                      color: lightGreyColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  SizedBox(width: 16),
-                  Container(
-                    height: 16,
-                    width: size.width / 2,
-                    decoration: BoxDecoration(
-                      color: lightGreyColor,
-                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                    ),
-                  ),
-                ],
-              ).padding(horizontal: 16),
+              Container(
+                height: 16,
+                width: size.width / 2,
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: lightGreyColor,
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
+              ),
               SizedBox(height: 32),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

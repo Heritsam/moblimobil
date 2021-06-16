@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/notifiers/authentication/authentication_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -57,6 +58,7 @@ class _SearchPageState extends State<SearchPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Consumer(
         builder: (context, watch, child) {
+          final authState = watch(authenticationNotifier);
           final vm = watch(searchViewModel);
 
           return RefreshIndicator(
@@ -99,14 +101,21 @@ class _SearchPageState extends State<SearchPage> {
                       selected: vm.type == '',
                       elevated: vm.type == '',
                     ).padding(right: 12, bottom: 24),
-                    MobliChip(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/search-recent');
+                    authState.maybeWhen(
+                      authenticated: () {
+                        return MobliChip(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/search-recent');
+                          },
+                          label: S.of(context).recentlySeen,
+                          selected: false,
+                          elevated: false,
+                        ).padding(right: 12, bottom: 24);
                       },
-                      label: S.of(context).recentlySeen,
-                      selected: false,
-                      elevated: false,
-                    ).padding(right: 12, bottom: 24),
+                      orElse: () {
+                        return SizedBox();
+                      },
+                    ),
                     MobliChip(
                       onTap: () {
                         vm.changeCategory('new');

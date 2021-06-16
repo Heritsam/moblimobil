@@ -10,6 +10,7 @@ import '../../core/utils/preferences_key.dart';
 import '../../providers.dart';
 import '../models/product/product.dart';
 import '../models/product/product_index.dart';
+import '../models/product/product_last_view.dart';
 import '../models/sort/sort_template.dart';
 import '../params/product/add_product_params.dart';
 
@@ -43,7 +44,9 @@ abstract class ProductRepository {
   Future<String> submit(int id);
   Future<Map<String, dynamic>> add(AddProductParams params);
   Future<void> addFile(int carId, File file);
+  Future<void> update(int id, AddProductParams params);
   Future<void> delete(int id);
+  Future<ProductLastViewResponse> lastViewed();
 }
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -115,7 +118,16 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<Product> detail(int id) async {
     try {
-      final response = await _client.get('/api/product/$id');
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
+      final response = await _client.get(
+        '/api/product/$id',
+        options: Options(
+          headers: {
+            if (token != null) HttpHeaders.authorizationHeader: 'Bearer $token',
+          },
+        ),
+      );
 
       return Product.fromJson(response.data['data'][0]);
     } catch (e) {
@@ -186,7 +198,58 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
+  Future<void> update(int id, AddProductParams params) async {
+    try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
+      final response = await _client.post(
+        '/api/product/update',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+        data: {
+          'product_id': id,
+          ...params.toJson(),
+        },
+      );
+
+      return response.data;
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
   Future<void> delete(int id) async {
-    throw UnimplementedError();
+    try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
+      await _client.delete(
+        '/api/product/$id',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+      );
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<ProductLastViewResponse> lastViewed() async {
+    try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
+      final response = await _client.get(
+        '/api/product-last-viewed',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+      );
+
+      return ProductLastViewResponse.fromJson(response.data);
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
   }
 }

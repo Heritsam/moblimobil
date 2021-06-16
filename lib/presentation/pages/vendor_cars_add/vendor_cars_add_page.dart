@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
@@ -13,10 +16,8 @@ import '../../../infrastructures/models/product_master/fuel_type.dart';
 import '../../../infrastructures/models/product_master/transmission.dart';
 import '../../../infrastructures/models/product_master/variant.dart';
 import '../../widgets/buttons/rounded_button.dart';
-import 'upload_image_row.dart';
+import '../../widgets/vendor/upload_image_row.dart';
 import 'viewmodels/vendor_cars_add_viewmodel.dart';
-
-enum CarStatus { newCar, usedCar }
 
 class VendorCarsAddPage extends StatefulWidget {
   @override
@@ -24,6 +25,7 @@ class VendorCarsAddPage extends StatefulWidget {
 }
 
 class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
+  final _picker = ImagePicker();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -72,14 +74,27 @@ class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
                     itemCount: vm.files.length + 1,
                     itemBuilder: (context, index) {
                       if (index == vm.files.length) {
-                        return UploadImageRow();
+                        return UploadImageRow(
+                          onTap: () async {
+                            final picked = await _picker.getImage(
+                              source: ImageSource.gallery,
+                              imageQuality: 50,
+                            );
+
+                            if (picked != null) {
+                              context
+                                  .read(vendorCarsAddViewModel)
+                                  .addFile(File(picked.path));
+                            }
+                          },
+                        );
                       }
 
                       return UploadImageRow(
-                        onDelete: () {
+                        onTap: () {
                           vm.removeFile(index);
                         },
-                        image: vm.files[index],
+                        image: FileImage(vm.files[index]),
                       ).padding(right: 12);
                     },
                   ).constrained(height: 100),

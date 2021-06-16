@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/pages/cars_detail/cars_detail_page.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
-import '../../../infrastructures/models/car.dart';
 import '../../widgets/cars/car_card.dart';
+import '../../widgets/error/empty_state.dart';
+import 'viewmodels/search_recent_viewmodel.dart';
 
-class SearchRecentPage extends StatelessWidget {
+class SearchRecentPage extends StatefulWidget {
+  @override
+  _SearchRecentPageState createState() => _SearchRecentPageState();
+}
+
+class _SearchRecentPageState extends State<SearchRecentPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      context.read(searchRecentViewModel).fetch();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -25,34 +43,131 @@ class SearchRecentPage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
       ),
-      body: GridView.builder(
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.only(
-          right: 16,
-          left: 16,
-          top: mediaQuery.padding.top + 72,
-          bottom: mediaQuery.padding.bottom + 16,
-        ),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: 3.3 / 4.3,
-        ),
-        itemCount: carList.length,
-        itemBuilder: (context, index) {
-          final item = carList[index];
+      body: Consumer(
+        builder: (context, watch, child) {
+          final vm = watch(searchRecentViewModel);
 
-          return CarCard(
-            carId: item.id,
-            hasUsed: index.isOdd,
-            title: item.title,
-            price: item.price,
-            imageUrl: item.imageUrl,
-            size: mediaQuery.size.width / 2 - 24,
+          return vm.productState.when(
+            initial: () => _Jerangkong(),
+            loading: () => _Jerangkong(),
+            error: (message) {
+              return EmptyState(message: message);
+            },
+            data: (cars) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  Future.wait([
+                    vm.fetch(),
+                  ]);
+                },
+                displacement: 32 + mediaQuery.padding.top,
+                edgeOffset: 32 + mediaQuery.padding.top,
+                child: GridView.builder(
+                  physics: BouncingScrollPhysics(),
+                  padding: EdgeInsets.only(
+                    right: 16,
+                    left: 16,
+                    top: mediaQuery.padding.top + 72,
+                    bottom: mediaQuery.padding.bottom + 16,
+                  ),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 3.3 / 4.3,
+                  ),
+                  itemCount: cars.length,
+                  itemBuilder: (context, index) {
+                    final item = cars[index].product;
+
+                    return CarCard(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/cars-detail',
+                          arguments: CarsDetailArgs(item.id),
+                        );
+                      },
+                      carId: item.id,
+                      hasUsed: item.type == 'used',
+                      title: item.title,
+                      price: int.tryParse(item.price) ?? 0,
+                      imageUrl: item.file.isNotEmpty
+                          ? item.file.first.file
+                          : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png',
+                      size: mediaQuery.size.width / 2 - 24,
+                    );
+                  },
+                ),
+              );
+            },
           );
         },
       ),
+    );
+  }
+}
+
+class _Jerangkong extends StatelessWidget {
+  const _Jerangkong({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
+    return GridView.builder(
+      padding: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: mediaQuery.padding.top + 16,
+        bottom: mediaQuery.padding.bottom + 16,
+      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16,
+        childAspectRatio: 3.3 / 4.3,
+      ),
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 3,
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: lightGreyColor,
+          highlightColor: Colors.white24,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: mediaQuery.size.width / 2 - 24,
+                width: mediaQuery.size.width / 2 - 24,
+                decoration: BoxDecoration(
+                  color: lightGreyColor,
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                height: 16,
+                width: mediaQuery.size.width / 3,
+                decoration: BoxDecoration(
+                  color: lightGreyColor,
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                height: 14,
+                width: mediaQuery.size.width / 1.2,
+                decoration: BoxDecoration(
+                  color: lightGreyColor,
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

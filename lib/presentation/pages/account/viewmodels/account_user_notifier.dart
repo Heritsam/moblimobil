@@ -5,8 +5,11 @@ import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
 import '../../../../infrastructures/models/profile/user.dart';
 import '../../../../infrastructures/repositories/profile_repository.dart';
+import '../../vendor_cars/viewmodels/vendor_cars_viewmodel.dart';
 import 'account_bookmark_notifier.dart';
 import 'account_wishlist_notifier.dart';
+import 'vendor_cars_notifier.dart';
+import 'vendor_sold_notifier.dart';
 
 final accountUserNotifier = ChangeNotifierProvider<AccountUserNotifier>((ref) {
   return AccountUserNotifier(ref.read);
@@ -35,6 +38,9 @@ class AccountUserNotifier extends ChangeNotifier {
       // Fetch user wishlist & bookmarks
       _read(accountWishlistNotifier).getWishlists();
       _read(accountBookmarkNotifier).getBookmarks();
+      _read(vendorCarsNotifier).fetch();
+      _read(vendorSoldNotifier).fetch();
+      _read(vendorCarsViewModel).fetch();
 
       notifyListeners();
     } on NetworkExceptions catch (e) {
