@@ -44,6 +44,7 @@ abstract class ProductRepository {
   Future<String> submit(int id);
   Future<Map<String, dynamic>> add(AddProductParams params);
   Future<void> addFile(int carId, File file);
+  Future<void> deleteFile(int id);
   Future<void> update(int id, AddProductParams params);
   Future<void> delete(int id);
   Future<ProductLastViewResponse> lastViewed();
@@ -192,6 +193,22 @@ class ProductRepositoryImpl implements ProductRepository {
       );
 
       return response.data;
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<void> deleteFile(int id) async {
+    try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
+      await _client.delete(
+        '/api/product-file/$id',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+      );
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }

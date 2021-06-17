@@ -13,6 +13,7 @@ import '../../../../infrastructures/models/product_master/fuel_type.dart';
 import '../../../../infrastructures/models/product_master/transmission.dart';
 import '../../../../infrastructures/models/product_master/variant.dart';
 import '../../../../infrastructures/params/product/add_product_params.dart';
+import '../../../../infrastructures/params/product/product_file_params.dart';
 import '../../../../infrastructures/repositories/product_master_repository.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 import '../../account/viewmodels/vendor_cars_notifier.dart';
@@ -39,7 +40,9 @@ class VendorCarsEditViewModel extends ChangeNotifier {
   late AppState<List<FuelType>> fuelTypeState;
   late AppState<List<Transmission>> transmissionState;
 
-  List<File> files = [];
+  List<ProductFileParams> files = [];
+  List<int> filesToDelete = [];
+
   String carName = '';
   String price = '';
   String type = 'new';
@@ -54,8 +57,6 @@ class VendorCarsEditViewModel extends ChangeNotifier {
   String descriptionTitle = '';
   String description = '';
 
-  List<ProductFile> oldFiles = [];
-
   late AppState<Product> carState;
 
   Future<void> fetchCar() async {
@@ -64,8 +65,12 @@ class VendorCarsEditViewModel extends ChangeNotifier {
     try {
       final car = await _read(productRepository).detail(id);
 
-      oldFiles = car.file;
       files.clear();
+      filesToDelete.clear();
+
+      files = car.file
+          .map((e) => ProductFileParams(id: e.id, imageUrl: e.file))
+          .toList();
       carName = car.title;
       price = car.price;
       type = car.type;
@@ -214,17 +219,33 @@ class VendorCarsEditViewModel extends ChangeNotifier {
         ),
       );
 
-      // files.forEach((element) async {
-      //   await _read(productRepository).addFile(product['product_id'], element);
-      // });
+      files.forEach((element) async {
+        if (element.file != null) {
+          Future.wait([
+            _read(productRepository).addFile(id, element.file!),
+          ]).then((value) {
+            _read(vendorCarsViewModel).fetch();
+            _read(vendorCarsDetailViewModel(id)).fetch();
+          });
+        }
+      });
 
-      Navigator.pop(context);
+      filesToDelete.forEach((element) async {
+        Future.wait([
+          _read(productRepository).deleteFile(element),
+        ]).then((value) {
+          _read(vendorCarsViewModel).fetch();
+          _read(vendorCarsDetailViewModel(id)).fetch();
+        });
+      });
 
-      _read(vendorCarsDetailViewModel(id)).fetch();
-      _read(vendorCarsNotifier).fetch();
-      _read(vendorCarsViewModel).fetch();
+      Navigator.popUntil(context, ModalRoute.withName('/vendor-cars'));
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Success')));
+
+      _read(vendorCarsNotifier).fetch();
+      _read(vendorCarsViewModel).fetch();
+      _read(vendorCarsDetailViewModel(id)).fetch();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
@@ -241,11 +262,16 @@ class VendorCarsEditViewModel extends ChangeNotifier {
   }
 
   void addFile(File file) {
-    files.add(file);
+    files.add(ProductFileParams(file: file));
     notifyListeners();
   }
 
   void removeFile(int index) {
+    if (files[index].id != null) {
+      filesToDelete.add(files[index].id!);
+      print(filesToDelete);
+    }
+
     files.removeAt(index);
     notifyListeners();
   }

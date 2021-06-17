@@ -51,7 +51,7 @@ class VendorCarsAddViewModel extends ChangeNotifier {
   String descriptionTitle = '';
   String description = '';
 
-  Future<void> initialize() async {
+  void initialize() {
     files.clear();
     carName = '';
     price = '';
@@ -80,6 +80,8 @@ class VendorCarsAddViewModel extends ChangeNotifier {
     fetchBodyTypes();
     fetchFuelTypes();
     fetchTransmissions();
+
+    notifyListeners();
   }
 
   Future<void> fetchBrands() async {
@@ -178,15 +180,17 @@ class VendorCarsAddViewModel extends ChangeNotifier {
       );
 
       files.forEach((element) async {
-        await _read(productRepository).addFile(product['product_id'], element);
+        Future.wait([
+          _read(productRepository).addFile(product['product_id'], element),
+        ]).then((value) => _read(vendorCarsViewModel).fetch());
       });
 
-      Navigator.pop(context);
+      Navigator.popUntil(context, ModalRoute.withName('/vendor-cars'));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Success')));
 
       _read(vendorCarsNotifier).fetch();
       _read(vendorCarsViewModel).fetch();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Success')));
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));

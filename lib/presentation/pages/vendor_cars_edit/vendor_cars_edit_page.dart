@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -95,9 +97,9 @@ class _VendorCarsAddPageState extends State<VendorCarsEditPage> {
                         physics: BouncingScrollPhysics(),
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         scrollDirection: Axis.horizontal,
-                        itemCount: vm.oldFiles.length + 1,
+                        itemCount: vm.files.length + 1,
                         itemBuilder: (context, index) {
-                          if (index == vm.oldFiles.length) {
+                          if (index == vm.files.length) {
                             return UploadImageRow(
                               onTap: () async {
                                 final picked = await _picker.getImage(
@@ -105,13 +107,29 @@ class _VendorCarsAddPageState extends State<VendorCarsEditPage> {
                                   imageQuality: 50,
                                 );
 
-                                if (picked != null) {}
+                                if (picked != null) {
+                                  vm.addFile(File(picked.path));
+                                }
                               },
                             );
                           }
 
+                          // image from database
+                          if (vm.files[index].imageUrl != null) {
+                            return UploadImageRow(
+                              onTap: () {
+                                vm.removeFile(index);
+                              },
+                              image: NetworkImage(vm.files[index].imageUrl!),
+                            ).padding(right: 12);
+                          }
+
+                          // image from file (upload)
                           return UploadImageRow(
-                            image: NetworkImage(vm.oldFiles[index].file),
+                            onTap: () {
+                              vm.removeFile(index);
+                            },
+                            image: FileImage(vm.files[index].file!),
                           ).padding(right: 12);
                         },
                       ).constrained(height: 100),
@@ -389,6 +407,13 @@ class _VendorCarsAddPageState extends State<VendorCarsEditPage> {
                       else
                         RoundedButton(
                           onPressed: () {
+                            if (vm.files.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text('Upload min 1 image')));
+                              return;
+                            }
+
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
                               vm.addProduct(context);

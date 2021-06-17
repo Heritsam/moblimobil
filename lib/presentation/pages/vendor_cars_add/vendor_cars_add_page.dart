@@ -367,6 +367,12 @@ class _VendorCarsAddPageState extends State<VendorCarsAddPage> {
                   else
                     RoundedButton(
                       onPressed: () {
+                        if (vm.files.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Upload min 1 image')));
+                          return;
+                        }
+
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           vm.addProduct(context);
