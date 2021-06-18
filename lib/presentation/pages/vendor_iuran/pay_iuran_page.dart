@@ -9,6 +9,7 @@ import '../../../generated/l10n.dart';
 import '../../../infrastructures/models/bank/bank.dart';
 import '../../widgets/buttons/rounded_button.dart';
 import '../../widgets/cars/price_chip.dart';
+import '../account/viewmodels/account_user_notifier.dart';
 import 'viewmodels/pay_iuran_viewmodels.dart';
 
 class PayIuranPage extends StatefulWidget {
@@ -50,6 +51,7 @@ class _PayIuranPageState extends State<PayIuranPage> {
         ),
         body: Consumer(
           builder: (context, watch, child) {
+            final userState = watch(accountUserNotifier);
             final vm = watch(payIuranViewModels);
 
             return SingleChildScrollView(
@@ -65,7 +67,10 @@ class _PayIuranPageState extends State<PayIuranPage> {
                     decoration: InputDecoration(
                       labelText: S.of(context).fullNameField,
                     ),
-                    initialValue: vm.fullname,
+                    initialValue: userState.userState.maybeWhen(
+                      data: (user) => user.fullname,
+                      orElse: () => vm.fullname,
+                    ),
                     onSaved: (value) {
                       vm.fullname = value!;
                     },
@@ -166,7 +171,23 @@ class _PayIuranPageState extends State<PayIuranPage> {
                     style: textTheme.headline6,
                   ).padding(horizontal: 16),
                   SizedBox(height: 16),
-                  if (vm.file == null)
+                  if (vm.file != null)
+                    Container(
+                      width: mediaQuery.size.width,
+                      child: SizedBox(height: 80),
+                      padding: EdgeInsets.all(64),
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: lightGreyColor.withOpacity(.70),
+                        borderRadius:
+                            BorderRadius.circular(defaultBorderRadius),
+                        image: DecorationImage(
+                          image: FileImage(vm.file!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ).gestures(onTap: () => vm.peekImage(context))
+                  else
                     Icon(
                       Icons.camera_alt_outlined,
                       size: 80,
@@ -180,24 +201,32 @@ class _PayIuranPageState extends State<PayIuranPage> {
                         )
                         .constrained(width: mediaQuery.size.width)
                         .padding(horizontal: 16)
-                        .gestures(onTap: vm.pickImage)
-                  else
-                    Container(
-                      width: mediaQuery.size.width,
-                      child: SizedBox(height: 80),
-                      padding: EdgeInsets.all(64),
-                      margin: EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: lightGreyColor.withOpacity(.70),
-                        borderRadius:
-                            BorderRadius.circular(defaultBorderRadius),
-                      ),
-                    ),
+                        .gestures(onTap: vm.pickImage),
                   SizedBox(height: 48),
-                  RoundedButton(
-                    label: 'Upload',
-                    horizontalPadding: 32,
-                  ).center(),
+                  if (vm.isLoading)
+                    RoundedButton(
+                      enabled: false,
+                      elevated: false,
+                      label: 'Loading...',
+                      horizontalPadding: 32,
+                    ).center()
+                  else
+                    RoundedButton(
+                      onPressed: () {
+                        if (vm.file == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Upload bukti')));
+                          return;
+                        }
+
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          vm.submit(context);
+                        }
+                      },
+                      label: 'Upload',
+                      horizontalPadding: 32,
+                    ).center(),
                   SizedBox(height: mediaQuery.padding.bottom + 32),
                 ],
               ),

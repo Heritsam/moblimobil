@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
+import '../../widgets/error/empty_state.dart';
 import '../../widgets/mobli_card.dart';
+import 'viewmodels/iuran_history_viewmodel.dart';
 
-class IuranHistoryPage extends StatelessWidget {
+class IuranHistoryPage extends StatefulWidget {
+  @override
+  _IuranHistoryPageState createState() => _IuranHistoryPageState();
+}
+
+class _IuranHistoryPageState extends State<IuranHistoryPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      context.read(iuranHistoryViewModel).fetch();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -23,72 +40,184 @@ class IuranHistoryPage extends StatelessWidget {
           style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
       ),
-      body: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.only(
-          top: mediaQuery.padding.top + 72,
-          bottom: mediaQuery.padding.bottom + 64,
-          left: 16,
-          right: 16,
-        ),
-        itemCount: 6,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: 16),
-            child: MobliCard(
-              padding: EdgeInsets.all(16),
+      body: Consumer(
+        builder: (context, watch, child) {
+          final vm = watch(iuranHistoryViewModel);
+
+          return vm.iuranState.when(
+            initial: () => _Jerangkong(),
+            loading: () => _Jerangkong(),
+            error: (message) {
+              return EmptyState(
+                onPressed: vm.fetch,
+                message: message,
+              );
+            },
+            data: (items) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  Future.wait([
+                    vm.fetch(),
+                  ]);
+                },
+                displacement: mediaQuery.padding.top,
+                edgeOffset: mediaQuery.padding.top,
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  padding: EdgeInsets.only(
+                    top: mediaQuery.padding.top + 72,
+                    bottom: mediaQuery.padding.bottom + 64,
+                    left: 16,
+                    right: 16,
+                  ),
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    final item = items[index];
+
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 16),
+                      child: MobliCard(
+                        padding: EdgeInsets.all(16),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 120,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                color: lightGreyColor,
+                                borderRadius:
+                                    BorderRadius.circular(defaultBorderRadius),
+                                image: DecorationImage(
+                                  image: NetworkImage(item.file),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 16),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Pembayaran 3 Bulan',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  '12/12/2021',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: redColor,
+                                  ),
+                                ),
+                                SizedBox(height: 12),
+                                Text(
+                                  item.bankName,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: blueColor,
+                                  ),
+                                ),
+                                Text(
+                                  item.detailName,
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 6),
+                                Text(
+                                  'Rp 123.000',
+                                  style: TextStyle(
+                                    color: greenColor,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ).expanded(),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _Jerangkong extends StatelessWidget {
+  const _Jerangkong({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final size = mediaQuery.size;
+
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.only(
+        top: mediaQuery.padding.top + 16,
+        bottom: mediaQuery.padding.bottom + 16,
+        left: 16,
+        right: 16,
+      ),
+      itemCount: 2,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: 16),
+          child: MobliCard(
+            padding: EdgeInsets.all(16),
+            child: Shimmer.fromColors(
+              baseColor: lightGreyColor,
+              highlightColor: Colors.white24,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Styled.widget()
-                      .decorated(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              'https://1.bp.blogspot.com/-MOHGve9IHeQ/XHvEjRpgyhI/AAAAAAAAIyQ/06yF5OyDDHQEwAqbc9SnzW7Sq0rx_RMdwCLcBGAs/s1600/IMG_20181120_064248_565.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius:
-                            BorderRadius.circular(defaultBorderRadius),
-                      )
-                      .constrained(height: 120, width: 120),
+                  Container(
+                    height: 120,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: lightGreyColor,
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                    ),
+                  ),
                   SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Pembayaran 3 Bulan',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                      Container(
+                        height: 16,
+                        width: size.width / 2,
+                        decoration: BoxDecoration(
+                          color: lightGreyColor,
+                          borderRadius:
+                              BorderRadius.circular(defaultBorderRadius),
                         ),
                       ),
-                      SizedBox(height: 4),
-                      Text(
-                        '12/12/2021',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: redColor,
+                      SizedBox(height: 8),
+                      Container(
+                        height: 14,
+                        width: size.width / 3,
+                        decoration: BoxDecoration(
+                          color: lightGreyColor,
+                          borderRadius:
+                              BorderRadius.circular(defaultBorderRadius),
                         ),
                       ),
-                      SizedBox(height: 12),
-                      Text(
-                        'BCA',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: blueColor,
-                        ),
-                      ),
-                      Text(
-                        'Rohayat G. Ade',
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(height: 6),
-                      Text(
-                        'Rp 123.000',
-                        style: TextStyle(
-                          color: greenColor,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
+                      SizedBox(height: 40),
+                      Container(
+                        height: 22,
+                        width: size.width / 2.3,
+                        decoration: BoxDecoration(
+                          color: lightGreyColor,
+                          borderRadius:
+                              BorderRadius.circular(defaultBorderRadius),
                         ),
                       ),
                     ],
@@ -96,9 +225,9 @@ class IuranHistoryPage extends StatelessWidget {
                 ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

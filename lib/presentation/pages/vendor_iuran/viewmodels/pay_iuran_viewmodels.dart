@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:moblimobil/infrastructures/params/iuran/pay_iuran_params.dart';
+import 'package:moblimobil/infrastructures/repositories/iuran_repository.dart';
 
 import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
@@ -26,6 +28,8 @@ class PayIuranViewModels extends ChangeNotifier {
   String nominal = '';
   String type = '3_month';
   File? file;
+
+  bool isLoading = false;
 
   void initialize() {
     fullname = '';
@@ -54,7 +58,34 @@ class PayIuranViewModels extends ChangeNotifier {
     }
   }
 
-  // ==
+  Future<void> submit(BuildContext context) async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      await _read(iuranRepository).pay(
+        PayIuranParams(
+          fullname: fullname,
+          accountNumber: accountNumber,
+          nominal: nominal,
+          type: type,
+          bankId: bankId!,
+          file: file!,
+        ),
+      );
+
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Success')));
+    } on NetworkExceptions catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+    }
+
+    isLoading = false;
+    notifyListeners();
+  }
+
   void changeType(String value) {
     type = value;
     notifyListeners();
@@ -71,6 +102,22 @@ class PayIuranViewModels extends ChangeNotifier {
 
     if (picked != null) {
       file = File(picked.path);
+      notifyListeners();
     }
+  }
+
+  void peekImage(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) => GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Center(
+          child: Image.file(file!),
+        ),
+      ),
+    );
   }
 }

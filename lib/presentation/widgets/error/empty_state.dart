@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 
@@ -33,7 +34,7 @@ class EmptyState extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8),
-          Text(message, textAlign: TextAlign.center),
+          Text(message, textAlign: TextAlign.center).padding(horizontal: 24),
           SizedBox(height: 16),
           if (onPressed != null)
             TextButton(
