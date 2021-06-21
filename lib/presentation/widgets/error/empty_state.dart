@@ -6,11 +6,13 @@ import '../../../core/themes/theme.dart';
 class EmptyState extends StatelessWidget {
   const EmptyState({
     Key? key,
+    this.title = 'Oops!',
     required this.message,
     this.onPressed,
     this.buttonLabel = 'Refresh',
   }) : super(key: key);
 
+  final String title;
   final String message;
   final String buttonLabel;
   final Function()? onPressed;
@@ -26,7 +28,7 @@ class EmptyState extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 1.5,
           ),
           Text(
-            'Oops!',
+            title,
             style: TextStyle(
               fontWeight: FontWeight.w800,
               color: darkGreyColor,

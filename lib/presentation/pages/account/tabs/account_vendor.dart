@@ -49,9 +49,19 @@ class _AccountVendorState extends State<AccountVendor> {
             initial: () => _Jerangkong(),
             loading: () => _Jerangkong(),
             data: (user) {
-              if (user.statusVendor != 'active') {
+              if (user.isVendor == 'pending') {
                 return EmptyState(
-                  onPressed: () {},
+                  title: 'Pending',
+                  message: 'Sedang menunggu verifikasi admin',
+
+                );
+              }
+              
+              if (user.isVendor != 'active') {
+                return EmptyState(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/vendor-register');
+                  },
                   message: S.of(context).vendorInactive,
                   buttonLabel: S.of(context).register,
                 );

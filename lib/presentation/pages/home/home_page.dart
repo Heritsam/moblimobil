@@ -82,7 +82,9 @@ class _HomePageState extends State<HomePage> {
             <Widget>[
               Text(S.of(context).hotDeals, style: textTheme.headline6),
               InkResponse(
-                onTap: () {},
+                onTap: () {
+                  context.read(bottomNavNotifier).changeIndex(1);
+                },
                 child: Text(
                   S.of(context).seeAll,
                   style: TextStyle(color: blueColor),
@@ -96,7 +98,9 @@ class _HomePageState extends State<HomePage> {
             <Widget>[
               Text(S.of(context).popularCars, style: textTheme.headline6),
               InkResponse(
-                onTap: () {},
+                onTap: () {
+                  context.read(bottomNavNotifier).changeIndex(1);
+                },
                 child: Text(
                   S.of(context).seeAll,
                   style: TextStyle(color: blueColor),
@@ -110,7 +114,9 @@ class _HomePageState extends State<HomePage> {
             <Widget>[
               Text(S.of(context).price, style: textTheme.headline6),
               InkResponse(
-                onTap: () {},
+                onTap: () {
+                  context.read(bottomNavNotifier).changeIndex(1);
+                },
                 child: Text(
                   S.of(context).seeAll,
                   style: TextStyle(color: blueColor),
@@ -127,6 +133,13 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   S.of(context).searchByLocation,
                   style: textTheme.headline6,
+                ).expanded(),
+                InkResponse(
+                  onTap: () {},
+                  child: Text(
+                    S.of(context).seeAll,
+                    style: TextStyle(color: blueColor),
+                  ),
                 ),
               ],
             ).padding(horizontal: 16),
@@ -148,19 +161,20 @@ class _HomePageState extends State<HomePage> {
               }).toList(),
             ).padding(horizontal: 16),
             SizedBox(height: 32),
-            <Widget>[
-              Text(S.of(context).searchByBrand, style: textTheme.headline6)
-                  .expanded(),
-              InkResponse(
-                onTap: () {},
-                child: Text(
-                  S.of(context).seeAll,
-                  style: TextStyle(color: blueColor),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(S.of(context).searchByBrand, style: textTheme.headline6)
+                    .expanded(),
+                InkResponse(
+                  onTap: () {},
+                  child: Text(
+                    S.of(context).seeAll,
+                    style: TextStyle(color: blueColor),
+                  ),
                 ),
-              ),
-            ]
-                .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
-                .padding(horizontal: 16),
+              ],
+            ).padding(horizontal: 16),
             SizedBox(height: 16),
             HomeSortByBrand(),
             SizedBox(height: 32),

@@ -37,6 +37,7 @@ import 'presentation/pages/vendor_cars_edit/vendor_cars_edit_page.dart';
 import 'presentation/pages/vendor_iuran/iuran_history_page.dart';
 import 'presentation/pages/vendor_iuran/iuran_page.dart';
 import 'presentation/pages/vendor_iuran/pay_iuran_page.dart';
+import 'presentation/pages/vendor_register/vendor_register_page.dart';
 import 'providers.dart';
 import 'wrapper.dart';
 
@@ -128,6 +129,7 @@ class MyApp extends ConsumerWidget {
         '/about': (context) => AboutPage(),
         '/change-password': (context) => ChangePasswordPage(),
         '/edit-profile': (context) => EditProfilePage(),
+        '/vendor-register': (context) => VendorRegisterPage(),
         '/vendor-sold': (context) => VendorSoldPage(),
         '/vendor-cars': (context) => VendorCarsPage(),
         '/vendor-cars-detail': (context) => VendorCarsDetailPage(),

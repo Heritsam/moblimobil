@@ -87,6 +87,8 @@ class MobliDrawer extends ConsumerWidget {
                   data: (user) {
                     if (user.statusVendor == 'active') {
                       Navigator.pushNamed(context, '/vendor-cars-add');
+                    } else {
+                      Navigator.pushNamed(context, '/vendor-register');
                     }
                   },
                   orElse: () {},
