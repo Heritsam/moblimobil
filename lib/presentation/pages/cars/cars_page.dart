@@ -69,33 +69,6 @@ class _CarsPageState extends State<CarsPage> {
               onTextCleared: context.read(carCompareViewModel).resetAndFetch,
             ).padding(horizontal: 16),
             SizedBox(height: 32),
-            Text(S.of(context).category, style: textTheme.headline6)
-                .padding(horizontal: 16),
-            SizedBox(height: 12),
-            ListView(
-              scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              children: [
-                MobliChip(
-                  label: S.of(context).popular,
-                  selected: true,
-                ).padding(right: 12, bottom: 24),
-                MobliChip(
-                  onTap: () {},
-                  label: S.of(context).justReleased,
-                  selected: false,
-                  elevated: false,
-                ).padding(right: 12, bottom: 24),
-                MobliChip(
-                  onTap: () {},
-                  label: S.of(context).comingSoon,
-                  selected: false,
-                  elevated: false,
-                ).padding(right: 12, bottom: 24),
-              ],
-            ).constrained(height: 64),
-            SizedBox(height: 4),
             InkResponse(
               onTap: () {
                 showDialog(
