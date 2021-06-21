@@ -8,7 +8,6 @@ import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/error/empty_state.dart';
-import '../../widgets/mobli_chip.dart';
 import '../../widgets/search_bar.dart';
 import 'compare_nav.dart';
 import 'modals/sort_and_filter.dart';
