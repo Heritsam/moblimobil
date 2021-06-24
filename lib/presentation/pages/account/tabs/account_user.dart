@@ -50,7 +50,7 @@ class AccountUser extends ConsumerWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (user.file != null)
+                    if (user.file?.contains('http') ?? false)
                       CircleImage(
                         size: 120,
                         image: NetworkImage(user.file!),

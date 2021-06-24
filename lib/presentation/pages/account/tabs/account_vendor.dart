@@ -53,11 +53,10 @@ class _AccountVendorState extends State<AccountVendor> {
                 return EmptyState(
                   title: 'Pending',
                   message: 'Sedang menunggu verifikasi admin',
-
                 );
               }
               
-              if (user.isVendor != 'active') {
+              if (user.isVendor != 'true') {
                 return EmptyState(
                   onPressed: () {
                     Navigator.pushNamed(context, '/vendor-register');
@@ -91,7 +90,7 @@ class _AccountVendorState extends State<AccountVendor> {
                         children: [
                           Stack(
                             children: [
-                              if (user.file != null)
+                              if (user.file?.contains('http') ?? false)
                                 CircleImage(
                                   size: 120,
                                   image: NetworkImage(user.file!),
