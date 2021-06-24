@@ -158,21 +158,6 @@ class _AccountVendorState extends State<AccountVendor> {
                                     color: darkGreyColor,
                                   ),
                                 ),
-                                Spacer(),
-                                Text(
-                                  NumberFormat.compactCurrency(
-                                        locale: 'en',
-                                        decimalDigits: 0,
-                                        symbol: 'Rp ',
-                                      ).format(123000) +
-                                      '/' +
-                                      S.of(context).month,
-                                  style: TextStyle(
-                                    color: mediumGreyColor,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                SizedBox(width: 8),
                               ],
                             ),
                           ),

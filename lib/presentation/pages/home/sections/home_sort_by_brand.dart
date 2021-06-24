@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:moblimobil/presentation/notifiers/bottom_nav/bottom_nav_notifier.dart';
+import 'package:moblimobil/presentation/pages/search/viewmodels/search_viewmodel.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -42,7 +44,11 @@ class HomeSortByBrand extends ConsumerWidget {
       runSpacing: 12,
       children: state.items.map((e) {
         return BrandItem(
-          onTap: () {},
+          onTap: () {
+            context.read(bottomNavNotifier).changeIndex(1);
+            context.read(searchViewModel).selectBrand(e);
+            context.read(searchViewModel).search();
+          },
           image: NetworkImage(e.file),
         );
       }).toList(),

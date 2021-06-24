@@ -6,10 +6,10 @@ import 'package:styled_widget/styled_widget.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../notifiers/bottom_nav/bottom_nav_notifier.dart';
-import '../../widgets/cars/location_chip.dart';
 import '../cars/modals/sort_and_filter.dart';
 import 'sections/home_banner.dart';
 import 'sections/home_choose_us.dart';
+import 'sections/home_city.dart';
 import 'sections/home_hot_deals.dart';
 import 'sections/home_news_and_review.dart';
 import 'sections/home_popular_cars.dart';
@@ -17,6 +17,7 @@ import 'sections/home_sort_by_brand.dart';
 import 'sections/home_sort_by_price.dart';
 import 'viewmodels/choose_us_notifier.dart';
 import 'viewmodels/home_banner_notifier.dart';
+import 'viewmodels/home_city_notifier.dart';
 import 'viewmodels/home_news_and_review_notifier.dart';
 import 'viewmodels/hot_deals_notifier.dart';
 import 'viewmodels/popular_cars_notifier.dart';
@@ -33,7 +34,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
-    final size = mediaQuery.size;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
             context.read(hotDealsNotifier).fetch(),
             context.read(popularCarsNotifier).fetch(),
             context.read(sortByPriceNotifier).fetch(),
+            context.read(homeCityNotifier).fetch(),
             context.read(sortByBrandNotifier).fetch(),
             context.read(homeNewsAndReviewNotifier).fetch(),
           ]);
@@ -108,6 +109,10 @@ class _HomePageState extends State<HomePage> {
                 InkResponse(
                   onTap: () {
                     context.read(bottomNavNotifier).changeIndex(1);
+                    showDialog(
+                      context: context,
+                      builder: (context) => SortAndFilter(),
+                    );
                   },
                   child: Text(
                     S.of(context).seeAll,
@@ -124,6 +129,10 @@ class _HomePageState extends State<HomePage> {
                 InkResponse(
                   onTap: () {
                     context.read(bottomNavNotifier).changeIndex(1);
+                    showDialog(
+                      context: context,
+                      builder: (context) => SortAndFilter(),
+                    );
                   },
                   child: Text(
                     S.of(context).seeAll,
@@ -143,7 +152,13 @@ class _HomePageState extends State<HomePage> {
                   style: textTheme.headline6,
                 ).expanded(),
                 InkResponse(
-                  onTap: () {},
+                  onTap: () {
+                    context.read(bottomNavNotifier).changeIndex(1);
+                    showDialog(
+                      context: context,
+                      builder: (context) => SortAndFilter(),
+                    );
+                  },
                   child: Text(
                     S.of(context).seeAll,
                     style: TextStyle(color: blueColor),
@@ -152,22 +167,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ).padding(horizontal: 16),
             SizedBox(height: 16),
-            Wrap(
-              spacing: 10,
-              runSpacing: 14,
-              children: [
-                'Jakarta',
-                'Tangerang',
-                'Bogor',
-                'Depok',
-                'Bandung',
-                'Detroit',
-              ].map((e) {
-                return LocationChip(
-                  label: e,
-                ).constrained(height: 44, width: size.width / 3 - 18);
-              }).toList(),
-            ).padding(horizontal: 16),
+            HomeCity(),
             SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,7 +175,13 @@ class _HomePageState extends State<HomePage> {
                 Text(S.of(context).searchByBrand, style: textTheme.headline6)
                     .expanded(),
                 InkResponse(
-                  onTap: () {},
+                  onTap: () {
+                    context.read(bottomNavNotifier).changeIndex(1);
+                    showDialog(
+                      context: context,
+                      builder: (context) => SortAndFilter(),
+                    );
+                  },
                   child: Text(
                     S.of(context).seeAll,
                     style: TextStyle(color: blueColor),

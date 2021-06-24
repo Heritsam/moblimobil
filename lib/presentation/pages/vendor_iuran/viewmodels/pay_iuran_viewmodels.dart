@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:moblimobil/infrastructures/params/iuran/pay_iuran_params.dart';
 import 'package:moblimobil/infrastructures/repositories/iuran_repository.dart';
+import 'package:moblimobil/presentation/notifiers/authentication/authentication_notifier.dart';
+import 'package:moblimobil/presentation/pages/account/viewmodels/account_user_notifier.dart';
 
 import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
@@ -77,6 +79,8 @@ class PayIuranViewModels extends ChangeNotifier {
       Navigator.pop(context);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Success')));
+
+      _read(accountUserNotifier).fetchUser();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));
