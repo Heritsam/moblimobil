@@ -7,6 +7,7 @@ import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../notifiers/bottom_nav/bottom_nav_notifier.dart';
 import '../../widgets/cars/location_chip.dart';
+import '../cars/modals/sort_and_filter.dart';
 import 'sections/home_banner.dart';
 import 'sections/home_choose_us.dart';
 import 'sections/home_hot_deals.dart';
@@ -79,52 +80,59 @@ class _HomePageState extends State<HomePage> {
             HomeBanner(),
             HomeChooseUs().padding(horizontal: 16, top: 8),
             SizedBox(height: 32),
-            <Widget>[
-              Text(S.of(context).hotDeals, style: textTheme.headline6),
-              InkResponse(
-                onTap: () {
-                  context.read(bottomNavNotifier).changeIndex(1);
-                },
-                child: Text(
-                  S.of(context).seeAll,
-                  style: TextStyle(color: blueColor),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(S.of(context).hotDeals, style: textTheme.headline6),
+                InkResponse(
+                  onTap: () {
+                    context.read(bottomNavNotifier).changeIndex(1);
+                    showDialog(
+                      context: context,
+                      builder: (context) => SortAndFilter(),
+                    );
+                  },
+                  child: Text(
+                    S.of(context).seeAll,
+                    style: TextStyle(color: blueColor),
+                  ),
                 ),
-              ),
-            ]
-                .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
-                .padding(horizontal: 16),
+              ],
+            ).padding(horizontal: 16),
             SizedBox(height: 16),
             HomeHotDeals(),
-            <Widget>[
-              Text(S.of(context).popularCars, style: textTheme.headline6),
-              InkResponse(
-                onTap: () {
-                  context.read(bottomNavNotifier).changeIndex(1);
-                },
-                child: Text(
-                  S.of(context).seeAll,
-                  style: TextStyle(color: blueColor),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(S.of(context).popularCars, style: textTheme.headline6),
+                InkResponse(
+                  onTap: () {
+                    context.read(bottomNavNotifier).changeIndex(1);
+                  },
+                  child: Text(
+                    S.of(context).seeAll,
+                    style: TextStyle(color: blueColor),
+                  ),
                 ),
-              ),
-            ]
-                .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
-                .padding(horizontal: 16),
+              ],
+            ).padding(horizontal: 16),
             SizedBox(height: 16),
             HomePopularCars(),
-            <Widget>[
-              Text(S.of(context).price, style: textTheme.headline6),
-              InkResponse(
-                onTap: () {
-                  context.read(bottomNavNotifier).changeIndex(1);
-                },
-                child: Text(
-                  S.of(context).seeAll,
-                  style: TextStyle(color: blueColor),
+            Row(
+              children: [
+                Text(S.of(context).price, style: textTheme.headline6),
+                InkResponse(
+                  onTap: () {
+                    context.read(bottomNavNotifier).changeIndex(1);
+                  },
+                  child: Text(
+                    S.of(context).seeAll,
+                    style: TextStyle(color: blueColor),
+                  ),
                 ),
-              ),
-            ]
-                .toRow(mainAxisAlignment: MainAxisAlignment.spaceBetween)
-                .padding(horizontal: 16),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ).padding(horizontal: 16),
             SizedBox(height: 12),
             HomeSortByPrice(),
             Row(

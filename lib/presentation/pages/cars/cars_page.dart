@@ -25,7 +25,6 @@ class _CarsPageState extends State<CarsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
