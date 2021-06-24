@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "246994348061",
+    "project_id": "lakumobil-c5af7",
+    "storage_bucket": "lakumobil-c5af7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246994348061:android:653ab8a506c7687e01fef4",
+        "android_client_info": {
+          "package_name": "com.belimobil.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246994348061-9pq45sosqbvu0ombqap9b94vbk7njun5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.belimobil.app",
+            "certificate_hash": "1afd8f3222ea901c544408aae2df5eb09d5ab4b7"
+          }
+        },
+        {
+          "client_id": "246994348061-cj05df9vid0765928s6st97v6vnmaa6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3WEV9GJ3FEcyjVDuWXUypYV1sECqT1Gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "246994348061-cj05df9vid0765928s6st97v6vnmaa6f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "246994348061-r8um8qln8g2j1qv8idl12qltb60s72r5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.belimobil.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

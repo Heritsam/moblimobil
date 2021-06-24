@@ -147,7 +147,9 @@ class _LoginPageState extends State<LoginPage> {
                 ).constrained(width: size.width).padding(horizontal: 24),
                 SizedBox(height: 16),
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    vm.loginWithGoogle(context);
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

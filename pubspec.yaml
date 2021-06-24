@@ -39,6 +39,7 @@ dependencies:
   flutter_svg: ^0.22.0
   freezed_annotation: ^0.14.1
   google_fonts: ^2.0.0
+  google_sign_in: ^5.0.4
   image_picker: ^0.8.0
   intl: ^0.17.0
   onesignal_flutter: ^3.0.0-beta4

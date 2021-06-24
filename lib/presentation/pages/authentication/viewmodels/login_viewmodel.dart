@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/infrastructures/models/auth/email_not_verified.dart';
-import 'package:moblimobil/presentation/pages/authentication/otp_page.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../core/exceptions/network_exceptions.dart';
+import '../../../../infrastructures/models/auth/email_not_verified.dart';
 import '../../../../infrastructures/repositories/authentication_repository.dart';
 import '../../../../infrastructures/repositories/onesignal_repository.dart';
 import '../../../notifiers/authentication/authentication_notifier.dart';
+import '../otp_page.dart';
 
 final loginViewModel =
     ChangeNotifierProvider((ref) => LoginViewModel(ref.read));
@@ -15,6 +16,13 @@ class LoginViewModel extends ChangeNotifier {
   final Reader _read;
 
   LoginViewModel(this._read);
+
+  final _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
 
   bool isLoading = false;
   bool isObscured = true;
@@ -70,5 +78,14 @@ class LoginViewModel extends ChangeNotifier {
 
     isLoading = false;
     notifyListeners();
+  }
+
+  Future<void> loginWithGoogle(BuildContext context) async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
   }
 }
