@@ -68,9 +68,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                 ),
               ),
               body: EmptyState(
-                onPressed: () {
-                  vm.fetch();
-                },
+                onPressed: vm.fetch,
                 message: message,
               ),
             );
