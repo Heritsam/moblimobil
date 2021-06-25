@@ -15,7 +15,6 @@ import '../../../../infrastructures/params/product/add_product_params.dart';
 import '../../../../infrastructures/repositories/product_master_repository.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 import '../../account/viewmodels/vendor_cars_notifier.dart';
-import '../../vendor_cars/viewmodels/vendor_cars_viewmodel.dart';
 
 final vendorCarsAddViewModel =
     ChangeNotifierProvider<VendorCarsAddViewModel>((ref) {
@@ -182,7 +181,7 @@ class VendorCarsAddViewModel extends ChangeNotifier {
       files.forEach((element) async {
         Future.wait([
           _read(productRepository).addFile(product['product_id'], element),
-        ]).then((value) => _read(vendorCarsViewModel).fetch());
+        ]).then((value) => _read(vendorCarsNotifier).fetch());
       });
 
       Navigator.popUntil(context, ModalRoute.withName('/vendor-cars'));
@@ -190,7 +189,6 @@ class VendorCarsAddViewModel extends ChangeNotifier {
           .showSnackBar(SnackBar(content: Text('Success')));
 
       _read(vendorCarsNotifier).fetch();
-      _read(vendorCarsViewModel).fetch();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));

@@ -8,15 +8,15 @@ import '../../../generated/l10n.dart';
 import '../../widgets/buttons/circle_button.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/error/empty_state.dart';
+import '../account/viewmodels/vendor_cars_notifier.dart';
 import 'vendor_cars_detail_page.dart';
-import 'viewmodels/vendor_cars_viewmodel.dart';
 
 class VendorCarsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final mediaQuery = MediaQuery.of(context);
 
-    final vm = watch(vendorCarsViewModel);
+    final vm = watch(vendorCarsNotifier);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -40,7 +40,7 @@ class VendorCarsPage extends ConsumerWidget {
         child: Icon(Icons.add, size: 32, color: Colors.white),
         backgroundColor: greenColor,
       ),
-      body: vm.carsState.when(
+      body: vm.carState.when(
         initial: () => _Jerangkong(),
         loading: () => _Jerangkong(),
         error: (message) {

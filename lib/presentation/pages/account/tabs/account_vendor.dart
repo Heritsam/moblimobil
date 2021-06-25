@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -10,7 +9,6 @@ import '../../../../generated/l10n.dart';
 import '../../../widgets/circle_image.dart';
 import '../../../widgets/error/empty_state.dart';
 import '../../../widgets/mobli_card.dart';
-import '../../vendor_cars/viewmodels/vendor_cars_viewmodel.dart';
 import '../sections/vendor_cars.dart';
 import '../sections/vendor_sold.dart';
 import '../viewmodels/account_user_notifier.dart';
@@ -39,7 +37,6 @@ class _AccountVendorState extends State<AccountVendor> {
                 if (user.statusVendor == 'active') {
                   context.read(vendorCarsNotifier).fetch();
                   context.read(vendorSoldNotifier).fetch();
-                  context.read(vendorCarsViewModel).fetch();
                 }
               },
               orElse: () {},

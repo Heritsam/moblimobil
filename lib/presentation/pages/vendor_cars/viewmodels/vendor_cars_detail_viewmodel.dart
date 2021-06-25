@@ -8,7 +8,7 @@ import '../../../../infrastructures/models/product/product.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 import '../../../widgets/dialog/progress_dialog.dart';
 import '../../account/viewmodels/vendor_cars_notifier.dart';
-import 'vendor_cars_viewmodel.dart';
+import '../../account/viewmodels/vendor_sold_notifier.dart';
 
 final vendorCarsDetailViewModel =
     ChangeNotifierProvider.family<VendorCarsDetailViewModel, int>((ref, carId) {
@@ -47,7 +47,23 @@ class VendorCarsDetailViewModel extends ChangeNotifier {
       Navigator.popUntil(context, ModalRoute.withName('/vendor-cars'));
 
       await _read(vendorCarsNotifier).fetch();
-      await _read(vendorCarsViewModel).fetch();
+    } on NetworkExceptions catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.message)));
+    }
+  }
+
+  Future<void> sold(BuildContext context) async {
+    showDialog(context: context, builder: (context) => ProgressDialog());
+
+    try {
+      await _read(productRepository).sold(id);
+
+      Navigator.popUntil(context, ModalRoute.withName('/home'));
+
+      await _read(vendorCarsNotifier).fetch();
+      await _read(vendorSoldNotifier).fetch();
     } on NetworkExceptions catch (e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context)

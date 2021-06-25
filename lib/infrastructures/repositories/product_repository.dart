@@ -48,6 +48,7 @@ abstract class ProductRepository {
   Future<void> update(int id, AddProductParams params);
   Future<void> delete(int id);
   Future<ProductLastViewResponse> lastViewed();
+  Future<void> sold(int id);
 }
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -265,6 +266,23 @@ class ProductRepositoryImpl implements ProductRepository {
       );
 
       return ProductLastViewResponse.fromJson(response.data);
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<void> sold(int id) async {
+    try {
+      final token = _preferences.getString(PreferencesKey.tokenKey);
+
+      await _client.post(
+        '/api/product/sold',
+        options: Options(
+          headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
+        ),
+        data: {'product_id': id},
+      );
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }

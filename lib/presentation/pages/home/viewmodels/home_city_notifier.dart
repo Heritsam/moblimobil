@@ -23,7 +23,7 @@ class HomeCityNotifier extends ChangeNotifier {
     notifyListeners();
 
     try {
-      items = await _read(locationRepository).cityAll();
+      items = await _read(locationRepository).cityAll(limit: true);
       isLoading = false;
       notifyListeners();
     } catch (e) {

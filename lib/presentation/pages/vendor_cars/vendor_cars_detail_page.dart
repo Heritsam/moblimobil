@@ -174,6 +174,31 @@ class _VendorCarsDetailPageState extends State<VendorCarsDetailPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       RoundedIconButton(
+                        onPressed: () {
+                          showCupertinoDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                              title: 'Sold Car',
+                              description: 'Confirm to sold out car',
+                              actions: [
+                                CustomDialogAction(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  label: S.of(context).no,
+                                  isDefaultAction: true,
+                                ),
+                                CustomDialogAction(
+                                  onPressed: () {
+                                    vm.sold(context);
+                                  },
+                                  label: S.of(context).yes,
+                                  isDestructiveAction: true,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                         icon: Icon(Icons.check, color: Colors.white, size: 32),
                         horizontalPadding: 24,
                         verticalPadding: 20,

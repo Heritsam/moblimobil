@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-import '../../../../core/themes/mobli_icons_icons.dart';
 import '../../../../core/themes/theme.dart';
 import '../../../../generated/l10n.dart';
 import '../../../widgets/buttons/rounded_icon_button.dart';

@@ -18,7 +18,6 @@ import '../../../../infrastructures/repositories/product_master_repository.dart'
 import '../../../../infrastructures/repositories/product_repository.dart';
 import '../../account/viewmodels/vendor_cars_notifier.dart';
 import '../../vendor_cars/viewmodels/vendor_cars_detail_viewmodel.dart';
-import '../../vendor_cars/viewmodels/vendor_cars_viewmodel.dart';
 
 final vendorCarsEditViewModel =
     ChangeNotifierProvider.family<VendorCarsEditViewModel, int>((ref, carId) {
@@ -224,7 +223,7 @@ class VendorCarsEditViewModel extends ChangeNotifier {
           Future.wait([
             _read(productRepository).addFile(id, element.file!),
           ]).then((value) {
-            _read(vendorCarsViewModel).fetch();
+            _read(vendorCarsNotifier).fetch();
             _read(vendorCarsDetailViewModel(id)).fetch();
           });
         }
@@ -234,7 +233,7 @@ class VendorCarsEditViewModel extends ChangeNotifier {
         Future.wait([
           _read(productRepository).deleteFile(element),
         ]).then((value) {
-          _read(vendorCarsViewModel).fetch();
+          _read(vendorCarsNotifier).fetch();
           _read(vendorCarsDetailViewModel(id)).fetch();
         });
       });
@@ -244,7 +243,6 @@ class VendorCarsEditViewModel extends ChangeNotifier {
           .showSnackBar(SnackBar(content: Text('Success')));
 
       _read(vendorCarsNotifier).fetch();
-      _read(vendorCarsViewModel).fetch();
       _read(vendorCarsDetailViewModel(id)).fetch();
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
