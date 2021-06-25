@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/notifiers/authentication/authentication_notifier.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/mobli_icons_icons.dart';
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
+import '../../notifiers/authentication/authentication_notifier.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/error/empty_state.dart';
 import '../../widgets/mobli_chip.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/pages/account/viewmodels/account_user_notifier.dart';
 
 import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../infrastructures/repositories/vendor_repository.dart';
+import '../../account/viewmodels/account_user_notifier.dart';
 
 final vendorRegisterViewModel =
     ChangeNotifierProvider<VendorRegisterViewModel>((ref) {

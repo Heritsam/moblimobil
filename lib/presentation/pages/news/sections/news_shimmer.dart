@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:moblimobil/core/themes/theme.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
+
+import '../../../../core/themes/theme.dart';
 
 class NewsShimmer extends StatelessWidget {
   const NewsShimmer({Key? key}) : super(key: key);

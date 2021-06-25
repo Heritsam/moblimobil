@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/pages/news/news_detail_page.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../../core/themes/theme.dart';
 import '../../../widgets/video/video_card.dart';
+import '../../news/news_detail_page.dart';
 import '../viewmodels/home_news_and_review_notifier.dart';
 
 class HomeNewsAndReview extends ConsumerWidget {

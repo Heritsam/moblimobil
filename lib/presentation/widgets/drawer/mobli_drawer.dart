@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/pages/account/viewmodels/account_user_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/mobli_icons_icons.dart';
@@ -9,6 +8,7 @@ import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../notifiers/app_settings/app_settings_notifier.dart';
 import '../../notifiers/authentication/authentication_notifier.dart';
+import '../../pages/account/viewmodels/account_user_notifier.dart';
 import '../dialog/custom_dialog.dart';
 import '../toggle.dart';
 

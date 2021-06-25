@@ -2,7 +2,6 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:moblimobil/presentation/pages/account/viewmodels/account_user_notifier.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
@@ -10,6 +9,7 @@ import '../../../generated/l10n.dart';
 import '../../widgets/buttons/rounded_button.dart';
 import '../../widgets/error/empty_state.dart';
 import '../../widgets/mobli_loading_indicator.dart';
+import '../account/viewmodels/account_user_notifier.dart';
 import 'viewmodels/bank_account_notifier.dart';
 
 class IuranPage extends StatelessWidget {

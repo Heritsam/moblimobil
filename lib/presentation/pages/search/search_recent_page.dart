@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/pages/cars_detail/cars_detail_page.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -8,6 +7,7 @@ import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/cars/car_card.dart';
 import '../../widgets/error/empty_state.dart';
+import '../cars_detail/cars_detail_page.dart';
 import 'viewmodels/search_recent_viewmodel.dart';
 
 class SearchRecentPage extends StatefulWidget {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/presentation/notifiers/bottom_nav/bottom_nav_notifier.dart';
-import 'package:moblimobil/presentation/pages/search/viewmodels/search_viewmodel.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../../core/themes/theme.dart';
+import '../../../notifiers/bottom_nav/bottom_nav_notifier.dart';
 import '../../../widgets/cars/brand_item.dart';
+import '../../search/viewmodels/search_viewmodel.dart';
 import '../viewmodels/sort_by_brand_notifier.dart';
 
 class HomeSortByBrand extends ConsumerWidget {

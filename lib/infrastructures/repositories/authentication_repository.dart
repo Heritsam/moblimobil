@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblimobil/infrastructures/models/auth/email_not_verified.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/exceptions/network_exceptions.dart';
 import '../../core/utils/dio_client.dart';
 import '../../core/utils/preferences_key.dart';
 import '../../providers.dart';
+import '../models/auth/email_not_verified.dart';
 import '../models/auth/login_response.dart';
 
 final authenticationRepository = Provider<AuthenticationRepository>((ref) {
