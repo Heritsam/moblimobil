@@ -4,7 +4,9 @@ import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
+import '../../notifiers/about/about_notifier.dart';
 import '../../widgets/buttons/rounded_button.dart';
+import '../../widgets/error/empty_state.dart';
 import 'viewmodels/help_viewmodel.dart';
 
 class HelpPage extends ConsumerWidget {
@@ -16,6 +18,7 @@ class HelpPage extends ConsumerWidget {
     final size = mediaQuery.size;
 
     final vm = watch(helpViewModel);
+    final about = watch(aboutNotifier);
 
     return Form(
       key: _formKey,
@@ -96,64 +99,81 @@ class HelpPage extends ConsumerWidget {
                 textAlign: TextAlign.center,
               ).textColor(darkGreyColor.withOpacity(.70)),
               SizedBox(height: 32),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.phone_outlined,
-                        color: mediumGreyColor,
-                        size: 28,
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        '0822 1353 0065',
-                        style: TextStyle(
-                          color: blueColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ).expanded()
-                    ],
-                  ).padding(vertical: 16),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.mail_outline_rounded,
-                        color: mediumGreyColor,
-                        size: 28,
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        'moblimobil@gmail.com',
-                        style: TextStyle(
-                          color: blueColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ).expanded()
-                    ],
-                  ).padding(vertical: 16),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.map_rounded,
-                        color: mediumGreyColor,
-                        size: 28,
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        'Jl. Anyelir IV Blok 5W No.4',
-                        style: TextStyle(
-                          color: blueColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ).expanded()
-                    ],
-                  ).padding(vertical: 16),
-                ],
-              )
+              about.aboutState
+                  .when(
+                    initial: () {
+                      return Center(child: CircularProgressIndicator());
+                    },
+                    loading: () {
+                      return Center(child: CircularProgressIndicator());
+                    },
+                    error: (message) {
+                      return EmptyState(
+                        onPressed: about.fetch,
+                        message: message,
+                      );
+                    },
+                    data: (item) {
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.phone_outlined,
+                                color: mediumGreyColor,
+                                size: 28,
+                              ),
+                              SizedBox(width: 16),
+                              Text(
+                                item.formattedPhone,
+                                style: TextStyle(
+                                  color: blueColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ).expanded()
+                            ],
+                          ).padding(vertical: 16),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.mail_outline_rounded,
+                                color: mediumGreyColor,
+                                size: 28,
+                              ),
+                              SizedBox(width: 16),
+                              Text(
+                                item.email,
+                                style: TextStyle(
+                                  color: blueColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ).expanded()
+                            ],
+                          ).padding(vertical: 16),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.map_rounded,
+                                color: mediumGreyColor,
+                                size: 28,
+                              ),
+                              SizedBox(width: 16),
+                              Text(
+                                item.address,
+                                style: TextStyle(
+                                  color: blueColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ).expanded()
+                            ],
+                          ).padding(vertical: 16),
+                        ],
+                      );
+                    },
+                  )
                   .padding(all: 16)
                   .decorated(
                     borderRadius: BorderRadius.circular(defaultBorderRadius),
