@@ -19,18 +19,22 @@ class NotificationViewModel extends ChangeNotifier {
   }
 
   AppState<List<MobliNotif>> notifState = AppState.initial();
+  int totalNotification = 0;
 
   Future<void> fetch() async {
     notifState = AppState.loading();
     notifyListeners();
 
     try {
-      final items = await _read(notificationRepository).index();
+      final notification = await _read(notificationRepository).index();
 
-      notifState = AppState.data(data: items.data);
+      notifState = AppState.data(data: notification.data);
+      totalNotification = notification.totalNotification;
+      
       notifyListeners();
     } on NetworkExceptions catch (e) {
       notifState = AppState.error(message: e.message);
+      totalNotification = 0;
       notifyListeners();
     }
   }

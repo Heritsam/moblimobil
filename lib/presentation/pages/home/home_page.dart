@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../notification/viewmodels/notification_viewmodel.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
@@ -46,15 +47,23 @@ class _HomePageState extends State<HomePage> {
           child: Container(color: Colors.white60).backgroundBlur(7),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/notification');
+          Consumer(
+            builder: (context, watch, child) {
+              final notifier = watch(notificationViewModel);
+
+              return IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/notification');
+                },
+                icon: Badge(
+                  showBadge: notifier.totalNotification > 0,
+                  badgeContent: Text(notifier.totalNotification.toString())
+                      .textColor(Colors.white),
+                  badgeColor: redColor,
+                  child: Icon(Icons.notifications_none_rounded),
+                ),
+              );
             },
-            icon: Badge(
-              badgeContent: Text('1').textColor(Colors.white),
-              badgeColor: redColor,
-              child: Icon(Icons.notifications_none_rounded),
-            ),
           ),
           SizedBox(width: 8),
         ],
