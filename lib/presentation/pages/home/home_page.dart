@@ -1,13 +1,13 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../notification/viewmodels/notification_viewmodel.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../notifiers/bottom_nav/bottom_nav_notifier.dart';
 import '../cars/modals/sort_and_filter.dart';
+import '../notification/viewmodels/notification_viewmodel.dart';
 import 'sections/home_banner.dart';
 import 'sections/home_choose_us.dart';
 import 'sections/home_city.dart';
@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> {
       body: RefreshIndicator(
         onRefresh: () async {
           Future.wait([
+            context.read(notificationViewModel).fetch(),
             context.read(homeBannerNotifier).fetch(),
             context.read(chooseUsNotifier).fetch(),
             context.read(hotDealsNotifier).fetch(),
