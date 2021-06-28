@@ -90,7 +90,7 @@ class _SearchRecentPageState extends State<SearchRecentPage> {
                       },
                       carId: item.id,
                       hasUsed: item.type == 'used',
-                      title: item.title,
+                      title: '${item.brandName} ${item.title}',
                       price: int.tryParse(item.price) ?? 0,
                       imageUrl: item.file.isNotEmpty
                           ? item.file.first.file
