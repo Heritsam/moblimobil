@@ -52,7 +52,7 @@ class _AccountVendorState extends State<AccountVendor> {
                   message: 'Sedang menunggu verifikasi admin',
                 );
               }
-              
+
               if (user.isVendor != 'true') {
                 return EmptyState(
                   onPressed: () {
@@ -72,7 +72,9 @@ class _AccountVendorState extends State<AccountVendor> {
                 displacement: mediaQuery.padding.top,
                 edgeOffset: mediaQuery.padding.top,
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
                   padding: EdgeInsets.only(
                     top: mediaQuery.padding.top + 16,
                     right: 16,

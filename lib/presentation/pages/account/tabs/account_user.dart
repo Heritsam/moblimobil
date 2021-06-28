@@ -39,7 +39,9 @@ class AccountUser extends ConsumerWidget {
           displacement: mediaQuery.padding.top,
           edgeOffset: mediaQuery.padding.top,
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
             padding: EdgeInsets.only(
               top: mediaQuery.padding.top + 16,
               bottom: mediaQuery.padding.bottom,
