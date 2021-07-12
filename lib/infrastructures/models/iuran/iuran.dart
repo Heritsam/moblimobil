@@ -51,6 +51,7 @@ class Iuran {
     required this.file,
     required this.createdAt,
     required this.updatedAt,
+    required this.fee,
     required this.bankName,
   });
 
@@ -65,6 +66,7 @@ class Iuran {
   final String file;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String fee;
   final String bankName;
 
   factory Iuran.fromJson(Map<String, dynamic> json) => Iuran(
@@ -79,6 +81,7 @@ class Iuran {
         file: json['file'],
         createdAt: DateTime.parse(json['created_at']),
         updatedAt: DateTime.parse(json['updated_at']),
+        fee: json['fee'],
         bankName: json['bank_name'],
       );
 
@@ -96,6 +99,7 @@ class Iuran {
         'file': file,
         'created_at': createdAt.toIso8601String(),
         'updated_at': updatedAt.toIso8601String(),
+        'fee': fee,
         'bank_name': bankName,
       };
 }

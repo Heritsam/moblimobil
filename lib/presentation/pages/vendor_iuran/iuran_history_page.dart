@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -63,7 +64,9 @@ class _IuranHistoryPageState extends State<IuranHistoryPage> {
                 displacement: mediaQuery.padding.top,
                 edgeOffset: mediaQuery.padding.top,
                 child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
                   padding: EdgeInsets.only(
                     top: mediaQuery.padding.top + 72,
                     bottom: mediaQuery.padding.bottom + 64,
@@ -99,7 +102,7 @@ class _IuranHistoryPageState extends State<IuranHistoryPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Pembayaran 3 Bulan',
+                                  item.typeFee,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -107,7 +110,8 @@ class _IuranHistoryPageState extends State<IuranHistoryPage> {
                                 ),
                                 SizedBox(height: 4),
                                 Text(
-                                  '12/12/2021',
+                                  DateFormat('dd/MM/yyyy')
+                                      .format(item.createdAt),
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: redColor,
@@ -127,7 +131,11 @@ class _IuranHistoryPageState extends State<IuranHistoryPage> {
                                 ),
                                 SizedBox(height: 6),
                                 Text(
-                                  'Rp 123.000',
+                                  NumberFormat.currency(
+                                    locale: 'id',
+                                    decimalDigits: 0,
+                                    symbol: 'Rp ',
+                                  ).format(int.parse(item.fee)),
                                   style: TextStyle(
                                     color: greenColor,
                                     fontSize: 22,
