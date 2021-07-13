@@ -8,6 +8,7 @@ import '../../../generated/l10n.dart';
 import '../../notifiers/bottom_nav/bottom_nav_notifier.dart';
 import '../cars/modals/sort_and_filter.dart';
 import '../notification/viewmodels/notification_viewmodel.dart';
+import '../search/viewmodels/search_viewmodel.dart';
 import 'sections/home_banner.dart';
 import 'sections/home_choose_us.dart';
 import 'sections/home_city.dart';
@@ -39,6 +40,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white70,
         centerTitle: false,
         elevation: 0,
@@ -94,17 +96,15 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(S.of(context).hotDeals, style: textTheme.headline6),
+                Text(S.of(context).newest, style: textTheme.headline6),
                 InkResponse(
                   onTap: () {
                     context.read(bottomNavNotifier).changeIndex(1);
-                    showDialog(
-                      context: context,
-                      builder: (context) => SortAndFilter(),
-                    );
+                    context.read(searchViewModel).selectSorting('Latest');
+                    context.read(searchViewModel).search();
                   },
                   child: Text(
-                    S.of(context).seeAll,
+                    S.of(context).search,
                     style: TextStyle(color: blueColor),
                   ),
                 ),
@@ -119,13 +119,11 @@ class _HomePageState extends State<HomePage> {
                 InkResponse(
                   onTap: () {
                     context.read(bottomNavNotifier).changeIndex(1);
-                    showDialog(
-                      context: context,
-                      builder: (context) => SortAndFilter(),
-                    );
+                    context.read(searchViewModel).selectSorting('Popular');
+                    context.read(searchViewModel).search();
                   },
                   child: Text(
-                    S.of(context).seeAll,
+                    S.of(context).search,
                     style: TextStyle(color: blueColor),
                   ),
                 ),

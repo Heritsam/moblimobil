@@ -48,18 +48,7 @@ class HelpPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: S.of(context).fullNameField,
-                ),
-                onSaved: (value) {
-                  vm.fullname = value!;
-                },
-                validator: (value) {
-                  if (value!.isEmpty) return 'Required';
-                },
-              ),
-              SizedBox(height: 24),
+              SizedBox(height: 16),
               TextFormField(
                 decoration: InputDecoration(
                   hintText: S.of(context).textField,

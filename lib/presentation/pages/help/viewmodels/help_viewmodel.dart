@@ -12,18 +12,14 @@ class HelpViewModel extends ChangeNotifier {
   HelpViewModel(this._read);
 
   bool isLoading = false;
-  String fullname = '';
   String description = '';
 
   void sendHelp(BuildContext context) async {
     isLoading = true;
     notifyListeners();
-    
+
     try {
-      await _read(helpRepository).sendHelp(
-        fullname: fullname,
-        description: description,
-      );
+      await _read(helpRepository).sendHelp(description: description);
 
       Navigator.popUntil(context, ModalRoute.withName('/home'));
       ScaffoldMessenger.of(context)

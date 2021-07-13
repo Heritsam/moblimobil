@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -71,7 +72,7 @@ class AboutPage extends ConsumerWidget {
                   ),
                 ).padding(horizontal: 16),
                 SizedBox(height: 16),
-                Text(item.aboutUs).padding(horizontal: 16),
+                Html(data: item.aboutUs).padding(horizontal: 8),
               ],
             ),
           );

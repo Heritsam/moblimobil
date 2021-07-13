@@ -44,6 +44,7 @@ class _SearchPageState extends State<SearchPage> {
           style: TextStyle(color: darkGreyColor, fontWeight: FontWeight.w700),
         ),
       ),
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           showDialog(
