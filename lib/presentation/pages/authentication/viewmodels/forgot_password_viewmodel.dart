@@ -26,8 +26,6 @@ class ForgotPasswordViewModel extends ChangeNotifier {
 
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Success. Check your email inbox')));
-
-      Navigator.popUntil(context, ModalRoute.withName('/login'));
     } on NetworkExceptions catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.message)));

@@ -990,6 +990,16 @@ class S {
     );
   }
 
+  /// `Please change your password`
+  String get changePasswordMessage {
+    return Intl.message(
+      'Please change your password',
+      name: 'changePasswordMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Enter text`
   String get textField {
     return Intl.message(

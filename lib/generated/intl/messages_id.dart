@@ -33,7 +33,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "carName": MessageLookupByLibrary.simpleMessage("Nama mobil"),
         "cars": MessageLookupByLibrary.simpleMessage("Mobil"),
         "category": MessageLookupByLibrary.simpleMessage("Kategori"),
-        "changePassword": MessageLookupByLibrary.simpleMessage("Ubah Email"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("Ubah Password"),
+        "changePasswordMessage": MessageLookupByLibrary.simpleMessage(
+            "Silahkan ganti password anda"),
         "changePhoneAndPassword":
             MessageLookupByLibrary.simpleMessage("Ubah Email dan Password"),
         "city": MessageLookupByLibrary.simpleMessage("Kota"),

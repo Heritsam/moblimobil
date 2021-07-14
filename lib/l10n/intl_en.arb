@@ -106,6 +106,7 @@
     "aboutUs": "About Us",
     "changePhoneAndPassword": "Change Email & Password",
     "changePassword": "Change Password",
+    "changePasswordMessage": "Please change your password",
 
     "textField": "Enter text",
     "otherHelpMessage": "Or, contact us directly to:",

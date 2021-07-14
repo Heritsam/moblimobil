@@ -24,6 +24,7 @@ abstract class ProfileRepository {
   Future<void> checkPassword(String oldPassword);
   Future<void> updatePassword(String newPassword);
   Future<void> forgotPassword(String email);
+  Future<void> changeForgotPassword(int userId, String newPassword);
 }
 
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -106,6 +107,21 @@ class ProfileRepositoryImpl implements ProfileRepository {
   Future<void> forgotPassword(String email) async {
     try {
       await _client.post('/api/forgot-password', data: {'email': email});
+    } catch (e) {
+      throw NetworkExceptions.getDioException(e);
+    }
+  }
+
+  @override
+  Future<void> changeForgotPassword(int userId, String newPassword) async {
+    try {
+      await _client.post(
+        '/api/forgot-password/change',
+        data: {
+          'user_id': userId,
+          'new_password': newPassword,
+        },
+      );
     } catch (e) {
       throw NetworkExceptions.getDioException(e);
     }

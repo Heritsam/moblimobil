@@ -3,7 +3,6 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:share/share.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -242,9 +241,7 @@ class _CarsDetailPageState extends State<CarsDetailPage> {
                           children: <Widget>[
                             IconButton(
                               onPressed: () {
-                                Share.share(
-                                  'https://belimobil.bekas/${car.id} ${car.description}',
-                                );
+                                vm.shareCarLink(context);
                               },
                               icon: Icon(Icons.share),
                               iconSize: 32,

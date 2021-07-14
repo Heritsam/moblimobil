@@ -10,6 +10,7 @@ import 'presentation/notifiers/app_settings/app_settings_notifier.dart';
 import 'presentation/pages/about/about_page.dart';
 import 'presentation/pages/account/account_page.dart';
 import 'presentation/pages/account/edit_profile_page.dart';
+import 'presentation/pages/authentication/forgot_password2_page.dart';
 import 'presentation/pages/authentication/forgot_password_page.dart';
 import 'presentation/pages/authentication/login_page.dart';
 import 'presentation/pages/authentication/otp_page.dart';
@@ -111,6 +112,7 @@ class MyApp extends ConsumerWidget {
         '/otp': (context) => OtpPage(),
         '/register': (context) => RegisterPage(),
         '/forgot-password': (context) => ForgotPasswordPage(),
+        '/forgot-password2': (context) => ForgotPassword2Page(),
         '/home': (context) => MainPage(),
         '/feature-detail': (context) => FeatureDetailPage(),
         '/notification': (context) => NotificationPage(),

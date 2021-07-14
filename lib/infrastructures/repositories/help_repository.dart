@@ -17,10 +17,7 @@ final helpRepository = Provider<HelpRepository>((ref) {
 });
 
 abstract class HelpRepository {
-  Future<void> sendHelp({
-    required String fullname,
-    required String description,
-  });
+  Future<void> sendHelp({required String description});
 }
 
 class HelpRepositoryImpl implements HelpRepository {
@@ -30,22 +27,16 @@ class HelpRepositoryImpl implements HelpRepository {
   const HelpRepositoryImpl(this._client, this._preferences);
 
   @override
-  Future<void> sendHelp({
-    required String fullname,
-    required String description,
-  }) async {
+  Future<void> sendHelp({required String description}) async {
     try {
       final token = _preferences.getString(PreferencesKey.tokenKey);
-      
+
       await _client.post(
         '/api/bantuan',
         options: Options(
           headers: {HttpHeaders.authorizationHeader: 'Bearer $token'},
         ),
-        data: {
-          'fullname': fullname,
-          'description': description,
-        },
+        data: {'description': description},
       );
     } catch (e) {
       throw NetworkExceptions.getDioException(e);

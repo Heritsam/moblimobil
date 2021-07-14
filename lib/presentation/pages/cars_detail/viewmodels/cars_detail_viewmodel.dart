@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -133,5 +134,14 @@ class CarsDetailViewModel extends ChangeNotifier {
     required String phone,
   }) async {
     await FlutterPhoneDirectCaller.callNumber(phone);
+  }
+
+  Future<void> shareCarLink(BuildContext context) async {
+    productState.maybeWhen(
+      data: (car) async {
+        Share.share('http://belimobil.link/mobil/${car.id} ${car.description}');
+      },
+      orElse: () {},
+    );
   }
 }

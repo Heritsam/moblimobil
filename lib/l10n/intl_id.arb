@@ -105,7 +105,8 @@
     "advertisement": "Iklan",
     "aboutUs": "Tentang Kami",
     "changePhoneAndPassword": "Ubah Email dan Password",
-    "changePassword": "Ubah Email",
+    "changePassword": "Ubah Password",
+    "changePasswordMessage": "Silahkan ganti password anda",
 
     "textField": "Masukkan text",
     "otherHelpMessage": "Jika kamu ingin melakukan kontak langsung dengan kami hubungi kami ke:",

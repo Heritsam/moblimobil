@@ -34,6 +34,7 @@ dependencies:
   equatable: ^2.0.2
   expandable: ^5.0.1
   fading_edge_scrollview: ^2.0.0
+  flutter_html: ^2.1.0
   flutter_phone_direct_caller: ^2.0.0
   flutter_riverpod: ^0.14.0+2
   flutter_svg: ^0.22.0
@@ -50,7 +51,9 @@ dependencies:
   shimmer: ^2.0.0
   smooth_page_indicator: ^0.3.0-nullsafety.0
   styled_widget: ^0.3.0
+  supercharged: ^2.0.0
   timeago: ^3.0.2
+  uni_links: ^0.5.1
   url_launcher: ^6.0.6
   whatsapp_unilink: ^2.0.0
   youtube_player_flutter: ^8.0.0
