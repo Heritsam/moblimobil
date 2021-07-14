@@ -61,8 +61,8 @@ class _IuranHistoryPageState extends State<IuranHistoryPage> {
                     vm.fetch(),
                   ]);
                 },
-                displacement: mediaQuery.padding.top,
-                edgeOffset: mediaQuery.padding.top,
+                displacement: 32 + mediaQuery.padding.top,
+                edgeOffset: 32 + mediaQuery.padding.top,
                 child: ListView.builder(
                   physics: BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),

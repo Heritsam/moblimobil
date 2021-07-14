@@ -89,7 +89,7 @@ class _CarCardState extends State<CarCard> {
                 .scale(all: _isPressed ? 0.95 : 1.0, animate: true)
                 .animate(
                     Duration(milliseconds: 175), Curves.fastLinearToSlowEaseIn),
-            SizedBox(height: 8),
+            SizedBox(height: 6),
             Text(
               widget.title,
               overflow: TextOverflow.ellipsis,
