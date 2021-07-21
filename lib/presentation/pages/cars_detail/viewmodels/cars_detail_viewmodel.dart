@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
@@ -8,6 +9,7 @@ import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 import '../../../../core/exceptions/network_exceptions.dart';
 import '../../../../core/providers/app_state.dart';
 import '../../../../infrastructures/models/product/product.dart';
+import '../../../../infrastructures/repositories/deeplink_repository.dart';
 import '../../../../infrastructures/repositories/product_repository.dart';
 import '../../../../infrastructures/repositories/wishlist_repository.dart';
 import '../../../widgets/dialog/progress_dialog.dart';
@@ -137,9 +139,34 @@ class CarsDetailViewModel extends ChangeNotifier {
   }
 
   Future<void> shareCarLink(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) => ProgressDialog(),
+      barrierDismissible: false,
+    );
+
     productState.maybeWhen(
       data: (car) async {
-        Share.share('http://belimobil.link/mobil/${car.id} ${car.description}');
+        try {
+          final path = 'mobil/${car.id}';
+          final link = await _read(deeplinkRepository).createDeeplink(path);
+          final carName = car.brandName + ' ' + car.title;
+          final price = NumberFormat.currency(
+            symbol: 'Rp',
+            decimalDigits: 0,
+            locale: 'id',
+          ).format(num.parse(car.price));
+
+          Navigator.pop(context);
+
+          Share.share(
+            'Beli $carName $link $price di belimobil sekarang!',
+          );
+        } on NetworkExceptions catch (e) {
+          Navigator.pop(context);
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.message)));
+        }
       },
       orElse: () {},
     );
