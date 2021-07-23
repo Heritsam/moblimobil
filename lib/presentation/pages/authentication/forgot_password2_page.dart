@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'viewmodels/forgot_password2_viewmodel.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../../core/themes/theme.dart';
 import '../../../generated/l10n.dart';
 import '../../widgets/buttons/rounded_button.dart';
-import 'viewmodels/forgot_password_viewmodel.dart';
+import 'viewmodels/forgot_password2_viewmodel.dart';
 
 class ForgotPassword2Args {
   final int userId;
@@ -15,13 +14,11 @@ class ForgotPassword2Args {
 }
 
 class ForgotPassword2Page extends ConsumerWidget {
-  late ForgotPassword2Args args;
-
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    args = ModalRoute.of(context)!.settings.arguments as ForgotPassword2Args;
+    final args = ModalRoute.of(context)!.settings.arguments as ForgotPassword2Args;
 
     final mediaQuery = MediaQuery.of(context);
     final size = mediaQuery.size;

@@ -148,7 +148,7 @@ class CarsDetailViewModel extends ChangeNotifier {
     productState.maybeWhen(
       data: (car) async {
         try {
-          final path = 'mobil/${car.id}';
+          final path = 'car/${car.id}';
           final link = await _read(deeplinkRepository).createDeeplink(path);
           final carName = car.brandName + ' ' + car.title;
           final price = NumberFormat.currency(
